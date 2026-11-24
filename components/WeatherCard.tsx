@@ -31,15 +31,15 @@ function Metric({
   hint?: string;
 }) {
   return (
-    <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2">
-      <div className="flex items-center gap-1.5 text-white/40">
-        <span className="[&>svg]:h-3.5 [&>svg]:w-3.5">{icon}</span>
-        <span className="text-[10px] tracking-wide">{label}</span>
+    <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-1.5 sm:px-3 sm:py-2">
+      <div className="flex items-center gap-1 text-white/40">
+        <span className="[&>svg]:h-3 [&>svg]:w-3 sm:[&>svg]:h-3.5 sm:[&>svg]:w-3.5">{icon}</span>
+        <span className="truncate text-[9px] tracking-wide sm:text-[10px]">{label}</span>
       </div>
-      <p className="mt-1 text-sm font-semibold text-white/95" dir="ltr">
+      <p className="mt-0.5 truncate text-[13px] font-semibold text-white/95 sm:mt-1 sm:text-sm" dir="ltr">
         {value}
       </p>
-      {hint && <p className="truncate text-[10px] text-white/40">{hint}</p>}
+      {hint && <p className="truncate text-[9px] text-white/40 sm:text-[10px]">{hint}</p>}
     </div>
   );
 }
@@ -140,7 +140,7 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
         </div>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4">
+      <div className="mt-3 grid grid-cols-4 gap-1.5 sm:mt-4 sm:gap-2">
         <Metric icon={icons.drop} label="الرطوبة" value={`${Math.round(current.humidity)}%`} />
         <Metric
           icon={icons.wind}
@@ -150,7 +150,7 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
         />
         <Metric
           icon={icons.umbrella}
-          label="احتمال المطر"
+          label="المطر"
           value={`${Math.round(today.precipitationProbability)}%`}
         />
         <Metric

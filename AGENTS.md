@@ -15,6 +15,7 @@ Arabic-first cinematic weather app (سماء / Samaa). Next.js 14 App Router, Ta
 - City data lives in `lib/landmarks.ts`. `matchLandmark()` resolves a query against curated cities (Arabic-normalised aliases) before falling back to geocoding.
 - Weather/geocoding calls go through `app/api/geocode` and `app/api/weather` so responses can be cached server-side and the client never talks to Open-Meteo directly.
 - All backdrop images are routed through `app/api/scene?u=…` (host allow-list + long cache). Wikimedia URLs must use `Special:FilePath`; direct `upload.wikimedia.org` thumb URLs get rate-limited (429) and `thumb.wikimedia.org` paths drift.
+- Backdrops are `object-cover`; on phones a landscape photo crops to a narrow vertical slice, so each landmark may set `focus` (object-position) and `zoom` (bottom-anchored scale, applied only under `@media (max-aspect-ratio: 4/5)`).
 - `lib/weather.ts` maps WMO codes to Arabic labels and to the effect config consumed by `components/WeatherEffects.tsx`.
 
 ## Conventions

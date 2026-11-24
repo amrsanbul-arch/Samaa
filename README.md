@@ -76,6 +76,8 @@ Append an entry to `LANDMARKS` in `lib/landmarks.ts`:
   latitude: 23.588,
   longitude: 58.3829,
   aliases: ['مسقط', 'muscat'],
+  focus: '50% 55%', // optional CSS object-position for the backdrop
+  zoom: 1.3,        // optional extra zoom on tall screens
 }
 ```
 

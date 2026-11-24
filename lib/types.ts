@@ -66,4 +66,8 @@ export type Landmark = {
   latitude: number;
   longitude: number;
   aliases: string[];
+  /** CSS object-position used to keep the subject in frame on tall screens. */
+  focus?: string;
+  /** Extra zoom on tall screens, anchored at the bottom so low subjects stay visible. */
+  zoom?: number;
 };

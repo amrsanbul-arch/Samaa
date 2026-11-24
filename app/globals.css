@@ -192,3 +192,10 @@
     opacity: 0;
   }
 }
+
+/* Tall screens crop landscape backdrops hard; weak subjects get a bottom-anchored zoom. */
+@media (max-aspect-ratio: 4/5) {
+  .scene-image {
+    scale: var(--scene-zoom, 1);
+  }
+}

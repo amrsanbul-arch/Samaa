@@ -20,7 +20,7 @@ const commons = (path: string, width = 1920) => {
 const UNSPLASH_CREDIT = { label: 'Unsplash', url: 'https://unsplash.com' };
 const credit = (file: string) => ({
   label: 'Wikimedia Commons',
-  url: `https://commons.wikimedia.org/wiki/File:${file}`,
+  url: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file)}`,
 });
 
 /**
@@ -72,6 +72,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 24.7136,
     longitude: 46.6753,
     aliases: ['الرياض', 'رياض', 'riyadh', 'الرياض السعودية'],
+    focus: '80% 50%',
   },
   {
     id: 'alexandria',
@@ -97,7 +98,7 @@ export const LANDMARKS: Landmark[] = [
     landmark: 'المسجد الحرام والكعبة',
     description:
       'الكعبة المشرفة في قلب المسجد الحرام، قبلة أكثر من مليار مسلم، تتوسطها أفواج الطائفين ليلاً ونهاراً منذ أربعة عشر قرناً.',
-    image: unsplash('1591604129939-f1efa4d9f7fa'),
+    image: unsplash('1564769625905-50e93615e769'),
     credit: UNSPLASH_CREDIT,
     latitude: 21.4225,
     longitude: 39.8262,
@@ -112,11 +113,13 @@ export const LANDMARKS: Landmark[] = [
     landmark: 'المسجد النبوي',
     description:
       'المسجد النبوي وقبّته الخضراء، ثاني أقدس موقع في الإسلام، يهبط الضوء الهادئ على ساحاته الواسعة عند الفجر والمغيب.',
-    image: unsplash('1564769625905-50e93615e769'),
+    image: unsplash('1591604129939-f1efa4d9f7fa'),
     credit: UNSPLASH_CREDIT,
     latitude: 24.4672,
     longitude: 39.6111,
     aliases: ['المدينة', 'المدينه', 'المدينة المنورة', 'المدينه المنوره', 'madinah', 'medina'],
+    focus: '70% 50%',
+    zoom: 1.45,
   },
   {
     id: 'jeddah',
@@ -147,6 +150,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 24.4539,
     longitude: 54.3773,
     aliases: ['أبوظبي', 'ابوظبي', 'ابو ظبي', 'abu dhabi', 'abudhabi'],
+    zoom: 1.3,
   },
   {
     id: 'doha',
@@ -162,6 +166,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 25.2854,
     longitude: 51.531,
     aliases: ['الدوحة', 'الدوحه', 'دوحه', 'doha', 'قطر'],
+    zoom: 1.35,
   },
   {
     id: 'kuwait',
@@ -177,6 +182,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 29.3759,
     longitude: 47.9774,
     aliases: ['الكويت', 'مدينة الكويت', 'kuwait', 'kuwait city'],
+    zoom: 1.3,
   },
   {
     id: 'manama',
@@ -209,6 +215,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 23.588,
     longitude: 58.3829,
     aliases: ['مسقط', 'muscat', 'سلطنة عمان'],
+    zoom: 1.3,
   },
   {
     id: 'amman',
@@ -239,6 +246,7 @@ export const LANDMARKS: Landmark[] = [
     latitude: 30.3285,
     longitude: 35.4444,
     aliases: ['البتراء', 'البترا', 'بتراء', 'petra', 'الخزنة'],
+    focus: '70% 45%',
   },
   {
     id: 'beirut',
@@ -278,14 +286,15 @@ export const LANDMARKS: Landmark[] = [
     cityEn: 'Baghdad',
     country: 'العراق',
     countryCode: 'IQ',
-    landmark: 'نهر دجلة',
+    landmark: 'نصب الشهيد',
     description:
-      'دجلة يشقّ بغداد، مدينة السلام التي بناها المنصور قبل اثني عشر قرناً، وينعكس على مائه ضوء المدينة عند الغسق.',
-    image: commons('c/c6/Tigris_river_from_Al_Shohada%27_bridge.jpg'),
-    credit: credit("Tigris_river_from_Al_Shohada'_bridge.jpg"),
+      'قبّتان فيروزيتان تنشقّان عن قلب واحد في نصب الشهيد، شُيّدتا تخليداً لأرواح العراقيين، وتقفان اليوم على ضفّة دجلة شاهداً على ذاكرة بغداد.',
+    image: commons('العلم العراقي في قلب نصب الشهيد – بغداد، العراق.jpg'),
+    credit: credit('العلم العراقي في قلب نصب الشهيد – بغداد، العراق.jpg'),
     latitude: 33.3152,
     longitude: 44.3661,
     aliases: ['بغداد', 'baghdad', 'العراق'],
+    focus: '50% 45%',
   },
   {
     id: 'casablanca',

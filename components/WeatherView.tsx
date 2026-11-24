@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useMemo } from 'react';
+import type { CSSProperties } from 'react';
 import type { Landmark, Place, WeatherBundle } from '@/lib/types';
 import { sceneImageSrc } from '@/lib/landmarks';
 import { buildEffects } from '@/lib/weather';
@@ -9,7 +10,7 @@ import ForecastStrip from './ForecastStrip';
 import WeatherCard from './WeatherCard';
 import WeatherEffects from './WeatherEffects';
 
-type Scene = Pick<Landmark, 'landmark' | 'description' | 'image' | 'credit'>;
+type Scene = Pick<Landmark, 'landmark' | 'description' | 'image' | 'credit' | 'focus' | 'zoom'>;
 
 type Props = {
   place: Place;
@@ -40,7 +41,14 @@ export default function WeatherView({ place, scene, weather, onBack }: Props) {
         fill
         priority
         sizes="100vw"
-        className="animate-kenburns object-cover"
+        style={
+          {
+            objectPosition: scene.focus ?? '50% 50%',
+            transformOrigin: scene.zoom ? '50% 100%' : scene.focus ?? '50% 50%',
+            '--scene-zoom': scene.zoom ? String(scene.zoom) : undefined,
+          } as CSSProperties
+        }
+        className="scene-image animate-kenburns object-cover"
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-night-950/80 via-night-950/10 to-night-950/80" />

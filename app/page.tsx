@@ -70,7 +70,11 @@ export default function HomePage() {
       setPending(true);
 
       try {
-        const resolved = payload.place ?? (await geocodeFirst(payload.text));
+        const curated = findLandmark(payload.text);
+        const resolved =
+          payload.place ??
+          (curated ? placeFromLandmark(curated) : null) ??
+          (await geocodeFirst(payload.text));
 
         if (!resolved) {
           setError(`لم نجد «${payload.text}». جرّب اسماً آخر مثل القاهرة أو دبي.`);

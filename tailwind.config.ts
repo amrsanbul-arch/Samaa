@@ -46,8 +46,8 @@ const config: Config = {
           to: { opacity: '1' },
         },
         kenburns: {
-          '0%': { transform: 'scale(1.05) translate3d(0,0,0)' },
-          '100%': { transform: 'scale(1.16) translate3d(-1.5%, -1%, 0)' },
+          '0%': { transform: 'scale(1.03) translate3d(0,0,0)' },
+          '100%': { transform: 'scale(1.1) translate3d(-1%, -0.5%, 0)' },
         },
         shimmer: {
           '0%': { backgroundPosition: '200% 0' },
