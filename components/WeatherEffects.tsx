@@ -170,11 +170,11 @@ export default function WeatherEffects({ effects }: { effects: EffectConfig }) {
 
       {/* drifting clouds */}
       {effects.clouds > 0.32 && (
-        <div className="absolute inset-0" style={{ opacity: 0.35 + effects.clouds * 0.4 }}>
+        <div className="absolute inset-0" style={{ opacity: 0.12 + effects.clouds * 0.26 }}>
           {[
-            { top: '-6%', start: '4%', size: '58vmax', duration: 52, delay: 0 },
-            { top: '18%', start: '46%', size: '48vmax', duration: 68, delay: -12 },
-            { top: '52%', start: '-8%', size: '66vmax', duration: 78, delay: -30 },
+            { top: '-14%', start: '2%', size: '46vmax', duration: 52, delay: 0 },
+            { top: '6%', start: '52%', size: '38vmax', duration: 68, delay: -12 },
+            { top: '34%', start: '-10%', size: '50vmax', duration: 78, delay: -30 },
           ].map((cloud, index) => (
             <div
               key={index}
@@ -185,7 +185,7 @@ export default function WeatherEffects({ effects }: { effects: EffectConfig }) {
                 width: cloud.size,
                 height: `calc(${cloud.size} * 0.55)`,
                 background:
-                  'radial-gradient(closest-side, rgba(220,228,240,0.55), rgba(180,196,220,0.16) 62%, transparent 80%)',
+                  'radial-gradient(closest-side, rgba(226,233,244,0.4), rgba(186,200,224,0.1) 60%, transparent 78%)',
                 animation: reducedMotion
                   ? undefined
                   : `cloudDrift ${cloud.duration}s ease-in-out ${cloud.delay}s infinite alternate`,

@@ -24,11 +24,14 @@ function Metric({
   label,
   value,
   hint,
+  tight,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   hint?: string;
+  /** Slightly smaller value type for wider strings such as «13 كم/س». */
+  tight?: boolean;
 }) {
   return (
     <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-1.5 sm:px-3 sm:py-2">
@@ -36,7 +39,12 @@ function Metric({
         <span className="[&>svg]:h-3 [&>svg]:w-3 sm:[&>svg]:h-3.5 sm:[&>svg]:w-3.5">{icon}</span>
         <span className="truncate text-[9px] tracking-wide sm:text-[10px]">{label}</span>
       </div>
-      <p className="mt-0.5 truncate text-[13px] font-semibold text-white/95 sm:mt-1 sm:text-sm" dir="ltr">
+      <p
+        className={`mt-0.5 truncate font-semibold text-white/95 sm:mt-1 ${
+          tight ? 'text-[11.5px] sm:text-[13px]' : 'text-[13px] sm:text-sm'
+        }`}
+        dir="ltr"
+      >
         {value}
       </p>
       {hint && <p className="truncate text-[9px] text-white/40 sm:text-[10px]">{hint}</p>}
@@ -147,6 +155,7 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
           label="الرياح"
           value={`${Math.round(current.windSpeed)} كم/س`}
           hint={windDirectionLabel(current.windDirection)}
+          tight
         />
         <Metric
           icon={icons.umbrella}
