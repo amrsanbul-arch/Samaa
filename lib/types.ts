@@ -58,6 +58,8 @@ export type WeatherBundle = {
   stale?: boolean;
 };
 
+export type ThemeName = 'nile' | 'sea' | 'sunset';
+
 export type Landmark = {
   id: string;
   city: string;
@@ -77,4 +79,6 @@ export type Landmark = {
   focus?: string;
   /** Extra zoom on tall screens, anchored at the bottom so low subjects stay visible. */
   zoom?: number;
+  /** Palette/font theme override; otherwise derived from the id in lib/theme.ts. */
+  theme?: ThemeName;
 };

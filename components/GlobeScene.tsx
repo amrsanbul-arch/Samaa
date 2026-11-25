@@ -102,8 +102,8 @@ export default function GlobeScene({
       globeImageUrl={daylight ? '/textures/earth-day.jpg' : '/textures/earth-night.jpg'}
       bumpImageUrl="/textures/earth-topology.png"
       showAtmosphere
-      atmosphereColor={daylight ? '#a9d5ff' : '#6cc2ff'}
-      atmosphereAltitude={0.22}
+      atmosphereColor={daylight ? '#7fb2e0' : '#4f86c6'}
+      atmosphereAltitude={0.14}
       pointsData={points}
       pointLat="lat"
       pointLng="lng"

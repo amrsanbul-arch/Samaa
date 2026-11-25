@@ -6,21 +6,27 @@ type Props = {
   className?: string;
 };
 
-const base = {
-  fill: 'none',
-  stroke: 'currentColor',
-  strokeWidth: 1.6,
-  strokeLinecap: 'round' as const,
-  strokeLinejoin: 'round' as const,
+// Flat, coloured glyphs: a gold sun, soft white clouds and blue drops.
+const C = {
+  sun: '#F7B733',
+  sunDeep: '#E39A16',
+  cloud: '#FFFFFF',
+  cloudShade: '#C3CCDA',
+  cloudDark: '#A7B3C4',
+  drop: '#5AA8F0',
+  flake: '#E8F3FF',
+  bolt: '#FFC53D',
+  moon: '#E6EDF8',
 };
 
-function Cloud({ offset = 0 }: { offset?: number }) {
+function Cloud({ shade = false }: { shade?: boolean }) {
   return (
-    <path
-      {...base}
-      transform={`translate(0 ${offset})`}
-      d="M7.4 18.2h9.2a3.6 3.6 0 0 0 .3-7.2 5.6 5.6 0 0 0-10.7 1.3 3.1 3.1 0 0 0 1.2 5.9Z"
-    />
+    <g>
+      <path
+        d="M6.9 18.6h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+        fill={shade ? C.cloudShade : C.cloud}
+      />
+    </g>
   );
 }
 
@@ -28,21 +34,31 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
   if (condition === 'clear') {
     return isDay ? (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <circle {...base} cx="12" cy="12" r="4.2" />
+        <circle cx="12" cy="12" r="5" fill={C.sun} />
         {Array.from({ length: 8 }).map((_, index) => {
-          const angle = (index * Math.PI) / 4;
-          const x1 = 12 + Math.cos(angle) * 6.4;
-          const y1 = 12 + Math.sin(angle) * 6.4;
-          const x2 = 12 + Math.cos(angle) * 8.4;
-          const y2 = 12 + Math.sin(angle) * 8.4;
-          return <line key={index} {...base} x1={x1} y1={y1} x2={x2} y2={y2} />;
+          const a = (index * Math.PI) / 4;
+          return (
+            <line
+              key={index}
+              x1={12 + Math.cos(a) * 6.9}
+              y1={12 + Math.sin(a) * 6.9}
+              x2={12 + Math.cos(a) * 9.2}
+              y2={12 + Math.sin(a) * 9.2}
+              stroke={C.sun}
+              strokeWidth="1.9"
+              strokeLinecap="round"
+            />
+          );
         })}
       </svg>
     ) : (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <path {...base} d="M20 14.4A8.2 8.2 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z" />
-        <circle cx="17.5" cy="6" r="0.9" fill="currentColor" opacity="0.7" />
-        <circle cx="20" cy="10" r="0.6" fill="currentColor" opacity="0.5" />
+        <path
+          d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"
+          fill={C.moon}
+        />
+        <circle cx="17.6" cy="6.2" r="1" fill={C.moon} opacity="0.75" />
+        <circle cx="20.3" cy="9.6" r="0.7" fill={C.moon} opacity="0.55" />
       </svg>
     );
   }
@@ -50,9 +66,11 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
   if (condition === 'partly') {
     return (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <circle {...base} cx="8.6" cy="8.2" r="3" />
-        <path {...base} d="M8.6 2.4v1.4M8.6 12.6v1.4M2.8 8.2h1.4M13 8.2h1.4M4.5 4.1l1 1M11.7 11.3l1 1M12.7 4.1l-1 1M5.5 11.3l-1 1" opacity="0.85" />
-        <Cloud offset={1.4} />
+        <circle cx="9" cy="8.4" r="4" fill={C.sun} />
+        <path
+          d="M6.9 19.4h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+          fill={C.cloud}
+        />
       </svg>
     );
   }
@@ -60,8 +78,11 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
   if (condition === 'fog') {
     return (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <Cloud offset={-1.6} />
-        <path {...base} d="M4 18.4h16M6 21h12" opacity="0.85" />
+        <path
+          d="M6.9 15.4h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+          fill={C.cloudShade}
+        />
+        <path d="M4.5 18.4h15M6.5 21h11" stroke={C.cloudDark} strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     );
   }
@@ -70,12 +91,26 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
     const heavy = condition === 'rain';
     return (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <Cloud offset={-1.4} />
-        {heavy ? (
-          <path {...base} d="M7.6 17.6 6.6 21M12 17.6 11 21M16.4 17.6 15.4 21" />
-        ) : (
-          <path {...base} d="M8.4 18.2v1.4M12 18.2v1.4M15.6 18.2v1.4" />
-        )}
+        <path
+          d="M6.9 15.6h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+          fill={C.cloudShade}
+        />
+        {heavy
+          ? [8, 12, 16].map((x) => (
+              <line
+                key={x}
+                x1={x}
+                y1="17.2"
+                x2={x - 1}
+                y2="21.2"
+                stroke={C.drop}
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            ))
+          : [8.5, 12, 15.5].map((x) => (
+              <circle key={x} cx={x} cy="19.2" r="1.1" fill={C.drop} />
+            ))}
       </svg>
     );
   }
@@ -83,8 +118,17 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
   if (condition === 'snow') {
     return (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <Cloud offset={-1.4} />
-        <path {...base} d="M8 17.6v3.4M6.6 18.6l2.8 1.4M9.4 18.6l-2.8 1.4M15.6 17.6v3.4M14.2 18.6l2.8 1.4M17 18.6l-2.8 1.4" />
+        <path
+          d="M6.9 15.6h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+          fill={C.cloudShade}
+        />
+        {[8, 12, 16].map((x) => (
+          <g key={x} stroke={C.flake} strokeWidth="1.5" strokeLinecap="round">
+            <line x1={x} y1="17.6" x2={x} y2="21.2" />
+            <line x1={x - 1.5} y1="18.5" x2={x + 1.5} y2="20.3" />
+            <line x1={x + 1.5} y1="18.5" x2={x - 1.5} y2="20.3" />
+          </g>
+        ))}
       </svg>
     );
   }
@@ -92,8 +136,11 @@ export default function WeatherIcon({ condition, isDay = true, className = 'h-6 
   if (condition === 'thunder') {
     return (
       <svg viewBox="0 0 24 24" className={className} aria-hidden>
-        <Cloud offset={-1.6} />
-        <path {...base} d="M12.8 15.4 10.2 19h2.6l-1.2 3" />
+        <path
+          d="M6.9 15.4h9.9a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.5 1.3 3 3 0 0 0 .4 5.7Z"
+          fill={C.cloudShade}
+        />
+        <path d="M13 15.8 10 20.2h2.6l-1 3.2" stroke={C.bolt} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       </svg>
     );
   }

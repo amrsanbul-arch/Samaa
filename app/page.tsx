@@ -18,6 +18,7 @@ import {
   sceneImageSrc,
 } from '@/lib/landmarks';
 import type { Landmark, Place, WeatherBundle } from '@/lib/types';
+import { themeFor } from '@/lib/theme';
 import type { Lang } from '@/lib/i18n';
 
 type Stage = 'idle' | 'flying' | 'weather' | 'leaving';
@@ -98,6 +99,7 @@ export default function HomePage() {
   placeRef.current = place;
 
   const scene = useMemo(() => sceneFor(place, lang), [place, lang]);
+  const theme = useMemo(() => themeFor(landmarkFor(place) ?? place), [place]);
   const deepLinkDone = useRef(false);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -279,20 +281,14 @@ export default function HomePage() {
     <>
       <main
         ref={landingRef}
-        className={`relative flex min-h-[100svh] flex-col overflow-hidden transition-opacity duration-500 ${
+        className={`theme-nile relative flex min-h-[100svh] flex-col overflow-hidden bg-[#0B1220] transition-opacity duration-500 ${
           landingHidden ? 'pointer-events-none opacity-0' : 'opacity-100'
         }`}
         aria-hidden={overlayOpen}
       >
         <Starfield dim={daytime} daylight={daytime} />
 
-        <div
-          className={`pointer-events-none absolute inset-x-0 top-0 h-[68svh] transition-colors duration-1000 sm:h-[74svh] ${
-            daytime
-              ? 'bg-[radial-gradient(circle_at_50%_38%,rgba(120,170,220,0.2),transparent_65%)]'
-              : ''
-          }`}
-        >
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[68svh] sm:h-[74svh]">
           <div className="pointer-events-auto absolute left-1/2 top-1/2 aspect-square w-[min(100vw,72svh,700px)] -translate-x-1/2 -translate-y-1/2">
             <GlobeStage
               className="h-full w-full"
@@ -301,24 +297,26 @@ export default function HomePage() {
               paused={stage === 'weather'}
             />
           </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-night-950" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#0B1220]" />
         </div>
 
         <header className="relative z-20 flex items-start justify-between gap-4 px-5 pt-[max(1.25rem,var(--safe-top))] sm:px-8">
           <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-full border border-sand-300/40 bg-sand-300/10">
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-sand-300" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-                <path d="M12 3.5 13.8 9l5.7 1.8-5.7 1.8L12 18.3l-1.8-5.7L4.5 10.8 10.2 9 12 3.5Z" />
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-brand/15 text-brand">
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+                <circle cx="9.5" cy="9" r="3.1" />
+                <path d="M9.5 3.4v1.2M3.9 9h1.2M5.5 5l.9.9M13.5 5l-.9.9" />
+                <path d="M8.4 19.4h8.1a2.9 2.9 0 0 0 .2-5.8 4.6 4.6 0 0 0-8.7 1.1 2.5 2.5 0 0 0 .4 4.7Z" fill="currentColor" fillOpacity="0.18" />
               </svg>
             </span>
             <div>
-              <p className="font-display text-base font-bold leading-none text-white">{t('brand')}</p>
-              <p className="mt-1 text-[10px] tracking-wide text-white/40">{t('tagline')}</p>
+              <p className="font-display text-lg font-extrabold leading-none text-white">{t('brand')}</p>
+              <p className="mt-1.5 text-[10px] text-cream/60">{t('tagline')}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] tracking-wide text-white/40 backdrop-blur sm:inline">
+            <span className="hidden rounded-full border border-cream/15 px-3 py-1.5 text-[10px] tracking-wide text-cream/50 sm:inline">
               {t('live')} · Open-Meteo
             </span>
             <LanguageSwitcher />
@@ -333,11 +331,11 @@ export default function HomePage() {
               <h1 className="font-display text-[1.75rem] font-bold leading-tight text-shadow-cinema sm:text-4xl">
                 {t('heroTitle')}
               </h1>
-              <p className="mt-1.5 text-xs text-white/50 sm:text-sm">{t('heroSubtitle')}</p>
+              <p className="mt-1.5 text-xs text-cream/55 sm:text-sm">{t('heroSubtitle')}</p>
             </div>
 
             {error && (
-              <div className="mb-3 flex items-start gap-2 rounded-2xl border border-red-400/25 bg-red-500/10 px-4 py-2.5 text-xs text-red-100 backdrop-blur">
+              <div className="mb-3 flex items-start gap-2 rounded-xl border border-red-400/25 bg-red-500/10 px-4 py-2.5 text-xs text-red-100">
                 <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 8v4M12 16h.01" />
@@ -348,7 +346,7 @@ export default function HomePage() {
 
             <SearchBar onSubmit={runSearch} pending={pending} />
 
-            <p className="mt-4 text-[10px] tracking-wide text-white/30">{t('popular')}</p>
+            <p className="mt-4 text-[10px] tracking-wide text-cream/45">{t('popular')}</p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               {FEATURED_LANDMARKS.map((landmark) => (
                 <button
@@ -358,21 +356,21 @@ export default function HomePage() {
                   onPointerEnter={() => warmImage(landmark.image)}
                   onFocus={() => warmImage(landmark.image)}
                   disabled={pending}
-                  className="shrink-0 rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-[11px] text-white/70 backdrop-blur transition hover:border-sand-300/40 hover:bg-white/10 hover:text-white active:scale-[0.98] disabled:opacity-50"
+                  className="shrink-0 rounded-[10px] border border-cream/20 px-3.5 py-1.5 text-[11px] text-cream/75 transition hover:border-brand/50 hover:text-brand active:scale-[0.98] disabled:opacity-50"
                 >
                   {localizedText(landmark, lang).city}
                 </button>
               ))}
             </div>
 
-            <p className="mt-5 text-center text-[10px] leading-relaxed text-white/25">{t('footerNote')}</p>
+            <p className="mt-5 text-center text-[10px] leading-relaxed text-cream/35">{t('footerNote')}</p>
           </div>
         </div>
 
         {stage === 'flying' && (
           <div className="pointer-events-none absolute inset-0 z-30 grid place-items-center">
-            <div className="glass flex items-center gap-3 rounded-full px-5 py-3 text-sm text-white/90 animate-fadeIn">
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/25 border-t-sand-300" />
+            <div className="panel flex items-center gap-3 rounded-full px-5 py-3 text-sm text-cream/90 animate-fadeIn">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-cream/25 border-t-brand" />
               {t('flying', { city: place?.name ?? pendingText })}
             </div>
           </div>
@@ -388,6 +386,7 @@ export default function HomePage() {
           <WeatherView
             place={place}
             scene={scene}
+            theme={theme}
             error={weatherError}
             onRetry={() => {
               if (place) void loadWeather(place);

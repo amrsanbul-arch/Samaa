@@ -99,14 +99,14 @@ export default function SearchBar({
   return (
     <div ref={wrapperRef} className="relative w-full">
       <div
-        className={`glass flex items-center gap-2 rounded-full p-1.5 transition-shadow duration-500 focus-within:shadow-glow ${
+        className={`panel-solid flex items-center gap-2 rounded-[14px] p-1.5 transition-colors duration-300 focus-within:border-brand/60 ${
           compact ? 'sm:gap-2' : ''
         }`}
       >
         <div className="flex flex-1 items-center gap-2 ps-3">
           <svg
             viewBox="0 0 24 24"
-            className={`shrink-0 text-white/40 ${compact ? 'h-4 w-4' : 'h-5 w-5'}`}
+            className={`shrink-0 text-brand ${compact ? 'h-4 w-4' : 'h-5 w-5'}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="1.8"
@@ -131,13 +131,13 @@ export default function SearchBar({
             aria-autocomplete="list"
             aria-label={t('searchAria')}
             placeholder={placeholder ?? t('searchPlaceholder')}
-            className={`w-full bg-transparent text-white outline-none placeholder:text-[13px] placeholder:text-white/40 sm:placeholder:text-base ${
+            className={`w-full bg-transparent text-white outline-none placeholder:text-[13px] placeholder:text-cream/45 sm:placeholder:text-base ${
               compact ? 'py-2 text-sm' : 'py-3 text-base sm:text-lg'
             }`}
           />
 
           {loading && (
-            <span className="me-1 h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/25 border-t-white/80" />
+            <span className="me-1 h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-cream/25 border-t-brand" />
           )}
 
           {!loading && text && (
@@ -149,7 +149,7 @@ export default function SearchBar({
                 inputRef.current?.focus();
               }}
               aria-label="×"
-              className="me-1 shrink-0 rounded-full p-1 text-white/40 transition hover:text-white/80"
+              className="me-1 shrink-0 rounded-full p-1 text-cream/50 transition hover:text-white"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M6 6l12 12M18 6 6 18" />
@@ -162,13 +162,13 @@ export default function SearchBar({
           type="button"
           onClick={() => submit(active >= 0 ? results[active] : null)}
           disabled={pending || (!text.trim() && active < 0)}
-          className={`group flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-b from-sand-300 to-sand-400 font-semibold text-night-950 shadow-[0_10px_30px_-12px_rgba(220,174,99,0.9)] transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 ${
+          className={`group flex shrink-0 items-center gap-2 rounded-[10px] bg-brand font-semibold text-[#0B1220] transition hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 ${
             compact ? 'px-4 py-2 text-sm' : 'px-5 py-3 text-sm sm:px-6 sm:text-base'
           }`}
         >
           {pending ? (
             <>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-night-950/30 border-t-night-950" />
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#0B1220]/30 border-t-[#0B1220]" />
             </>
           ) : (
             <>
@@ -193,7 +193,7 @@ export default function SearchBar({
         <ul
           id="city-suggestions"
           role="listbox"
-          className="glass absolute inset-x-0 bottom-[calc(100%+0.6rem)] z-50 max-h-[46vh] overflow-y-auto rounded-3xl p-1.5 no-scrollbar animate-fadeIn"
+          className="panel absolute inset-x-0 bottom-[calc(100%+0.6rem)] z-50 max-h-[46vh] overflow-y-auto rounded-[14px] p-1.5 no-scrollbar animate-fadeIn"
         >
           {results.map((place, index) => (
             <li key={`${place.id}-${index}`} role="option" aria-selected={index === active}>
@@ -201,19 +201,19 @@ export default function SearchBar({
                 type="button"
                 onClick={() => submit(place)}
                 onMouseEnter={() => setActive(index)}
-                className={`flex w-full items-center justify-between gap-3 rounded-2xl px-4 py-2.5 text-start transition ${
-                  index === active ? 'bg-white/10' : 'hover:bg-white/10'
+                className={`flex w-full items-center justify-between gap-3 rounded-[10px] px-3 py-2.5 text-start transition ${
+                  index === active ? 'bg-cream/10' : 'hover:bg-cream/10'
                 }`}
               >
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold text-white sm:text-base">
                     {place.name}
                   </span>
-                  <span className="block truncate text-xs text-white/40">
+                  <span className="block truncate text-xs text-cream/50">
                     {[place.admin1, place.country].filter(Boolean).join(' · ')}
                   </span>
                 </span>
-                <span className="shrink-0 rounded-full border border-white/20 px-2 py-0.5 text-[10px] tracking-wide text-white/50">
+                <span className="shrink-0 rounded-full border border-cream/20 px-2 py-0.5 text-[10px] tracking-wide text-cream/55">
                   {place.countryCode}
                 </span>
               </button>

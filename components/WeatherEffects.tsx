@@ -164,7 +164,7 @@ export default function WeatherEffects({ effects }: { effects: EffectConfig }) {
               animation: reducedMotion ? undefined : 'flareSpin 70s linear infinite',
             }}
           />
-          <div className="absolute inset-x-[18%] top-[16%] h-px bg-gradient-to-l from-transparent via-sand-200/25 to-transparent blur-[1px]" />
+          <div className="absolute inset-x-[18%] top-[16%] h-px bg-gradient-to-l from-transparent via-cream/25 to-transparent blur-[1px]" />
         </div>
       )}
 

@@ -76,7 +76,7 @@ export default function SoundToggle({ effects }: { effects: EffectConfig }) {
       aria-pressed={on}
       aria-label={on ? t('soundOn') : t('soundOff')}
       title={on ? t('soundOn') : t('soundOff')}
-      className="glass-soft focus-ring grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/10 active:scale-95"
+      className="panel-solid focus-ring grid h-10 w-10 place-items-center rounded-full text-cream/80 transition hover:text-white active:scale-95"
     >
       {on ? (
         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">

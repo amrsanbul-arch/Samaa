@@ -61,7 +61,7 @@ type Dict = Record<UiKey, string>;
 
 const ar: Dict = {
   brand: 'سماء',
-  tagline: 'طقس مدن العالم',
+  tagline: 'الطقس .. بكل .. وضوح',
   heroTitle: 'إلى أين نسافر اليوم؟',
   heroSubtitle: 'اكتب اسم مدينة، وستحلّق الكرة الأرضية إلى مشهدها.',
   searchPlaceholder: 'ابحث عن مدينة… القاهرة، لندن، طوكيو',
@@ -84,7 +84,7 @@ const ar: Dict = {
   sunrise: 'الشروق',
   feelsLike: 'يُحسّ كـ {t}°',
   localTime: 'التوقيت المحلي',
-  forecastTitle: 'توقعات سبعة أيام',
+  forecastTitle: 'توقعات ٧ أيام',
   forecastHint: 'العظمى والصغرى',
   today: 'اليوم',
   dataLabel: 'البيانات',

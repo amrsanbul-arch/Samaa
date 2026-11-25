@@ -1,54 +1,73 @@
 import type { DailyWeather } from '@/lib/types';
-import { shortDate, weekdayLabel } from '@/lib/weather';
+import { langMeta } from '@/lib/i18n';
+import { weekdayLabel } from '@/lib/weather';
 import WeatherIcon from './WeatherIcon';
 import { useLang } from './LangProvider';
 
 export default function ForecastStrip({ daily }: { daily: DailyWeather[] }) {
   const { lang, t } = useLang();
-  const weekMin = Math.min(...daily.map((day) => day.min));
-  const weekMax = Math.max(...daily.map((day) => day.max));
-  const span = Math.max(1, weekMax - weekMin);
+  const locale = langMeta(lang).locale;
+
+  // Arabic keeps the full weekday name; Latin/Cyrillic scripts read better short.
+  const dayLabel = (date: string, index: number) => {
+    if (index === 0) return t('today');
+    if (lang === 'ar') return weekdayLabel(date, index, lang, t('today'));
+    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
+      new Date(`${date}T12:00:00`)
+    );
+  };
 
   return (
-    <div className="glass rounded-3xl p-2.5 sm:p-4">
-      <div className="mb-1.5 flex items-center justify-between px-1 sm:mb-2">
-        <h2 className="text-xs font-semibold tracking-wide text-white/60">{t('forecastTitle')}</h2>
-        <span className="hidden text-[10px] text-white/30 sm:inline">{t('forecastHint')}</span>
+    <div className="panel p-2.5 sm:p-3.5">
+      <div className="mb-1.5 flex items-center gap-1.5 px-1 sm:mb-2">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-3.5 w-3.5 shrink-0 text-brand"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.9"
+          strokeLinecap="round"
+        >
+          <rect x="3.5" y="5.5" width="17" height="15" rx="2.5" />
+          <path d="M3.5 10h17M8 3.5v3M16 3.5v3" />
+        </svg>
+        <h2 className="truncate text-[11px] font-semibold text-cream/75 sm:text-xs">
+          {t('forecastTitle')}
+        </h2>
       </div>
 
-      <ul className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 md:grid md:grid-cols-7 md:overflow-visible">
+      <ul className="grid grid-cols-7 gap-1 sm:gap-1.5">
         {daily.map((day, index) => {
-          const left = ((day.min - weekMin) / span) * 100;
-          const width = Math.max(8, ((day.max - day.min) / span) * 100);
+          const isToday = index === 0;
           return (
             <li
               key={day.date}
-              className="min-w-[70px] flex-1 snap-start rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-2 text-center sm:py-3 transition hover:border-white/20 hover:bg-white/[0.07]"
+              className={`rounded-[10px] px-0.5 py-1.5 text-center transition-colors sm:py-2 ${
+                isToday ? 'bg-extra' : ''
+              }`}
             >
-              <p className={`text-[11px] ${index === 0 ? 'font-bold text-sand-300' : 'text-white/60'}`}>
-                {weekdayLabel(day.date, index, lang, t('today'))}
+              <p
+                className={`truncate text-[9px] leading-tight sm:text-[10.5px] ${
+                  isToday ? 'font-bold text-cream' : 'text-cream/60'
+                }`}
+              >
+                {dayLabel(day.date, index)}
               </p>
-              <p className="mt-0.5 text-[10px] text-white/30">{shortDate(day.date, lang)}</p>
 
               <WeatherIcon
                 condition={day.condition}
-                className="mx-auto my-1.5 h-6 w-6 text-white/80"
+                className="mx-auto my-1 h-[22px] w-[22px]"
               />
 
-              <p className="text-sm font-bold leading-none" dir="ltr">
+              <p className="text-[12.5px] font-bold leading-none text-white sm:text-sm" dir="ltr">
                 {Math.round(day.max)}°
-                <span className="ms-1 text-xs font-medium text-white/40">{Math.round(day.min)}°</span>
+              </p>
+              <p className="mt-0.5 text-[10px] leading-none text-cream/60 sm:text-[11px]" dir="ltr">
+                {Math.round(day.min)}°
               </p>
 
-              <div className="relative mx-auto mt-2 h-1 w-10 overflow-hidden rounded-full bg-white/10">
-                <span
-                  className="absolute inset-y-0 rounded-full bg-gradient-to-l from-sand-300 to-sky-400"
-                  style={{ insetInlineStart: `${left}%`, width: `${width}%` }}
-                />
-              </div>
-
-              {day.precipitationProbability >= 20 && (
-                <p className="mt-1.5 text-[10px] text-sky-300/80" dir="ltr">
+              {day.precipitationProbability >= 40 && (
+                <p className="mt-0.5 text-[9px] leading-none text-brand" dir="ltr">
                   {Math.round(day.precipitationProbability)}%
                 </p>
               )}

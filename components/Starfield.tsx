@@ -30,15 +30,7 @@ export default function Starfield({ dim = false, daylight = false }: { dim?: boo
         dim ? 'opacity-40' : 'opacity-100'
       }`}
     >
-      <div
-        className={`absolute inset-0 ${
-          daylight
-            ? 'bg-[radial-gradient(120%_90%_at_50%_-10%,#1d3f68_0%,#0d1a2c_45%,#060a12_100%)]'
-            : 'bg-[radial-gradient(120%_90%_at_50%_-10%,#12203c_0%,#080d18_45%,#04060c_100%)]'
-        }`}
-      />
-      <div className="absolute -left-1/4 top-1/4 h-[70vmin] w-[70vmin] rounded-full bg-[radial-gradient(circle,rgba(63,169,245,0.18),transparent_65%)] blur-2xl" />
-      <div className="absolute -right-1/4 bottom-0 h-[60vmin] w-[60vmin] rounded-full bg-[radial-gradient(circle,rgba(220,174,99,0.14),transparent_65%)] blur-2xl" />
+      <div className="absolute inset-0 bg-[#0B1220]" />
 
       <svg
         className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ${

@@ -4,12 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LANGS, type Lang } from '@/lib/i18n';
 import { useLang } from './LangProvider';
 
-type Props = {
-  /** `dark` sits on photos, `soft` sits on the starfield. */
-  tone?: 'dark' | 'soft';
-};
-
-export default function LanguageSwitcher({ tone = 'soft' }: Props) {
+export default function LanguageSwitcher() {
   const { lang, setLang, t } = useLang();
   const [open, setOpen] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -31,10 +26,6 @@ export default function LanguageSwitcher({ tone = 'soft' }: Props) {
   }, [open]);
 
   const current = LANGS.find((item) => item.code === lang) ?? LANGS[0];
-  const surface =
-    tone === 'dark'
-      ? 'border-white/15 bg-black/40 text-white/80 hover:bg-black/55'
-      : 'border-white/10 bg-white/5 text-white/60 hover:bg-white/10';
 
   return (
     <div ref={boxRef} className="relative">
@@ -44,7 +35,7 @@ export default function LanguageSwitcher({ tone = 'soft' }: Props) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t('language')}
-        className={`focus-ring flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] backdrop-blur transition ${surface}`}
+        className="panel-solid focus-ring flex items-center gap-1.5 rounded-[14px] px-3 py-2 text-[11px] text-cream/80 transition hover:text-white active:scale-[0.98]"
       >
         <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8">
           <circle cx="12" cy="12" r="9" />
@@ -59,7 +50,7 @@ export default function LanguageSwitcher({ tone = 'soft' }: Props) {
       {open && (
         <ul
           role="listbox"
-          className="glass absolute end-0 top-[calc(100%+0.5rem)] z-50 w-40 overflow-hidden rounded-2xl p-1 animate-fadeIn"
+          className="panel absolute end-0 top-[calc(100%+0.5rem)] z-50 w-40 overflow-hidden rounded-[14px] p-1 animate-fadeIn"
         >
           {LANGS.map((item) => (
             <li key={item.code}>
@@ -71,12 +62,12 @@ export default function LanguageSwitcher({ tone = 'soft' }: Props) {
                   setLang(item.code as Lang);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-xs transition ${
-                  item.code === lang ? 'bg-white/12 text-white' : 'text-white/70 hover:bg-white/10'
+                className={`flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-xs transition ${
+                  item.code === lang ? 'bg-brand/15 text-brand' : 'text-cream/75 hover:bg-cream/10'
                 }`}
               >
                 <span>{item.native}</span>
-                <span className="text-[10px] uppercase tracking-wider text-white/35">{item.code}</span>
+                <span className="text-[10px] uppercase tracking-wider text-cream/35">{item.code}</span>
               </button>
             </li>
           ))}

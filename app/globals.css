@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  /* nile is the default palette; .theme-sea / .theme-sunset override the channels. */
   :root {
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --brand-rgb: 247 183 51;
+    --scrim-rgb: 30 58 138;
+    --cream-rgb: 245 245 220;
+    --panel-rgb: 31 41 55;
+    --extra-rgb: 31 41 55;
+    --font-display: var(--font-cairo);
+    --font-body: var(--font-cairo);
   }
 
   html {
@@ -13,12 +21,13 @@
   }
 
   body {
-    background-color: #04060c;
+    background-color: #0b1220;
+    font-family: var(--font-body), system-ui, sans-serif;
     overscroll-behavior-y: none;
   }
 
   ::selection {
-    background: rgba(220, 174, 99, 0.35);
+    background: rgb(var(--brand-rgb) / 0.35);
     color: #fff;
   }
 
@@ -32,38 +41,84 @@
   }
 }
 
+/* City themes. Kept outside @layer so the class selectors are never purged. */
+.theme-nile {
+  --brand-rgb: 247 183 51;
+  --scrim-rgb: 30 58 138;
+  --cream-rgb: 245 245 220;
+  --panel-rgb: 31 41 55;
+  --extra-rgb: 31 41 55;
+  --font-display: var(--font-cairo);
+  --font-body: var(--font-cairo);
+}
+
+.theme-sea {
+  --brand-rgb: 14 165 233;
+  --scrim-rgb: 11 61 145;
+  --cream-rgb: 244 225 182;
+  --panel-rgb: 5 27 65;
+  --extra-rgb: 249 115 22;
+  --font-display: var(--font-tajawal);
+  --font-body: var(--font-tajawal);
+}
+
+.theme-sunset {
+  --brand-rgb: 217 119 6;
+  --scrim-rgb: 124 45 18;
+  --cream-rgb: 245 230 200;
+  --panel-rgb: 56 21 8;
+  --extra-rgb: 85 107 47;
+  --font-display: var(--font-amiri);
+  --font-body: var(--font-cairo);
+}
+
+/* Latin and Cyrillic pairings; small text keeps a neutral sans. */
+html:not([lang='ar']) .theme-nile {
+  --font-display: var(--font-montserrat);
+  --font-body: var(--font-montserrat);
+}
+
+html:not([lang='ar']) .theme-sea {
+  --font-display: var(--font-poppins);
+  --font-body: var(--font-poppins);
+}
+
+html:not([lang='ar']) .theme-sunset {
+  --font-display: var(--font-playfair);
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer components {
-  .glass {
-    background: linear-gradient(
-      160deg,
-      rgba(255, 255, 255, 0.13) 0%,
-      rgba(255, 255, 255, 0.06) 45%,
-      rgba(8, 12, 22, 0.28) 100%
-    );
-    backdrop-filter: blur(26px) saturate(150%);
-    -webkit-backdrop-filter: blur(26px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow:
-      0 30px 90px -30px rgba(0, 0, 0, 0.9),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+  .panel {
+    background: rgb(var(--panel-rgb) / 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgb(var(--cream-rgb) / 0.14);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.55);
+    transition:
+      background-color 0.4s,
+      color 0.4s;
   }
 
-  .glass-soft {
-    background: rgba(10, 14, 24, 0.42);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .panel-solid {
+    background: rgb(var(--panel-rgb) / 0.94);
+    border-radius: 16px;
+    border: 1px solid rgb(var(--cream-rgb) / 0.12);
+    transition:
+      background-color 0.4s,
+      color 0.4s;
   }
 
   .hairline {
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgb(var(--cream-rgb) / 0.14);
   }
 
   .focus-ring:focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 2px rgba(4, 6, 12, 0.9),
-      0 0 0 4px rgba(108, 194, 255, 0.55);
+      0 0 0 2px rgba(11, 18, 32, 0.9),
+      0 0 0 4px rgb(var(--brand-rgb) / 0.55);
   }
 }
 
@@ -78,9 +133,7 @@
   }
 
   .text-shadow-cinema {
-    text-shadow:
-      0 2px 30px rgba(0, 0, 0, 0.65),
-      0 1px 3px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
   }
 
   .grain {
@@ -200,16 +253,7 @@
   }
 }
 
-/* Language-aware typography: Arabic uses Cairo/Tajawal, Latin and Cyrillic use Inter. */
-html[lang='ar'] body {
-  font-family: var(--font-cairo), system-ui, sans-serif;
-}
-
-html:not([lang='ar']) body {
-  font-family: var(--font-inter), system-ui, sans-serif;
-}
-
+/* Typography follows --font-display/--font-body, which the theme classes set. */
 html:not([lang='ar']) .font-display {
-  font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: -0.015em;
 }

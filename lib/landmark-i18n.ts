@@ -15,9 +15,9 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
     cairo: {
       city: 'Cairo',
       country: 'Egypt',
-      landmark: 'The Pyramids of Giza',
+      landmark: 'Cairo Tower',
       description:
-        'The last surviving wonder of the ancient world, standing on the Giza plateau for more than 4,500 years. At sunset the stone turns a warm gold that floods the desert.',
+        'A 187-metre concrete tower on Gezira Island in the middle of the Nile, designed by Naoum Shebib and completed in 1961 as a pharaonic lotus flower. From its revolving deck you see the river and Qasr El Nil Bridge.',
     },
     dubai: {
       city: 'Dubai',
@@ -39,6 +39,20 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
       landmark: 'Qaitbay Citadel',
       description:
         'Qaitbay Citadel stands on the site of the ancient Lighthouse of Alexandria, one of the seven wonders, facing a restless Mediterranean.',
+    },
+    hurghada: {
+      city: 'Hurghada',
+      country: 'Egypt',
+      landmark: 'Red Sea reefs',
+      description:
+        'Shallow turquoise water, wooden jetties over the reef and dive boats heading for the islands. Hurghada is Egypt’s first diving town, and the sun rarely leaves.',
+    },
+    luxor: {
+      city: 'Luxor',
+      country: 'Egypt',
+      landmark: 'Karnak Temple',
+      description:
+        'The avenue of ram-headed sphinxes leading to the pylon of Karnak, begun almost four thousand years ago and built for centuries after. Luxor is the world’s largest open-air museum.',
     },
     makkah: {
       city: 'Makkah',
@@ -381,9 +395,9 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
     cairo: {
       city: 'Kairo',
       country: 'Ägypten',
-      landmark: 'Die Pyramiden von Gizeh',
+      landmark: 'Kairo Tower',
       description:
-        'Das letzte erhaltene Weltwunder der Antike, seit über 4.500 Jahren auf dem Plateau von Gizeh. Bei Sonnenuntergang färbt sich der Stein in warmes Gold.',
+        'Ein 187 Meter hoher Betonturm auf der Gezira-Insel mitten im Nil, entworfen von Naoum Shebib und 1961 fertiggestellt – in Form einer pharaonischen Lotusblume. Von der drehbaren Plattform blickt man über den Fluss und die Qasr-el-Nil-Brücke.',
     },
     dubai: {
       city: 'Dubai',
@@ -405,6 +419,20 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
       landmark: 'Zitadelle von Qaitbay',
       description:
         'Die Zitadelle von Qaitbay steht auf dem Grund des antiken Leuchtturms von Alexandria und blickt auf ein ruheloses Mittelmeer.',
+    },
+    hurghada: {
+      city: 'Hurghada',
+      country: 'Ägypten',
+      landmark: 'Riffe des Roten Meeres',
+      description:
+        'Flaches türkisfarbenes Wasser, Holzstege über dem Riff und Tauchboote auf dem Weg zu den Inseln. Hurghada ist Ägyptens erste Tauchstadt – und die Sonne bleibt selten aus.',
+    },
+    luxor: {
+      city: 'Luxor',
+      country: 'Ägypten',
+      landmark: 'Karnak-Tempel',
+      description:
+        'Die Allee der widderköpfigen Sphinxe führt zum Pylon von Karnak – begonnen vor fast viertausend Jahren und über Jahrhunderte weitergebaut. Luxor ist das größte Freilichtmuseum der Welt.',
     },
     makkah: {
       city: 'Mekka',
@@ -747,9 +775,9 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
     cairo: {
       city: 'Каир',
       country: 'Египет',
-      landmark: 'Пирамиды Гизы',
+      landmark: 'Каирская башня',
       description:
-        'Последнее сохранившееся чудо древнего мира, стоящее на плато Гиза более 4500 лет. На закате камень становится тёпло-золотым.',
+        'Бетонная башня высотой 187 метров на острове Гезира посреди Нила. Проект Наума Шебиба, завершена в 1961 году в форме фараоновского лотоса. С вращающейся площадки видны река и мост Каср-эль-Нил.',
     },
     dubai: {
       city: 'Дубай',
@@ -771,6 +799,20 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
       landmark: 'Цитадель Кайт-Бей',
       description:
         'Цитадель Кайт-Бей стоит на месте древнего Александрийского маяка и смотрит на неспокойное Средиземное море.',
+    },
+    hurghada: {
+      city: 'Хургада',
+      country: 'Египет',
+      landmark: 'Рифы Красного моря',
+      description:
+        'Бирюзовая мелкая вода, деревянные пирсы над рифом и дайв-боты, уходящие к островам. Хургада — первый дайв-город Египта, и солнце здесь почти не уходит.',
+    },
+    luxor: {
+      city: 'Луксор',
+      country: 'Египет',
+      landmark: 'Карнакский храм',
+      description:
+        'Аллея сфинксов с бараньими головами ведёт к пилону Карнака: строительство началось почти четыре тысячи лет назад и шло веками. Луксор — крупнейший музей под открытым небом.',
     },
     makkah: {
       city: 'Мекка',
@@ -1113,9 +1155,9 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
     cairo: {
       city: 'Il Cairo',
       country: 'Egitto',
-      landmark: 'Le Piramidi di Giza',
+      landmark: 'Torre del Cairo',
       description:
-        'L’ultima meraviglia del mondo antico ancora in piedi, sul plateau di Giza da oltre 4.500 anni. Al tramonto la pietra diventa oro caldo.',
+        'Una torre di cemento alta 187 metri sull’isola di Gezira, in mezzo al Nilo: disegnata da Naoum Shebib e completata nel 1961 a forma di fiore di loto faraonico. Dalla terrazza girevole si guardano il fiume e il ponte Qasr El Nil.',
     },
     dubai: {
       city: 'Dubai',
@@ -1137,6 +1179,20 @@ export const LANDMARK_I18N: Record<TranslatedLang, Record<string, LandmarkText>>
       landmark: 'Cittadella di Qaitbay',
       description:
         'La cittadella di Qaitbay sorge sul sito dell’antico Faro di Alessandria e guarda un Mediterraneo inquieto.',
+    },
+    hurghada: {
+      city: 'Hurghada',
+      country: 'Egitto',
+      landmark: 'Le barriere del Mar Rosso',
+      description:
+        'Acqua turchese e bassa, pontili di legno sopra la barriera e barche dei subacquei dirette alle isole. Hurghada è la prima città subacquea d’Egitto, e il sole quasi non se ne va.',
+    },
+    luxor: {
+      city: 'Luxor',
+      country: 'Egitto',
+      landmark: 'Tempio di Karnak',
+      description:
+        'Il viale delle sfingi a testa di ariete che porta al pilone di Karnak, iniziato quasi quattromila anni fa e costruito per secoli. Luxor è il più grande museo all’aperto del mondo.',
     },
     makkah: {
       city: 'La Mecca',

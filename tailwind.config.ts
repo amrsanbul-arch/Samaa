@@ -5,32 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: {
-          950: '#04060c',
-          900: '#070b14',
-          800: '#0c1220',
-          700: '#141c2f',
-        },
-        sand: {
-          100: '#fdf6e9',
-          200: '#f7e7c6',
-          300: '#eccf9b',
-          400: '#dcae63',
-          500: '#c9903c',
-        },
-        sky: {
-          300: '#9fd8ff',
-          400: '#6cc2ff',
-          500: '#3fa9f5',
-        },
+        brand: 'rgb(var(--brand-rgb) / <alpha-value>)',
+        scrim: 'rgb(var(--scrim-rgb) / <alpha-value>)',
+        cream: 'rgb(var(--cream-rgb) / <alpha-value>)',
+        panel: 'rgb(var(--panel-rgb) / <alpha-value>)',
+        extra: 'rgb(var(--extra-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['var(--font-cairo)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-tajawal)', 'var(--font-cairo)', 'sans-serif'],
-      },
-      boxShadow: {
-        glass: '0 24px 80px -24px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255,255,255,0.08)',
-        glow: '0 0 40px -8px rgba(108, 194, 255, 0.55)',
+        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-body)', 'sans-serif'],
       },
       keyframes: {
         floatY: {
