@@ -1,12 +1,14 @@
 import type { Landmark, Place } from './types';
 import { normalizeArabic } from './arabic';
+import type { Lang } from './i18n';
+import { FALLBACK_I18N, LANDMARK_I18N, type LandmarkText } from './landmark-i18n';
 
 const unsplash = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2400&q=85`;
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=78`;
 
 // Special:FilePath resolves to the canonical thumbnail for any file name, so the
 // stored paths cannot drift out of sync with Wikimedia's hash directories.
-const commons = (path: string, width = 1920) => {
+const commons = (path: string, width = 1600) => {
   const raw = path.split('/').pop() ?? path;
   let file = raw;
   try {
@@ -391,15 +393,54 @@ export const FALLBACK_SCENE = {
   landmark: 'أفق عربي مفتوح',
   description:
     'مدينة عربية أخرى تحت سماء واحدة. لا توجد بعد صورة أرشيفية لهذه المدينة، لكن الطقس هنا حقيقي وحيّ الآن.',
-  image: unsplash('1547234935-80c7145ec969'),
+  image: unsplash('1473580044384-7ba9967e16a0'),
   credit: UNSPLASH_CREDIT,
 };
 
 export const FEATURED_IDS = ['cairo', 'dubai', 'riyadh', 'makkah', 'alexandria', 'doha'];
 
+/** City, country, landmark and description in the requested UI language. */
+export function localizedText(item: Landmark, lang: Lang): LandmarkText {
+  if (lang === 'ar') {
+    return {
+      city: item.city,
+      country: item.country,
+      landmark: item.landmark,
+      description: item.description,
+    };
+  }
+  return (
+    LANDMARK_I18N[lang][item.id] ?? {
+      city: item.cityEn,
+      country: item.country,
+      landmark: item.landmark,
+      description: item.description,
+    }
+  );
+}
+
+export function fallbackSceneText(lang: Lang): LandmarkText {
+  if (lang === 'ar') {
+    return {
+      city: '',
+      country: '',
+      landmark: FALLBACK_SCENE.landmark,
+      description: FALLBACK_SCENE.description,
+    };
+  }
+  return FALLBACK_I18N[lang];
+}
+
 const normalized = LANDMARKS.map((item) => ({
   item,
-  keys: [item.city, item.cityEn, ...item.aliases].map(normalizeArabic),
+  keys: [
+    item.city,
+    item.cityEn,
+    ...item.aliases,
+    ...Object.values(LANDMARK_I18N).map((table) => table[item.id]?.city ?? ''),
+  ]
+    .filter(Boolean)
+    .map(normalizeArabic),
 }));
 
 /** Finds the curated backdrop that best matches a searched city. */
@@ -429,11 +470,12 @@ export function landmarkById(id: string): Landmark | null {
 export const FEATURED_LANDMARKS = FEATURED_IDS.map((id) => landmarkById(id)!).filter(Boolean);
 
 /** Lets the quick-pick chips skip the geocoding round trip. */
-export function placeFromLandmark(item: Landmark): Place {
+export function placeFromLandmark(item: Landmark, lang: Lang = 'ar'): Place {
+  const text = localizedText(item, lang);
   return {
     id: -(LANDMARKS.indexOf(item) + 1),
-    name: item.city,
-    country: item.country,
+    name: text.city || item.cityEn,
+    country: text.country || item.country,
     countryCode: item.countryCode,
     latitude: item.latitude,
     longitude: item.longitude,

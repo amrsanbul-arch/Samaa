@@ -5,12 +5,13 @@ import { normalizeArabic } from '@/lib/arabic';
 import type { EffectConfig } from '@/lib/weather';
 import {
   ACCENT,
-  describeCode,
+  describeCodeLabel,
   localClock,
   timeLabel,
   windDirectionLabel,
 } from '@/lib/weather';
 import WeatherIcon from './WeatherIcon';
+import { useLang } from './LangProvider';
 
 type Props = {
   place: Place;
@@ -37,7 +38,7 @@ function Metric({
     <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-1.5 sm:px-3 sm:py-2">
       <div className="flex items-center gap-1 text-white/40">
         <span className="[&>svg]:h-3 [&>svg]:w-3 sm:[&>svg]:h-3.5 sm:[&>svg]:w-3.5">{icon}</span>
-        <span className="truncate text-[9px] tracking-wide sm:text-[10px]">{label}</span>
+        <span className="truncate text-[9px] tracking-tight sm:text-[10px]">{label}</span>
       </div>
       <p
         className={`mt-0.5 truncate font-semibold text-white/95 sm:mt-1 ${
@@ -82,8 +83,9 @@ const icons = {
 };
 
 export default function WeatherCard({ place, landmark, weather, effects }: Props) {
+  const { lang, t } = useLang();
   const { current, daily, timezone } = weather;
-  const info = describeCode(current.code);
+  const conditionText = describeCodeLabel(lang, current.code);
   const today = daily[0];
   const accent = ACCENT[effects.tone];
   const region = [place.country, place.admin1]
@@ -109,12 +111,12 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
         </div>
 
         <div className="shrink-0 text-end">
-          <p className="text-[10px] tracking-wide text-white/40">التوقيت المحلي</p>
+          <p className="text-[10px] tracking-wide text-white/40">{t('localTime')}</p>
           <p className="text-sm font-semibold text-white/80" dir="ltr">
-            {localClock(timezone)}
+            {localClock(timezone, lang)}
           </p>
           <p className="mt-1 text-[10px] text-white/30">
-            {timeLabel(weather.sunrise, timezone)} · {timeLabel(weather.sunset, timezone)}
+            {timeLabel(weather.sunrise, timezone, lang)} · {timeLabel(weather.sunset, timezone, lang)}
           </p>
         </div>
       </div>
@@ -137,9 +139,9 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
             className="h-9 w-9 text-white/90 sm:h-11 sm:w-11"
           />
           <div>
-            <p className="text-sm font-semibold sm:text-base">{info.label}</p>
+            <p className="text-sm font-semibold sm:text-base">{conditionText}</p>
             <p className="text-[11px] text-white/50">
-              يُحسّ كـ {Math.round(current.apparentTemperature)}°
+              {t('feelsLike', { t: Math.round(current.apparentTemperature) })}
             </p>
             <p className="mt-0.5 text-[11px] text-white/40" dir="ltr">
               {Math.round(today.max)}° / {Math.round(today.min)}°
@@ -149,23 +151,24 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
       </div>
 
       <div className="mt-3 grid grid-cols-4 gap-1.5 sm:mt-4 sm:gap-2">
-        <Metric icon={icons.drop} label="الرطوبة" value={`${Math.round(current.humidity)}%`} />
+        <Metric icon={icons.drop} label={t('humidity')} value={`${Math.round(current.humidity)}%`} />
         <Metric
           icon={icons.wind}
-          label="الرياح"
-          value={`${Math.round(current.windSpeed)} كم/س`}
-          hint={windDirectionLabel(current.windDirection)}
+          label={t('wind')}
+          value={`${Math.round(current.windSpeed)} ${t('windUnit')}`}
+          hint={windDirectionLabel(lang, current.windDirection)}
           tight
         />
         <Metric
           icon={icons.umbrella}
-          label="المطر"
+          label={t('rain')}
           value={`${Math.round(today.precipitationProbability)}%`}
         />
         <Metric
           icon={current.isDay ? icons.sun : icons.moon}
-          label={current.isDay ? 'الغروب' : 'الشروق'}
-          value={timeLabel(current.isDay ? weather.sunset : weather.sunrise, timezone)}
+          label={current.isDay ? t('sunset') : t('sunrise')}
+          value={timeLabel(current.isDay ? weather.sunset : weather.sunrise, timezone, lang)}
+          tight
         />
       </div>
 
@@ -182,9 +185,9 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
           rel="noreferrer noopener"
           className="truncate underline-offset-2 transition hover:text-white/60 hover:underline"
         >
-          الصورة: {landmark.credit.label}
+          {t('imageLabel')}: {landmark.credit.label}
         </a>
-        <span className="shrink-0">البيانات: Open-Meteo</span>
+        <span className="shrink-0">{t('dataLabel')}: Open-Meteo</span>
       </div>
     </section>
   );

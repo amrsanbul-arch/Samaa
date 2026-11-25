@@ -1,39 +1,40 @@
 import type { Condition, DailyWeather } from './types';
+import { compassLabel, conditionLabel, localeOf, type ConditionKey, type Lang } from './i18n';
 
-type CodeInfo = { label: string; condition: Condition };
+type CodeInfo = { key: ConditionKey; condition: Condition };
 
 const WMO: Record<number, CodeInfo> = {
-  0: { label: 'سماء صافية', condition: 'clear' },
-  1: { label: 'صافٍ غالباً', condition: 'clear' },
-  2: { label: 'غيوم متفرقة', condition: 'partly' },
-  3: { label: 'غائم', condition: 'cloudy' },
-  45: { label: 'ضباب', condition: 'fog' },
-  48: { label: 'ضباب متجمّد', condition: 'fog' },
-  51: { label: 'رذاذ خفيف', condition: 'drizzle' },
-  53: { label: 'رذاذ', condition: 'drizzle' },
-  55: { label: 'رذاذ كثيف', condition: 'drizzle' },
-  56: { label: 'رذاذ متجمّد', condition: 'drizzle' },
-  57: { label: 'رذاذ متجمّد كثيف', condition: 'drizzle' },
-  61: { label: 'مطر خفيف', condition: 'rain' },
-  63: { label: 'مطر', condition: 'rain' },
-  65: { label: 'مطر غزير', condition: 'rain' },
-  66: { label: 'مطر متجمّد', condition: 'rain' },
-  67: { label: 'مطر متجمّد غزير', condition: 'rain' },
-  71: { label: 'ثلج خفيف', condition: 'snow' },
-  73: { label: 'ثلج', condition: 'snow' },
-  75: { label: 'ثلج كثيف', condition: 'snow' },
-  77: { label: 'حبيبات ثلجية', condition: 'snow' },
-  80: { label: 'زخات مطر خفيفة', condition: 'rain' },
-  81: { label: 'زخات مطر', condition: 'rain' },
-  82: { label: 'زخات مطر عنيفة', condition: 'rain' },
-  85: { label: 'زخات ثلجية', condition: 'snow' },
-  86: { label: 'زخات ثلجية كثيفة', condition: 'snow' },
-  95: { label: 'عاصفة رعدية', condition: 'thunder' },
-  96: { label: 'عاصفة رعدية مع برد', condition: 'thunder' },
-  99: { label: 'عاصفة رعدية شديدة', condition: 'thunder' },
+  0: { key: 'clear', condition: 'clear' },
+  1: { key: 'mainlyClear', condition: 'clear' },
+  2: { key: 'partly', condition: 'partly' },
+  3: { key: 'overcast', condition: 'cloudy' },
+  45: { key: 'fog', condition: 'fog' },
+  48: { key: 'fog', condition: 'fog' },
+  51: { key: 'drizzle', condition: 'drizzle' },
+  53: { key: 'drizzle', condition: 'drizzle' },
+  55: { key: 'drizzle', condition: 'drizzle' },
+  56: { key: 'drizzle', condition: 'drizzle' },
+  57: { key: 'drizzle', condition: 'drizzle' },
+  61: { key: 'rainLight', condition: 'rain' },
+  63: { key: 'rain', condition: 'rain' },
+  65: { key: 'rainHeavy', condition: 'rain' },
+  66: { key: 'freezingRain', condition: 'rain' },
+  67: { key: 'freezingRain', condition: 'rain' },
+  71: { key: 'snowLight', condition: 'snow' },
+  73: { key: 'snow', condition: 'snow' },
+  75: { key: 'snowHeavy', condition: 'snow' },
+  77: { key: 'snowLight', condition: 'snow' },
+  80: { key: 'showers', condition: 'rain' },
+  81: { key: 'showers', condition: 'rain' },
+  82: { key: 'rainHeavy', condition: 'rain' },
+  85: { key: 'showers', condition: 'snow' },
+  86: { key: 'snowHeavy', condition: 'snow' },
+  95: { key: 'thunder', condition: 'thunder' },
+  96: { key: 'thunderHail', condition: 'thunder' },
+  99: { key: 'thunderHail', condition: 'thunder' },
 };
 
-const FALLBACK: CodeInfo = { label: 'طقس متغيّر', condition: 'cloudy' };
+const FALLBACK: CodeInfo = { key: 'variable', condition: 'cloudy' };
 
 export function describeCode(code: number): CodeInfo {
   return WMO[code] ?? FALLBACK;
@@ -43,24 +44,17 @@ export function conditionOf(code: number): Condition {
   return describeCode(code).condition;
 }
 
-export function describeDay(day: DailyWeather): string {
-  return describeCode(day.code).label;
+/** Human readable condition for a WMO code in the given language. */
+export function describeCodeLabel(lang: Lang, code: number): string {
+  return conditionLabel(lang, describeCode(code).key);
 }
 
-const COMPASS = [
-  'الشمال',
-  'الشمال الشرقي',
-  'الشرق',
-  'الجنوب الشرقي',
-  'الجنوب',
-  'الجنوب الغربي',
-  'الغرب',
-  'الشمال الغربي',
-];
+export function describeDay(day: DailyWeather, lang: Lang): string {
+  return describeCodeLabel(lang, day.code);
+}
 
-export function windDirectionLabel(degrees: number): string {
-  const index = Math.round(((degrees % 360) / 45)) % 8;
-  return COMPASS[index];
+export function windDirectionLabel(lang: Lang, degrees: number): string {
+  return compassLabel(lang, degrees);
 }
 
 export function formatTemp(value: number): string {
@@ -129,45 +123,36 @@ export const ACCENT: Record<EffectConfig['tone'], { text: string; ring: string; 
   fog: { text: 'text-slate-200', ring: 'ring-white/20', glow: 'rgba(226,232,240,0.22)' },
 };
 
-const AR = 'ar-u-nu-latn';
-
-export function weekdayLabel(dateISO: string, index: number): string {
-  if (index === 0) return 'اليوم';
+export function weekdayLabel(dateISO: string, index: number, lang: Lang, todayLabel: string): string {
+  if (index === 0) return todayLabel;
   const date = new Date(`${dateISO}T12:00:00`);
-  return new Intl.DateTimeFormat(AR, { weekday: 'long' }).format(date);
+  return new Intl.DateTimeFormat(localeOf(lang), { weekday: 'long' }).format(date);
 }
 
-export function shortDate(dateISO: string): string {
+export function shortDate(dateISO: string, lang: Lang): string {
   const date = new Date(`${dateISO}T12:00:00`);
-  return new Intl.DateTimeFormat(AR, { day: 'numeric', month: 'short' }).format(date);
+  return new Intl.DateTimeFormat(localeOf(lang), { day: 'numeric', month: 'short' }).format(date);
 }
 
-export function localClock(timezone: string): string {
+const clockOptions = (lang: Lang, timeZone?: string) => ({
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: lang === 'ar' || lang === 'en',
+  timeZone,
+}) as Intl.DateTimeFormatOptions;
+
+export function localClock(timezone: string, lang: Lang): string {
   try {
-    return new Intl.DateTimeFormat(AR, {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: timezone,
-    }).format(new Date());
+    return new Intl.DateTimeFormat(localeOf(lang), clockOptions(lang, timezone)).format(new Date());
   } catch {
-    return new Intl.DateTimeFormat(AR, {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    }).format(new Date());
+    return new Intl.DateTimeFormat(localeOf(lang), clockOptions(lang)).format(new Date());
   }
 }
 
-export function timeLabel(iso: string | null, timezone: string): string {
+export function timeLabel(iso: string | null, timezone: string, lang: Lang): string {
   if (!iso) return '—';
   try {
-    return new Intl.DateTimeFormat(AR, {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: timezone,
-    }).format(new Date(iso));
+    return new Intl.DateTimeFormat(localeOf(lang), clockOptions(lang, timezone)).format(new Date(iso));
   } catch {
     return '—';
   }

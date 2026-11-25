@@ -21,10 +21,11 @@ function GlobeSkeleton() {
 
 type Props = {
   flyTo?: { lat: number; lng: number } | null;
+  daylight?: boolean;
   className?: string;
 };
 
-export default function GlobeStage({ flyTo, className = '' }: Props) {
+export default function GlobeStage({ flyTo, daylight = false, className = '' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -45,7 +46,12 @@ export default function GlobeStage({ flyTo, className = '' }: Props) {
   return (
     <div ref={containerRef} className={`relative ${className}`} aria-hidden>
       {size.width > 0 && size.height > 0 ? (
-        <GlobeScene width={size.width} height={size.height} flyTo={flyTo} />
+        <GlobeScene
+          width={size.width}
+          height={size.height}
+          flyTo={flyTo}
+          daylight={daylight}
+        />
       ) : (
         <GlobeSkeleton />
       )}

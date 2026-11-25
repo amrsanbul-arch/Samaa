@@ -8,14 +8,19 @@ type Props = {
   width: number;
   height: number;
   flyTo?: { lat: number; lng: number } | null;
+  daylight?: boolean;
   onReady?: () => void;
 };
 
 const HOME = { lat: 24.5, lng: 44.5, altitude: 1.75 };
+/** Short dive: fast enough to feel instant, slow enough to read as a zoom. */
+const ZOOM_IN_MS = 700;
+const ZOOM_OUT_MS = 900;
 
-export default function GlobeScene({ width, height, flyTo, onReady }: Props) {
+export default function GlobeScene({ width, height, flyTo, daylight = false, onReady }: Props) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
   const [ready, setReady] = useState(false);
+  const wasFocused = useRef(false);
 
   const points = useMemo(
     () => LANDMARKS.map((item) => ({ lat: item.latitude, lng: item.longitude })),
@@ -44,13 +49,22 @@ export default function GlobeScene({ width, height, flyTo, onReady }: Props) {
   }, [ready, flyTo]);
 
   useEffect(() => {
-    if (!ready || !flyTo) return;
+    if (!ready) return;
     const globe = globeRef.current;
     if (!globe) return;
-
     const controls = globe.controls();
-    controls.autoRotate = false;
-    globe.pointOfView({ lat: flyTo.lat, lng: flyTo.lng, altitude: 0.42 }, 2400);
+
+    if (flyTo) {
+      controls.autoRotate = false;
+      wasFocused.current = true;
+      globe.pointOfView({ lat: flyTo.lat, lng: flyTo.lng, altitude: 0.55 }, ZOOM_IN_MS);
+      return;
+    }
+
+    if (wasFocused.current) {
+      wasFocused.current = false;
+      globe.pointOfView(HOME, ZOOM_OUT_MS);
+    }
   }, [ready, flyTo]);
 
   const handleReady = () => {
@@ -65,22 +79,22 @@ export default function GlobeScene({ width, height, flyTo, onReady }: Props) {
       width={width}
       height={height}
       backgroundColor="rgba(0,0,0,0)"
-      globeImageUrl="/textures/earth-night.jpg"
+      globeImageUrl={daylight ? '/textures/earth-day.jpg' : '/textures/earth-night.jpg'}
       bumpImageUrl="/textures/earth-topology.png"
       showAtmosphere
-      atmosphereColor="#6cc2ff"
+      atmosphereColor={daylight ? '#a9d5ff' : '#6cc2ff'}
       atmosphereAltitude={0.22}
       pointsData={points}
       pointLat="lat"
       pointLng="lng"
-      pointColor={() => 'rgba(255, 214, 150, 0.95)'}
+      pointColor={() => (daylight ? 'rgba(255, 246, 226, 0.95)' : 'rgba(255, 214, 150, 0.95)')}
       pointAltitude={0.012}
       pointRadius={0.16}
       pointsMerge={false}
       ringsData={rings}
       ringLat="lat"
       ringLng="lng"
-      ringColor={() => 'rgba(255, 214, 150, 0.85)'}
+      ringColor={() => (daylight ? 'rgba(255, 246, 226, 0.85)' : 'rgba(255, 214, 150, 0.85)')}
       ringMaxRadius={4}
       ringPropagationSpeed={2.4}
       ringRepeatPeriod={900}

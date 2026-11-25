@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Cairo, Tajawal } from 'next/font/google';
+import { Cairo, Inter, Tajawal } from 'next/font/google';
+import { LangProvider } from '@/components/LangProvider';
 import './globals.css';
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   weight: ['300', '400', '600', '700', '800'],
   variable: '--font-cairo',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -32,8 +40,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable}`}>
-      <body className="min-h-screen bg-night-950 font-sans text-white antialiased">{children}</body>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`${cairo.variable} ${tajawal.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen bg-night-950 font-sans text-white antialiased">
+        <LangProvider>{children}</LangProvider>
+      </body>
     </html>
   );
 }

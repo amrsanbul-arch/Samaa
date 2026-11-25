@@ -1,8 +1,10 @@
 import type { DailyWeather } from '@/lib/types';
 import { shortDate, weekdayLabel } from '@/lib/weather';
 import WeatherIcon from './WeatherIcon';
+import { useLang } from './LangProvider';
 
 export default function ForecastStrip({ daily }: { daily: DailyWeather[] }) {
+  const { lang, t } = useLang();
   const weekMin = Math.min(...daily.map((day) => day.min));
   const weekMax = Math.max(...daily.map((day) => day.max));
   const span = Math.max(1, weekMax - weekMin);
@@ -10,8 +12,8 @@ export default function ForecastStrip({ daily }: { daily: DailyWeather[] }) {
   return (
     <div className="glass rounded-3xl p-2.5 sm:p-4">
       <div className="mb-1.5 flex items-center justify-between px-1 sm:mb-2">
-        <h2 className="text-xs font-semibold tracking-wide text-white/60">توقعات سبعة أيام</h2>
-        <span className="hidden text-[10px] text-white/30 sm:inline">العظمى والصغرى</span>
+        <h2 className="text-xs font-semibold tracking-wide text-white/60">{t('forecastTitle')}</h2>
+        <span className="hidden text-[10px] text-white/30 sm:inline">{t('forecastHint')}</span>
       </div>
 
       <ul className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 md:grid md:grid-cols-7 md:overflow-visible">
@@ -24,9 +26,9 @@ export default function ForecastStrip({ daily }: { daily: DailyWeather[] }) {
               className="min-w-[70px] flex-1 snap-start rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-2 text-center sm:py-3 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
               <p className={`text-[11px] ${index === 0 ? 'font-bold text-sand-300' : 'text-white/60'}`}>
-                {weekdayLabel(day.date, index)}
+                {weekdayLabel(day.date, index, lang, t('today'))}
               </p>
-              <p className="mt-0.5 text-[10px] text-white/30">{shortDate(day.date)}</p>
+              <p className="mt-0.5 text-[10px] text-white/30">{shortDate(day.date, lang)}</p>
 
               <WeatherIcon
                 condition={day.condition}

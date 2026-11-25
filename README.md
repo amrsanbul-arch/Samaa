@@ -1,16 +1,20 @@
 # سماء · Samaa
 
-سماء (Samaa) is an Arabic-first, cinematic weather experience for Arab cities. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, and weather effects that react to the real conditions.
+سماء (Samaa) is a cinematic weather experience for Arab cities in five languages. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions.
 
 ## Features
 
-- **3D globe landing** — `react-globe.gl` / three.js night Earth with a starfield, city beacons and slow auto-rotation.
-- **Search** — Arabic or English city names, with debounced suggestions from the Open-Meteo geocoding API.
-- **Cinematic flight** — the globe rotates and zooms into the selected coordinates before the scene opens.
+- **Five languages** — Arabic (RTL), English, German, Russian and Italian. The language is auto-detected from the browser, can be switched from the header, is stored locally, and can be forced with `?lang=de`. UI copy, weather conditions, dates, city names and landmark descriptions are all localised.
+- **3D globe landing** — `react-globe.gl` / three.js Earth with a starfield, city beacons and slow auto-rotation. The texture follows the visitor's device clock: blue-marble day map between 06:00 and 18:00, city-lights night map after that.
+- **Search** — Arabic, English or translated city names, with debounced suggestions from the Open-Meteo geocoding API (requested in the active language).
+- **Instant entry** — the scene opens as soon as the place resolves (about 40 ms for curated cities); the photo paints first and the glass card follows when the forecast lands. The globe dive itself is a 700 ms zoom.
+- **Cinematic exit** — pressing back pulls the camera out to orbit altitude while the scene fades, so you always return to the globe rather than cutting to it.
 - **Live weather** — current conditions (temperature, wind, humidity, rain chance, sunrise/sunset) plus a 7-day forecast from Open-Meteo. No API key.
 - **Landmark scenes** — a curated backdrop per city (Pyramids, Burj Khalifa, Kingdom Centre, Hassan II Mosque…), with a Ken Burns drift and a glass card overlay.
 - **Weather effects** — rain, snow, fog, clouds, lightning and a sun flare driven by the fetched conditions, all CSS/SVG based so they stay smooth on phones.
-- **RTL Arabic UI** — Cairo/Tajawal typography, logical properties, safe-area padding, fully responsive from 360 px up.
+- **Ambient sound** — rain, wind and fog beds plus thunder are synthesised with the Web Audio API (no audio files), toggled by the speaker button and remembered across visits.
+- **Swipe-up card** — on phones the glass card starts as a peek and rises on swipe, so the landmark photo is unobstructed on arrival.
+- **RTL + LTR** — Cairo/Tajawal for Arabic and Inter for Latin/Cyrillic, logical properties, mirrored icons, safe-area padding, responsive from 360 px up.
 
 ## Stack
 
@@ -20,6 +24,7 @@
 | Styling | Tailwind CSS 3 |
 | 3D | react-globe.gl + three.js |
 | Data | Open-Meteo (geocoding + forecast), no key required |
+| Audio | Web Audio API (procedural ambience) |
 
 ## Getting started
 
@@ -35,27 +40,33 @@ Node 18+ is required.
 
 ```
 app/
-  page.tsx              landing ⇄ scene state machine, deep links (?city=)
-  layout.tsx            fonts, RTL <html dir="rtl" lang="ar">, metadata
+  page.tsx              landing ⇄ scene state machine, deep links (?city=, ?lang=)
+  layout.tsx            fonts (Cairo, Tajawal, Inter), LangProvider, metadata
   globals.css           glass surfaces, starfield, flare and cloud keyframes
   api/geocode/route.ts  proxy for the Open-Meteo geocoding API
   api/weather/route.ts  proxy for the Open-Meteo forecast API
   api/scene/route.ts    allow-listed, cached image proxy for the backdrops
 components/
+  LangProvider.tsx      language context: detection, persistence, <html lang dir>
+  LanguageSwitcher.tsx  header dropdown with the five locales
+  SoundToggle.tsx       ambience on/off, persists the choice
   GlobeStage.tsx        hero: globe + headline + search + city chips
-  GlobeScene.tsx        react-globe.gl wrapper (textures, arcs, flight)
+  GlobeScene.tsx        react-globe.gl wrapper (day/night textures, flight, zoom-out)
   SearchBar.tsx         input, debounced suggestions, keyboard support
-  WeatherView.tsx       full-screen landmark scene
+  WeatherView.tsx       full-screen landmark scene, swipe-up sheet, skeleton state
   WeatherCard.tsx       glass card: city, temperature, metrics, description
   ForecastStrip.tsx     7-day forecast
   WeatherEffects.tsx    rain / snow / fog / clouds / lightning / flare layers
   WeatherIcon.tsx       SVG condition icons
 lib/
+  i18n.ts               language table, UI dictionary, condition + compass labels
+  landmark-i18n.ts      localised city/landmark copy for the four Latin locales
   landmarks.ts          curated cities, aliases, backdrops, matching helpers
-  weather.ts            WMO code → Arabic label/condition, effect config
+  weather.ts            WMO code → localised label/condition, effect config
+  ambience.ts           Web Audio rain/wind/fog beds and thunder
   arabic.ts             Arabic normalisation for fuzzy city matching
   types.ts              shared types
-public/textures/        local Earth textures (night, topology, water)
+public/textures/        local Earth textures (day, night, topology, water)
 ```
 
 ## Adding a city
@@ -81,12 +92,14 @@ Append an entry to `LANDMARKS` in `lib/landmarks.ts`:
 }
 ```
 
-Cities without an entry still work — they fall back to a generic Arab skyline scene.
+Cities without an entry still work — they fall back to a desert-dune scene with localised copy. To localise a new city, add its copy to `LANDMARK_I18N` in `lib/landmark-i18n.ts` (keyed by the landmark `id`); Arabic lives on the landmark itself.
 
 ## Notes
 
 - **Image proxy.** Wikimedia and Unsplash block or throttle direct hotlinking from browsers, and `next/image` refuses responses it cannot verify. `app/api/scene` re-serves the allow-listed hosts with a long cache, so the optimizer always receives a clean image. Wikimedia URLs go through `Special:FilePath`, which resolves to the canonical thumbnail.
-- **Deep links.** `/?city=الرياض` opens straight into that city's scene, which makes sharing and reloading safe.
+- **Deep links.** `/?city=الرياض` opens straight into that city's scene, and `?lang=it` forces a language, which makes sharing and reloading safe.
+- **Typography.** `html[lang]` drives the font stack: Arabic switches to Cairo/Tajawal, every other locale uses Inter (Latin + Cyrillic). `dir` flips with the language and the arrow icons mirror through `rtl:`/`ltr:` variants.
+- **Sound.** Browsers only allow audio after a gesture, so the ambience starts muted; the toggle is the gesture that unlocks the AudioContext.
 - **Textures.** The globe uses local files in `public/textures`, so the landing page has no third-party dependency at runtime.
 
 ## Credits

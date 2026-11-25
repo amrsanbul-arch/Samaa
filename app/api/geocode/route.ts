@@ -19,6 +19,7 @@ type OpenMeteoResult = {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q')?.trim() ?? '';
+  const lang = searchParams.get('lang') ?? 'ar';
 
   if (query.length < 2) {
     return NextResponse.json({ results: [] });
@@ -27,7 +28,7 @@ export async function GET(request: Request) {
   const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
   url.searchParams.set('name', query);
   url.searchParams.set('count', '10');
-  url.searchParams.set('language', 'ar');
+  url.searchParams.set('language', lang);
   url.searchParams.set('format', 'json');
 
   try {

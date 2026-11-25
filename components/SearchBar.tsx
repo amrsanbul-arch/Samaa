@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { Place } from '@/lib/types';
+import { useLang } from './LangProvider';
 
 type Props = {
   onSubmit: (payload: { place: Place | null; text: string }) => void;
@@ -16,8 +17,9 @@ export default function SearchBar({
   pending = false,
   autoFocus = false,
   compact = false,
-  placeholder = 'ابحث عن مدينة… القاهرة، دبي، الرياض',
+  placeholder,
 }: Props) {
+  const { lang, t } = useLang();
   const [text, setText] = useState('');
   const [results, setResults] = useState<Place[]>([]);
   const [open, setOpen] = useState(false);
@@ -39,9 +41,10 @@ export default function SearchBar({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        const response = await fetch(`/api/geocode?q=${encodeURIComponent(query)}`, {
-          signal: controller.signal,
-        });
+        const response = await fetch(
+          `/api/geocode?q=${encodeURIComponent(query)}&lang=${lang}`,
+          { signal: controller.signal }
+        );
         const data = (await response.json()) as { results: Place[] };
         setResults(data.results ?? []);
         setOpen(true);
@@ -51,13 +54,13 @@ export default function SearchBar({
       } finally {
         setLoading(false);
       }
-    }, 280);
+    }, 240);
 
     return () => {
       controller.abort();
       clearTimeout(timer);
     };
-  }, [text]);
+  }, [text, lang]);
 
   useEffect(() => {
     const onPointerDown = (event: PointerEvent) => {
@@ -126,8 +129,8 @@ export default function SearchBar({
             aria-expanded={showList}
             aria-controls="city-suggestions"
             aria-autocomplete="list"
-            aria-label="البحث عن مدينة"
-            placeholder={placeholder}
+            aria-label={t('searchAria')}
+            placeholder={placeholder ?? t('searchPlaceholder')}
             className={`w-full bg-transparent text-white outline-none placeholder:text-white/40 ${
               compact ? 'py-2 text-sm' : 'py-3 text-base sm:text-lg'
             }`}
@@ -145,7 +148,7 @@ export default function SearchBar({
                 setResults([]);
                 inputRef.current?.focus();
               }}
-              aria-label="مسح البحث"
+              aria-label="×"
               className="me-1 shrink-0 rounded-full p-1 text-white/40 transition hover:text-white/80"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -166,12 +169,19 @@ export default function SearchBar({
           {pending ? (
             <>
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-night-950/30 border-t-night-950" />
-              <span className="hidden sm:inline">جارٍ البحث</span>
             </>
           ) : (
             <>
-              <span className="hidden sm:inline">استكشف</span>
-              <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <span className="hidden sm:inline">{t('searchButton')}</span>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4 ltr:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M19 12H5M11 6l-6 6 6 6" />
               </svg>
             </>
