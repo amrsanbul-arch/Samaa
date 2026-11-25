@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #04060c;
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background: rgba(220, 174, 99, 0.35);
+    color: #fff;
+  }
+
+  input,
+  button {
+    font: inherit;
+  }
+
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+  }
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.13) 0%,
+      rgba(255, 255, 255, 0.06) 45%,
+      rgba(8, 12, 22, 0.28) 100%
+    );
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 30px 90px -30px rgba(0, 0, 0, 0.9),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .glass-soft {
+    background: rgba(10, 14, 24, 0.42);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hairline {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px rgba(4, 6, 12, 0.9),
+      0 0 0 4px rgba(108, 194, 255, 0.55);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-shadow-cinema {
+    text-shadow:
+      0 2px 30px rgba(0, 0, 0, 0.65),
+      0 1px 3px rgba(0, 0, 0, 0.45);
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.star-twinkle {
+  animation: starTwinkle 5.5s ease-in-out infinite;
+}
+
+@keyframes flarePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.07);
+    opacity: 1;
+  }
+}
+
+@keyframes flareSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translate3d(-6%, 0, 0);
+  }
+  100% {
+    transform: translate3d(6%, 0, 0);
+  }
+}
+
+@keyframes fogDrift {
+  0% {
+    transform: translate3d(-14%, 0, 0);
+  }
+  100% {
+    transform: translate3d(14%, 0, 0);
+  }
+}
+
+@keyframes windStreak {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(-150vw, 24vh, 0) rotate(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lightningFlash {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+  91% {
+    opacity: 0.7;
+  }
+  92% {
+    opacity: 0.08;
+  }
+  93% {
+    opacity: 0.5;
+  }
+  94% {
+    opacity: 0;
+  }
+}
+
+/* Tall screens crop landscape backdrops hard; weak subjects get a bottom-anchored zoom. */
+@media (max-aspect-ratio: 4/5) {
+  .scene-image {
+    scale: var(--scene-zoom, 1);
+  }
+}
+
+/* Language-aware typography: Arabic uses Cairo/Tajawal, Latin and Cyrillic use Inter. */
+html[lang='ar'] body {
+  font-family: var(--font-cairo), system-ui, sans-serif;
+}
+
+html:not([lang='ar']) body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+html:not([lang='ar']) .font-display {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
