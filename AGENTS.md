@@ -29,7 +29,7 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 ## Conventions
 
 - UI copy comes from `t()` in `lib/i18n.ts` — never hardcode a string in a component. Use logical Tailwind utilities (`ms-*`, `me-*`, `start-*`, `end-*`) and mirror directional icons with `rtl:rotate-180` / `ltr:rotate-180`.
-- `html[lang]` picks the font stack (Cairo/Tajawal for Arabic, Inter for the rest); `.font-display` is overridden the same way in `globals.css`.
+- Each city resolves to a palette in `lib/theme.ts` (`nile` / `sea` / `sunset`), rendered as a `.theme-*` class on the scene and on the landing. Those classes set `--brand-rgb`, `--scrim-rgb`, `--cream-rgb`, `--panel-rgb`, `--extra-rgb` plus `--font-display`/`--font-body`; Tailwind reads the colour channels through `brand`/`scrim`/`cream`/`panel`/`extra`, so a new colour must be added in `tailwind.config.ts` and as a channel in `globals.css`. Arabic pairs Cairo/Tajawal/Amiri with the theme; Latin and Cyrillic fall back to Montserrat/Poppins/Playfair via `html:not([lang='ar'])`.
 - Forecast times are wall-clock strings from the API. Format them with `timeLabel(iso, lang)` — never `new Date(iso)` plus a `timeZone`, that shifts sunrise/sunset by the visitor's offset.
 - The landing `<main>` is kept mounted for the exit animation and switched to `inert` while the scene is open; keep it that way so hidden chips stay unclickable and out of the tab order.
 - Tailwind opacity modifiers must come from the default scale (0, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100) or use arbitrary values (`bg-white/[0.06]`). Values like `/8`, `/12`, `/35`, `/45` are silently dropped.
@@ -38,4 +38,7 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 ## Gotchas
 
 - After `npm run build`, restart `next start` — a running server keeps the old build manifest and serves stale CSS/JS.
+- Theme classes live outside `@layer` on purpose: Tailwind drops class selectors placed in `@layer base`, which silently strips the palette.
+- Changing the `next/font` set requires `rm -rf .next`; a stale font cache makes `next/font` fail with `Cannot read properties of null (reading '1')`.
+- `npm run lint` is not wired up (no ESLint config), so it prompts instead of running; `npx tsc --noEmit` plus a production build is the check.
 - Headless Chromium screenshots for mobile checks: `chromium --headless=new --no-sandbox --disable-gpu --window-size=390,844 --force-device-scale-factor=2 --screenshot=out.png URL`.
