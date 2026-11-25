@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
+import { cookies, headers } from 'next/headers';
 import { Cairo, Inter, Tajawal } from 'next/font/google';
 import { LangProvider } from '@/components/LangProvider';
+import { DEFAULT_LANG, dirOf, fromAcceptLanguage, isLang } from '@/lib/i18n';
 import './globals.css';
 
 const cairo = Cairo({
@@ -39,15 +41,20 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const stored = cookies().get('samaa:lang')?.value;
+  const initialLang = isLang(stored)
+    ? stored
+    : fromAcceptLanguage(headers().get('accept-language')) ?? DEFAULT_LANG;
+
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={initialLang}
+      dir={dirOf(initialLang)}
       className={`${cairo.variable} ${tajawal.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-night-950 font-sans text-white antialiased">
-        <LangProvider>{children}</LangProvider>
+        <LangProvider initialLang={initialLang}>{children}</LangProvider>
       </body>
     </html>
   );

@@ -37,24 +37,47 @@ export async function GET(request: Request) {
 
     const data = (await response.json()) as { results?: OpenMeteoResult[] };
 
-    const results = (data.results ?? [])
-      .map((item) => ({
-        id: item.id,
-        name: item.name,
-        country: item.country ?? '',
-        countryCode: item.country_code ?? '',
-        admin1: item.admin1,
-        latitude: item.latitude,
-        longitude: item.longitude,
+    const needle = query.trim().toLowerCase();
+    const scored = (data.results ?? []).map((item) => {
+      const name = (item.name ?? '').toLowerCase();
+      return {
+        place: {
+          id: item.id,
+          name: item.name,
+          country: item.country ?? '',
+          countryCode: item.country_code ?? '',
+          admin1: item.admin1,
+          latitude: item.latitude,
+          longitude: item.longitude,
+          population: item.population ?? 0,
+        },
+        exact: name === needle ? 2 : name.startsWith(needle) ? 1 : 0,
+        arab: ARAB_COUNTRIES.has(item.country_code ?? '') ? 1 : 0,
         population: item.population ?? 0,
-      }))
+      };
+    });
+
+    // Hamlets share names with real cities; prefer settlements big enough to
+    // be what the visitor meant, and never pad the list with duplicates.
+    const big = scored.filter((entry) => entry.population >= 15000);
+    const pool = big.length > 0 ? big : scored.filter((entry) => entry.population >= 5000);
+    const candidates = pool.length > 0 ? pool : scored;
+
+    const seen = new Set<string>();
+    const results = candidates
       .sort((a, b) => {
-        const aArab = ARAB_COUNTRIES.has(a.countryCode) ? 1 : 0;
-        const bArab = ARAB_COUNTRIES.has(b.countryCode) ? 1 : 0;
-        if (aArab !== bArab) return bArab - aArab;
-        return (b.population ?? 0) - (a.population ?? 0);
+        if (a.exact !== b.exact) return b.exact - a.exact;
+        if (a.arab !== b.arab) return b.arab - a.arab;
+        return b.population - a.population;
       })
-      .slice(0, 8);
+      .filter((entry) => {
+        const key = `${entry.place.name}|${entry.place.country}|${entry.place.admin1 ?? ''}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 6)
+      .map((entry) => entry.place);
 
     return NextResponse.json({ results });
   } catch {

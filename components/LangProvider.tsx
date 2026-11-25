@@ -3,7 +3,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import {
   DEFAULT_LANG,
-  detectLang,
   dirOf,
   isLang,
   t as translate,
@@ -22,13 +21,19 @@ type LangContextValue = {
 
 const LangContext = createContext<LangContextValue | null>(null);
 
-export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
+export function LangProvider({
+  children,
+  initialLang = DEFAULT_LANG,
+}: {
+  children: React.ReactNode;
+  initialLang?: Lang;
+}) {
+  const [lang, setLangState] = useState<Lang>(initialLang);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get('lang');
-    setLangState(isLang(requested) ? requested : detectLang());
+    if (isLang(requested)) setLangState(requested);
     setReady(true);
   }, []);
 
@@ -41,6 +46,8 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
     } catch {
       /* private mode: keep the choice for this session only */
     }
+    // The cookie lets the server render the right lang/dir on the next request.
+    document.cookie = `samaa:lang=${lang}; path=/; max-age=31536000; samesite=lax`;
   }, [lang]);
 
   const setLang = useCallback((next: Lang) => setLangState(next), []);

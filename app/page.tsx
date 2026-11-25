@@ -10,6 +10,7 @@ import { useLang } from '@/components/LangProvider';
 import {
   FALLBACK_SCENE,
   FEATURED_LANDMARKS,
+  LANDMARKS,
   fallbackSceneText,
   findLandmark,
   localizedText,
@@ -31,9 +32,15 @@ async function geocodeFirst(query: string, lang: Lang): Promise<Place | null> {
 }
 
 async function fetchWeather(place: Place): Promise<WeatherBundle> {
-  const response = await fetch(
-    `/api/weather?lat=${place.latitude.toFixed(4)}&lon=${place.longitude.toFixed(4)}`
-  );
+  const params = new URLSearchParams({
+    lat: place.latitude.toFixed(4),
+    lon: place.longitude.toFixed(4),
+  });
+  if (place.countryCode) params.set('cc', place.countryCode);
+
+  const response = await fetch(`/api/weather?${params.toString()}`, {
+    signal: AbortSignal.timeout(15000),
+  });
   const data = await response.json();
   if (!response.ok) throw new Error(data?.error ?? 'weather');
   return data as WeatherBundle;
@@ -77,6 +84,13 @@ export default function HomePage() {
   const [pending, setPending] = useState(false);
   const [daytime, setDaytime] = useState(true);
   const [pendingText, setPendingText] = useState('');
+  const [curatedId, setCuratedId] = useState<string | null>(null);
+  const [weatherError, setWeatherError] = useState<string | null>(null);
+  const lastQuery = useRef('');
+  const placeRef = useRef<Place | null>(null);
+  const langRef = useRef(lang);
+  const landingRef = useRef<HTMLElement | null>(null);
+  placeRef.current = place;
 
   const scene = useMemo(() => sceneFor(place, lang), [place, lang]);
   const deepLinkDone = useRef(false);
@@ -109,6 +123,19 @@ export default function HomePage() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  const loadWeather = useCallback(
+    async (target: Place) => {
+      setWeatherError(null);
+      try {
+        const bundle = await fetchWeather(target);
+        setWeather(bundle);
+      } catch {
+        setWeatherError(t('weatherError'));
+      }
+    },
+    [t]
+  );
+
   const runSearch = useCallback(
     async (payload: { place: Place | null; text: string }) => {
       if (pending) return;
@@ -138,12 +165,14 @@ export default function HomePage() {
         // Enter the scene immediately: the backdrop paints while the weather lands.
         setPlace(resolved);
         setWeather(null);
+        setWeatherError(null);
+        setCuratedId((curated ?? landmarkFor(resolved))?.id ?? null);
+        lastQuery.current = payload.text;
         setFlyTo({ lat: resolved.latitude, lng: resolved.longitude });
         setStage('weather');
         window.history.replaceState(null, '', `?city=${encodeURIComponent(resolved.name)}`);
 
-        const bundle = await fetchWeather(resolved);
-        setWeather(bundle);
+        void loadWeather(resolved);
       } catch (caught) {
         const message = caught instanceof Error ? caught.message : '';
         setError(
@@ -160,8 +189,47 @@ export default function HomePage() {
         setPending(false);
       }
     },
-    [pending, lang, t]
+    [pending, lang, t, loadWeather]
   );
+
+  // Re-resolve the place name when the language changes: curated cities are
+  // translated locally, everything else is geocoded again in the new language.
+  useEffect(() => {
+    if (langRef.current === lang) return;
+    langRef.current = lang;
+
+    const current = placeRef.current;
+    if (!current) return;
+
+    if (curatedId) {
+      const item = LANDMARKS.find((entry) => entry.id === curatedId);
+      if (item) {
+        const localized = placeFromLandmark(item, lang);
+        setPlace(localized);
+        window.history.replaceState(null, '', `?city=${encodeURIComponent(localized.name)}`);
+        return;
+      }
+    }
+
+    const query = lastQuery.current;
+    if (!query) return;
+
+    let cancelled = false;
+    geocodeFirst(query, lang)
+      .then((next) => {
+        if (cancelled || !next) return;
+        setPlace(next);
+        window.history.replaceState(null, '', `?city=${encodeURIComponent(next.name)}`);
+      })
+      .catch(() => {
+        /* keep the previous name */
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [lang, curatedId]);
+
 
   const handleBack = useCallback(() => {
     setStage('leaving');
@@ -172,6 +240,8 @@ export default function HomePage() {
       setStage('idle');
       setPlace(null);
       setWeather(null);
+      setWeatherError(null);
+      setCuratedId(null);
       setError(null);
       window.history.replaceState(null, '', window.location.pathname);
     }, EXIT_MS);
@@ -191,9 +261,17 @@ export default function HomePage() {
   const overlayOpen = (stage === 'weather' || stage === 'leaving') && Boolean(place);
   const landingHidden = stage === 'weather';
 
+  // The landing stays mounted (the exit animation needs the globe) but must not
+  // be focusable or clickable while the scene covers it.
+  useEffect(() => {
+    const node = landingRef.current as (HTMLElement & { inert?: boolean }) | null;
+    if (node) node.inert = overlayOpen;
+  }, [overlayOpen]);
+
   return (
     <>
       <main
+        ref={landingRef}
         className={`relative flex min-h-[100svh] flex-col overflow-hidden transition-opacity duration-500 ${
           landingHidden ? 'pointer-events-none opacity-0' : 'opacity-100'
         }`}
@@ -209,7 +287,12 @@ export default function HomePage() {
           }`}
         >
           <div className="pointer-events-auto absolute left-1/2 top-1/2 aspect-square w-[min(100vw,72svh,700px)] -translate-x-1/2 -translate-y-1/2">
-            <GlobeStage className="h-full w-full" flyTo={flyTo} daylight={daytime} />
+            <GlobeStage
+              className="h-full w-full"
+              flyTo={flyTo}
+              daylight={daytime}
+              paused={stage === 'weather'}
+            />
           </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-night-950" />
         </div>
@@ -298,6 +381,10 @@ export default function HomePage() {
           <WeatherView
             place={place}
             scene={scene}
+            error={weatherError}
+            onRetry={() => {
+              if (place) void loadWeather(place);
+            }}
             weather={weather}
             onBack={handleBack}
             leaving={stage === 'leaving'}

@@ -22,10 +22,17 @@ function GlobeSkeleton() {
 type Props = {
   flyTo?: { lat: number; lng: number } | null;
   daylight?: boolean;
+  /** The globe is covered by the scene: stop rendering until it is visible again. */
+  paused?: boolean;
   className?: string;
 };
 
-export default function GlobeStage({ flyTo, daylight = false, className = '' }: Props) {
+export default function GlobeStage({
+  flyTo,
+  daylight = false,
+  paused = false,
+  className = '',
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -51,6 +58,7 @@ export default function GlobeStage({ flyTo, daylight = false, className = '' }: 
           height={size.height}
           flyTo={flyTo}
           daylight={daylight}
+          paused={paused}
         />
       ) : (
         <GlobeSkeleton />

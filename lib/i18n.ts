@@ -33,6 +33,7 @@ const UI_KEYS = [
   'geocodeError',
   'weatherError',
   'genericError',
+  'retry',
   'back',
   'sceneEyebrow',
   'humidity',
@@ -73,6 +74,7 @@ const ar: Dict = {
   geocodeError: 'تعذّر الوصول إلى خدمة البحث عن المدن',
   weatherError: 'تعذّر جلب بيانات الطقس',
   genericError: 'حدث خطأ غير متوقع',
+  retry: 'حاول مرة أخرى',
   back: 'رجوع',
   sceneEyebrow: 'مشهد اليوم',
   humidity: 'الرطوبة',
@@ -110,6 +112,7 @@ const en: Dict = {
   geocodeError: 'The city search service is unreachable',
   weatherError: 'Weather data could not be loaded',
   genericError: 'Something went wrong',
+  retry: 'Try again',
   back: 'Back',
   sceneEyebrow: 'Today’s scene',
   humidity: 'Humidity',
@@ -147,6 +150,7 @@ const de: Dict = {
   geocodeError: 'Der Städtesuchdienst ist nicht erreichbar',
   weatherError: 'Wetterdaten konnten nicht geladen werden',
   genericError: 'Etwas ist schiefgelaufen',
+  retry: 'Erneut versuchen',
   back: 'Zurück',
   sceneEyebrow: 'Szene des Tages',
   humidity: 'Feuchte',
@@ -184,6 +188,7 @@ const ru: Dict = {
   geocodeError: 'Сервис поиска городов недоступен',
   weatherError: 'Не удалось загрузить данные о погоде',
   genericError: 'Что-то пошло не так',
+  retry: 'Повторить',
   back: 'Назад',
   sceneEyebrow: 'Сцена дня',
   humidity: 'Влажность',
@@ -221,6 +226,7 @@ const it: Dict = {
   geocodeError: 'Il servizio di ricerca città non è raggiungibile',
   weatherError: 'Impossibile caricare i dati meteo',
   genericError: 'Qualcosa è andato storto',
+  retry: 'Riprova',
   back: 'Indietro',
   sceneEyebrow: 'Scena del giorno',
   humidity: 'Umidità',
@@ -400,6 +406,25 @@ export function isRtl(lang: Lang): boolean {
 }
 
 /** Picks the browser's preferred language when it is one we support. */
+/** Picks a supported language from an Accept-Language header, honouring q-weights. */
+export function fromAcceptLanguage(header?: string | null): Lang | null {
+  if (!header) return null;
+  const ranked = header
+    .split(',')
+    .map((part) => {
+      const [tag, weight] = part.trim().split(';q=');
+      return { tag: (tag ?? '').trim().toLowerCase(), weight: weight ? Number(weight) : 1 };
+    })
+    .filter((entry) => entry.tag.length > 0)
+    .sort((a, b) => b.weight - a.weight);
+
+  for (const entry of ranked) {
+    const base = entry.tag.split('-')[0];
+    if (isLang(base)) return base;
+  }
+  return null;
+}
+
 export function detectLang(): Lang {
   if (typeof navigator === 'undefined') return DEFAULT_LANG;
   const stored = window.localStorage.getItem('samaa:lang');

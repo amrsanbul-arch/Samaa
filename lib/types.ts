@@ -51,6 +51,10 @@ export type WeatherBundle = {
   sunrise: string | null;
   sunset: string | null;
   fetchedAt: string;
+  /** Which upstream produced the reading. */
+  source?: string;
+  /** True when the upstream failed and an older cached reading is being served. */
+  stale?: boolean;
 };
 
 export type Landmark = {

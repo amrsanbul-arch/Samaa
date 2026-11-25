@@ -9,11 +9,12 @@
 - **Search** — Arabic, English or translated city names, with debounced suggestions from the Open-Meteo geocoding API (requested in the active language).
 - **Instant entry** — the scene opens as soon as the place resolves (about 40 ms for curated cities); the photo paints first and the glass card follows when the forecast lands. The globe dive itself is a 700 ms zoom.
 - **Cinematic exit** — pressing back pulls the camera out to orbit altitude while the scene fades, so you always return to the globe rather than cutting to it.
-- **Live weather** — current conditions (temperature, wind, humidity, rain chance, sunrise/sunset) plus a 7-day forecast from Open-Meteo. No API key.
+- **Live weather** — current conditions (temperature, wind, humidity, rain chance, sunrise/sunset) plus a 7-day forecast. Open-Meteo is the primary source; if it times out or refuses the request, the route transparently falls back to MET Norway, so the scene still fills in. No API key for either.
 - **Landmark scenes** — a curated backdrop per city (Pyramids, Burj Khalifa, Kingdom Centre, Hassan II Mosque…), with a Ken Burns drift and a glass card overlay.
 - **Weather effects** — rain, snow, fog, clouds, lightning and a sun flare driven by the fetched conditions, all CSS/SVG based so they stay smooth on phones.
 - **Ambient sound** — rain, wind and fog beds plus thunder are synthesised with the Web Audio API (no audio files), toggled by the speaker button and remembered across visits.
 - **Swipe-up card** — on phones the glass card starts as a peek and rises on swipe, so the landmark photo is unobstructed on arrival.
+- **Honest loading state** — if the forecast really cannot be fetched the card shows a short message and a retry button instead of an endless skeleton, and the credit line names the provider that answered.
 - **RTL + LTR** — Cairo/Tajawal for Arabic and Inter for Latin/Cyrillic, logical properties, mirrored icons, safe-area padding, responsive from 360 px up.
 
 ## Stack
@@ -23,7 +24,7 @@
 | Framework | Next.js 14 (App Router) |
 | Styling | Tailwind CSS 3 |
 | 3D | react-globe.gl + three.js |
-| Data | Open-Meteo (geocoding + forecast), no key required |
+| Data | Open-Meteo (geocoding + forecast, primary), MET Norway (forecast fallback), no keys required |
 | Audio | Web Audio API (procedural ambience) |
 
 ## Getting started
@@ -44,7 +45,7 @@ app/
   layout.tsx            fonts (Cairo, Tajawal, Inter), LangProvider, metadata
   globals.css           glass surfaces, starfield, flare and cloud keyframes
   api/geocode/route.ts  proxy for the Open-Meteo geocoding API
-  api/weather/route.ts  proxy for the Open-Meteo forecast API
+  api/weather/route.ts  forecast proxy: 3.5 s timeout, 10 min cache, breaker, MET Norway fallback
   api/scene/route.ts    allow-listed, cached image proxy for the backdrops
 components/
   LangProvider.tsx      language context: detection, persistence, <html lang dir>
@@ -59,7 +60,9 @@ components/
   WeatherEffects.tsx    rain / snow / fog / clouds / lightning / flare layers
   WeatherIcon.tsx       SVG condition icons
 lib/
-  i18n.ts               language table, UI dictionary, condition + compass labels
+  i18n.ts               language table, UI dictionary, condition + compass labels, Accept-Language parsing
+  solar.ts              NOAA sunrise/sunset (used by the fallback provider)
+  timezones.ts          country → IANA zone lookup for the fallback provider
   landmark-i18n.ts      localised city/landmark copy for the four Latin locales
   landmarks.ts          curated cities, aliases, backdrops, matching helpers
   weather.ts            WMO code → localised label/condition, effect config
@@ -98,6 +101,9 @@ Cities without an entry still work — they fall back to a desert-dune scene wit
 
 - **Image proxy.** Wikimedia and Unsplash block or throttle direct hotlinking from browsers, and `next/image` refuses responses it cannot verify. `app/api/scene` re-serves the allow-listed hosts with a long cache, so the optimizer always receives a clean image. Wikimedia URLs go through `Special:FilePath`, which resolves to the canonical thumbnail.
 - **Deep links.** `/?city=الرياض` opens straight into that city's scene, and `?lang=it` forces a language, which makes sharing and reloading safe.
+- **Times.** Forecast, sunrise and sunset are shown exactly as the city's wall clock — the API already returns local times, so they are never re-converted through the visitor's time zone.
+- **First paint.** The root layout reads the `samaa:lang` cookie (or the browser's `Accept-Language`) so `<html lang dir>` is correct in the server HTML, with no RTL/LTR flash on reload.
+- **Resilience.** `/api/weather` answers from a 10-minute in-memory cache, aborts a slow upstream after 3.5 s, opens a 5-minute circuit breaker after repeated Open-Meteo failures, and serves a stale reading rather than nothing.
 - **Typography.** `html[lang]` drives the font stack: Arabic switches to Cairo/Tajawal, every other locale uses Inter (Latin + Cyrillic). `dir` flips with the language and the arrow icons mirror through `rtl:`/`ltr:` variants.
 - **Sound.** Browsers only allow audio after a gesture, so the ambience starts muted; the toggle is the gesture that unlocks the AudioContext.
 - **Textures.** The globe uses local files in `public/textures`, so the landing page has no third-party dependency at runtime.

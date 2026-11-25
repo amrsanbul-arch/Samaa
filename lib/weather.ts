@@ -149,11 +149,26 @@ export function localClock(timezone: string, lang: Lang): string {
   }
 }
 
-export function timeLabel(iso: string | null, timezone: string, lang: Lang): string {
+/**
+ * Formats a wall-clock string from the API ("2026-11-25T06:42").
+ * The value is already local to the city, so it must never be converted again —
+ * parsing it into a Date would re-interpret it in the visitor's time zone.
+ */
+export function timeLabel(iso: string | null, lang: Lang): string {
   if (!iso) return '—';
+  const match = iso.match(/T(\d{2}):(\d{2})/);
+  if (!match) return '—';
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return '—';
+
   try {
-    return new Intl.DateTimeFormat(localeOf(lang), clockOptions(lang, timezone)).format(new Date(iso));
+    return new Intl.DateTimeFormat(localeOf(lang), {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: lang === 'ar' || lang === 'en',
+    }).format(new Date(2000, 0, 1, hours, minutes));
   } catch {
-    return '—';
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   }
 }

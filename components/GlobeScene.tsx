@@ -9,6 +9,8 @@ type Props = {
   height: number;
   flyTo?: { lat: number; lng: number } | null;
   daylight?: boolean;
+  /** Stop the render loop while the globe is hidden behind the scene. */
+  paused?: boolean;
   onReady?: () => void;
 };
 
@@ -17,7 +19,14 @@ const HOME = { lat: 24.5, lng: 44.5, altitude: 1.75 };
 const ZOOM_IN_MS = 700;
 const ZOOM_OUT_MS = 900;
 
-export default function GlobeScene({ width, height, flyTo, daylight = false, onReady }: Props) {
+export default function GlobeScene({
+  width,
+  height,
+  flyTo,
+  daylight = false,
+  paused = false,
+  onReady,
+}: Props) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
   const [ready, setReady] = useState(false);
   const wasFocused = useRef(false);
@@ -44,7 +53,10 @@ export default function GlobeScene({ width, height, flyTo, daylight = false, onR
     controls.maxDistance = 620;
     controls.rotateSpeed = 0.4;
     controls.zoomSpeed = 0.55;
-    controls.autoRotate = !flyTo;
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    controls.autoRotate = !flyTo && !reduceMotion;
     controls.autoRotateSpeed = 0.32;
   }, [ready, flyTo]);
 
@@ -66,6 +78,14 @@ export default function GlobeScene({ width, height, flyTo, daylight = false, onR
       globe.pointOfView(HOME, ZOOM_OUT_MS);
     }
   }, [ready, flyTo]);
+
+  useEffect(() => {
+    if (!ready) return;
+    const globe = globeRef.current;
+    if (!globe) return;
+    if (paused) globe.pauseAnimation();
+    else globe.resumeAnimation();
+  }, [ready, paused]);
 
   const handleReady = () => {
     setReady(true);

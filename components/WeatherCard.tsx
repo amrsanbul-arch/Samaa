@@ -116,13 +116,13 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
             {localClock(timezone, lang)}
           </p>
           <p className="mt-1 text-[10px] text-white/30">
-            {timeLabel(weather.sunrise, timezone, lang)} · {timeLabel(weather.sunset, timezone, lang)}
+            {timeLabel(weather.sunrise, lang)} · {timeLabel(weather.sunset, lang)}
           </p>
         </div>
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-3 sm:mt-4">
-        <div className="flex items-start">
+        <div className="flex items-start" dir="ltr">
           <span
             className="font-display text-[3.75rem] font-bold leading-[0.85] tracking-tight text-shadow-cinema sm:text-[5.5rem]"
             dir="ltr"
@@ -167,7 +167,7 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
         <Metric
           icon={current.isDay ? icons.sun : icons.moon}
           label={current.isDay ? t('sunset') : t('sunrise')}
-          value={timeLabel(current.isDay ? weather.sunset : weather.sunrise, timezone, lang)}
+          value={timeLabel(current.isDay ? weather.sunset : weather.sunrise, lang)}
           tight
         />
       </div>
@@ -187,7 +187,9 @@ export default function WeatherCard({ place, landmark, weather, effects }: Props
         >
           {t('imageLabel')}: {landmark.credit.label}
         </a>
-        <span className="shrink-0">{t('dataLabel')}: Open-Meteo</span>
+        <span className="shrink-0">
+          {t('dataLabel')}: {weather.source === 'met.no' ? 'MET Norway' : 'Open-Meteo'}
+        </span>
       </div>
     </section>
   );

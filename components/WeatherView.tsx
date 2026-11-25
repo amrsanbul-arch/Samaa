@@ -20,6 +20,9 @@ type Props = {
   scene: Scene;
   /** Null while the first forecast is still in flight. */
   weather: WeatherBundle | null;
+  /** Localised message when the forecast could not be loaded. */
+  error?: string | null;
+  onRetry?: () => void;
   onBack: () => void;
   leaving?: boolean;
 };
@@ -37,6 +40,30 @@ const CALM: EffectConfig = {
 
 /** Height of the sheet that stays on screen while it is collapsed. */
 const PEEK = 172;
+
+function ErrorCard({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  const { t } = useLang();
+  return (
+    <div className="glass rounded-[28px] p-5 text-center sm:p-6">
+      <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+        <svg viewBox="0 0 24 24" className="h-5 w-5 text-sand-300" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+          <path d="M12 8v5M12 16.5v.5" />
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+      </div>
+      <p className="mt-3 text-sm text-white/75">{message}</p>
+      {onRetry && (
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-4 rounded-full bg-gradient-to-b from-sand-300 to-sand-400 px-5 py-2 text-sm font-semibold text-night-950 transition active:scale-[0.98]"
+        >
+          {t('retry')}
+        </button>
+      )}
+    </div>
+  );
+}
 
 function CardSkeleton() {
   return (
@@ -66,7 +93,15 @@ function CardSkeleton() {
   );
 }
 
-export default function WeatherView({ place, scene, weather, onBack, leaving = false }: Props) {
+export default function WeatherView({
+  place,
+  scene,
+  weather,
+  error = null,
+  onRetry,
+  onBack,
+  leaving = false,
+}: Props) {
   const { t } = useLang();
   const [loaded, setLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -239,6 +274,8 @@ export default function WeatherView({ place, scene, weather, onBack, leaving = f
 
               {weather ? (
                 <WeatherCard place={place} landmark={scene} weather={weather} effects={effects} />
+              ) : error ? (
+                <ErrorCard message={error} onRetry={onRetry} />
               ) : (
                 <CardSkeleton />
               )}
