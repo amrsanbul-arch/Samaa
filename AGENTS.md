@@ -1,6 +1,8 @@
 # AGENTS.md
 
-Cinematic weather app (سماء / Samaa) for Arab cities. Next.js 14 App Router, Tailwind 3, react-globe.gl. Five UI languages: ar (RTL), en, de, ru, it.
+Cinematic weather app (سماء / Samaa) for cities worldwide. Next.js 14 App Router, Tailwind 3, react-globe.gl. Five UI languages: ar (RTL), en, de, ru, it.
+
+Curated landmarks cover major cities on every continent; any other city falls back to the neutral scene.
 
 ## Commands
 

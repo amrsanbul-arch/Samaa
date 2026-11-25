@@ -17,6 +17,7 @@ export type Place = {
   latitude: number;
   longitude: number;
   population?: number;
+  timezone?: string;
 };
 
 export type CurrentWeather = {
@@ -70,6 +71,8 @@ export type Landmark = {
   latitude: number;
   longitude: number;
   aliases: string[];
+  /** IANA zone, needed for countries that span several zones. */
+  timezone?: string;
   /** CSS object-position used to keep the subject in frame on tall screens. */
   focus?: string;
   /** Extra zoom on tall screens, anchored at the bottom so low subjects stay visible. */

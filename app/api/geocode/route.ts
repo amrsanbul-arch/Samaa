@@ -1,10 +1,5 @@
 import { NextResponse } from 'next/server';
 
-const ARAB_COUNTRIES = new Set([
-  'SA', 'AE', 'EG', 'DZ', 'MA', 'TN', 'LY', 'SD', 'JO', 'LB', 'SY',
-  'IQ', 'KW', 'QA', 'BH', 'OM', 'YE', 'PS', 'MR', 'SO', 'DJ', 'KM',
-]);
-
 type OpenMeteoResult = {
   id: number;
   name: string;
@@ -14,6 +9,7 @@ type OpenMeteoResult = {
   country_code?: string;
   admin1?: string;
   population?: number;
+  timezone?: string;
 };
 
 export async function GET(request: Request) {
@@ -27,7 +23,7 @@ export async function GET(request: Request) {
 
   const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
   url.searchParams.set('name', query);
-  url.searchParams.set('count', '10');
+  url.searchParams.set('count', '20');
   url.searchParams.set('language', lang);
   url.searchParams.set('format', 'json');
 
@@ -37,9 +33,7 @@ export async function GET(request: Request) {
 
     const data = (await response.json()) as { results?: OpenMeteoResult[] };
 
-    const needle = query.trim().toLowerCase();
-    const scored = (data.results ?? []).map((item) => {
-      const name = (item.name ?? '').toLowerCase();
+    const scored = (data.results ?? []).map((item, index) => {
       return {
         place: {
           id: item.id,
@@ -50,9 +44,12 @@ export async function GET(request: Request) {
           latitude: item.latitude,
           longitude: item.longitude,
           population: item.population ?? 0,
+          timezone: item.timezone,
         },
-        exact: name === needle ? 2 : name.startsWith(needle) ? 1 : 0,
-        arab: ARAB_COUNTRIES.has(item.country_code ?? '') ? 1 : 0,
+        // The provider already ranks exact names first and then by population.
+        // Local exact-matching cannot be trusted because names arrive localized
+        // (searching "Lima" in Arabic returns "ليما", which let Limay win).
+        index,
         population: item.population ?? 0,
       };
     });
@@ -65,11 +62,7 @@ export async function GET(request: Request) {
 
     const seen = new Set<string>();
     const results = candidates
-      .sort((a, b) => {
-        if (a.exact !== b.exact) return b.exact - a.exact;
-        if (a.arab !== b.arab) return b.arab - a.arab;
-        return b.population - a.population;
-      })
+      .sort((a, b) => a.index - b.index)
       .filter((entry) => {
         const key = `${entry.place.name}|${entry.place.country}|${entry.place.admin1 ?? ''}`;
         if (seen.has(key)) return false;

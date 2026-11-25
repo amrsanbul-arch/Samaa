@@ -1,16 +1,16 @@
 # سماء · Samaa
 
-سماء (Samaa) is a cinematic weather experience for Arab cities in five languages. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions.
+سماء (Samaa) is a cinematic weather experience for cities around the world in five languages. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions.
 
 ## Features
 
 - **Five languages** — Arabic (RTL), English, German, Russian and Italian. The language is auto-detected from the browser, can be switched from the header, is stored locally, and can be forced with `?lang=de`. UI copy, weather conditions, dates, city names and landmark descriptions are all localised.
 - **3D globe landing** — `react-globe.gl` / three.js Earth with a starfield, city beacons and slow auto-rotation. The texture follows the visitor's device clock: blue-marble day map between 06:00 and 18:00, city-lights night map after that.
-- **Search** — Arabic, English or translated city names, with debounced suggestions from the Open-Meteo geocoding API (requested in the active language).
+- **Search** — any city on Earth, typed in Arabic, English or its translated name, with debounced suggestions from the Open-Meteo geocoding API (requested in the active language and ranked by the provider's relevance, so the biggest matching city comes first).
 - **Instant entry** — the scene opens as soon as the place resolves (about 40 ms for curated cities); the photo paints first and the glass card follows when the forecast lands. The globe dive itself is a 700 ms zoom.
 - **Cinematic exit** — pressing back pulls the camera out to orbit altitude while the scene fades, so you always return to the globe rather than cutting to it.
 - **Live weather** — current conditions (temperature, wind, humidity, rain chance, sunrise/sunset) plus a 7-day forecast. Open-Meteo is the primary source; if it times out or refuses the request, the route transparently falls back to MET Norway, so the scene still fills in. No API key for either.
-- **Landmark scenes** — a curated backdrop per city (Pyramids, Burj Khalifa, Kingdom Centre, Hassan II Mosque…), with a Ken Burns drift and a glass card overlay.
+- **Landmark scenes** — a curated backdrop for 52 cities across every continent (Pyramids, Burj Khalifa, Eiffel Tower, Shibuya, Table Mountain, Sydney Opera House…), with a Ken Burns drift and a glass card overlay. Any other city gets a neutral scene picked by latitude band: tropical, temperate or northern.
 - **Weather effects** — rain, snow, fog, clouds, lightning and a sun flare driven by the fetched conditions, all CSS/SVG based so they stay smooth on phones.
 - **Ambient sound** — rain, wind and fog beds plus thunder are synthesised with the Web Audio API (no audio files), toggled by the speaker button and remembered across visits.
 - **Swipe-up card** — on phones the glass card starts as a peek and rises on swipe, so the landmark photo is unobstructed on arrival.
@@ -95,7 +95,7 @@ Append an entry to `LANDMARKS` in `lib/landmarks.ts`:
 }
 ```
 
-Cities without an entry still work — they fall back to a desert-dune scene with localised copy. To localise a new city, add its copy to `LANDMARK_I18N` in `lib/landmark-i18n.ts` (keyed by the landmark `id`); Arabic lives on the landmark itself.
+Cities without an entry still work — they fall back to a neutral horizon scene (tropical, temperate or northern, chosen by latitude) with localised copy. To localise a new city, add its copy to `LANDMARK_I18N` in `lib/landmark-i18n.ts` (keyed by the landmark `id`); Arabic lives on the landmark itself.
 
 ## Notes
 

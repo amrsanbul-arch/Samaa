@@ -8,9 +8,9 @@ import Starfield from '@/components/Starfield';
 import WeatherView from '@/components/WeatherView';
 import { useLang } from '@/components/LangProvider';
 import {
-  FALLBACK_SCENE,
   FEATURED_LANDMARKS,
   LANDMARKS,
+  fallbackSceneImage,
   fallbackSceneText,
   findLandmark,
   localizedText,
@@ -37,6 +37,7 @@ async function fetchWeather(place: Place): Promise<WeatherBundle> {
     lon: place.longitude.toFixed(4),
   });
   if (place.countryCode) params.set('cc', place.countryCode);
+  if (place.timezone) params.set('tz', place.timezone);
 
   const response = await fetch(`/api/weather?${params.toString()}`, {
     signal: AbortSignal.timeout(15000),
@@ -48,13 +49,17 @@ async function fetchWeather(place: Place): Promise<WeatherBundle> {
 
 function landmarkFor(place: Place | null): Landmark | null {
   if (!place) return null;
-  return findLandmark(place.name) ?? (place.admin1 ? findLandmark(place.admin1) : null);
+  const match = findLandmark(place.name) ?? (place.admin1 ? findLandmark(place.admin1) : null);
+  if (!match) return null;
+  // Paris, Texas must not borrow the Eiffel Tower.
+  if (place.countryCode && match.countryCode && place.countryCode !== match.countryCode) return null;
+  return match;
 }
 
 function sceneFor(place: Place | null, lang: Lang) {
   const item = landmarkFor(place);
   if (!item) {
-    return { ...FALLBACK_SCENE, ...fallbackSceneText(lang) };
+    return { ...fallbackSceneImage(place?.latitude), ...fallbackSceneText(lang) };
   }
   const text = localizedText(item, lang);
   return {
@@ -116,7 +121,7 @@ export default function HomePage() {
   // Warm the featured backdrops once the landing screen is idle so the first tap
   // paints instantly even on a slow connection.
   useEffect(() => {
-    const featured = FEATURED_LANDMARKS.slice(0, 6);
+    const featured = FEATURED_LANDMARKS.slice(0, 8);
     const timers = featured.map((landmark, index) =>
       setTimeout(() => warmImage(landmark.image), 1500 + index * 700)
     );
@@ -146,7 +151,9 @@ export default function HomePage() {
       if (exitTimer.current) clearTimeout(exitTimer.current);
 
       try {
-        const curated = findLandmark(payload.text) ?? landmarkFor(payload.place);
+        const curated = payload.place
+          ? landmarkFor(payload.place)
+          : findLandmark(payload.text);
         let resolved = payload.place ?? (curated ? placeFromLandmark(curated, lang) : null);
 
         if (!resolved) {

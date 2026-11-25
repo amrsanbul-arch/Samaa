@@ -131,7 +131,7 @@ export default function SearchBar({
             aria-autocomplete="list"
             aria-label={t('searchAria')}
             placeholder={placeholder ?? t('searchPlaceholder')}
-            className={`w-full bg-transparent text-white outline-none placeholder:text-white/40 ${
+            className={`w-full bg-transparent text-white outline-none placeholder:text-[13px] placeholder:text-white/40 sm:placeholder:text-base ${
               compact ? 'py-2 text-sm' : 'py-3 text-base sm:text-lg'
             }`}
           />

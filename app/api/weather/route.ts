@@ -241,7 +241,7 @@ async function fromMetNorway(lat: number, lon: number, timeZone: string): Promis
     cache: 'no-store',
     signal: AbortSignal.timeout(MET_TIMEOUT_MS),
     headers: {
-      'User-Agent': 'SamaaWeather/1.0 (Arabic weather scenes; +https://github.com/samaa-weather)',
+      'User-Agent': 'SamaaWeather/1.0 (cinematic weather scenes; +https://github.com/samaa-weather)',
       Accept: 'application/json',
     },
   });
