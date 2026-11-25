@@ -257,3 +257,32 @@ html:not([lang='ar']) .theme-sunset {
 html:not([lang='ar']) .font-display {
   letter-spacing: -0.015em;
 }
+
+/* Login page: Resend's dark monochrome reference, with a NASA night shot behind it. */
+.login-shell {
+  font-family: var(--font-inter), var(--font-cairo), system-ui, -apple-system, sans-serif;
+}
+
+.login-bg {
+  background-image: url('/images/login-night-earth.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 900px) {
+  .login-bg {
+    background-image: url('/images/login-night-earth.webp');
+  }
+}
+
+@supports (background-image: image-set(url('/images/login-night-earth.webp') 1x)) {
+  @media (max-width: 899px) {
+    .login-bg {
+      background-image: image-set(
+        url('/images/login-night-earth-1200.webp') 1x,
+        url('/images/login-night-earth.webp') 2x
+      );
+    }
+  }
+}

@@ -4,8 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { LANGS, type Lang } from '@/lib/i18n';
 import { useLang } from './LangProvider';
 
-export default function LanguageSwitcher() {
+type Props = {
+  /** `plain` is the monochrome variant used on the login page. */
+  variant?: 'theme' | 'plain';
+};
+
+export default function LanguageSwitcher({ variant = 'theme' }: Props) {
   const { lang, setLang, t } = useLang();
+  const plain = variant === 'plain';
   const [open, setOpen] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +41,11 @@ export default function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t('language')}
-        className="panel-solid focus-ring flex items-center gap-1.5 rounded-[14px] px-3 py-2 text-[11px] text-cream/80 transition hover:text-white active:scale-[0.98]"
+        className={
+          plain
+            ? 'flex items-center gap-1.5 rounded-md px-1.5 py-1 text-[12px] text-[#A1A4A5] transition hover:text-[#F0F0F0] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#A1A4A5]'
+            : 'panel-solid focus-ring flex items-center gap-1.5 rounded-[14px] px-3 py-2 text-[11px] text-cream/80 transition hover:text-white active:scale-[0.98]'
+        }
       >
         <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8">
           <circle cx="12" cy="12" r="9" />
@@ -50,7 +60,11 @@ export default function LanguageSwitcher() {
       {open && (
         <ul
           role="listbox"
-          className="panel absolute end-0 top-[calc(100%+0.5rem)] z-50 w-40 overflow-hidden rounded-[14px] p-1 animate-fadeIn"
+          className={
+            plain
+              ? 'absolute end-0 top-[calc(100%+0.5rem)] z-50 w-40 overflow-hidden rounded-lg border border-[#333B3E] bg-[#141517] p-1'
+              : 'panel absolute end-0 top-[calc(100%+0.5rem)] z-50 w-40 overflow-hidden rounded-[14px] p-1 animate-fadeIn'
+          }
         >
           {LANGS.map((item) => (
             <li key={item.code}>
@@ -62,12 +76,22 @@ export default function LanguageSwitcher() {
                   setLang(item.code as Lang);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-xs transition ${
-                  item.code === lang ? 'bg-brand/15 text-brand' : 'text-cream/75 hover:bg-cream/10'
-                }`}
+                className={
+                  plain
+                    ? `flex w-full items-center justify-between rounded-md px-3 py-2 text-[12px] transition ${
+                        item.code === lang
+                          ? 'bg-[#212629] text-[#F0F0F0]'
+                          : 'text-[#A1A4A5] hover:bg-[#191B1E] hover:text-[#F0F0F0]'
+                      }`
+                    : `flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-xs transition ${
+                        item.code === lang ? 'bg-brand/15 text-brand' : 'text-cream/75 hover:bg-cream/10'
+                      }`
+                }
               >
                 <span>{item.native}</span>
-                <span className="text-[10px] uppercase tracking-wider text-cream/35">{item.code}</span>
+                <span className={plain ? 'text-[10px] uppercase tracking-wider text-[#878D8F]' : 'text-[10px] uppercase tracking-wider text-cream/35'}>
+                  {item.code}
+                </span>
               </button>
             </li>
           ))}

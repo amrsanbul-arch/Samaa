@@ -11,6 +11,7 @@ import ForecastStrip from './ForecastStrip';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLang } from './LangProvider';
 import SoundToggle from './SoundToggle';
+import LogoutButton from './LogoutButton';
 import WeatherCard from './WeatherCard';
 import WeatherEffects from './WeatherEffects';
 
@@ -237,6 +238,7 @@ export default function WeatherView({
           <div className="flex items-center gap-2">
             <SoundToggle effects={effects} />
             <LanguageSwitcher />
+            <LogoutButton />
           </div>
         </header>
 

@@ -19,6 +19,9 @@ import {
 } from '@/lib/landmarks';
 import type { Landmark, Place, WeatherBundle } from '@/lib/types';
 import { themeFor } from '@/lib/theme';
+import AuthGate from '@/components/AuthGate';
+import { useAuth } from '@/components/AuthProvider';
+import LogoutButton from '@/components/LogoutButton';
 import type { Lang } from '@/lib/i18n';
 
 type Stage = 'idle' | 'flying' | 'weather' | 'leaving';
@@ -100,6 +103,7 @@ export default function HomePage() {
 
   const scene = useMemo(() => sceneFor(place, lang), [place, lang]);
   const theme = useMemo(() => themeFor(landmarkFor(place) ?? place), [place]);
+  const { session, loading: authLoading } = useAuth();
   const deepLinkDone = useRef(false);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -257,11 +261,11 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (!langReady || deepLinkDone.current) return;
+    if (authLoading || !session || !langReady || deepLinkDone.current) return;
     deepLinkDone.current = true;
     const city = new URLSearchParams(window.location.search).get('city');
     if (city) runSearch({ place: null, text: city });
-  }, [langReady, runSearch]);
+  }, [authLoading, session, langReady, runSearch]);
 
   const pickLandmark = (landmark: Landmark) => {
     runSearch({ place: placeFromLandmark(landmark, lang), text: landmark.city });
@@ -278,7 +282,7 @@ export default function HomePage() {
   }, [overlayOpen]);
 
   return (
-    <>
+    <AuthGate>
       <main
         ref={landingRef}
         className={`theme-nile relative flex min-h-[100svh] flex-col overflow-hidden bg-[#0B1220] transition-opacity duration-500 ${
@@ -320,6 +324,7 @@ export default function HomePage() {
               {t('live')} · Open-Meteo
             </span>
             <LanguageSwitcher />
+            <LogoutButton />
           </div>
         </header>
 
@@ -397,6 +402,6 @@ export default function HomePage() {
           />
         </div>
       )}
-    </>
+    </AuthGate>
   );
 }

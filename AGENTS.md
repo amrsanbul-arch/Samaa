@@ -35,10 +35,20 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 - Tailwind opacity modifiers must come from the default scale (0, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100) or use arbitrary values (`bg-white/[0.06]`). Values like `/8`, `/12`, `/35`, `/45` are silently dropped.
 - Keep animations CSS/SVG based; the app targets mid-range phones.
 
+## Auth
+
+- `/login` is the entry point. `components/AuthGate.tsx` keeps the globe and the city scenes behind a Supabase session and sends visitors without one to `/login`.
+- `lib/supabase.ts` reads the environment **on the server** (`readAuthConfig`) because Next only inlines `NEXT_PUBLIC_*` into the browser bundle; the deployment's `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` / `VITE_ENABLE_APPLE_LOGIN` names are accepted too. Missing values mean `configured: false`: no client is created, the login form is disabled behind a banner, and nothing throws.
+- `components/AuthProvider.tsx` owns the session (`getSession` + `onAuthStateChange`), `signIn`, `signUp`, `signInWithProvider`, `resetPassword` and `signOut`. `lib/auth-errors.ts` maps Supabase's English messages onto `t()` keys; never surface `error.message` directly.
+- Supabase validates OAuth providers server-side, so a disabled provider never reaches our code — it comes back as `#error=…&error_description=…`. `LoginScreen` reads that on mount, translates it and strips the hash with `replaceState`.
+- The login page is deliberately monochrome (Resend reference): `#F0F0F0` text on `#191B1E` fields, `#333B3E` borders, `#141517` inverted primary, Inter for Latin and Cairo for Arabic, no panels, no accent colour and no GitHub button. The overlay is `bg-black/[0.76]` plus a black radial; that pair is what keeps the `#A1A4A5` labels above 4.5:1 over the brightest part of the Nile photo.
+- The `?city=` deep link waits for `session` before running: its `history.replaceState` desyncs the App Router while `AuthGate` is navigating to `/login`, which leaves a blank page.
+
 ## Gotchas
 
 - After `npm run build`, restart `next start` — a running server keeps the old build manifest and serves stale CSS/JS.
 - Theme classes live outside `@layer` on purpose: Tailwind drops class selectors placed in `@layer base`, which silently strips the palette.
 - Changing the `next/font` set requires `rm -rf .next`; a stale font cache makes `next/font` fail with `Cannot read properties of null (reading '1')`.
+- The same error appears on a cold cache when Google serves the legacy `l/font?kit=` CSS, whose URLs have no font extension. Static Playfair Display instances do this, so Playfair is declared without `weight` (variable axis, 400–900) and must stay that way; if the error still appears, re-run the build.
 - `npm run lint` is not wired up (no ESLint config), so it prompts instead of running; `npx tsc --noEmit` plus a production build is the check.
 - Headless Chromium screenshots for mobile checks: `chromium --headless=new --no-sandbox --disable-gpu --window-size=390,844 --force-device-scale-factor=2 --screenshot=out.png URL`.

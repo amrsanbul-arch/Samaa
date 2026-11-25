@@ -15,6 +15,7 @@
 - **Ambient sound** — rain, wind and fog beds plus thunder are synthesised with the Web Audio API (no audio files), toggled by the speaker button and remembered across visits.
 - **Swipe-up card** — on phones the glass card starts as a peek and rises on swipe, so the landmark photo is unobstructed on arrival.
 - **Honest loading state** — if the forecast really cannot be fetched the card shows a short message and a retry button instead of an endless skeleton, and the credit line names the provider that answered.
+- **Login-first** — `/login` is the first screen, built as a monochrome mirror of the Resend login page (email + password, sign-up, password reset, Google/Apple) on a NASA night shot of the Nile. The globe and every city scene sit behind a Supabase session, and the header carries a sign-out button.
 - **RTL + LTR** — Cairo/Tajawal for Arabic and Inter for Latin/Cyrillic, logical properties, mirrored icons, safe-area padding, responsive from 360 px up.
 
 ## Stack
@@ -36,6 +37,33 @@ npm run build && npm start
 ```
 
 Node 18+ is required.
+
+## Authentication
+
+`/login` is the entry point and everything else is gated behind a Supabase session
+(`components/AuthGate.tsx`). Copy `.env.example` to `.env.local` and fill in:
+
+| Variable | Where it comes from |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Project Settings → API → anon public key |
+| `NEXT_PUBLIC_ENABLE_APPLE_LOGIN` | `false` hides the Apple button until the provider is configured |
+
+The `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` / `VITE_ENABLE_APPLE_LOGIN`
+names are also honoured, because the deployment notes use them; they are read on the
+server (`lib/supabase.ts`) and handed to the client provider, since Next only inlines
+`NEXT_PUBLIC_*` into the browser bundle.
+
+With no variables set the app still builds and runs: `lib/supabase.ts` exports a null
+client, the login page shows "خدمة تسجيل الدخول لم يتم إعدادها بعد." and every control
+is disabled. Nothing throws.
+
+Sign-in methods: email + password (`signInWithPassword`), sign-up with the confirm-email
+message when confirmation is enabled, password reset mail, and OAuth for Google and
+Apple. Errors are mapped to clear Arabic (or the active language) through
+`lib/auth-errors.ts`. In Supabase, add the deployment origin to
+**Authentication → URL Configuration** so confirmation and OAuth redirects come back to
+the app.
 
 ## Project layout
 
@@ -111,3 +139,13 @@ Cities without an entry still work — they fall back to a neutral horizon scene
 ## Credits
 
 Weather and geocoding by [Open-Meteo](https://open-meteo.com/). Landmark photography by [Unsplash](https://unsplash.com) and [Wikimedia Commons](https://commons.wikimedia.org) — individual credits are linked inside each scene.
+
+### Login background
+
+`public/images/login-night-earth.{webp,jpg}` — “Egypt’s Nile River stretches is pictured
+at night from the International Space Station” (ISS073-E-422279), NASA, **public domain**
+(NASA/JSC Earth Observation). Source:
+<https://commons.wikimedia.org/wiki/File:Egypt%E2%80%99s_Nile_River_stretches_is_pictured_at_night_from_the_International_Space_Station_(iss073e0422279).jpg>
+
+Cropped to 2.08:1 with the lit Nile band in the lower third, exported to WebP
+(2400 px and 1200 px, 176 KB and 48 KB) with a JPEG fallback for older browsers.
