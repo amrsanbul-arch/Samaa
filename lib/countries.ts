@@ -82,6 +82,24 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  DJ: { ar: 'جيبوتي', en: 'Djibouti', de: 'Dschibuti', ru: 'Джибути', it: 'Gibuti' },
+  ER: { ar: 'إريتريا', en: 'Eritrea', de: 'Eritrea', ru: 'Эритрея', it: 'Eritrea' },
+  MW: { ar: 'مالاوي', en: 'Malawi', de: 'Malawi', ru: 'Малави', it: 'Malawi' },
+  SZ: { ar: 'إسواتيني', en: 'Eswatini', de: 'Eswatini', ru: 'Эсватини', it: 'Eswatini' },
+  LS: { ar: 'ليسوتو', en: 'Lesotho', de: 'Lesotho', ru: 'Лесото', it: 'Lesotho' },
+  KM: { ar: 'جزر القمر', en: 'Comoros', de: 'Komoren', ru: 'Коморы', it: 'Comore' },
+  SC: { ar: 'سيشل', en: 'Seychelles', de: 'Seychellen', ru: 'Сейшельские Острова', it: 'Seychelles' },
+  ST: { ar: 'ساو تومي وبرينسيبي', en: 'São Tomé and Príncipe', de: 'São Tomé und Príncipe', ru: 'Сан-Томе и Принсипи', it: 'São Tomé e Príncipe' },
+  CV: { ar: 'الرأس الأخضر', en: 'Cabo Verde', de: 'Kap Verde', ru: 'Кабо-Верде', it: 'Capo Verde' },
+  GQ: { ar: 'غينيا الاستوائية', en: 'Equatorial Guinea', de: 'Äquatorialguinea', ru: 'Экваториальная Гвинея', it: 'Guinea Equatoriale' },
+  MR: { ar: 'موريتانيا', en: 'Mauritania', de: 'Mauretanien', ru: 'Мавритания', it: 'Mauritania' },
+  AF: { ar: 'أفغانستان', en: 'Afghanistan', de: 'Afghanistan', ru: 'Афганистан', it: 'Afghanistan' },
+  PG: { ar: 'بابوا غينيا الجديدة', en: 'Papua New Guinea', de: 'Papua-Neuguinea', ru: 'Папуа — Новая Гвинея', it: 'Papua Nuova Guinea' },
+  FJ: { ar: 'فيجي', en: 'Fiji', de: 'Fidschi', ru: 'Фиджи', it: 'Figi' },
+  SB: { ar: 'جزر سولومون', en: 'Solomon Islands', de: 'Salomonen', ru: 'Соломоновы Острова', it: 'Isole Salomone' },
+  VU: { ar: 'فانواتو', en: 'Vanuatu', de: 'Vanuatu', ru: 'Вануату', it: 'Vanuatu' },
+  WS: { ar: 'ساموا', en: 'Samoa', de: 'Samoa', ru: 'Самоа', it: 'Samoa' },
+  TO: { ar: 'تونغا', en: 'Tonga', de: 'Tonga', ru: 'Тонга', it: 'Tonga' },
   GA: { ar: 'الغابون', en: 'Gabon', de: 'Gabun', ru: 'Габон', it: 'Gabon' },
   TD: { ar: 'تشاد', en: 'Chad', de: 'Tschad', ru: 'Чад', it: 'Ciad' },
   NE: { ar: 'النيجر', en: 'Niger', de: 'Niger', ru: 'Нигер', it: 'Niger' },
@@ -7765,6 +7783,838 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Moschea Isbahaysiga',
         description:
           'La più grande moschea della Somalia, costruita nel 1987 con cupola e minareto bianchi, sulla via della Mecca nel cuore di Mogadiscio.',
+      },
+    },
+  },
+  {
+    id: 'tadjourah',
+    countryCode: 'DJ',
+    timezone: 'Africa/Djibouti',
+    latitude: 11.7877,
+    longitude: 42.8822,
+    image: commons('Lake Assal 1-Djibouti.jpg'),
+    credit: credit('Lake Assal 1-Djibouti.jpg'),
+    aliases: [
+      'تاجورة', 'tadjourah', 'tadjoura', 'جيبوتي', 'djibouti', 'lake assal', 'بحيرة عسل',
+      'assal',
+    ],
+    focus: '60% 50%',
+    copy: {
+      ar: {
+        city: 'تاجورة',
+        landmark: 'بحيرة عسل',
+        description:
+          'بحيرة ملح على عمق ١٥٥ متراً تحت سطح البحر، وهي أخفض نقطة في أفريقيا، تحيط بها قشور الملح البيضاء وتحتضنها تلال بركانية سوداء غرب تاجورة.',
+      },
+      en: {
+        city: 'Tadjourah',
+        landmark: 'Lake Assal',
+        description:
+          'A salt lake 155 metres below sea level, the lowest point in Africa, rimmed with white salt crusts and held between black volcanic hills west of Tadjourah.',
+      },
+      de: {
+        city: 'Tadjoura',
+        landmark: 'Assalsee',
+        description:
+          'Ein Salzsee 155 Meter unter dem Meeresspiegel, der tiefste Punkt Afrikas, umgeben von weißen Salzkrusten und schwarzen Vulkanhügeln westlich von Tadjoura.',
+      },
+      ru: {
+        city: 'Таджура',
+        landmark: 'Озеро Ассаль',
+        description:
+          'Солёное озеро на 155 метров ниже уровня моря, самая низкая точка Африки: белые соляные корки и чёрные вулканические холмы к западу от Таджуры.',
+      },
+      it: {
+        city: 'Tadjoura',
+        landmark: 'Lago Assal',
+        description:
+          'Un lago salato 155 metri sotto il livello del mare, il punto più basso dell’Africa, cinto da croste di sale bianche e colline vulcaniche nere a ovest di Tadjoura.',
+      },
+    },
+  },
+  {
+    id: 'asmara',
+    countryCode: 'ER',
+    timezone: 'Africa/Asmara',
+    latitude: 15.3229,
+    longitude: 38.9332,
+    image: commons('Fiat Tagliero building in Asmara.jpg'),
+    credit: credit('Fiat Tagliero building in Asmara.jpg'),
+    aliases: [
+      'أسمرة', 'asmara', 'asmera', 'eritrea', 'إريتريا', 'fiat tagliero', 'فيات تاغلييرو',
+    ],
+    capital: true,
+    focus: '55% 50%',
+    copy: {
+      ar: {
+        city: 'أسمرة',
+        landmark: 'مبنى فيات تاغلييرو',
+        description:
+          'محطة وقود مستقبلية بُنيت عام ١٩٣٨، جناحاها الخرسانيان يمتدان ثمانية عشر متراً بلا دعامات ظاهرة، وهي من رموز وسط أسمرة الحداثي.',
+      },
+      en: {
+        city: 'Asmara',
+        landmark: 'Fiat Tagliero',
+        description:
+          'A 1938 Futurist petrol station whose two concrete wings cantilever eighteen metres with no visible support, one of the icons of Asmara’s modernist centre.',
+      },
+      de: {
+        city: 'Asmara',
+        landmark: 'Fiat-Tagliero-Bau',
+        description:
+          'Eine futuristische Tankstelle von 1938, deren zwei Betonflügel achtzehn Meter ohne sichtbare Stütze auskragen – eine Ikone der modernen Innenstadt von Asmara.',
+      },
+      ru: {
+        city: 'Асмэра',
+        landmark: 'ФИАТ Тальеро',
+        description:
+          'Футуристическая заправка 1938 года: два бетонных крыла выносятся на восемнадцать метров без видимых опор, одна из икон модернистского центра Асмэры.',
+      },
+      it: {
+        city: 'Asmara',
+        landmark: 'Fiat Tagliero',
+        description:
+          'Una stazione di servizio futurista del 1938, le cui due ali di cemento sporgono per diciotto metri senza appoggi visibili: un’icona del centro modernista di Asmara.',
+      },
+    },
+  },
+  {
+    id: 'mangochi',
+    countryCode: 'MW',
+    timezone: 'Africa/Blantyre',
+    latitude: -14.478,
+    longitude: 35.2645,
+    image: commons('Dugout on Lake Malawi (14874751077).jpg'),
+    credit: credit('Dugout on Lake Malawi (14874751077).jpg'),
+    aliases: [
+      'مانغوتشي', 'mangochi', 'malawi', 'مالاوي', 'lake malawi', 'بحيرة مالاوي',
+      'بحيرة النجوم', 'ليلونغوي', 'lilongwe',
+    ],
+    focus: '55% 50%',
+    copy: {
+      ar: {
+        city: 'مانغوتشي',
+        landmark: 'بحيرة مالاوي',
+        description:
+          'الشاطئ الجنوبي لبحيرة النجوم، حيث تنطلق القوارب الخشبية عند الغروب، وفي مياهها من أنواع الأسماك أكثر مما في أي بحيرة أخرى على الأرض.',
+      },
+      en: {
+        city: 'Mangochi',
+        landmark: 'Lake Malawi',
+        description:
+          'The southern shore of the “Lake of Stars”, where dugout canoes head out at dusk and the water holds more fish species than any other lake on Earth.',
+      },
+      de: {
+        city: 'Mangochi',
+        landmark: 'Malawisee',
+        description:
+          'Das Südufer des „Sees der Sterne“, wo bei Sonnenuntergang Einbäume hinausfahren und das Wasser mehr Fischarten beherbergt als jeder andere See der Erde.',
+      },
+      ru: {
+        city: 'Мангочи',
+        landmark: 'Озеро Малави',
+        description:
+          'Южный берег «Озера звёзд»: на закате выходят долблёные каноэ, а в воде больше видов рыбы, чем в любом другом озере Земли.',
+      },
+      it: {
+        city: 'Mangochi',
+        landmark: 'Lago Malawi',
+        description:
+          'La sponda sud del «Lago delle stelle», dove all’imbrunire partono le canoe scavate nel legno e l’acqua ospita più specie di pesci di qualsiasi altro lago del mondo.',
+      },
+    },
+  },
+  {
+    id: 'mbabane',
+    countryCode: 'SZ',
+    timezone: 'Africa/Mbabane',
+    latitude: -26.3054,
+    longitude: 31.1367,
+    image: commons('Granite monolith.jpg'),
+    credit: credit('Granite monolith.jpg'),
+    aliases: [
+      'مبابان', 'mbabane', 'eswatini', 'swaziland', 'إسواتيني', 'سوازيلاند', 'sibebe',
+      'sibebe rock', 'صخرة سيبيري',
+    ],
+    capital: true,
+    focus: '62% 50%',
+    copy: {
+      ar: {
+        city: 'مبابان',
+        landmark: 'صخرة سيبيري',
+        description:
+          'قبة من الجرانيت العاري فوق مبابان، من أكبر كتل الجرانيت المكشوفة على الأرض، يصعد المتنزهون ظهرها الطويل الأملس.',
+      },
+      en: {
+        city: 'Mbabane',
+        landmark: 'Sibebe Rock',
+        description:
+          'A bare granite dome above Mbabane, one of the largest exposed granite masses on Earth, climbed by hikers along its long smooth back.',
+      },
+      de: {
+        city: 'Mbabane',
+        landmark: 'Sibebe-Felsen',
+        description:
+          'Eine nackte Granitkuppel über Mbabane, eine der größten freiliegenden Granitmassen der Erde, über deren langen Rücken Wanderer hinaufsteigen.',
+      },
+      ru: {
+        city: 'Мбабане',
+        landmark: 'Скала Сибэбе',
+        description:
+          'Голый гранитный купол над Мбабане, один из крупнейших открытых гранитных массивов Земли; по его длинной спине поднимаются туристы.',
+      },
+      it: {
+        city: 'Mbabane',
+        landmark: 'Roccia di Sibebe',
+        description:
+          'Una cupola di granito nudo sopra Mbabane, una delle più grandi masse granitiche affioranti della Terra, percorsa lungo il dorso da escursionisti.',
+      },
+    },
+  },
+  {
+    id: 'semonkong',
+    countryCode: 'LS',
+    timezone: 'Africa/Maseru',
+    latitude: -29.8333,
+    longitude: 28.05,
+    image: commons('Maletsunyanefalls.JPG'),
+    credit: credit('Maletsunyanefalls.JPG'),
+    aliases: [
+      'سيمونكونغ', 'semonkong', 'lesotho', 'ليسوتو', 'maletsunyane', 'maletsunyane falls',
+      'شلالات ماليتسواني', 'ماسيرو', 'maseru',
+    ],
+    copy: {
+      ar: {
+        city: 'سيمونكونغ',
+        landmark: 'شلالات ماليتسواني',
+        description:
+          'شلال واحد يهبط ١٩٢ متراً على نهر ماليتسواني قرب سيمونكونغ، من أعلى الشلالات ذات المسقط الواحد في أفريقيا، وفيه أطول هبوط بالحبال تجارياً في العالم.',
+      },
+      en: {
+        city: 'Semonkong',
+        landmark: 'Maletsunyane Falls',
+        description:
+          'A single 192-metre drop on the Maletsunyane river beside Semonkong, one of the highest single falls in Africa, with the world’s highest commercial abseil.',
+      },
+      de: {
+        city: 'Semonkong',
+        landmark: 'Maletsunyane-Fälle',
+        description:
+          'Ein einzelner 192 Meter hoher Fall des Maletsunyane bei Semonkong, einer der höchsten einstufigen Wasserfälle Afrikas, mit dem höchsten kommerziellen Abseilplatz der Erde.',
+      },
+      ru: {
+        city: 'Семонконг',
+        landmark: 'Водопад Малетсуньяне',
+        description:
+          'Водопад высотой 192 метра одним потоком на реке Малетсуньяне близ Семонконга: один из самых высоких одноступенчатых водопадов Африки и самый высокий коммерческий спуск по верёвке в мире.',
+      },
+      it: {
+        city: 'Semonkong',
+        landmark: 'Cascate Maletsunyane',
+        description:
+          'Un salto unico di 192 metri sul fiume Maletsunyane presso Semonkong, una delle cascate a caduta singola più alte dell’Africa, con la più alta discesa in corda doppia commerciale del mondo.',
+      },
+    },
+  },
+  {
+    id: 'moroni',
+    countryCode: 'KM',
+    timezone: 'Indian/Comoros',
+    latitude: -11.7042,
+    longitude: 43.2551,
+    image: commons('Moroni Friday Mosque Comoros.jpg'),
+    credit: credit('Moroni Friday Mosque Comoros.jpg'),
+    aliases: [
+      'موروني', 'moroni', 'comoros', 'جزر القمر', 'grande mosquee de moroni',
+      'grand mosque of moroni', 'الجامع الكبير في موروني', 'moroni mosque',
+    ],
+    capital: true,
+    focus: '62% 45%',
+    copy: {
+      ar: {
+        city: 'موروني',
+        landmark: 'الجامع الكبير في موروني',
+        description:
+          'الجامع الكبير في مدينة موروني القديمة، أبيض بقبة خضراء، ينتصب بين الميناء وأزقة المدينة الضيقة.',
+      },
+      en: {
+        city: 'Moroni',
+        landmark: 'Grande Mosquée de Moroni',
+        description:
+          'The great Friday mosque of Moroni’s old town, white with a green dome, standing between the harbour and the narrow lanes of the medina.',
+      },
+      de: {
+        city: 'Moroni',
+        landmark: 'Große Moschee von Moroni',
+        description:
+          'Die große Freitagsmoschee der Altstadt von Moroni, weiß mit grüner Kuppel, zwischen Hafen und den engen Gassen der Medina.',
+      },
+      ru: {
+        city: 'Морони',
+        landmark: 'Большая мечеть Морони',
+        description:
+          'Большая пятничная мечеть старого Морони — белая с зелёным куполом, между портом и узкими переулками медины.',
+      },
+      it: {
+        city: 'Moroni',
+        landmark: 'Grande Moschea di Moroni',
+        description:
+          'La grande moschea del venerdì della città vecchia di Moroni, bianca con cupola verde, tra il porto e i vicoli stretti della medina.',
+      },
+    },
+  },
+  {
+    id: 'la_digue',
+    countryCode: 'SC',
+    timezone: 'Indian/Mahe',
+    latitude: -4.3547,
+    longitude: 55.8247,
+    image: commons('Anse Source d\'Argent La Digue (4).jpg'),
+    credit: credit('Anse Source d\'Argent La Digue (4).jpg'),
+    aliases: [
+      'لا ديغ', 'la digue', 'ladigue', 'seychelles', 'سيشل', 'anse source d\'argent',
+      'anse source dargent', 'شاطئ أنس سورس دارجون', 'فيكتوريا', 'victoria',
+    ],
+    focus: '55% 50%',
+    copy: {
+      ar: {
+        city: 'لا ديغ',
+        landmark: 'شاطئ أنس سورس دارجون',
+        description:
+          'أشهر شواطئ لا ديغ: رمل فاتح ومياه فيروزية ضحلة وصخور جرانيتية منحوتة تتشبث بها أشجار النخيل.',
+      },
+      en: {
+        city: 'La Digue',
+        landmark: 'Anse Source d’Argent',
+        description:
+          'La Digue’s most photographed beach: pale sand, shallow turquoise water and weathered granite boulders hung with coconut palms.',
+      },
+      de: {
+        city: 'La Digue',
+        landmark: 'Anse Source d’Argent',
+        description:
+          'Der meistfotografierte Strand von La Digue: heller Sand, flaches türkisfarbenes Wasser und verwitterte Granitblöcke zwischen Kokospalmen.',
+      },
+      ru: {
+        city: 'Ла-Диг',
+        landmark: 'Пляж Анс-Сурс-д’Аржан',
+        description:
+          'Самый фотографируемый пляж Ла-Дига: светлый песок, мелкая бирюзовая вода и выветренные гранитные валуны среди кокосовых пальм.',
+      },
+      it: {
+        city: 'La Digue',
+        landmark: 'Anse Source d’Argent',
+        description:
+          'La spiaggia più fotografata di La Digue: sabbia chiara, acqua turchese bassa e massi di granito levigati tra le palme da cocco.',
+      },
+    },
+  },
+  {
+    id: 'sao_tome',
+    countryCode: 'ST',
+    timezone: 'Africa/Sao_Tome',
+    latitude: 0.3361,
+    longitude: 6.7306,
+    image: commons('Pico Cão Grande.jpg'),
+    credit: credit('Pico Cão Grande.jpg'),
+    aliases: [
+      'ساو تومي', 'sao tome', 'são tomé', 'sao tome and principe', 'ساو تومي وبرينسيبي',
+      'pico cao grande', 'قمة كاو غراندي',
+    ],
+    capital: true,
+    focus: '55% 50%',
+    copy: {
+      ar: {
+        city: 'ساو تومي',
+        landmark: 'قمة كاو غراندي',
+        description:
+          'إبرة بركانية ترتفع ٦٦٣ متراً كبرج من غابة منتزه أوبو الوطني، وهي رمز جزيرة ساو تومي.',
+      },
+      en: {
+        city: 'São Tomé',
+        landmark: 'Pico Cão Grande',
+        description:
+          'A volcanic needle 663 metres high that rises like a tower out of the forest of Obô National Park, and the emblem of São Tomé.',
+      },
+      de: {
+        city: 'São Tomé',
+        landmark: 'Pico Cão Grande',
+        description:
+          'Eine 663 Meter hohe Vulkannadel, die wie ein Turm aus dem Wald des Obô-Nationalparks steigt und als Wahrzeichen São Tomés gilt.',
+      },
+      ru: {
+        city: 'Сан-Томе',
+        landmark: 'Пику-Кау-Гранди',
+        description:
+          'Вулканическая игла высотой 663 метра поднимается башней из леса национального парка Обон — символ Сан-Томе.',
+      },
+      it: {
+        city: 'São Tomé',
+        landmark: 'Pico Cão Grande',
+        description:
+          'Un ago vulcanico alto 663 metri che sorge come una torre dalla foresta del parco nazionale dell’Obô, emblema di São Tomé.',
+      },
+    },
+  },
+  {
+    id: 'sao_filipe',
+    countryCode: 'CV',
+    timezone: 'Atlantic/Cape_Verde',
+    latitude: 14.8961,
+    longitude: -24.4956,
+    image: commons('Cape Verde Pico do Fogo wide.jpg'),
+    credit: credit('Cape Verde Pico do Fogo wide.jpg'),
+    aliases: [
+      'ساو فيليبي', 'sao filipe', 'são filipe', 'cape verde', 'cabo verde', 'الرأس الأخضر',
+      'pico do fogo', 'بركان بيكو دو فوغو', 'برايا', 'praia',
+    ],
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'ساو فيليبي',
+        landmark: 'بركان بيكو دو فوغو',
+        description:
+          'بركان جزيرة فوغو النشط، ٢٨٢٩ متراً من الرماد الأسود فوق كالديرا لا يزال أهلها يزرعون ويصنعون النبيذ داخل الفوهة.',
+      },
+      en: {
+        city: 'São Filipe',
+        landmark: 'Pico do Fogo',
+        description:
+          'The active volcano of Fogo island, 2,829 metres of black ash above a caldera where people still farm and make wine inside the crater.',
+      },
+      de: {
+        city: 'São Filipe',
+        landmark: 'Pico do Fogo',
+        description:
+          'Der aktive Vulkan der Insel Fogo, 2.829 Meter schwarze Asche über einer Caldera, in der die Menschen noch Ackerbau treiben und Wein keltern.',
+      },
+      ru: {
+        city: 'Сан-Филипе',
+        landmark: 'Вулкан Пику-ду-Фогу',
+        description:
+          'Действующий вулкан острова Фогу: 2829 метров чёрного пепла над кальдерой, где до сих пор возделывают землю и делают вино.',
+      },
+      it: {
+        city: 'São Filipe',
+        landmark: 'Pico do Fogo',
+        description:
+          'Il vulcano attivo dell’isola di Fogo, 2.829 metri di cenere nera sopra una caldera dove si coltiva ancora la terra e si fa il vino.',
+      },
+    },
+  },
+  {
+    id: 'malabo',
+    countryCode: 'GQ',
+    timezone: 'Africa/Malabo',
+    latitude: 3.7523,
+    longitude: 8.7742,
+    image: commons('Kathedrale Santa Isabel.jpg'),
+    credit: credit('Kathedrale Santa Isabel.jpg'),
+    aliases: [
+      'مالابو', 'malabo', 'equatorial guinea', 'غينيا الاستوائية', 'santa isabel',
+      'كاتدرائية سانتا إيزابيل',
+    ],
+    capital: true,
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'مالابو',
+        landmark: 'كاتدرائية سانتا إيزابيل',
+        description:
+          'كاتدرائية مالابو القوطية الجديدة، بناها الإسبان بين ١٨٩٧ و١٩١٦، وبرجاها التوأمان يعلوان نخيل ساحة الاستقلال.',
+      },
+      en: {
+        city: 'Malabo',
+        landmark: 'St. Elizabeth’s Cathedral',
+        description:
+          'Malabo’s neo-Gothic cathedral, built by the Spanish between 1897 and 1916, with twin spires above the palms of the Plaza de la Independencia.',
+      },
+      de: {
+        city: 'Malabo',
+        landmark: 'Kathedrale Santa Isabel',
+        description:
+          'Die neugotische Kathedrale von Malabo, zwischen 1897 und 1916 von den Spaniern erbaut, mit zwei Türmen über den Palmen der Plaza de la Independencia.',
+      },
+      ru: {
+        city: 'Малабо',
+        landmark: 'Собор Святой Изабеллы',
+        description:
+          'Неоготический собор Малабо, построенный испанцами в 1897–1916 годах: два шпиля над пальмами площади Независимости.',
+      },
+      it: {
+        city: 'Malabo',
+        landmark: 'Cattedrale di Santa Isabel',
+        description:
+          'La cattedrale neogotica di Malabo, costruita dagli spagnoli tra il 1897 e il 1916, con due guglie sopra le palme della Plaza de la Independencia.',
+      },
+    },
+  },
+  {
+    id: 'ouadane',
+    countryCode: 'MR',
+    timezone: 'Africa/Nouakchott',
+    latitude: 21.0944,
+    longitude: -11.5436,
+    image: commons('Richat Structure, Mauritania - 6 January 2023 (52616008386).jpg'),
+    credit: credit('Richat Structure, Mauritania - 6 January 2023 (52616008386).jpg'),
+    aliases: [
+      'وادان', 'ouadane', 'mauritania', 'موريتانيا', 'richat', 'richat structure',
+      'بنية ريشات', 'عين الصحراء', 'eye of the sahara', 'نواكشوط', 'nouakchott',
+    ],
+    copy: {
+      ar: {
+        city: 'وادان',
+        landmark: 'بنية ريشات',
+        description:
+          'حلقة قطرها ٤٠ كيلومتراً في هضبة أدرار قرب وادان، قبة متآكلة يستدل بها رواد الفضاء، تُعرف بعين الصحراء.',
+      },
+      en: {
+        city: 'Ouadane',
+        landmark: 'Richat Structure',
+        description:
+          'A ring 40 kilometres across in the Adrar plateau near Ouadane, an eroded dome that astronauts use as a landmark and call the Eye of the Sahara.',
+      },
+      de: {
+        city: 'Ouadane',
+        landmark: 'Richat-Struktur',
+        description:
+          'Ein Ring von 40 Kilometern Durchmesser im Adrar-Plateau bei Ouadane, eine erodierte Kuppel, die Astronauten als Landmarke nutzen: das Auge der Sahara.',
+      },
+      ru: {
+        city: 'Уадан',
+        landmark: 'Структура Ришат',
+        description:
+          'Кольцо диаметром 40 километров на плато Адрар близ Уадана — размытый купол, по которому ориентируются космонавты, «Око Сахары».',
+      },
+      it: {
+        city: 'Ouadane',
+        landmark: 'Struttura di Richat',
+        description:
+          'Un anello di 40 chilometri sull’altopiano dell’Adrar presso Ouadane, una cupola erosa usata come riferimento dagli astronauti: l’Occhio del Sahara.',
+      },
+    },
+  },
+  {
+    id: 'mazar_i_sharif',
+    countryCode: 'AF',
+    timezone: 'Asia/Kabul',
+    latitude: 36.7089,
+    longitude: 67.1108,
+    image: commons('Blue Mosque Courtyard Dusk Wikimedia Commons.jpg'),
+    credit: credit('Blue Mosque Courtyard Dusk Wikimedia Commons.jpg'),
+    aliases: [
+      'مزار شريف', 'mazar-i-sharif', 'mazar i sharif', 'afghanistan', 'أفغانستان',
+      'blue mosque', 'المسجد الأزرق', 'shrine of ali', 'ضريح علي', 'كابل', 'kabul',
+    ],
+    focus: '55% 55%',
+    copy: {
+      ar: {
+        city: 'مزار شريف',
+        landmark: 'المسجد الأزرق',
+        description:
+          'ضريح حضرت علي في مزار شريف، جدرانه مكسوة بالخزف الأزرق، ويجتمع عنده الناس في النوروز، ولا تُطارد حمامه أبداً.',
+      },
+      en: {
+        city: 'Mazar-i-Sharif',
+        landmark: 'Blue Mosque',
+        description:
+          'The shrine of Hazrat Ali in Mazar-i-Sharif, its walls covered in blue tilework, where crowds gather for Nawruz and the doves are never chased away.',
+      },
+      de: {
+        city: 'Masar-e Scharif',
+        landmark: 'Blaue Moschee',
+        description:
+          'Der Schrein von Hazrat Ali in Masar-e Scharif, mit blauen Kacheln verkleidet, wo sich zu Nawruz die Menschen sammeln und die Tauben nie verjagt werden.',
+      },
+      ru: {
+        city: 'Мазари-Шариф',
+        landmark: 'Голубая мечеть',
+        description:
+          'Мавзолей Хазрата Али в Мазари-Шарифе: стены в синих изразцах, сюда собираются на Навруз, а голубей здесь никогда не прогоняют.',
+      },
+      it: {
+        city: 'Mazar-i Sharif',
+        landmark: 'Moschea Blu',
+        description:
+          'Il santuario di Hazrat Ali a Mazar-i Sharif, rivestito di piastrelle blu, dove la folla si raduna per il Nawruz e le colombe non vengono mai scacciate.',
+      },
+    },
+  },
+  {
+    id: 'port_moresby',
+    countryCode: 'PG',
+    timezone: 'Pacific/Port_Moresby',
+    latitude: -9.4438,
+    longitude: 147.18,
+    image: commons('Papua New Guinea 1991-039 Parliament House, Port Moresby (33351725760).jpg'),
+    credit: credit('Papua New Guinea 1991-039 Parliament House, Port Moresby (33351725760).jpg'),
+    aliases: [
+      'بورت مورسبي', 'port moresby', 'papua new guinea', 'بابوا غينيا الجديدة',
+      'parliament house', 'مبنى البرلمان الوطني',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'بورت مورسبي',
+        landmark: 'مبنى البرلمان الوطني',
+        description:
+          'مبنى برلمان بابوا غينيا الجديدة، افتُتح عام ١٩٨٤، واجهته على شكل بيت الأرواح في منطقة سيبيك ومغطاة بفسيفساء الأنماط التقليدية.',
+      },
+      en: {
+        city: 'Port Moresby',
+        landmark: 'National Parliament House',
+        description:
+          'Papua New Guinea’s parliament, opened in 1984, its facade shaped as a Sepik spirit house and covered in a mosaic of traditional patterns.',
+      },
+      de: {
+        city: 'Port Moresby',
+        landmark: 'Nationalparlamentsgebäude',
+        description:
+          'Das Parlament Papua-Neuguineas, 1984 eröffnet: Die Fassade ist einem Geisterhaus der Sepik nachempfunden und mit einem Mosaik traditioneller Muster bedeckt.',
+      },
+      ru: {
+        city: 'Порт-Морсби',
+        landmark: 'Здание парламента',
+        description:
+          'Парламент Папуа — Новой Гвинеи, открытый в 1984 году: фасад в форме дома духов Сепика покрыт мозаикой традиционных узоров.',
+      },
+      it: {
+        city: 'Port Moresby',
+        landmark: 'Palazzo del Parlamento',
+        description:
+          'Il parlamento di Papua Nuova Guinea, inaugurato nel 1984: la facciata ha la forma di una casa degli spiriti del Sepik ed è coperta da un mosaico di motivi tradizionali.',
+      },
+    },
+  },
+  {
+    id: 'nadi',
+    countryCode: 'FJ',
+    timezone: 'Pacific/Fiji',
+    latitude: -17.8031,
+    longitude: 177.417,
+    image: commons('Sri Siva Subramaniya Temple 7, Nadi.jpg'),
+    credit: credit('Sri Siva Subramaniya Temple 7, Nadi.jpg'),
+    aliases: [
+      'نادي', 'nadi', 'fiji', 'فيجي', 'sri siva subramaniya', 'معبد سري سيفا سوبرامانيا',
+      'temple', 'سوفا', 'suva',
+    ],
+    focus: '45% 45%',
+    copy: {
+      ar: {
+        city: 'نادي',
+        landmark: 'معبد سري سيفا سوبرامانيا',
+        description:
+          'أكبر معبد هندوسي في جنوب المحيط الهادئ، في نادي، بوابته البرجية منحوتة وملونة على الطراز الدرافيدي على يد حرفيين من الهند.',
+      },
+      en: {
+        city: 'Nadi',
+        landmark: 'Sri Siva Subramaniya Temple',
+        description:
+          'The largest Hindu temple in the South Pacific, in Nadi, its gopuram carved and painted in the Dravidian manner by craftsmen from India.',
+      },
+      de: {
+        city: 'Nadi',
+        landmark: 'Sri-Siva-Subramaniya-Tempel',
+        description:
+          'Der größte Hindu-Tempel der Südsee in Nadi, dessen Gopuram von Handwerkern aus Indien im dravidischen Stil geschnitzt und bemalt wurde.',
+      },
+      ru: {
+        city: 'Нади',
+        landmark: 'Храм Шри Шивы Субрамании',
+        description:
+          'Крупнейший индуистский храм южной части Тихого океана в Нади: его гопурам вырезан и расписан в дравидийском стиле мастерами из Индии.',
+      },
+      it: {
+        city: 'Nadi',
+        landmark: 'Tempio Sri Siva Subramaniya',
+        description:
+          'Il più grande tempio indù del Pacifico meridionale, a Nadi, il cui gopuram è intagliato e dipinto in stile dravidico da artigiani indiani.',
+      },
+    },
+  },
+  {
+    id: 'honiara',
+    countryCode: 'SB',
+    timezone: 'Pacific/Guadalcanal',
+    latitude: -9.428,
+    longitude: 159.95,
+    image: commons('Bonegi Beach.jpg'),
+    credit: credit('Bonegi Beach.jpg'),
+    aliases: [
+      'هونيارا', 'honiara', 'solomon islands', 'جزر سولومون', 'bonegi', 'bonegi beach',
+      'شاطئ بونغي', 'حطام',
+    ],
+    capital: true,
+    focus: '55% 60%',
+    copy: {
+      ar: {
+        city: 'هونيارا',
+        landmark: 'شاطئ بونغي',
+        description:
+          'سفينتا نقل يابانيتان غرقتا عام ١٩٤٢ في مياه ضحلة قبالة شاطئ بونغي، وصارتا موقع غوص بين شعاب مرجانية نبتت على الحطام.',
+      },
+      en: {
+        city: 'Honiara',
+        landmark: 'Bonegi Beach',
+        description:
+          'Two Japanese transports sunk in 1942 lie in shallow water just off Bonegi beach, now a snorkelling site with coral growing over the wrecks.',
+      },
+      de: {
+        city: 'Honiara',
+        landmark: 'Bonegi-Strand',
+        description:
+          'Zwei 1942 versenkte japanische Transporter liegen im Flachwasser vor dem Bonegi-Strand, heute ein Schnorchelplatz mit Korallen auf den Wracks.',
+      },
+      ru: {
+        city: 'Хониара',
+        landmark: 'Пляж Бонэги',
+        description:
+          'Два японских транспорта, потопленных в 1942 году, лежат на мелководье у пляжа Бонэги — теперь здесь ныряют с маской среди кораллов на обломках.',
+      },
+      it: {
+        city: 'Honiara',
+        landmark: 'Spiaggia di Bonegi',
+        description:
+          'Due trasporti giapponesi affondati nel 1942 giacciono in acque basse davanti alla spiaggia di Bonegi, oggi meta di snorkeling con coralli sui relitti.',
+      },
+    },
+  },
+  {
+    id: 'tanna',
+    countryCode: 'VU',
+    timezone: 'Pacific/Efate',
+    latitude: -19.55,
+    longitude: 169.267,
+    image: commons('Lava trails at Mount Yasur Volcano, Tanna, Vanuatu (49181693888).jpg'),
+    credit: credit('Lava trails at Mount Yasur Volcano, Tanna, Vanuatu (49181693888).jpg'),
+    aliases: [
+      'تانا', 'tanna', 'tanna island', 'vanuatu', 'فانواتو', 'mount yasur', 'yasur',
+      'بركان جبل ياسور', 'بورت فيلا', 'port vila',
+    ],
+    copy: {
+      ar: {
+        city: 'تانا',
+        landmark: 'بركان جبل ياسور',
+        description:
+          'بركان بارتفاع ٣٦١ متراً في تانا لا يهدأ، يمكن الوصول إلى حافته سيراً، ويقذف حممه في أقواس بعد حلول الظلام.',
+      },
+      en: {
+        city: 'Tanna',
+        landmark: 'Mount Yasur',
+        description:
+          'A 361-metre volcano on Tanna in constant eruption, its crater rim reachable on foot and its lava thrown up in arcs after dark.',
+      },
+      de: {
+        city: 'Tanna',
+        landmark: 'Yasur',
+        description:
+          'Ein 361 Meter hoher Vulkan auf Tanna in ständigem Ausbruch, dessen Kraterrand zu Fuß erreichbar ist und der nach Einbruch der Dunkelheit Lava in Bögen schleudert.',
+      },
+      ru: {
+        city: 'Танна',
+        landmark: 'Вулкан Ясур',
+        description:
+          'Вулкан высотой 361 метр на Танне в постоянном извержении: к кромке кратера можно подняться пешком, а после темноты лава летит дугами.',
+      },
+      it: {
+        city: 'Tanna',
+        landmark: 'Monte Yasur',
+        description:
+          'Un vulcano di 361 metri a Tanna in eruzione continua, il cui bordo del cratere si raggiunge a piedi e che dopo il buio lancia la lava in archi.',
+      },
+    },
+  },
+  {
+    id: 'lotofaga',
+    countryCode: 'WS',
+    timezone: 'Pacific/Apia',
+    latitude: -14.0333,
+    longitude: -171.567,
+    image: commons('To Sua Ocean Trench - Lotofaga village - Samoa.jpg'),
+    credit: credit('To Sua Ocean Trench - Lotofaga village - Samoa.jpg'),
+    aliases: [
+      'لوتوفاغا', 'lotofaga', 'samoa', 'ساموا', 'to sua', 'to sua ocean trench', 'حفرة تو سوا',
+      'أبيا', 'apia',
+    ],
+    focus: '60% 50%',
+    copy: {
+      ar: {
+        city: 'لوتوفاغا',
+        landmark: 'حفرة تو سوا',
+        description:
+          'حفرة بحرية بعمق ثلاثين متراً في حقل حمم في لوتوفاغا، يُنزل إليها بسلم خشبي طويل، وماؤها أخضر صافٍ يتصل بالمحيط عبر كهف.',
+      },
+      en: {
+        city: 'Lotofaga',
+        landmark: 'To Sua Ocean Trench',
+        description:
+          'A thirty-metre-deep sea trench in a lava field at Lotofaga, reached by a long wooden ladder, its water clear green and linked to the ocean by a cave.',
+      },
+      de: {
+        city: 'Lotofaga',
+        landmark: 'To Sua Ocean Trench',
+        description:
+          'Ein dreißig Meter tiefer Meeresschacht in einem Lavafeld bei Lotofaga, über eine lange Holzleiter erreichbar, dessen grünes Wasser durch eine Höhle mit dem Ozean verbunden ist.',
+      },
+      ru: {
+        city: 'Лотофага',
+        landmark: 'Океанская воронка То-Суа',
+        description:
+          'Тридцатиметровая морская воронка в лавовом поле у Лотофаги: вниз ведёт длинная деревянная лестница, а зелёная вода соединена с океаном пещерой.',
+      },
+      it: {
+        city: 'Lotofaga',
+        landmark: 'To Sua Ocean Trench',
+        description:
+          'Una fossa marina profonda trenta metri in un campo di lava a Lotofaga, raggiunta con una lunga scala di legno, con acqua verde e limpida collegata all’oceano da una grotta.',
+      },
+    },
+  },
+  {
+    id: 'nukualofa',
+    countryCode: 'TO',
+    timezone: 'Pacific/Tongatapu',
+    latitude: -21.1394,
+    longitude: -175.202,
+    image: commons('Royal Palace, Nuku\'alofa, Nov 18.jpg'),
+    credit: credit('Royal Palace, Nuku\'alofa, Nov 18.jpg'),
+    aliases: [
+      'نوكو ألوفا', 'nukualofa', 'nuku\'alofa', 'tonga', 'تونغا', 'royal palace',
+      'القصر الملكي', 'palace',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'نوكو ألوفا',
+        landmark: 'القصر الملكي',
+        description:
+          'قصر تونغا الملكي الخشبي في نوكو ألوفا، بُني عام ١٨٦٧، بسقف أحمر وشرفات بيضاء تطل على البحيرة.',
+      },
+      en: {
+        city: 'Nukuʻalofa',
+        landmark: 'Royal Palace',
+        description:
+          'The wooden palace of Tonga’s kings in Nukuʻalofa, built in 1867, with a red roof and white verandas facing the lagoon.',
+      },
+      de: {
+        city: 'Nukuʻalofa',
+        landmark: 'Königspalast',
+        description:
+          'Der hölzerne Palast der Könige von Tonga in Nukuʻalofa, 1867 erbaut, mit rotem Dach und weißen Veranden zur Lagune.',
+      },
+      ru: {
+        city: 'Нукуалофа',
+        landmark: 'Королевский дворец',
+        description:
+          'Деревянный дворец королей Тонги в Нукуалофе, построенный в 1867 году: красная крыша и белые веранды лицом к лагуне.',
+      },
+      it: {
+        city: 'Nukuʻalofa',
+        landmark: 'Palazzo Reale',
+        description:
+          'Il palazzo di legno dei re di Tonga a Nukuʻalofa, costruito nel 1867, con tetto rosso e verande bianche rivolte alla laguna.',
       },
     },
   },
