@@ -69,7 +69,7 @@ type OpenMeteoResponse = {
   };
 };
 
-async function fromOpenMeteo(lat: number, lon: number): Promise<WeatherBundle> {
+async function fromOpenMeteo(lat: number, lon: number, timeZone: string): Promise<WeatherBundle> {
   const url = new URL('https://api.open-meteo.com/v1/forecast');
   url.searchParams.set('latitude', lat.toFixed(4));
   url.searchParams.set('longitude', lon.toFixed(4));
@@ -130,7 +130,12 @@ async function fromOpenMeteo(lat: number, lon: number): Promise<WeatherBundle> {
       precipitationProbability: data.daily.precipitation_probability_max[index] ?? 0,
       windMax: data.daily.wind_speed_10m_max[index],
     })),
-    timezone: data.timezone,
+    // Open-Meteo derives the zone from its own boundary data, which can disagree
+    // with the curated zone for a landmark (northern Vietnam maps to Bangkok).
+    // Keep the curated zone whenever the UTC offset matches, so the clock, the
+    // sunrise and the catalogue all name the same zone.
+    timezone:
+      data.utc_offset_seconds === offsetSeconds(new Date(), timeZone) ? timeZone : data.timezone,
     utcOffsetSeconds: data.utc_offset_seconds,
     sunrise: data.daily.sunrise[0] ?? null,
     sunset: data.daily.sunset[0] ?? null,
@@ -378,7 +383,7 @@ export async function GET(request: Request) {
 
   if (!openMeteoIsDown()) {
     try {
-      const bundle = await fromOpenMeteo(lat, lon);
+      const bundle = await fromOpenMeteo(lat, lon, timeZone);
       omFailures = 0;
       remember(key, bundle);
       return NextResponse.json(bundle);

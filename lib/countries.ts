@@ -1,5 +1,6 @@
 import type { Lang } from './i18n';
-import type { ThemeName } from './types';
+import type { PhotoCredit, ThemeName } from './types';
+import { PHOTO_CREDITS } from './photo-credits';
 
 /**
  * The city catalogue behind every landing scene: one object per curated place, with
@@ -29,7 +30,7 @@ export type CountryScene = {
   latitude: number;
   longitude: number;
   image: string;
-  credit: { label: string; url: string };
+  credit: PhotoCredit;
   aliases: string[];
   copy: Record<Lang, SceneText>;
   /** CSS object-position used to keep the subject in frame on tall screens. */
@@ -39,27 +40,43 @@ export type CountryScene = {
   theme?: ThemeName;
 };
 
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=78`;
+// File names arrive either percent-encoded or plain, so both helpers normalise to the
+// decoded name first: the credits map and the file page URL are keyed by that name.
+const fileName = (path: string) => {
+  const raw = path.split('/').pop() ?? path;
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+};
 
 // Special:FilePath resolves to the canonical thumbnail for any file name, so the
 // stored paths cannot drift out of sync with Wikimedia's hash directories.
-export const commons = (path: string, width = 1600) => {
-  const raw = path.split('/').pop() ?? path;
-  let file = raw;
-  try {
-    file = decodeURIComponent(raw);
-  } catch {
-    /* keep the raw name when it is not valid percent-encoding */
-  }
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
-};
+export const commons = (path: string, width = 1600) =>
+  `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(fileName(path))}?width=${width}`;
 
-const UNSPLASH_CREDIT = { label: 'Unsplash', url: 'https://unsplash.com' };
-export const credit = (file: string) => ({
-  label: 'Wikimedia Commons',
-  url: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file)}`,
-});
+const DEFAULT_CHANGES =
+  "Resized to 1600 px wide by the site's image proxy; cropped to fill the screen. No other changes.";
+
+/**
+ * Builds the attribution for a Commons file from the verified metadata in
+ * `photo-credits.ts`. Unknown files still link to their source page rather than
+ * inventing a photographer.
+ */
+export const credit = (file: string): PhotoCredit => {
+  const name = fileName(file);
+  const meta = PHOTO_CREDITS[name];
+  return {
+    photographer: meta?.photographer ?? 'Wikimedia Commons contributor',
+    license: meta?.license ?? 'See source page',
+    licenseUrl: meta?.licenseUrl,
+    source: 'Wikimedia Commons',
+    url: meta?.url ?? `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(name)}`,
+    changes: meta?.changes ?? DEFAULT_CHANGES,
+    label: meta ? `${meta.photographer} · ${meta.license}` : 'Wikimedia Commons',
+  };
+};
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
@@ -115,6 +132,19 @@ export const COUNTRY_NAMES: Record<string, CountryName> = {
   NG: { ar: 'نيجيريا', en: 'Nigeria', de: 'Nigeria', ru: 'Нигерия', it: 'Nigeria' },
   KE: { ar: 'كينيا', en: 'Kenya', de: 'Kenia', ru: 'Кения', it: 'Kenya' },
   PK: { ar: 'باكستان', en: 'Pakistan', de: 'Pakistan', ru: 'Пакистан', it: 'Pakistan' },
+  DK: { ar: 'الدنمارك', en: 'Denmark', de: 'Dänemark', ru: 'Дания', it: 'Danimarca' },
+  FI: { ar: 'فنلندا', en: 'Finland', de: 'Finnland', ru: 'Финляндия', it: 'Finlandia' },
+  IS: { ar: 'آيسلندا', en: 'Iceland', de: 'Island', ru: 'Исландия', it: 'Islanda' },
+  HR: { ar: 'كرواتيا', en: 'Croatia', de: 'Kroatien', ru: 'Хорватия', it: 'Croazia' },
+  VN: { ar: 'فيتنام', en: 'Vietnam', de: 'Vietnam', ru: 'Вьетнам', it: 'Vietnam' },
+  KH: { ar: 'كمبوديا', en: 'Cambodia', de: 'Kambodscha', ru: 'Камбоджа', it: 'Cambogia' },
+  PH: { ar: 'الفلبين', en: 'Philippines', de: 'Philippinen', ru: 'Филиппины', it: 'Filippine' },
+  NZ: { ar: 'نيوزيلندا', en: 'New Zealand', de: 'Neuseeland', ru: 'Новая Зеландия', it: 'Nuova Zelanda' },
+  CL: { ar: 'تشيلي', en: 'Chile', de: 'Chile', ru: 'Чили', it: 'Cile' },
+  CO: { ar: 'كولومبيا', en: 'Colombia', de: 'Kolumbien', ru: 'Колумбия', it: 'Colombia' },
+  IL: { ar: 'إسرائيل', en: 'Israel', de: 'Israel', ru: 'Израиль', it: 'Israele' },
+  PS: { ar: 'فلسطين', en: 'Palestine', de: 'Palästina', ru: 'Палестина', it: 'Palestina' },
+  IR: { ar: 'إيران', en: 'Iran', de: 'Iran', ru: 'Иран', it: 'Iran' },
 };
 
 export const COUNTRIES: CountryScene[] = [
@@ -215,8 +245,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Asia/Dubai',
     latitude: 25.2048,
     longitude: 55.2708,
-    image: unsplash('1512453979798-5ea266f8880c'),
-    credit: UNSPLASH_CREDIT,
+    image: commons('Dubai Skyline mit Burj Khalifa (18241030269).jpg'),
+    credit: credit('Dubai Skyline mit Burj Khalifa (18241030269).jpg'),
     aliases: [
       'دبي', 'دوبي', 'اماره دبي', 'dubai',
     ],
@@ -439,8 +469,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Asia/Riyadh',
     latitude: 21.4225,
     longitude: 39.8262,
-    image: unsplash('1564769625905-50e93615e769'),
-    credit: UNSPLASH_CREDIT,
+    image: commons('The Kaaba during Hajj - edited.jpg'),
+    credit: credit('The Kaaba during Hajj - edited.jpg'),
     aliases: [
       'مكة', 'مكه', 'مكة المكرمة', 'مكه المكرمه', 'makkah', 'mecca', 'المسجد الحرام',
     ],
@@ -483,8 +513,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Asia/Riyadh',
     latitude: 24.4672,
     longitude: 39.6111,
-    image: unsplash('1591604129939-f1efa4d9f7fa'),
-    credit: UNSPLASH_CREDIT,
+    image: commons('Mezquita del Profeta, Medina, Arabia Saudita, 2025-05-22, DD 02.jpg'),
+    credit: credit('Mezquita del Profeta, Medina, Arabia Saudita, 2025-05-22, DD 02.jpg'),
     aliases: [
       'المدينة', 'المدينه', 'المدينة المنورة', 'المدينه المنوره', 'madinah', 'medina',
     ],
@@ -663,8 +693,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Asia/Kuwait',
     latitude: 29.3759,
     longitude: 47.9774,
-    image: commons('Kuwait_City_Kuwait_Towers_Panoramic_View_4.jpg'),
-    credit: credit('Kuwait_City_Kuwait_Towers_Panoramic_View_4.jpg'),
+    image: commons('Kuwait Towers2025.jpg'),
+    credit: credit('Kuwait Towers2025.jpg'),
     aliases: [
       'الكويت', 'مدينة الكويت', 'kuwait', 'kuwait city',
     ],
@@ -709,7 +739,7 @@ export const COUNTRIES: CountryScene[] = [
     latitude: 26.2285,
     longitude: 50.586,
     image: commons('Manama_Bahrain_World_Trade_Centre_%26_Bahrain_Financial_Harbour_1.jpg'),
-    credit: credit('Manama_Bahrain_World_Trade_Centre_%2526_Bahrain_Financial_Harbour_1.jpg'),
+    credit: credit('Manama_Bahrain_World_Trade_Centre_%26_Bahrain_Financial_Harbour_1.jpg'),
     aliases: [
       'المنامة', 'المنامه', 'manama', 'البحرين', 'bahrain',
     ],
@@ -886,8 +916,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Asia/Beirut',
     latitude: 33.8938,
     longitude: 35.5018,
-    image: commons('Pigeon_Rocks_at_sunset%2C_Beirut%2C_Lebanon.jpg'),
-    credit: credit('Pigeon_Rocks_at_sunset%2C_Beirut%2C_Lebanon.jpg'),
+    image: commons('The Rock of Raouché, or Pigeon Rock.jpg'),
+    credit: credit('The Rock of Raouché, or Pigeon Rock.jpg'),
     aliases: [
       'بيروت', 'beirut', 'لبنان',
     ],
@@ -1063,8 +1093,8 @@ export const COUNTRIES: CountryScene[] = [
     timezone: 'Africa/Casablanca',
     latitude: 31.6295,
     longitude: -7.9811,
-    image: unsplash('1597212618440-806262de4f6b'),
-    credit: UNSPLASH_CREDIT,
+    image: commons('Jemaa el-Fnaa Marrakech at sunset.jpg'),
+    credit: credit('Jemaa el-Fnaa Marrakech at sunset.jpg'),
     aliases: [
       'مراكش', 'marrakech', 'marrakesh', 'المغرب',
     ],
@@ -3311,6 +3341,769 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Il Geirangerfjord',
         description:
           'Un ramo dello Storfjord profondo 260 metri tra pareti alte 1.700 metri, con le Sette Sorelle che vi cadono dentro. Il villaggio sulla riva vive di traghetti e navi estive.',
+      },
+    },
+  },
+  {
+    id: 'copenhagen',
+    countryCode: 'DK',
+    timezone: 'Europe/Copenhagen',
+    latitude: 55.6929,
+    longitude: 12.5993,
+    image: commons('KleineMeerjungfrauUndAmagerBakke001.jpg'),
+    credit: credit('KleineMeerjungfrauUndAmagerBakke001.jpg'),
+    aliases: [
+      'كوبنهاغن', 'كوبنهاجن', 'copenhagen', 'københavn',
+      'kobenhavn', 'denmark', 'الدنمارك', 'little mermaid',
+      'the little mermaid', 'حورية البحر الصغيرة', 'حورية البحر', 'langelinie',
+    ],
+    focus: '50% 55%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'كوبنهاغن',
+        landmark: 'حورية البحر الصغيرة',
+        description:
+          'تمثال برونزي صغير لحورية بحر على صخرة عند ميناء لانغيلينيه، أهداه كارل جاكوبسن للمدينة عام ١٩١٣ ونحته إدفارد إريكسن. يجلس التمثال على حجر عند حافة الماء ويواجه المدخل البحري.',
+      },
+      en: {
+        city: 'Copenhagen',
+        landmark: 'The Little Mermaid',
+        description:
+          'A small bronze mermaid on a granite rock at the Langelinie waterfront, given to the city by Carl Jacobsen in 1913 and sculpted by Edvard Eriksen. She sits at the water’s edge facing the harbour entrance.',
+      },
+      de: {
+        city: 'Kopenhagen',
+        landmark: 'Die kleine Meerjungfrau',
+        description:
+          'Eine kleine Bronzemeerjungfrau auf einem Granitfelsen am Langelinie-Ufer, 1913 von Carl Jacobsen gestiftet und von Edvard Eriksen geschaffen. Sie sitzt am Wasser und blickt zur Hafeneinfahrt.',
+      },
+      ru: {
+        city: 'Копенгаген',
+        landmark: 'Русалочка',
+        description:
+          'Маленькая бронзовая русалочка на гранитной скале у набережной Лангелиние, подаренная городу Карлом Якобсеном в 1913 году и созданная Эдвардом Эриксеном. Она сидит у самой воды лицом к входу в гавань.',
+      },
+      it: {
+        city: 'Copenaghen',
+        landmark: 'La Sirenetta',
+        description:
+          'Una piccola sirena di bronzo su una roccia di granito sul lungomare di Langelinie, donata alla città da Carl Jacobsen nel 1913 e scolpita da Edvard Eriksen. Siede sull’acqua davanti all’ingresso del porto.',
+      },
+    },
+  },
+  {
+    id: 'helsinki',
+    countryCode: 'FI',
+    timezone: 'Europe/Helsinki',
+    latitude: 60.1704,
+    longitude: 24.9522,
+    image: commons('Helsinki Senate Square and Helsinki Cathedral in May 2026.jpg'),
+    credit: credit('Helsinki Senate Square and Helsinki Cathedral in May 2026.jpg'),
+    aliases: [
+      'هلسنكي', 'helsinki', 'helsingfors', 'finland',
+      'فنلندا', 'helsinki cathedral', 'كاتدرائية هلسنكي', 'tuomiokirkko',
+    ],
+    focus: '50% 42%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'هلسنكي',
+        landmark: 'كاتدرائية هلسنكي',
+        description:
+          'كاتدرائية إنجيلية بيضاء بقبة خضراء وأربع قباب صغيرة تعلو سلالم واسعة في ساحة سيناتينتوري. صمّمها كارل لودفيغ إنجل واكتملت عام ١٨٥٢، وهي رمز المدينة.',
+      },
+      en: {
+        city: 'Helsinki',
+        landmark: 'Helsinki Cathedral',
+        description:
+          'A white Lutheran cathedral with a green dome and four smaller domes above the broad steps of Senate Square. Designed by Carl Ludvig Engel and finished in 1852, it is the city’s symbol.',
+      },
+      de: {
+        city: 'Helsinki',
+        landmark: 'Dom von Helsinki',
+        description:
+          'Eine weiße evangelische Kathedrale mit grüner Kuppel und vier kleineren Kuppeln über der breiten Treppe des Senatsplatzes. Carl Ludvig Engel entwarf sie; 1852 vollendet, ist sie das Wahrzeichen der Stadt.',
+      },
+      ru: {
+        city: 'Хельсинки',
+        landmark: 'Кафедральный собор Хельсинки',
+        description:
+          'Белый лютеранский собор с зелёным куполом и четырьмя малыми куполами над широкой лестницей Сенатской площади. Его спроектировал Карл Людвиг Энгель, строительство завершилось в 1852 году; это символ города.',
+      },
+      it: {
+        city: 'Helsinki',
+        landmark: 'Cattedrale di Helsinki',
+        description:
+          'Una cattedrale luterana bianca con cupola verde e quattro cupole minori sopra l’ampia scalinata di Piazza del Senato. Progettata da Carl Ludvig Engel e ultimata nel 1852, è il simbolo della città.',
+      },
+    },
+  },
+  {
+    id: 'grindavik',
+    countryCode: 'IS',
+    timezone: 'Atlantic/Reykjavik',
+    latitude: 63.8804,
+    longitude: -22.4495,
+    image: commons('Blue Lagoon Geothermal Spa, Grindavík, Iceland (37917013312).jpg'),
+    credit: credit('Blue Lagoon Geothermal Spa, Grindavík, Iceland (37917013312).jpg'),
+    aliases: [
+      'جريندافيك', 'grindavik', 'grindavík', 'iceland',
+      'آيسلندا', 'blue lagoon', 'البحيرة الزرقاء', 'bláa lónið',
+      'blaa lonid', 'reykjanes',
+    ],
+    focus: '50% 55%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'جريندافيك',
+        landmark: 'البحيرة الزرقاء',
+        description:
+          'بحيرة جيوحرارية بلون حليبي أزرق في حقل حمم على شبه جزيرة ريكيانيس، مياهها غنية بالسيليكا والمعادن. تقع قرب قرية جريندافيك على بعد نحو خمسين كيلومتراً من ريكيافيك.',
+      },
+      en: {
+        city: 'Grindavík',
+        landmark: 'Blue Lagoon',
+        description:
+          'A milky blue geothermal lagoon in a lava field on the Reykjanes peninsula, fed by silica- and mineral-rich water. It sits beside Grindavík, about fifty kilometres from Reykjavík.',
+      },
+      de: {
+        city: 'Grindavík',
+        landmark: 'Blaue Lagune',
+        description:
+          'Eine milchig blaue Geothermallagune in einem Lavafeld auf der Halbinsel Reykjanes, gespeist von silikatreichem Mineralwasser. Sie liegt bei Grindavík, rund fünfzig Kilometer von Reykjavík.',
+      },
+      ru: {
+        city: 'Гриндавик',
+        landmark: 'Голубая лагуна',
+        description:
+          'Молочно-голубая геотермальная лагуна в лавовом поле на полуострове Рейкьянес, питаемая водой, богатой кремнием и минералами. Она находится у Гриндавика, примерно в пятидесяти километрах от Рейкьявика.',
+      },
+      it: {
+        city: 'Grindavík',
+        landmark: 'Blue Lagoon',
+        description:
+          'Una laguna geotermica azzurro latte in un campo di lava sulla penisola di Reykjanes, alimentata da acqua ricca di silice e minerali. Si trova accanto a Grindavík, a circa cinquanta chilometri da Reykjavík.',
+      },
+    },
+  },
+  {
+    id: 'dubrovnik',
+    countryCode: 'HR',
+    timezone: 'Europe/Zagreb',
+    latitude: 42.6407,
+    longitude: 18.1077,
+    image: commons('The walls of the fortress and View of the old city. panorama.jpg'),
+    credit: credit('The walls of the fortress and View of the old city. panorama.jpg'),
+    aliases: [
+      'دوبروفنيك', 'dubrovnik', 'croatia', 'كرواتيا',
+      'city walls', 'أسوار دوبروفنيك', 'stari grad', 'dalmatia',
+    ],
+    focus: '50% 50%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'دوبروفنيك',
+        landmark: 'أسوار دوبروفنيك',
+        description:
+          'أسوار حجرية بطول نحو كيلومترين تحيط بالمدينة القديمة، مع أبراج وحصون تعود إلى القرنين الثالث عشر والسابع عشر. من أعلاها يظهر البحر الأدرياتيكي وأسطح القرميد الحمراء.',
+      },
+      en: {
+        city: 'Dubrovnik',
+        landmark: 'The City Walls',
+        description:
+          'Stone walls almost two kilometres long ring the old town, with towers and bastions built between the thirteenth and seventeenth centuries. From the parapet you see the Adriatic and the red tile roofs.',
+      },
+      de: {
+        city: 'Dubrovnik',
+        landmark: 'Die Stadtmauern',
+        description:
+          'Fast zwei Kilometer lange Steinmauern umschließen die Altstadt, mit Türmen und Bastionen aus dem 13. bis 17. Jahrhundert. Von der Brüstung blickt man auf die Adria und die roten Ziegeldächer.',
+      },
+      ru: {
+        city: 'Дубровник',
+        landmark: 'Городские стены',
+        description:
+          'Почти двухкилометровые каменные стены окружают старый город, с башнями и бастионами XIII–XVII веков. С гребня стены видны Адриатика и красные черепичные крыши.',
+      },
+      it: {
+        city: 'Dubrovnik',
+        landmark: 'Le mura della città',
+        description:
+          'Mura di pietra lunghe quasi due chilometri circondano la città vecchia, con torri e bastioni costruiti tra il XIII e il XVII secolo. Dal cammino di ronda si vedono l’Adriatico e i tetti di tegole rosse.',
+      },
+    },
+  },
+  {
+    id: 'halong',
+    countryCode: 'VN',
+    timezone: 'Asia/Ho_Chi_Minh',
+    latitude: 20.9101,
+    longitude: 107.1839,
+    image: commons('Ha Long Bay in 2019.jpg'),
+    credit: credit('Ha Long Bay in 2019.jpg'),
+    aliases: [
+      'ها لونغ', 'هالونغ', 'ha long', 'halong',
+      'ha long bay', 'خليج ها لونغ', 'vietnam', 'فيتنام',
+      'hạ long', 'bai chay',
+    ],
+    focus: '50% 55%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'ها لونغ',
+        landmark: 'خليج ها لونغ',
+        description:
+          'خليج في خليج تونكين تنتشر فيه نحو ألفي جزيرة من الحجر الجيري وقمم كارستية، وقد أُدرج في قائمة اليونسكو عام ١٩٩٤. القوارب الشراعية تمر بين الجزر عند الفجر.',
+      },
+      en: {
+        city: 'Ha Long',
+        landmark: 'Ha Long Bay',
+        description:
+          'A bay in the Gulf of Tonkin scattered with some two thousand limestone islands and karst pillars, a UNESCO site since 1994. Junks thread between the islets at dawn.',
+      },
+      de: {
+        city: 'Hạ Long',
+        landmark: 'Die Halong-Bucht',
+        description:
+          'Eine Bucht im Golf von Tonkin mit rund zweitausend Kalksteininseln und Karstfelsen, seit 1994 UNESCO-Welterbe. Dschunken fahren im Morgengrauen zwischen den Inseln.',
+      },
+      ru: {
+        city: 'Халонг',
+        landmark: 'Бухта Халонг',
+        description:
+          'Бухта в Тонкинском заливе с почти двумя тысячами известняковых островов и карстовых скал, объект ЮНЕСКО с 1994 года. На рассвете между островами проходят джонки.',
+      },
+      it: {
+        city: 'Ha Long',
+        landmark: 'La baia di Ha Long',
+        description:
+          'Una baia nel golfo del Tonchino punteggiata da circa duemila isole calcaree e guglie carsiche, patrimonio UNESCO dal 1994. All’alba le giunche passano tra gli isolotti.',
+      },
+    },
+  },
+  {
+    id: 'siem-reap',
+    countryCode: 'KH',
+    timezone: 'Asia/Phnom_Penh',
+    latitude: 13.4125,
+    longitude: 103.867,
+    image: commons('Angkor Wat.jpg'),
+    credit: credit('Angkor Wat.jpg'),
+    aliases: [
+      'سييم ريب', 'siem reap', 'cambodia', 'كمبوديا',
+      'angkor', 'angkor wat', 'أنغكور وات', 'انغكور وات',
+      'khmer',
+    ],
+    focus: '50% 45%',
+    theme: 'sunset',
+    copy: {
+      ar: {
+        city: 'سييم ريب',
+        landmark: 'أنغكور وات',
+        description:
+          'أكبر معبد هندوسي في العالم، بناه سوريا فارمان الثاني في القرن الثاني عشر لفيشنو ثم تحوّل إلى معبد بوذي. تعكس خنادقه المائية أبراجه الخمس عند الفجر.',
+      },
+      en: {
+        city: 'Siem Reap',
+        landmark: 'Angkor Wat',
+        description:
+          'The largest Hindu temple in the world, built by Suryavarman II in the twelfth century for Vishnu and later turned Buddhist. Its moat mirrors the five towers at dawn.',
+      },
+      de: {
+        city: 'Siem Reap',
+        landmark: 'Angkor Wat',
+        description:
+          'Der größte Hindutempel der Welt, im 12. Jahrhundert von Suryavarman II. für Vishnu errichtet und später buddhistisch. Sein Wassergraben spiegelt im Morgengrauen die fünf Türme.',
+      },
+      ru: {
+        city: 'Сиемреап',
+        landmark: 'Ангкор-Ват',
+        description:
+          'Крупнейший индуистский храм мира, построенный Сурьяварманом II в XII веке в честь Вишну и позже ставший буддийским. На рассвете его ров отражает пять башен.',
+      },
+      it: {
+        city: 'Siem Reap',
+        landmark: 'Angkor Wat',
+        description:
+          'Il più grande tempio induista del mondo, costruito da Suryavarman II nel XII secolo per Vishnu e poi divenuto buddista. All’alba il fossato riflette le cinque torri.',
+      },
+    },
+  },
+  {
+    id: 'bohol',
+    countryCode: 'PH',
+    timezone: 'Asia/Manila',
+    latitude: 9.9194,
+    longitude: 124.1697,
+    image: commons('Chocolate Hills Carmen Bohol 2019.jpg'),
+    credit: credit('Chocolate Hills Carmen Bohol 2019.jpg'),
+    aliases: [
+      'بوهول', 'bohol', 'philippines', 'الفلبين',
+      'chocolate hills', 'تلال الشوكولاتة', 'carmen', 'كارمن',
+      'visayas',
+    ],
+    focus: '50% 55%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'بوهول',
+        landmark: 'تلال الشوكولاتة',
+        description:
+          'أكثر من ألف تلة مخروطية من الحجر الجيري تتحول إلى اللون البني في موسم الجفاف، وسط جزيرة بوهول. تُعدّ من أشهر معالم الفلبين وأُدرجت في قائمة اليونسكو المؤقتة.',
+      },
+      en: {
+        city: 'Bohol',
+        landmark: 'The Chocolate Hills',
+        description:
+          'More than a thousand conical limestone hills that turn brown in the dry season, in the middle of Bohol island. They are among the Philippines’ best-known sights and a tentative UNESCO site.',
+      },
+      de: {
+        city: 'Bohol',
+        landmark: 'Die Chocolate Hills',
+        description:
+          'Über tausend kegelförmige Kalksteinhügel, die in der Trockenzeit braun werden, mitten auf der Insel Bohol. Sie gehören zu den bekanntesten Motiven der Philippinen.',
+      },
+      ru: {
+        city: 'Бохол',
+        landmark: 'Шоколадные холмы',
+        description:
+          'Более тысячи конических известняковых холмов, буреющих в сухой сезон, в центре острова Бохол. Это одна из самых известных достопримечательностей Филиппин.',
+      },
+      it: {
+        city: 'Bohol',
+        landmark: 'Le Chocolate Hills',
+        description:
+          'Oltre mille colline calcaree coniche che in stagione secca diventano marroni, nel cuore dell’isola di Bohol. Sono tra le immagini più note delle Filippine.',
+      },
+    },
+  },
+  {
+    id: 'milford-sound',
+    countryCode: 'NZ',
+    timezone: 'Pacific/Auckland',
+    latitude: -44.6414,
+    longitude: 167.8974,
+    image: commons('Milford Sound Mitre Peak Cabbage tree Toetoe.JPG'),
+    credit: credit('Milford Sound Mitre Peak Cabbage tree Toetoe.JPG'),
+    aliases: [
+      'ميلفورد ساوند', 'milford sound', 'milford', 'new zealand',
+      'نيوزيلندا', 'southland', 'ساوثلاند', 'fiordland',
+      'mitre peak', 'piopiotahi',
+    ],
+    focus: '50% 55%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'ميلفورد ساوند',
+        landmark: 'مضيق ميلفورد',
+        description:
+          'مضيق عميق في فيوردلاند تطل عليه قمة ميترا بارتفاع ١٦٩٢ متراً وشلالات تتدفق من الجروف. وصفه روديارد كيبلنغ بأنه الأعجوبة الثامنة في العالم.',
+      },
+      en: {
+        city: 'Milford Sound',
+        landmark: 'Milford Sound and Mitre Peak',
+        description:
+          'A deep fiord in Fiordland beneath Mitre Peak, which rises 1,692 metres, with waterfalls dropping straight off the cliffs. Rudyard Kipling called it the eighth wonder of the world.',
+      },
+      de: {
+        city: 'Milford Sound',
+        landmark: 'Der Milford Sound',
+        description:
+          'Ein tiefer Fjord im Fiordland unter dem 1.692 Meter hohen Mitre Peak, mit Wasserfällen, die von den Klippen stürzen. Rudyard Kipling nannte ihn das achte Weltwunder.',
+      },
+      ru: {
+        city: 'Милфорд-Саунд',
+        landmark: 'Милфорд-Саунд',
+        description:
+          'Глубокий фьорд в Фьордленде под пиком Митре высотой 1692 метра, с водопадами, падающими прямо со скал. Редьярд Киплинг назвал его восьмым чудом света.',
+      },
+      it: {
+        city: 'Milford Sound',
+        landmark: 'Il Milford Sound',
+        description:
+          'Un fiordo profondo nel Fiordland sotto il Mitre Peak, alto 1.692 metri, con cascate che precipitano dalle pareti. Rudyard Kipling lo chiamò l’ottava meraviglia del mondo.',
+      },
+    },
+  },
+  {
+    id: 'hanga-roa',
+    countryCode: 'CL',
+    timezone: 'Pacific/Easter',
+    latitude: -27.1258,
+    longitude: -109.2769,
+    image: commons('Ahu Tongariki.jpg'),
+    credit: credit('Ahu Tongariki.jpg'),
+    aliases: [
+      'هانغا روا', 'hanga roa', 'chile', 'تشيلي',
+      'easter island', 'جزيرة الفصح', 'rapa nui', 'moai',
+      'تماثيل موآي', 'ahu tongariki',
+    ],
+    focus: '50% 50%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'هانغا روا',
+        landmark: 'تماثيل موآي',
+        description:
+          'خمسة عشر تمثالاً ضخماً من حجر البازلت على منصة واحدة في آهو تونغاريكي، أعيد نصبها في التسعينيات بعد تسونامي ١٩٦٠. حُمِلت التماثيل من محجر رانو راراكو على بعد عدة كيلومترات.',
+      },
+      en: {
+        city: 'Hanga Roa',
+        landmark: 'The Moai of Easter Island',
+        description:
+          'Fifteen colossal basalt moai on a single platform at Ahu Tongariki, re-erected in the 1990s after the 1960 tsunami. The statues were hauled from the Rano Raraku quarry kilometres away.',
+      },
+      de: {
+        city: 'Hanga Roa',
+        landmark: 'Die Moai der Osterinsel',
+        description:
+          'Fünfzehn gewaltige Basalt-Moai auf einer Plattform in Ahu Tongariki, in den 1990er-Jahren nach dem Tsunami von 1960 wieder aufgerichtet. Sie wurden vom Steinbruch Rano Raraku hergeschafft.',
+      },
+      ru: {
+        city: 'Ханга-Роа',
+        landmark: 'Моаи острова Пасхи',
+        description:
+          'Пятнадцать колоссальных базальтовых моаи на одной платформе Аху Тонгарики, вновь установленных в 1990-х после цунами 1960 года. Статуи перевозили из каменоломни Рано Рараку.',
+      },
+      it: {
+        city: 'Hanga Roa',
+        landmark: 'I moai dell’Isola di Pasqua',
+        description:
+          'Quindici colossali moai di basalto su un’unica piattaforma ad Ahu Tongariki, rialzati negli anni Novanta dopo lo tsunami del 1960. Furono trasportati dalla cava di Rano Raraku.',
+      },
+    },
+  },
+  {
+    id: 'cartagena',
+    countryCode: 'CO',
+    timezone: 'America/Bogota',
+    latitude: 10.422,
+    longitude: -75.533,
+    image: commons('Cartagena, view from old city walls.jpg'),
+    credit: credit('Cartagena, view from old city walls.jpg'),
+    aliases: [
+      'كارتاخينا', 'قرطاجنة', 'cartagena', 'colombia',
+      'كولومبيا', 'walled city', 'المدينة المسورة', 'ciudad amurallada',
+      'cartagena de indias',
+    ],
+    focus: '50% 50%',
+    theme: 'sunset',
+    copy: {
+      ar: {
+        city: 'كارتاخينا',
+        landmark: 'المدينة المسوّرة',
+        description:
+          'مدينة استعمارية محاطة بأسوار وحصون بناها الإسبان بين القرنين السادس عشر والثامن عشر لحماية ميناء الذهب. أعلنت اليونسكو المدينة القديمة وسورها موقع تراث عام ١٩٨٤.',
+      },
+      en: {
+        city: 'Cartagena',
+        landmark: 'The Walled City',
+        description:
+          'A colonial city ringed by walls and forts that Spain built between the sixteenth and eighteenth centuries to guard its gold port. UNESCO listed the old town and its defences in 1984.',
+      },
+      de: {
+        city: 'Cartagena',
+        landmark: 'Die ummauerte Altstadt',
+        description:
+          'Eine Kolonialstadt mit Mauern und Festungen, die Spanien vom 16. bis 18. Jahrhundert zum Schutz seines Goldhafens errichtete. Seit 1984 ist die Altstadt UNESCO-Welterbe.',
+      },
+      ru: {
+        city: 'Картахена',
+        landmark: 'Обнесённый стеной старый город',
+        description:
+          'Колониальный город в кольце стен и крепостей, построенных Испанией в XVI–XVIII веках для защиты золотого порта. Старый город внесён в список ЮНЕСКО в 1984 году.',
+      },
+      it: {
+        city: 'Cartagena',
+        landmark: 'La città murata',
+        description:
+          'Una città coloniale cinta da mura e fortezze costruite dalla Spagna tra XVI e XVIII secolo per proteggere il porto dell’oro. La città vecchia è patrimonio UNESCO dal 1984.',
+      },
+    },
+  },
+  {
+    id: 'doha-mia',
+    countryCode: 'QA',
+    timezone: 'Asia/Qatar',
+    latitude: 25.2955,
+    longitude: 51.539,
+    image: commons('Museum of Islamic Art (6188166880).jpg'),
+    credit: credit('Museum of Islamic Art (6188166880).jpg'),
+    aliases: [
+      'الدوحة', 'doha', 'qatar', 'قطر',
+      'museum of islamic art', 'متحف الفن الإسلامي', 'mia', 'الدوحة متحف',
+    ],
+    focus: '55% 50%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'الدوحة',
+        landmark: 'متحف الفن الإسلامي',
+        description:
+          'متحف صمّمه آي إم باي وافتُتح عام ٢٠٠٨ على رصيف بحري خاص، بقبة هرمية من الحجر الرملي ونوافذ تطل على الخليج. يضم مجموعة من الفن الإسلامي تمتد من الأندلس إلى آسيا الوسطى.',
+      },
+      en: {
+        city: 'Doha',
+        landmark: 'Museum of Islamic Art',
+        description:
+          'A museum designed by I. M. Pei and opened in 2008 on its own corniche island, with a stepped sandstone dome and windows framing the Gulf. Its collection spans Islamic art from Andalusia to Central Asia.',
+      },
+      de: {
+        city: 'Doha',
+        landmark: 'Museum für Islamische Kunst',
+        description:
+          'Ein Museum von I. M. Pei, 2008 auf einer eigenen Corniche-Insel eröffnet, mit gestufter Sandsteinkuppel und Blick auf den Golf. Die Sammlung reicht von Andalusien bis Zentralasien.',
+      },
+      ru: {
+        city: 'Доха',
+        landmark: 'Музей исламского искусства',
+        description:
+          'Музей, спроектированный И. М. Пеем и открытый в 2008 году на отдельном острове у набережной, со ступенчатым куполом из песчаника и видом на залив. Коллекция охватывает исламское искусство от Андалусии до Средней Азии.',
+      },
+      it: {
+        city: 'Doha',
+        landmark: 'Museo d’arte islamica',
+        description:
+          'Un museo progettato da I. M. Pei e aperto nel 2008 su un’isola della corniche, con cupola a gradoni in arenaria e finestre sul golfo. La collezione va dall’Andalusia all’Asia centrale.',
+      },
+    },
+  },
+  {
+    id: 'jerusalem',
+    countryCode: 'IL',
+    timezone: 'Asia/Jerusalem',
+    latitude: 31.7767,
+    longitude: 35.2345,
+    image: commons('Westernwall2.jpg'),
+    credit: credit('Westernwall2.jpg'),
+    aliases: [
+      'القدس', 'jerusalem', 'israel', 'إسرائيل',
+      'western wall', 'حائط البراق', 'الحائط الغربي', 'kotel',
+      'wailing wall',
+    ],
+    focus: '50% 45%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'القدس',
+        landmark: 'الحائط الغربي',
+        description:
+          'الجدار الغربي للمسجد الأقصى، بقايا السور الاستنادي لهيرودس الكبير، وهو أقدس مكان يصلّي عنده اليهود. يبلغ طول الظاهر منه نحو ٥٧ متراً وتُدسّ بين حجارته قصاصات الأمنيات.',
+      },
+      en: {
+        city: 'Jerusalem',
+        landmark: 'The Western Wall',
+        description:
+          'The western retaining wall of the Temple Mount, left from Herod the Great’s expansion and the holiest place where Jews pray. About 57 metres are exposed, and written prayers are pressed between the stones.',
+      },
+      de: {
+        city: 'Jerusalem',
+        landmark: 'Die Westmauer',
+        description:
+          'Die westliche Stützmauer des Tempelbergs aus der Erweiterung Herodes’ des Großen und der heiligste Ort jüdischen Gebets. Rund 57 Meter sind sichtbar; Gebetszettel werden zwischen die Steine gesteckt.',
+      },
+      ru: {
+        city: 'Иерусалим',
+        landmark: 'Западная стена',
+        description:
+          'Западная подпорная стена Храмовой горы, оставшаяся от расширения Ирода Великого, святейшее место иудейской молитвы. Открыто около 57 метров; записки с молитвами вкладывают между камнями.',
+      },
+      it: {
+        city: 'Gerusalemme',
+        landmark: 'Il Muro Occidentale',
+        description:
+          'Il muro di contenimento occidentale del Monte del Tempio, lasciato dall’ampliamento di Erode il Grande e il luogo più sacro della preghiera ebraica. Sono visibili circa 57 metri; biglietti con preghiere sono infilati tra le pietre.',
+      },
+    },
+  },
+  {
+    id: 'jerusalem-al-aqsa',
+    countryCode: 'PS',
+    timezone: 'Asia/Hebron',
+    latitude: 31.7781,
+    longitude: 35.2354,
+    image: commons('Jerusalem DomeoftheRock J65 (cropped).JPG'),
+    credit: credit('Jerusalem DomeoftheRock J65 (cropped).JPG'),
+    aliases: [
+      'القدس', 'jerusalem', 'palestine', 'فلسطين',
+      'dome of the rock', 'قبة الصخرة', 'المسجد الأقصى', 'al-aqsa',
+      'haram al-sharif', 'الحرم القدسي',
+    ],
+    focus: '50% 45%',
+    theme: 'sunset',
+    copy: {
+      ar: {
+        city: 'القدس',
+        landmark: 'قبة الصخرة',
+        description:
+          'قبة ذهبية فوق مسجد ثماني الأضلاع على الحرم القدسي، بناها عبد الملك بن مروان بين ٦٩١ و٦٩٢. صخرتها المقدسة وقبابها الفسيفسائية تجعلها من أقدم المباني الإسلامية الباقية.',
+      },
+      en: {
+        city: 'Jerusalem',
+        landmark: 'Dome of the Rock',
+        description:
+          'A golden dome over an octagonal shrine on the Haram al-Sharif, built by Abd al-Malik between 691 and 692. Its rock and mosaic interior make it one of the oldest surviving Islamic buildings.',
+      },
+      de: {
+        city: 'Jerusalem',
+        landmark: 'Der Felsendom',
+        description:
+          'Eine goldene Kuppel über einem achteckigen Heiligtum auf dem Haram al-Sharif, 691–692 von Abd al-Malik erbaut. Fels und Mosaike machen sie zu einem der ältesten erhaltenen islamischen Bauwerke.',
+      },
+      ru: {
+        city: 'Иерусалим',
+        landmark: 'Купол Скалы',
+        description:
+          'Золотой купол над восьмигранным святилищем на Харам аль-Шариф, построенным Абд аль-Маликом в 691–692 годах. Скала и мозаики делают его одним из древнейших сохранившихся исламских зданий.',
+      },
+      it: {
+        city: 'Gerusalemme',
+        landmark: 'La Cupola della Roccia',
+        description:
+          'Una cupola dorata su un santuario ottagonale sull’Haram al-Sharif, costruito da Abd al-Malik tra il 691 e il 692. La roccia e i mosaici ne fanno uno degli edifici islamici più antichi conservati.',
+      },
+    },
+  },
+  {
+    id: 'tehran',
+    countryCode: 'IR',
+    timezone: 'Asia/Tehran',
+    latitude: 35.6997,
+    longitude: 51.338,
+    image: commons('Azadi Tower (29358497718).jpg'),
+    credit: credit('Azadi Tower (29358497718).jpg'),
+    aliases: [
+      'طهران', 'تهران', 'tehran', 'iran',
+      'إيران', 'azadi tower', 'برج آزادي', 'برج الحرية',
+    ],
+    focus: '50% 50%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'طهران',
+        landmark: 'برج آزادي',
+        description:
+          'برج من الرخام الأبيض عند مدخل طهران الغربي، صمّمه حسين أمانت واكتمل عام ١٩٧١ بمناسبة احتفالات الإمبراطورية الفارسية. قوسه المقلوب يجمع بين العمارة الساسانية والقوطية.',
+      },
+      en: {
+        city: 'Tehran',
+        landmark: 'Azadi Tower',
+        description:
+          'A white marble tower at Tehran’s western gateway, designed by Hossein Amanat and completed in 1971 for the Persian Empire’s anniversary. Its inverted arch blends Sasanian and Gothic forms.',
+      },
+      de: {
+        city: 'Teheran',
+        landmark: 'Azadi-Turm',
+        description:
+          'Ein Turm aus weißem Marmor am westlichen Tor Teherans, von Hossein Amanat entworfen und 1971 zum Jubiläum des Perserreichs vollendet. Der umgekehrte Bogen verbindet sasanidische und gotische Formen.',
+      },
+      ru: {
+        city: 'Тегеран',
+        landmark: 'Башня Азади',
+        description:
+          'Башня из белого мрамора у западного въезда в Тегеран, спроектированная Хоссейном Аманатом и открытая в 1971 году к юбилею Персидской империи. Перевёрнутая арка соединяет сасанидские и готические формы.',
+      },
+      it: {
+        city: 'Teheran',
+        landmark: 'Torre Azadi',
+        description:
+          'Una torre di marmo bianco all’ingresso occidentale di Teheran, progettata da Hossein Amanat e ultimata nel 1971 per l’anniversario dell’Impero persiano. L’arco rovesciato unisce forme sasanidi e gotiche.',
+      },
+    },
+  },
+  {
+    id: 'erbil',
+    countryCode: 'IQ',
+    timezone: 'Asia/Baghdad',
+    latitude: 36.1911,
+    longitude: 44.0092,
+    image: commons('Panorama view of the Erbil Citadel, Erbil Governorate, Iraqi Kurdistan.jpg'),
+    credit: credit('Panorama view of the Erbil Citadel, Erbil Governorate, Iraqi Kurdistan.jpg'),
+    aliases: [
+      'أربيل', 'اربيل', 'erbil', 'arbil',
+      'hawler', 'iraq', 'العراق', 'erbil citadel',
+      'قلعة أربيل',
+    ],
+    focus: '50% 50%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'أربيل',
+        landmark: 'قلعة أربيل',
+        description:
+          'قلعة على تلّ اصطناعي يعلو المدينة، سكنها الناس نحو ستة آلاف سنة، وهي من أقدم المواقع المأهولة باستمرار. أُدرجت في قائمة اليونسكو عام ٢٠١٤ بعد ترميم بوابتها وأزقتها.',
+      },
+      en: {
+        city: 'Erbil',
+        landmark: 'The Citadel of Erbil',
+        description:
+          'A citadel on a tell above the city, inhabited for roughly six thousand years and among the oldest continuously settled sites. UNESCO listed it in 2014 after its gate and lanes were restored.',
+      },
+      de: {
+        city: 'Erbil',
+        landmark: 'Die Zitadelle von Erbil',
+        description:
+          'Eine Zitadelle auf einem Siedlungshügel über der Stadt, seit rund sechstausend Jahren bewohnt und damit einer der ältesten dauerhaft besiedelten Orte. 2014 UNESCO-Welterbe.',
+      },
+      ru: {
+        city: 'Эрбиль',
+        landmark: 'Цитадель Эрбиля',
+        description:
+          'Цитадель на телле над городом, заселённая около шести тысяч лет и относящаяся к древнейшим постоянно обитаемым местам. В 2014 году внесена в список ЮНЕСКО.',
+      },
+      it: {
+        city: 'Erbil',
+        landmark: 'La cittadella di Erbil',
+        description:
+          'Una cittadella su un tell sopra la città, abitata da circa seimila anni e tra i più antichi insediamenti continui. Patrimonio UNESCO dal 2014.',
+      },
+    },
+  },
+  {
+    id: 'lahore',
+    countryCode: 'PK',
+    timezone: 'Asia/Karachi',
+    latitude: 31.5882,
+    longitude: 74.3096,
+    image: commons('Badshahi Mosque front picture.jpg'),
+    credit: credit('Badshahi Mosque front picture.jpg'),
+    aliases: [
+      'لاهور', 'lahore', 'pakistan', 'باكستان',
+      'badshahi mosque', 'مسجد بادشاهي', 'badshahi', 'punjab',
+    ],
+    focus: '50% 45%',
+    theme: 'sunset',
+    copy: {
+      ar: {
+        city: 'لاهور',
+        landmark: 'مسجد بادشاهي',
+        description:
+          'مسجد من الحجر الرملي الأحمر بناه أورنكزيب عام ١٦٧٣، ويتسع لأكثر من خمسين ألف مصلٍّ. تقابله قلعة لاهور وحدائق شاليمار، وقد بُني على طراز المسجد الجامع في دلهي.',
+      },
+      en: {
+        city: 'Lahore',
+        landmark: 'Badshahi Mosque',
+        description:
+          'A red sandstone mosque built by Aurangzeb in 1673 that holds more than fifty thousand worshippers. It faces Lahore Fort and the Shalimar Gardens, and follows the plan of Delhi’s Jama Masjid.',
+      },
+      de: {
+        city: 'Lahore',
+        landmark: 'Badschahi-Moschee',
+        description:
+          'Eine Moschee aus rotem Sandstein, 1673 von Aurangzeb erbaut, mit Platz für über fünfzigtausend Betende. Sie liegt gegenüber dem Fort von Lahore und folgt dem Plan der Jama Masjid in Delhi.',
+      },
+      ru: {
+        city: 'Лахор',
+        landmark: 'Мечеть Бадшахи',
+        description:
+          'Мечеть из красного песчаника, построенная Аурангзебом в 1673 году и вмещающая более пятидесяти тысяч молящихся. Она обращена к Лахорской крепости и повторяет план делийской Джама Масджид.',
+      },
+      it: {
+        city: 'Lahore',
+        landmark: 'Moschea Badshahi',
+        description:
+          'Una moschea in arenaria rossa costruita da Aurangzeb nel 1673, che accoglie oltre cinquantamila fedeli. Fronteggia il Forte di Lahore e segue il modello della Jama Masjid di Delhi.',
       },
     },
   },

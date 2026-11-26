@@ -60,6 +60,24 @@ export type WeatherBundle = {
 
 export type ThemeName = 'nile' | 'sea' | 'sunset';
 
+/** Everything the credits view and the caption need to attribute a photo. */
+export type PhotoCredit = {
+  /** Photographer or creator exactly as the source file page records it. */
+  photographer: string;
+  /** Human-readable licence name. */
+  license: string;
+  /** Licence deed, when the licence has one. */
+  licenseUrl?: string;
+  /** Where the file lives. */
+  source: string;
+  /** Exact source file page, where the reuse terms were checked. */
+  url: string;
+  /** What this site changed about the original file. */
+  changes: string;
+  /** Short "photographer · licence" line shown next to the image. */
+  label: string;
+};
+
 export type Landmark = {
   id: string;
   city: string;
@@ -69,7 +87,7 @@ export type Landmark = {
   landmark: string;
   description: string;
   image: string;
-  credit: { label: string; url: string };
+  credit: PhotoCredit;
   latitude: number;
   longitude: number;
   aliases: string[];

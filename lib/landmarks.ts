@@ -47,6 +47,11 @@ export function sceneImageSrc(url: string): string {
   return `/api/scene?u=${encodeURIComponent(url)}`;
 }
 
+/** Same proxy, smaller render for the credits grid. */
+export function sceneThumbSrc(url: string, width = 480): string {
+  return sceneImageSrc(url.replace(/([?&]width=)\d+/, `$1${width}`));
+}
+
 /** Used when a city has no curated landmark yet. */
 export const FALLBACK_SCENE = {
   landmark: 'أفق مفتوح',
@@ -173,7 +178,9 @@ export function findLandmark(query: string): Landmark | null {
       if (key === q) score = 100;
       else if (q.length >= 3 && (key.startsWith(q) || q.startsWith(key))) score = 70;
       else if (q.length >= 4 && (key.includes(q) || q.includes(key))) score = 50;
-      if (score && (!best || score > best.score)) best = { item, score };
+      // Ties go to the later entry, so a newly curated scene supersedes an older
+      // one for the same city (Doha's Museum of Islamic Art over the West Bay view).
+      if (score && (!best || score >= best.score)) best = { item, score };
     }
   }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import type { Landmark, Place, WeatherBundle } from '@/lib/types';
+import type { Landmark, PhotoCredit, Place, WeatherBundle } from '@/lib/types';
 import { normalizeArabic } from '@/lib/arabic';
 import { describeCodeLabel, localClock, timeLabel, windDirectionLabel } from '@/lib/weather';
 import WeatherIcon from './WeatherIcon';
@@ -8,7 +8,7 @@ import { useLang } from './LangProvider';
 
 type Props = {
   place: Place;
-  landmark: Landmark | { landmark: string; description: string; credit: { label: string; url: string } };
+  landmark: Landmark | { landmark: string; description: string; credit: PhotoCredit };
   weather: WeatherBundle;
   /** The landmark blurb only appears in the expanded sheet and on desktop. */
   showDescription?: boolean;
@@ -160,16 +160,26 @@ export default function WeatherCard({ place, landmark, weather, showDescription 
         <p className="mt-3 text-[12.5px] leading-relaxed text-cream/70">{landmark.description}</p>
       )}
 
-      <div className="mt-2.5 flex items-center justify-between gap-2 text-[10px] text-cream/40">
-        <a
-          href={landmark.credit.url}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="truncate underline-offset-2 transition hover:text-cream/70 hover:underline"
-        >
-          {t('imageLabel')}: {landmark.credit.label}
-        </a>
+      <div className="mt-2.5 flex items-center gap-2 text-[10px] text-cream/40">
+        <span className="min-w-0 flex-1 truncate">
+          <a
+            href={landmark.credit.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="underline-offset-2 transition hover:text-cream/70 hover:underline"
+            title={`${landmark.credit.photographer} · ${landmark.credit.license} · ${landmark.credit.source}`}
+          >
+            {t('imageLabel')}: {landmark.credit.label}
+          </a>
+        </span>
         <span className="shrink-0">
+          <a
+            href="/credits"
+            className="underline-offset-2 transition hover:text-cream/70 hover:underline"
+          >
+            {t('creditsLink')}
+          </a>
+          {' · '}
           {t('dataLabel')}: {weather.source === 'met.no' ? 'MET Norway' : 'Open-Meteo'}
         </span>
       </div>

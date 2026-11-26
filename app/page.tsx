@@ -405,7 +405,12 @@ export default function HomePage() {
               ))}
             </div>
 
-            <p className="mt-5 text-center text-[10px] leading-relaxed text-cream/35">{t('footerNote')}</p>
+            <p className="mt-5 text-center text-[10px] leading-relaxed text-cream/35">
+              {t('footerNote')} ·{' '}
+              <a href="/credits" className="underline-offset-2 transition hover:text-cream/60 hover:underline">
+                {t('creditsLink')}
+              </a>
+            </p>
           </div>
         </div>
 

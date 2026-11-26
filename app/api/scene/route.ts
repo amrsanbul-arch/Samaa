@@ -32,9 +32,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'host not allowed' }, { status: 400 });
   }
 
-  // Wikimedia intermittently throttles a cold fetch (429/503), which used to leave
-  // a blank backdrop until the next visit; one retry covers the transient case.
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  // Wikimedia throttles cold fetches in bursts (429/403/503), which used to leave a
+  // blank backdrop until the next visit; a short exponential backoff covers it.
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
       const upstream = await fetch(target, {
         headers: {
@@ -54,9 +54,9 @@ export async function GET(request: Request) {
         });
       }
     } catch {
-      /* retry once before giving up */
+      /* fall through to the backoff */
     }
-    if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 400));
+    if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 500 * 3 ** attempt));
   }
 
   return NextResponse.json({ error: 'upstream failed' }, { status: 502 });
