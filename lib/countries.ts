@@ -82,6 +82,26 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  BD: { ar: 'بنغلاديش', en: 'Bangladesh', de: 'Bangladesch', ru: 'Бангладеш', it: 'Bangladesh' },
+  LK: { ar: 'سريلانكا', en: 'Sri Lanka', de: 'Sri Lanka', ru: 'Шри-Ланка', it: 'Sri Lanka' },
+  NP: { ar: 'نيبال', en: 'Nepal', de: 'Nepal', ru: 'Непал', it: 'Nepal' },
+  BT: { ar: 'بوتان', en: 'Bhutan', de: 'Bhutan', ru: 'Бутан', it: 'Bhutan' },
+  MV: { ar: 'المالديف', en: 'Maldives', de: 'Malediven', ru: 'Мальдивы', it: 'Maldive' },
+  MM: { ar: 'ميانمار', en: 'Myanmar', de: 'Myanmar', ru: 'Мьянма', it: 'Myanmar' },
+  LA: { ar: 'لاوس', en: 'Laos', de: 'Laos', ru: 'Лаос', it: 'Laos' },
+  MN: { ar: 'منغوليا', en: 'Mongolia', de: 'Mongolei', ru: 'Монголия', it: 'Mongolia' },
+  KZ: { ar: 'كازاخستان', en: 'Kazakhstan', de: 'Kasachstan', ru: 'Казахстан', it: 'Kazakistan' },
+  UZ: { ar: 'أوزبكستان', en: 'Uzbekistan', de: 'Usbekistan', ru: 'Узбекистан', it: 'Uzbekistan' },
+  KG: { ar: 'قيرغيزستان', en: 'Kyrgyzstan', de: 'Kirgisistan', ru: 'Киргизия', it: 'Kirghizistan' },
+  TJ: { ar: 'طاجيكستان', en: 'Tajikistan', de: 'Tadschikistan', ru: 'Таджикистан', it: 'Tagikistan' },
+  TM: { ar: 'تركمانستان', en: 'Turkmenistan', de: 'Turkmenistan', ru: 'Туркменистан', it: 'Turkmenistan' },
+  AZ: { ar: 'أذربيجان', en: 'Azerbaijan', de: 'Aserbaidschan', ru: 'Азербайджан', it: 'Azerbaigian' },
+  AM: { ar: 'أرمينيا', en: 'Armenia', de: 'Armenien', ru: 'Армения', it: 'Armenia' },
+  GE: { ar: 'جورجيا', en: 'Georgia', de: 'Georgien', ru: 'Грузия', it: 'Georgia' },
+  UA: { ar: 'أوكرانيا', en: 'Ukraine', de: 'Ukraine', ru: 'Украина', it: 'Ucraina' },
+  RO: { ar: 'رومانيا', en: 'Romania', de: 'Rumänien', ru: 'Румыния', it: 'Romania' },
+  BG: { ar: 'بلغاريا', en: 'Bulgaria', de: 'Bulgarien', ru: 'Болгария', it: 'Bulgaria' },
+  RS: { ar: 'صربيا', en: 'Serbia', de: 'Serbien', ru: 'Сербия', it: 'Serbia' },
   EG: { ar: 'مصر', en: 'Egypt', de: 'Ägypten', ru: 'Египет', it: 'Egitto' },
   DZ: { ar: 'الجزائر', en: 'Algeria', de: 'Algerien', ru: 'Алжир', it: 'Algeria' },
   SD: { ar: 'السودان', en: 'Sudan', de: 'Sudan', ru: 'Судан', it: 'Sudan' },
@@ -4258,6 +4278,923 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Burj Al-Fateh',
         description:
           'Un albergo di 130 metri sul Nilo Azzurro nel punto in cui i due Nili si incontrano, a forma di vela. Dono della Libia inaugurato nel 2008, è oggi il simbolo della capitale.',
+      },
+    },
+  },
+  {
+    id: 'dhaka',
+    countryCode: 'BD',
+    timezone: 'Asia/Dhaka',
+    latitude: 23.7086,
+    longitude: 90.4061,
+    image: commons('Ahsan Manzil-Front View.jpg'),
+    credit: credit('Ahsan Manzil-Front View.jpg'),
+    aliases: [
+      'دكا', 'dhaka', 'dacca', 'bangladesh', 'بنغلاديش', 'ahsan manzil', 'قصر أحسن منزل',
+      'القصر الوردي', 'pink palace',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'دكا',
+        landmark: 'قصر أحسن منزل',
+        description:
+          'قصر وردي على ضفة نهر بوريجانغا، كان مقر عائلة نواب دكا ثم صار متحفاً وطنياً. شرفته المزدوجة وقبته المضيئة من معالم المدينة القديمة.',
+      },
+      en: {
+        city: 'Dhaka',
+        landmark: 'Ahsan Manzil',
+        description:
+          'A pink palace on the bank of the Buriganga, once the residence of the Nawabs of Dhaka and now a national museum. Its twin staircase and dome mark the old city.',
+      },
+      de: {
+        city: 'Dhaka',
+        landmark: 'Ahsan Manzil',
+        description:
+          'Ein rosafarbener Palast am Ufer des Buriganga, einst Residenz der Nawabs von Dhaka und heute ein Nationalmuseum. Die doppelte Freitreppe und die Kuppel prägen die Altstadt.',
+      },
+      ru: {
+        city: 'Дакка',
+        landmark: 'Ахсан Манзил',
+        description:
+          'Розовый дворец на берегу Буриганги, бывшая резиденция навабов Дакки, а теперь национальный музей. Двойная лестница и купол стали приметой старого города.',
+      },
+      it: {
+        city: 'Dacca',
+        landmark: 'Ahsan Manzil',
+        description:
+          'Un palazzo rosa sulla riva del Buriganga, un tempo residenza dei Nawab di Dacca e oggi museo nazionale. La doppia scalinata e la cupola segnano la città vecchia.',
+      },
+    },
+  },
+  {
+    id: 'sigiriya',
+    countryCode: 'LK',
+    timezone: 'Asia/Colombo',
+    latitude: 7.9563,
+    longitude: 80.7603,
+    image: commons('Sigiriya Luftbild (29781064900).jpg'),
+    credit: credit('Sigiriya Luftbild (29781064900).jpg'),
+    aliases: [
+      'سيجيريا', 'sigiriya', 'sri lanka', 'سريلانكا', 'sigiriya rock', 'قلعة صخرة سيجيريا',
+      'صخرة سيجيريا', 'colombo', 'كولومبو',
+    ],
+    copy: {
+      ar: {
+        city: 'سيجيريا',
+        landmark: 'قلعة صخرة سيجيريا',
+        description:
+          'صخرة جرانيتية ترتفع نحو مئتي متر من السهل، بناها الملك كاسيابا في القرن الخامس فجعل فوقها قصره وحصنه. جداريات وجهها الغربي أشهر ما فيها.',
+      },
+      en: {
+        city: 'Sigiriya',
+        landmark: 'Sigiriya Rock Fortress',
+        description:
+          'A granite rock rising some 200 metres from the plain, crowned by King Kashyapa’s fifth-century palace and fortress. The frescoes on its western face are the most famous part of the site.',
+      },
+      de: {
+        city: 'Sigiriya',
+        landmark: 'Felsenfestung Sigiriya',
+        description:
+          'Ein Granitfelsen, der rund 200 Meter aus der Ebene ragt und die Palastfestung König Kashyapas aus dem 5. Jahrhundert trägt. Berühmt sind die Wandmalereien an seiner Westwand.',
+      },
+      ru: {
+        city: 'Сигирия',
+        landmark: 'Скальная крепость Сигирия',
+        description:
+          'Гранитная скала высотой около 200 метров, на которой в V веке царь Кашьяпа построил дворец-крепость. Знамениты фрески на её западной стене.',
+      },
+      it: {
+        city: 'Sigiriya',
+        landmark: 'Fortezza rupestre di Sigiriya',
+        description:
+          'Una roccia di granito che si alza di circa 200 metri dalla pianura, con il palazzo-fortezza del re Kashyapa del V secolo. Famose le pitture murali sulla parete ovest.',
+      },
+    },
+  },
+  {
+    id: 'kathmandu',
+    countryCode: 'NP',
+    timezone: 'Asia/Kathmandu',
+    latitude: 27.7214,
+    longitude: 85.3619,
+    image: commons('Boudha Stupa 2018 04.jpg'),
+    credit: credit('Boudha Stupa 2018 04.jpg'),
+    aliases: [
+      'كاتماندو', 'kathmandu', 'nepal', 'نيبال', 'boudhanath', 'بودانات', 'boudha', 'bodnath',
+      'ستوبا بودانات', 'boudhanath stupa',
+    ],
+    capital: true,
+    focus: '60% 45%',
+    copy: {
+      ar: {
+        city: 'كاتماندو',
+        landmark: 'ستوبا بودانات',
+        description:
+          'أكبر ستوبا في نيبال وأحد أقدس مواقع البوذية التبتية، بعينين مرسومتين تراقبان الوادي وأعلام صلاة ترفرف حول قبتها البيضاء.',
+      },
+      en: {
+        city: 'Kathmandu',
+        landmark: 'Boudhanath Stupa',
+        description:
+          'The largest stupa in Nepal and one of the holiest sites of Tibetan Buddhism, with painted eyes watching the valley and prayer flags around its white dome.',
+      },
+      de: {
+        city: 'Kathmandu',
+        landmark: 'Boudhanath-Stupa',
+        description:
+          'Die größte Stupa Nepals und einer der heiligsten Orte des tibetischen Buddhismus, mit gemalten Augen über dem Tal und Gebetsfahnen um den weißen Dom.',
+      },
+      ru: {
+        city: 'Катманду',
+        landmark: 'Ступа Боднатх',
+        description:
+          'Крупнейшая ступа Непала и одно из святейших мест тибетского буддизма: нарисованные глаза над долиной и молитвенные флаги вокруг белого купола.',
+      },
+      it: {
+        city: 'Kathmandu',
+        landmark: 'Stupa di Boudhanath',
+        description:
+          'La più grande stupa del Nepal e uno dei luoghi più sacri del buddismo tibetano, con gli occhi dipinti sul valle e bandiere di preghiera attorno alla cupola bianca.',
+      },
+    },
+  },
+  {
+    id: 'paro',
+    countryCode: 'BT',
+    timezone: 'Asia/Thimphu',
+    latitude: 27.4917,
+    longitude: 89.3633,
+    image: commons('Paro Taktsang, Bhutan (edited).jpg'),
+    credit: credit('Paro Taktsang, Bhutan (edited).jpg'),
+    aliases: [
+      'بارو', 'paro', 'bhutan', 'بوتان', 'tiger\'s nest', 'tigers nest', 'taktsang', 'تاكسانغ',
+      'دير عش النمر', 'عش النمر', 'thimphu', 'تيمفو',
+    ],
+    focus: '40% 50%',
+    copy: {
+      ar: {
+        city: 'بارو',
+        landmark: 'دير عش النمر',
+        description:
+          'دير بوذي معلق على جرف صخري على ارتفاع ٣١٢٠ متراً، يُصعد إليه على ممر ضيق بين أشجار الصنوبر. اسمه المحلي تاكسانغ، أي عرين النمر.',
+      },
+      en: {
+        city: 'Paro',
+        landmark: 'Tiger’s Nest Monastery',
+        description:
+          'A Buddhist monastery clinging to a cliff at 3,120 metres, reached by a narrow path through pine forest. Its local name, Taktsang, means the tiger’s lair.',
+      },
+      de: {
+        city: 'Paro',
+        landmark: 'Kloster Tigers Nest',
+        description:
+          'Ein buddhistisches Kloster an einer Felswand auf 3.120 Metern, erreichbar über einen schmalen Pfad durch den Kiefernwald. Sein Name Taktsang bedeutet „Tigernest“.',
+      },
+      ru: {
+        city: 'Паро',
+        landmark: 'Монастырь Такцанг',
+        description:
+          'Буддийский монастырь, прилепившийся к скале на высоте 3 120 метров; к нему ведёт узкая тропа через сосновый лес. Местное имя Такцанг — «гнездо тигра».',
+      },
+      it: {
+        city: 'Paro',
+        landmark: 'Monastero del Nido della Tigre',
+        description:
+          'Un monastero buddista aggrappato a una parete rocciosa a 3.120 metri, raggiunto da un sentiero tra i pini. Il nome locale Taktsang significa «nido della tigre».',
+      },
+    },
+  },
+  {
+    id: 'male',
+    countryCode: 'MV',
+    timezone: 'Indian/Maldives',
+    latitude: 4.1755,
+    longitude: 73.5093,
+    image: commons('Male\' Hukuru Miskiy 1.jpg'),
+    credit: credit('Male\' Hukuru Miskiy 1.jpg'),
+    aliases: [
+      'ماليه', 'male', 'malé', 'maldives', 'المالديف', 'hukuru miskiy', 'مسجد هوكورو مسكي',
+      'friday mosque', 'المسجد القديم',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'ماليه',
+        landmark: 'مسجد هوكورو مسكي',
+        description:
+          'أقدم مسجد في ماليه، بُني في القرن السابع عشر من حجر مرجاني منحوت ونُقشت آيات قرآنية على سقفه الخشبي. مئذنته البيضاء تطل على سوق السمك.',
+      },
+      en: {
+        city: 'Malé',
+        landmark: 'Hukuru Miskiy',
+        description:
+          'The oldest mosque in Malé, built in the seventeenth century from carved coral stone, with Quranic verses carved into its wooden ceiling. Its white minaret stands over the fish market.',
+      },
+      de: {
+        city: 'Malé',
+        landmark: 'Hukuru Miskiy',
+        description:
+          'Die älteste Moschee von Malé, im 17. Jahrhundert aus behauenem Korallenstein errichtet, mit Koranversen in der Holzdecke. Ihr weißes Minarett steht über dem Fischmarkt.',
+      },
+      ru: {
+        city: 'Мале',
+        landmark: 'Мечеть Хукуру Миский',
+        description:
+          'Старейшая мечеть Мале, построенная в XVII веке из резного кораллового камня; на деревянном потолке вырезаны коранические строки. Белый минарет поднимается над рыбным рынком.',
+      },
+      it: {
+        city: 'Malé',
+        landmark: 'Hukuru Miskiy',
+        description:
+          'La più antica moschea di Malé, costruita nel Seicento in pietra corallina intagliata, con versetti coranici incisi nel soffitto di legno. Il minareto bianco sovrasta il mercato del pesce.',
+      },
+    },
+  },
+  {
+    id: 'yangon',
+    countryCode: 'MM',
+    timezone: 'Asia/Yangon',
+    latitude: 16.7988,
+    longitude: 96.1489,
+    image: commons('Shwedagon Zedi Daw Yangon 4.jpg'),
+    credit: credit('Shwedagon Zedi Daw Yangon 4.jpg'),
+    aliases: [
+      'يانغون', 'yangon', 'rangoon', 'myanmar', 'ميانمار', 'shwedagon', 'شويداغون',
+      'shwedagon pagoda', 'معبد شويداغون', 'naypyidaw', 'نايبيداو',
+    ],
+    copy: {
+      ar: {
+        city: 'يانغون',
+        landmark: 'معبد شويداغون',
+        description:
+          'معبد ذهبي مهيب على تل سينغوتارا، قمته مغطاة بألواح ذهبية وتعلوها أحجار كريمة، ويُعد أقدس معبد بوذي في ميانمار.',
+      },
+      en: {
+        city: 'Yangon',
+        landmark: 'Shwedagon Pagoda',
+        description:
+          'A golden pagoda on Singuttara Hill, its spire covered in gold plates and set with precious stones; it is the holiest Buddhist shrine in Myanmar.',
+      },
+      de: {
+        city: 'Yangon',
+        landmark: 'Shwedagon-Pagode',
+        description:
+          'Eine goldene Pagode auf dem Singuttara-Hügel, deren Turm mit Goldplatten verkleidet und mit Edelsteinen besetzt ist; sie gilt als heiligster buddhistischer Ort Myanmars.',
+      },
+      ru: {
+        city: 'Янгон',
+        landmark: 'Пагода Шведагон',
+        description:
+          'Золотая пагода на холме Сингутара: шпиль покрыт золотыми пластинами и украшен драгоценными камнями, это главная буддийская святыня Мьянмы.',
+      },
+      it: {
+        city: 'Yangon',
+        landmark: 'Pagoda Shwedagon',
+        description:
+          'Una pagoda dorata sulla collina di Singuttara, con la guglia rivestita d’oro e incrostata di pietre preziose: è il santuario buddista più sacro del Myanmar.',
+      },
+    },
+  },
+  {
+    id: 'vientiane',
+    countryCode: 'LA',
+    timezone: 'Asia/Vientiane',
+    latitude: 17.9763,
+    longitude: 102.635,
+    image: commons('Pha That Luang Sunrise Panorama BLS.jpg'),
+    credit: credit('Pha That Luang Sunrise Panorama BLS.jpg'),
+    aliases: [
+      'فيينتيان', 'vientiane', 'laos', 'لاوس', 'pha that luang', 'فاتات لوانغ', 'فا ذات لوانغ',
+      'that luang',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'فيينتيان',
+        landmark: 'فا ذات لوانغ',
+        description:
+          'ستوبا ذهبية ضخمة تُعد الرمز الوطني للاوس، قام أصلها في القرن السادس عشر وتحيط بها ساحة مغلقة وأديرة. قمتها المدببة مغطاة بالذهب.',
+      },
+      en: {
+        city: 'Vientiane',
+        landmark: 'Pha That Luang',
+        description:
+          'The great golden stupa that is Laos’ national symbol, first built in the sixteenth century and ringed by a cloister and monasteries. Its spire is covered in gold.',
+      },
+      de: {
+        city: 'Vientiane',
+        landmark: 'Pha That Luang',
+        description:
+          'Die große goldene Stupa, das Nationalsymbol von Laos, im 16. Jahrhundert begründet und von einem Kreuzgang und Klöstern umgeben. Ihre Spitze ist mit Gold verkleidet.',
+      },
+      ru: {
+        city: 'Вьентьян',
+        landmark: 'Пха Тхат Луанг',
+        description:
+          'Большая золотая ступа, национальный символ Лаоса, основанная в XVI веке и окружённая галереей и монастырями. Её шпиль покрыт золотом.',
+      },
+      it: {
+        city: 'Vientiane',
+        landmark: 'Pha That Luang',
+        description:
+          'La grande stupa dorata, simbolo nazionale del Laos, fondata nel Cinquecento e circondata da un chiostro e da monasteri. La guglia è rivestita d’oro.',
+      },
+    },
+  },
+  {
+    id: 'tsonjin-boldog',
+    countryCode: 'MN',
+    timezone: 'Asia/Ulaanbaatar',
+    latitude: 47.808,
+    longitude: 106.53,
+    image: commons('Genghis Khan Equestrian Statue, photo by Vaiz Ha.jpg'),
+    credit: credit('Genghis Khan Equestrian Statue, photo by Vaiz Ha.jpg'),
+    aliases: [
+      'تسونجين بولدوج', 'tsonjin boldog', 'mongolia', 'منغوليا', 'genghis khan', 'جنكيز خان',
+      'genghis khan statue', 'تمثال جنكيز خان', 'ulaanbaatar', 'أولان باتور',
+    ],
+    focus: '40% 50%',
+    copy: {
+      ar: {
+        city: 'تسونجين بولدوج',
+        landmark: 'تمثال جنكيز خان الفارس',
+        description:
+          'تمثال من الفولاذ المقاوم للصدأ لجنكيز خان على ظهر جواده، يبلغ ارتفاعه أربعين متراً ويقف على تلة في تسونجين بولدوج شرق أولان باتور.',
+      },
+      en: {
+        city: 'Tsonjin Boldog',
+        landmark: 'Genghis Khan Equestrian Statue',
+        description:
+          'A 40-metre stainless-steel statue of Genghis Khan on horseback, standing on a hill at Tsonjin Boldog east of Ulaanbaatar.',
+      },
+      de: {
+        city: 'Tsonjin Boldog',
+        landmark: 'Reiterstatue des Dschingis Khan',
+        description:
+          'Eine 40 Meter hohe Reiterstatue aus Edelstahl, die Dschingis Khan auf einem Hügel bei Tsonjin Boldog östlich von Ulaanbaatar zeigt.',
+      },
+      ru: {
+        city: 'Цонжин-Болдог',
+        landmark: 'Конная статуя Чингисхана',
+        description:
+          '40-метровая конная статуя Чингисхана из нержавеющей стали на холме в Цонжин-Болдоге к востоку от Улан-Батора.',
+      },
+      it: {
+        city: 'Tsonjin Boldog',
+        landmark: 'Statua equestre di Gengis Khan',
+        description:
+          'Una statua equestre di 40 metri in acciaio inox dedicata a Gengis Khan, su una collina a Tsonjin Boldog, a est di Ulan Bator.',
+      },
+    },
+  },
+  {
+    id: 'astana',
+    countryCode: 'KZ',
+    timezone: 'Asia/Almaty',
+    latitude: 51.1251,
+    longitude: 71.4317,
+    image: commons('Night at Esil District, Astana (P1190721).jpg'),
+    credit: credit('Night at Esil District, Astana (P1190721).jpg'),
+    aliases: [
+      'أستانا', 'astana', 'nur-sultan', 'nursultan', 'kazakhstan', 'كازاخستان', 'baiterek',
+      'بايتيريك', 'baiterek tower', 'برج بايتيريك',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'أستانا',
+        landmark: 'برج بايتيريك',
+        description:
+          'برج أبيض ارتفاعه سبعة وتسعون متراً في قلب أستانا، تحمله ساق متسعة وتعلوه كرة زجاجية ذهبية، وهو رمز العاصمة الكازاخية.',
+      },
+      en: {
+        city: 'Astana',
+        landmark: 'Baiterek Tower',
+        description:
+          'A 97-metre white tower in the heart of Astana, held up by a splayed leg and crowned with a golden glass sphere; it is the emblem of the Kazakh capital.',
+      },
+      de: {
+        city: 'Astana',
+        landmark: 'Baiterek-Turm',
+        description:
+          'Ein 97 Meter hoher weißer Turm im Zentrum von Astana, getragen von einem sich weitenden Schaft und gekrönt von einer goldenen Glaskugel; er gilt als Wahrzeichen der Hauptstadt.',
+      },
+      ru: {
+        city: 'Астана',
+        landmark: 'Башня Байтерек',
+        description:
+          'Белая башня высотой 97 метров в центре Астаны: её держит расширяющаяся опора, а венчает золотая стеклянная сфера. Это символ казахстанской столицы.',
+      },
+      it: {
+        city: 'Astana',
+        landmark: 'Torre Baiterek',
+        description:
+          'Una torre bianca di 97 metri nel cuore di Astana, sorretta da una gamba che si allarga e coronata da una sfera di vetro dorata: è l’emblema della capitale kazaka.',
+      },
+    },
+  },
+  {
+    id: 'samarkand',
+    countryCode: 'UZ',
+    timezone: 'Asia/Samarkand',
+    latitude: 39.6548,
+    longitude: 66.9757,
+    image: commons('Registan 01.jpg'),
+    credit: credit('Registan 01.jpg'),
+    aliases: [
+      'سمرقند', 'samarkand', 'samarqand', 'uzbekistan', 'أوزبكستان', 'registan', 'ريجستان',
+      'registan square', 'ساحة ريجستان', 'tashkent', 'طشقند',
+    ],
+    copy: {
+      ar: {
+        city: 'سمرقند',
+        landmark: 'ساحة ريجستان',
+        description:
+          'ثلاث مدارس إسلامية كُسيت واجهاتها بالقاشاني الفيروزي وتواجه ساحة واحدة، بُنيت بين القرنين الخامس عشر والسابع عشر، وهي قلب سمرقند التاريخي.',
+      },
+      en: {
+        city: 'Samarkand',
+        landmark: 'Registan Square',
+        description:
+          'Three madrasas faced in turquoise tile around a single square, built between the fifteenth and seventeenth centuries: the historic heart of Samarkand.',
+      },
+      de: {
+        city: 'Samarkand',
+        landmark: 'Registan',
+        description:
+          'Drei mit Türkisfliesen verkleidete Medresen um einen Platz, zwischen dem 15. und 17. Jahrhundert erbaut – das historische Herz von Samarkand.',
+      },
+      ru: {
+        city: 'Самарканд',
+        landmark: 'Площадь Регистан',
+        description:
+          'Три медресе в бирюзовых изразцах, выстроенные вокруг площади в XV–XVII веках, — историческое сердце Самарканда.',
+      },
+      it: {
+        city: 'Samarcanda',
+        landmark: 'Piazza Registan',
+        description:
+          'Tre madrase rivestite di piastrelle turchesi attorno a un’unica piazza, costruite tra Quattro e Seicento: il cuore storico di Samarcanda.',
+      },
+    },
+  },
+  {
+    id: 'tokmok',
+    countryCode: 'KG',
+    timezone: 'Asia/Bishkek',
+    latitude: 42.7464,
+    longitude: 75.2501,
+    image: commons('Burana Tower, Kyrgyzstan 01.jpg'),
+    credit: credit('Burana Tower, Kyrgyzstan 01.jpg'),
+    aliases: [
+      'توكموك', 'tokmok', 'kyrgyzstan', 'قيرغيزستان', 'burana', 'بورانا', 'burana tower',
+      'برج بورانا', 'bishkek', 'بيشكيك',
+    ],
+    copy: {
+      ar: {
+        city: 'توكموك',
+        landmark: 'برج بورانا',
+        description:
+          'مئذنة من الطوب تعود إلى القرن الحادي عشر وترتفع أربعة وعشرين متراً، وهي ما بقي من مدينة بلاساغون القديمة في وادي تشوي قرب توكموك.',
+      },
+      en: {
+        city: 'Tokmok',
+        landmark: 'Burana Tower',
+        description:
+          'An eleventh-century brick minaret 24 metres tall, the last survivor of the ancient city of Balasagun in the Chuy valley near Tokmok.',
+      },
+      de: {
+        city: 'Tokmok',
+        landmark: 'Burana-Turm',
+        description:
+          'Ein 24 Meter hohes Backsteinminarett aus dem 11. Jahrhundert, der letzte Rest der Stadt Balasagun im Tschüi-Tal bei Tokmok.',
+      },
+      ru: {
+        city: 'Токмок',
+        landmark: 'Башня Бурана',
+        description:
+          'Кирпичный минарет XI века высотой 24 метра — всё, что осталось от города Баласагун в Чуйской долине близ Токмока.',
+      },
+      it: {
+        city: 'Tokmok',
+        landmark: 'Torre Burana',
+        description:
+          'Un minareto di mattoni dell’XI secolo alto 24 metri, ultimo resto dell’antica Balasagun nella valle del Čüj, vicino a Tokmok.',
+      },
+    },
+  },
+  {
+    id: 'dushanbe',
+    countryCode: 'TJ',
+    timezone: 'Asia/Dushanbe',
+    latitude: 38.5358,
+    longitude: 68.779,
+    image: commons('Ismoili Somoni monument Dushanbe 2026.jpg'),
+    credit: credit('Ismoili Somoni monument Dushanbe 2026.jpg'),
+    aliases: [
+      'دوشنبه', 'dushanbe', 'tajikistan', 'طاجيكستان', 'ismoil somoni', 'إسماعيل ساماني',
+      'ismail samani', 'نصب إسماعيل ساماني', 'somoni monument',
+    ],
+    capital: true,
+    focus: '45% 50%',
+    copy: {
+      ar: {
+        city: 'دوشنبه',
+        landmark: 'نصب إسماعيل ساماني',
+        description:
+          'نصب مهيب لإسماعيل الساماني، مؤسس الدولة السامانية، يقف في وسط دوشنبه تحت قوس ذهبي يعلوه تاج.',
+      },
+      en: {
+        city: 'Dushanbe',
+        landmark: 'Ismoil Somoni Monument',
+        description:
+          'A towering monument to Ismoil Somoni, founder of the Samanid state, standing in central Dushanbe beneath a golden arch and crown.',
+      },
+      de: {
+        city: 'Duschanbe',
+        landmark: 'Ismoil-Somoni-Denkmal',
+        description:
+          'Ein hoch aufragendes Denkmal für Ismoil Somoni, den Begründer des Samanidenstaats, im Zentrum von Duschanbe unter einem goldenen Bogen.',
+      },
+      ru: {
+        city: 'Душанбе',
+        landmark: 'Монумент Исмоила Сомони',
+        description:
+          'Внушительный монумент Исмоилу Сомони, основателю Саманидского государства, в центре Душанбе под золотой аркой и короной.',
+      },
+      it: {
+        city: 'Dušanbe',
+        landmark: 'Monumento a Ismoil Somoni',
+        description:
+          'Un monumento imponente a Ismoil Somoni, fondatore dello Stato samanide, nel centro di Dušanbe sotto un arco dorato e una corona.',
+      },
+    },
+  },
+  {
+    id: 'ashgabat',
+    countryCode: 'TM',
+    timezone: 'Asia/Ashgabat',
+    latitude: 37.8826,
+    longitude: 58.3334,
+    image: commons('Rustam Minnikhanov\'s trip to Turkmenistan 2008 11.jpg'),
+    credit: credit('Rustam Minnikhanov\'s trip to Turkmenistan 2008 11.jpg'),
+    aliases: [
+      'عشق آباد', 'ashgabat', 'turkmenistan', 'تركمانستان', 'turkmenbasy ruhy mosque',
+      'turkmenbashi mosque', 'gypjak', 'غيبتشاك', 'جامع تركمانباشي', 'مسجد تركمانباشي',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'عشق آباد',
+        landmark: 'جامع تركمانباشي الروحي',
+        description:
+          'مسجد ضخم من الرخام الأبيض بقبة ذهبية وأربع مآذن في غيبجاك على أطراف عشق آباد، بناه تركمانباشي تخليداً لوالده، وهو أكبر مسجد في البلاد.',
+      },
+      en: {
+        city: 'Ashgabat',
+        landmark: 'Türkmenbaşy Ruhy Mosque',
+        description:
+          'A vast white-marble mosque with one golden dome and four minarets at Gypjak on the edge of Ashgabat, built by Türkmenbaşy in memory of his father; it is the largest mosque in the country.',
+      },
+      de: {
+        city: 'Aschgabat',
+        landmark: 'Türkmenbaşy-Ruhy-Moschee',
+        description:
+          'Eine gewaltige Moschee aus weißem Marmor mit einer goldenen Kuppel und vier Minaretten in Gypjak am Rand von Aschgabat, von Türkmenbaşy zum Gedenken an seinen Vater erbaut; sie ist die größte Moschee des Landes.',
+      },
+      ru: {
+        city: 'Ашхабад',
+        landmark: 'Мечеть Туркменбаши Рухы',
+        description:
+          'Огромная мечеть из белого мрамора с золотым куполом и четырьмя минаретами в Гипджаке на окраине Ашхабада, построенная Туркменбаши в память об отце; крупнейшая мечеть страны.',
+      },
+      it: {
+        city: 'Ašgabat',
+        landmark: 'Moschea Türkmenbaşy Ruhy',
+        description:
+          'Una vasta moschea di marmo bianco con una cupola dorata e quattro minareti a Gypjak, ai margini di Ašgabat, fatta costruire da Türkmenbaşy in memoria del padre: è la più grande del paese.',
+      },
+    },
+  },
+  {
+    id: 'baku',
+    countryCode: 'AZ',
+    timezone: 'Asia/Baku',
+    latitude: 40.3777,
+    longitude: 49.892,
+    image: commons('Flame towers from Baku boulevard.JPG'),
+    credit: credit('Flame towers from Baku boulevard.JPG'),
+    aliases: [
+      'باكو', 'baku', 'azerbaijan', 'أذربيجان', 'flame towers', 'أبراج اللهب', 'flame tower',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'باكو',
+        landmark: 'أبراج اللهب',
+        description:
+          'ثلاثة أبراج من الزجاج والفولاذ على تلة تطل على خليج باكو، تُضاء ليلاً بشرائط ضوء تشبه ألسنة اللهب.',
+      },
+      en: {
+        city: 'Baku',
+        landmark: 'Flame Towers',
+        description:
+          'Three towers of glass and steel on a hill above Baku bay, lit at night with flame-shaped bands of light.',
+      },
+      de: {
+        city: 'Baku',
+        landmark: 'Flammenstürme',
+        description:
+          'Drei Türme aus Glas und Stahl auf einem Hügel über der Bucht von Baku, nachts mit flammenartigen Lichtbändern erleuchtet.',
+      },
+      ru: {
+        city: 'Баку',
+        landmark: 'Пламенные башни',
+        description:
+          'Три башни из стекла и стали на холме над Бакинской бухтой; ночью их фасады светятся полосами, похожими на пламя.',
+      },
+      it: {
+        city: 'Baku',
+        landmark: 'Torri della Fiamma',
+        description:
+          'Tre torri di vetro e acciaio su una collina sopra la baia di Baku, illuminate di notte da fasce di luce a forma di fiamma.',
+      },
+    },
+  },
+  {
+    id: 'yerevan',
+    countryCode: 'AM',
+    timezone: 'Asia/Yerevan',
+    latitude: 40.19,
+    longitude: 44.5155,
+    image: commons('Cascade, Yerevan, July 2023 17 27 24 039000.jpeg'),
+    credit: credit('Cascade, Yerevan, July 2023 17 27 24 039000.jpeg'),
+    aliases: [
+      'يريفان', 'yerevan', 'armenia', 'أرمينيا', 'cascade', 'كاسكيد', 'cascade complex',
+      'مجمع كاسكيد',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'يريفان',
+        landmark: 'مجمع كاسكيد',
+        description:
+          'خمس مصاطب من الحدائق والنوافير والتماثيل تتسلق تلة في وسط يريفان على امتداد ثلاثمئة متر، ومن أعلاها يمتد النظر إلى جبل أرارات.',
+      },
+      en: {
+        city: 'Yerevan',
+        landmark: 'Cascade Complex',
+        description:
+          'Five terraces of gardens, fountains and sculptures climb a hill in central Yerevan for 302 metres; from the top the view runs over the city to Mount Ararat.',
+      },
+      de: {
+        city: 'Jerewan',
+        landmark: 'Kaskadenkomplex',
+        description:
+          'Fünf Terrassen mit Gärten, Brunnen und Skulpturen steigen 302 Meter den Hügel im Zentrum von Jerewan hinauf; oben reicht der Blick über die Stadt zum Ararat.',
+      },
+      ru: {
+        city: 'Ереван',
+        landmark: 'Каскад',
+        description:
+          'Пять террас с садами, фонтанами и скульптурами поднимаются на 302 метра по холму в центре Еревана; сверху открывается вид на город и Арарат.',
+      },
+      it: {
+        city: 'Erevan',
+        landmark: 'Complesso del Cascade',
+        description:
+          'Cinque terrazze di giardini, fontane e sculture salgono per 302 metri su una collina nel centro di Erevan; dall’alto lo sguardo corre sulla città fino all’Ararat.',
+      },
+    },
+  },
+  {
+    id: 'tbilisi',
+    countryCode: 'GE',
+    timezone: 'Asia/Tbilisi',
+    latitude: 41.6972,
+    longitude: 44.8162,
+    image: commons('Samebao0000.jpg'),
+    credit: credit('Samebao0000.jpg'),
+    aliases: [
+      'تبليسي', 'tbilisi', 'georgia', 'جورجيا', 'sameba', 'ساميبا', 'holy trinity cathedral',
+      'كاتدرائية الثالوث الأقدس', 'trinity cathedral',
+    ],
+    capital: true,
+    focus: '60% 35%',
+    copy: {
+      ar: {
+        city: 'تبليسي',
+        landmark: 'كاتدرائية الثالوث الأقدس (ساميبا)',
+        description:
+          'أكبر كاتدرائية في جورجيا، بُنيت بين عامي ١٩٩٥ و٢٠٠٤ على تلة في تبليسي، وقبتها الذهبية تُرى من كل أحياء المدينة.',
+      },
+      en: {
+        city: 'Tbilisi',
+        landmark: 'Holy Trinity Cathedral (Sameba)',
+        description:
+          'The largest cathedral in Georgia, built between 1995 and 2004 on a hill in Tbilisi, its gilded dome visible from every quarter of the city.',
+      },
+      de: {
+        city: 'Tiflis',
+        landmark: 'Kathedrale der Heiligen Dreifaltigkeit (Sameba)',
+        description:
+          'Die größte Kathedrale Georgiens, 1995 bis 2004 auf einem Hügel in Tiflis erbaut; ihre vergoldete Kuppel ist aus allen Vierteln der Stadt zu sehen.',
+      },
+      ru: {
+        city: 'Тбилиси',
+        landmark: 'Собор Святой Троицы (Самеба)',
+        description:
+          'Крупнейший собор Грузии, построенный в 1995–2004 годах на холме в Тбилиси; его золочёный купол виден из всех районов города.',
+      },
+      it: {
+        city: 'Tbilisi',
+        landmark: 'Cattedrale della Santissima Trinità (Sameba)',
+        description:
+          'La più grande cattedrale della Georgia, costruita tra il 1995 e il 2004 su una collina di Tbilisi: la cupola dorata si vede da ogni quartiere.',
+      },
+    },
+  },
+  {
+    id: 'kyiv',
+    countryCode: 'UA',
+    timezone: 'Europe/Kyiv',
+    latitude: 50.4529,
+    longitude: 30.5143,
+    image: commons('80-391-0151 Kyiv St.Sophia\'s Cathedral RB 18 2.jpg'),
+    credit: credit('80-391-0151 Kyiv St.Sophia\'s Cathedral RB 18 2.jpg'),
+    aliases: [
+      'كييف', 'kyiv', 'kiev', 'ukraine', 'أوكرانيا', 'saint sophia', 'القديسة صوفيا',
+      'saint sophia cathedral', 'كاتدرائية القديسة صوفيا',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'كييف',
+        landmark: 'كاتدرائية القديسة صوفيا',
+        description:
+          'كاتدرائية من القرن الحادي عشر في قلب كييف مع برج جرسها الأزرق المائل، وتحفظ في داخلها أكبر مجموعة باقية من فسيفساء وجداريات ذلك القرن في أوكرانيا.',
+      },
+      en: {
+        city: 'Kyiv',
+        landmark: 'Saint Sophia Cathedral',
+        description:
+          'An eleventh-century cathedral in the heart of Kyiv with its leaning blue bell tower; inside it keeps the largest surviving set of eleventh-century mosaics and frescoes in Ukraine.',
+      },
+      de: {
+        city: 'Kyjiw',
+        landmark: 'Sophienkathedrale',
+        description:
+          'Eine Kathedrale aus dem 11. Jahrhundert im Herzen Kyjiws mit ihrem schiefen blauen Glockenturm; innen bewahrt sie das größte erhaltene Mosaik- und Freskenensemble der Ukraine aus dieser Zeit.',
+      },
+      ru: {
+        city: 'Киев',
+        landmark: 'Софийский собор',
+        description:
+          'Собор XI века в центре Киева с наклонившейся синей колокольней; внутри сохранился крупнейший в Украине ансамбль мозаик и фресок XI века.',
+      },
+      it: {
+        city: 'Kyiv',
+        landmark: 'Cattedrale di Santa Sofia',
+        description:
+          'Una cattedrale dell’XI secolo nel cuore di Kyiv con il campanile blu pendente; all’interno conserva il più ampio ciclo di mosaici e affreschi dell’XI secolo in Ucraina.',
+      },
+    },
+  },
+  {
+    id: 'bran',
+    countryCode: 'RO',
+    timezone: 'Europe/Bucharest',
+    latitude: 45.5151,
+    longitude: 25.3672,
+    image: commons('Bran Castle (Toerzburg or Castelul Bran)-05ASD.jpg'),
+    credit: credit('Bran Castle (Toerzburg or Castelul Bran)-05ASD.jpg'),
+    aliases: [
+      'بران', 'bran', 'romania', 'رومانيا', 'bran castle', 'قلعة بران', 'dracula castle',
+      'قلعة دراكولا', 'bucharest', 'بوخارست',
+    ],
+    copy: {
+      ar: {
+        city: 'بران',
+        landmark: 'قلعة بران',
+        description:
+          'قلعة على صخرة عند ممر جبلي بين ترانسلفانيا ووالاشيا، بدأ بناؤها في القرن الرابع عشر، وربطتها الحكايات بدراكولا.',
+      },
+      en: {
+        city: 'Bran',
+        landmark: 'Bran Castle',
+        description:
+          'A castle on a rock at a mountain pass between Transylvania and Wallachia, begun in the fourteenth century and tied in legend to Dracula.',
+      },
+      de: {
+        city: 'Bran',
+        landmark: 'Schloss Bran',
+        description:
+          'Eine Burg auf einem Felsen an einem Gebirgspass zwischen Siebenbürgen und der Walachei, im 14. Jahrhundert begonnen und der Legende nach mit Dracula verbunden.',
+      },
+      ru: {
+        city: 'Бран',
+        landmark: 'Замок Бран',
+        description:
+          'Замок на скале у горного перевала между Трансильванией и Валахией, заложенный в XIV веке и связанный легендой с Дракулой.',
+      },
+      it: {
+        city: 'Bran',
+        landmark: 'Castello di Bran',
+        description:
+          'Un castello su una roccia a un passo di montagna tra Transilvania e Valacchia, iniziato nel Trecento e legato dalla leggenda a Dracula.',
+      },
+    },
+  },
+  {
+    id: 'sofia',
+    countryCode: 'BG',
+    timezone: 'Europe/Sofia',
+    latitude: 42.6961,
+    longitude: 23.3333,
+    image: commons('Saint Alexander Nevsky Cathedral, Façade from Northeast.jpg'),
+    credit: credit('Saint Alexander Nevsky Cathedral, Façade from Northeast.jpg'),
+    aliases: [
+      'صوفيا', 'sofia', 'bulgaria', 'بلغاريا', 'alexander nevsky', 'ألكسندر نيفسكي',
+      'alexander nevsky cathedral', 'كاتدرائية ألكسندر نيفسكي',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'صوفيا',
+        landmark: 'كاتدرائية ألكسندر نيفسكي',
+        description:
+          'كاتدرائية أرثوذكسية بقباب ذهبية وقبة مركزية خضراء، بُنيت بين عامي ١٨٨٢ و١٩١٢ تكريماً للجنود الروس الذين سقطوا في حرب ١٨٧٧ و١٨٧٨.',
+      },
+      en: {
+        city: 'Sofia',
+        landmark: 'Alexander Nevsky Cathedral',
+        description:
+          'An Orthodox cathedral of golden domes and a great green cupola, built between 1882 and 1912 to honour the Russian soldiers who fell in the war of 1877–78.',
+      },
+      de: {
+        city: 'Sofia',
+        landmark: 'Alexander-Newski-Kathedrale',
+        description:
+          'Eine orthodoxe Kathedrale mit goldenen Kuppeln und großer grüner Mittelkuppel, 1882 bis 1912 zum Gedenken an die russischen Gefallenen des Krieges 1877/78 erbaut.',
+      },
+      ru: {
+        city: 'София',
+        landmark: 'Собор Александра Невского',
+        description:
+          'Православный собор с золотыми куполами и большой зелёной главой, построенный в 1882–1912 годах в память о русских воинах, павших в войне 1877–1878 годов.',
+      },
+      it: {
+        city: 'Sofia',
+        landmark: 'Cattedrale di Aleksandr Nevskij',
+        description:
+          'Una cattedrale ortodossa dalle cupole dorate e dalla grande cupola verde, costruita tra il 1882 e il 1912 in memoria dei soldati russi caduti nella guerra del 1877-78.',
+      },
+    },
+  },
+  {
+    id: 'belgrade',
+    countryCode: 'RS',
+    timezone: 'Europe/Belgrade',
+    latitude: 44.804,
+    longitude: 20.4651,
+    image: commons('P037152-661920 - Belgrade fortress stand at the downtown of Belgrade.jpg'),
+    credit: credit('P037152-661920 - Belgrade fortress stand at the downtown of Belgrade.jpg'),
+    aliases: [
+      'بلغراد', 'belgrade', 'beograd', 'serbia', 'صربيا', 'kalemegdan', 'كالميغدان',
+      'belgrade fortress', 'قلعة بلغراد',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'بلغراد',
+        landmark: 'قلعة بلغراد (كالميغدان)',
+        description:
+          'قلعة على الحرف الذي يلتقي فيه نهر سافا بالدانوب، وقد صار متنزه كالميغدان اليوم ممراً للمشاة ومطلّاً على قلب بلغراد.',
+      },
+      en: {
+        city: 'Belgrade',
+        landmark: 'Belgrade Fortress (Kalemegdan)',
+        description:
+          'A fortress on the ridge where the Sava meets the Danube; its Kalemegdan park is now the promenade and lookout of central Belgrade.',
+      },
+      de: {
+        city: 'Belgrad',
+        landmark: 'Belgrader Festung (Kalemegdan)',
+        description:
+          'Eine Festung auf dem Grat, an dem die Save in die Donau mündet; ihr Kalemegdan-Park ist heute Flaniermeile und Aussichtspunkt im Zentrum Belgrads.',
+      },
+      ru: {
+        city: 'Белград',
+        landmark: 'Белградская крепость (Калемегдан)',
+        description:
+          'Крепость на гребне у впадения Савы в Дунай; её парк Калемегдан стал прогулочной зоной и смотровой площадкой центра Белграда.',
+      },
+      it: {
+        city: 'Belgrado',
+        landmark: 'Fortezza di Belgrado (Kalemegdan)',
+        description:
+          'Una fortezza sul crinale dove la Sava incontra il Danubio; il suo parco Kalemegdan è oggi il passeggio e il belvedere del centro di Belgrado.',
       },
     },
   },
