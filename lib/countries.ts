@@ -81,6 +81,8 @@ export const credit = (file: string): PhotoCredit => {
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
   EG: { ar: 'مصر', en: 'Egypt', de: 'Ägypten', ru: 'Египет', it: 'Egitto' },
+  DZ: { ar: 'الجزائر', en: 'Algeria', de: 'Algerien', ru: 'Алжир', it: 'Algeria' },
+  SD: { ar: 'السودان', en: 'Sudan', de: 'Sudan', ru: 'Судан', it: 'Sudan' },
   AE: { ar: 'الإمارات', en: 'United Arab Emirates', de: 'Vereinigte Arabische Emirate', ru: 'ОАЭ', it: 'Emirati Arabi Uniti' },
   SA: { ar: 'السعودية', en: 'Saudi Arabia', de: 'Saudi-Arabien', ru: 'Саудовская Аравия', it: 'Arabia Saudita' },
   QA: { ar: 'قطر', en: 'Qatar', de: 'Katar', ru: 'Катар', it: 'Qatar' },
@@ -3451,6 +3453,9 @@ export const COUNTRIES: CountryScene[] = [
       'جريندافيك', 'grindavik', 'grindavík', 'iceland',
       'آيسلندا', 'blue lagoon', 'البحيرة الزرقاء', 'bláa lónið',
       'blaa lonid', 'reykjanes',
+      // Reykjavík has no scene of its own; the Blue Lagoon is the curated view
+      // most searches for the Icelandic capital expect.
+      'reykjavik', 'reykjavík', 'ريكيافيك', 'höfuðborgarsvæðið',
     ],
     focus: '50% 55%',
     theme: 'sea',
@@ -3929,6 +3934,7 @@ export const COUNTRIES: CountryScene[] = [
       'القدس', 'jerusalem', 'palestine', 'فلسطين',
       'dome of the rock', 'قبة الصخرة', 'المسجد الأقصى', 'al-aqsa',
       'haram al-sharif', 'الحرم القدسي',
+      'hebron', 'الخليل', 'خليل الرحمن',
     ],
     focus: '50% 45%',
     theme: 'sunset',
@@ -4104,6 +4110,147 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Moschea Badshahi',
         description:
           'Una moschea in arenaria rossa costruita da Aurangzeb nel 1673, che accoglie oltre cinquantamila fedeli. Fronteggia il Forte di Lahore e segue il modello della Jama Masjid di Delhi.',
+      },
+    },
+  },
+  {
+    id: 'aswan',
+    countryCode: 'EG',
+    timezone: 'Africa/Cairo',
+    latitude: 24.0243,
+    longitude: 32.8843,
+    image: commons('Philae Temple Complex, Agilkia Island, Aswan, AG, EGY (48027052466).jpg'),
+    credit: credit('Philae Temple Complex, Agilkia Island, Aswan, AG, EGY (48027052466).jpg'),
+    aliases: [
+      'أسوان', 'aswan', 'assuan', 'egypt', 'مصر',
+      'philae', 'فيلة', 'معبد فيلة', 'agilkia', 'أجليكا',
+    ],
+    focus: '50% 55%',
+    theme: 'sunset',
+    copy: {
+      ar: {
+        city: 'أسوان',
+        landmark: 'معبد فيلة',
+        description:
+          'معبد إيزيس على جزيرة أجليكا، أنقذته اليونسكو في السبعينيات من غرق بحيرة ناصر بعد أن كان على جزيرة فيلة. بدأه البطالمة وأكملته روما، ولا يزال الوصول إليه بالقارب وسط النيل.',
+      },
+      en: {
+        city: 'Aswan',
+        landmark: 'Philae Temple',
+        description:
+          'The temple of Isis on Agilkia Island, moved stone by stone in the 1970s before Lake Nasser drowned its old island. Begun under the Ptolemies and finished under Rome, it is still reached by boat across the Nile.',
+      },
+      de: {
+        city: 'Assuan',
+        landmark: 'Philae-Tempel',
+        description:
+          'Der Isis-Tempel auf der Insel Agilkia, den die UNESCO in den 1970er-Jahren vor dem Nassersee rettete. Unter den Ptolemäern begonnen und von Rom vollendet, erreicht man ihn noch immer per Boot über den Nil.',
+      },
+      ru: {
+        city: 'Асуан',
+        landmark: 'Храм Филе',
+        description:
+          'Храм Исиды на острове Агилкия, который ЮНЕСКО спасла от затопления водохранилищем Насер в 1970-е годы. Начатый при Птолемеях и достроенный Римом, он до сих пор доступен только по Нилу на лодке.',
+      },
+      it: {
+        city: 'Assuan',
+        landmark: 'Tempio di File',
+        description:
+          'Il tempio di Iside sull’isola di Agilkia, salvato dall’UNESCO negli anni Settanta prima che il lago Nasser sommergesse l’isola originale. Iniziato sotto i Tolomei e completato da Roma, si raggiunge ancora in barca sul Nilo.',
+      },
+    },
+  },
+  {
+    id: 'algiers',
+    countryCode: 'DZ',
+    timezone: 'Africa/Algiers',
+    latitude: 36.7459,
+    longitude: 3.0694,
+    image: commons('Martyrs Memorial. Algiers, Algeria.jpg'),
+    credit: credit('Martyrs Memorial. Algiers, Algeria.jpg'),
+    aliases: [
+      'الجزائر', 'الجزائر العاصمة', 'algiers', 'alger', 'algeria',
+      'martyrs memorial', 'مقام الشهيد', 'maqam echahid', 'el madania',
+    ],
+    focus: '50% 45%',
+    theme: 'sea',
+    copy: {
+      ar: {
+        city: 'الجزائر',
+        landmark: 'مقام الشهيد',
+        description:
+          'نصب بارتفاع ٩٢ متراً على تلال المنادية يطل على خليج الجزائر، شُيّد عام ١٩٨٢ لذكرى شهداء حرب التحرير، وتلتقي أوراقه الثلاث صاعدة كما تنمو النخيل.',
+      },
+      en: {
+        city: 'Algiers',
+        landmark: 'The Martyrs’ Memorial',
+        description:
+          'A 92-metre monument on the hills of El Madania above the bay, raised in 1982 for the martyrs of the independence war. Its three leaves meet as they rise, like palms growing upward.',
+      },
+      de: {
+        city: 'Algier',
+        landmark: 'Märtyrerdenkmal',
+        description:
+          'Ein 92 Meter hohes Denkmal auf den Hügeln von El Madania über der Bucht, 1982 für die Märtyrer des Unabhängigkeitskrieges errichtet. Seine drei Blätter steigen wie Palmen empor.',
+      },
+      ru: {
+        city: 'Алжир',
+        landmark: 'Мемориал мучеников',
+        description:
+          '92-метровый монумент на холмах Эль-Мадания над бухтой, воздвигнутый в 1982 году в память о погибших в войне за независимость. Три его «листа» возносятся вверх, как пальмы.',
+      },
+      it: {
+        city: 'Algeri',
+        landmark: 'Memoriale dei Martiri',
+        description:
+          'Un monumento di 92 metri sulle colline di El Madania sopra la baia, eretto nel 1982 per i martiri della guerra d’indipendenza. Le sue tre foglie salgono come palme.',
+      },
+    },
+  },
+  {
+    id: 'khartoum',
+    countryCode: 'SD',
+    timezone: 'Africa/Khartoum',
+    latitude: 15.6063,
+    longitude: 32.5322,
+    image: commons('Corinthia Burj AlFatih Hotel (33232862443).jpg'),
+    credit: credit('Corinthia Burj AlFatih Hotel (33232862443).jpg'),
+    aliases: [
+      'الخرطوم', 'khartoum', 'sudan', 'السودان', 'burj al fateh',
+      'burj al-fatih', 'برج الفاتح', 'corinthia', 'المقرن', 'al mogran',
+    ],
+    focus: '50% 50%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'الخرطوم',
+        landmark: 'برج الفاتح',
+        description:
+          'فندق على ضفة النيل الأزرق عند نقطة التقاء النيلين، بارتفاع ١٣٠ متراً وبشكل شراع يذكّر بسفن النيل. أهدته ليبيا للسودان وافتُتح عام ٢٠٠٨، وأصبح أشهر معالم العاصمة.',
+      },
+      en: {
+        city: 'Khartoum',
+        landmark: 'Burj Al-Fateh',
+        description:
+          'A 130-metre hotel on the Blue Nile where the two Niles meet, shaped like a lateen sail on the river. A gift from Libya opened in 2008, it has become the mark of the capital.',
+      },
+      de: {
+        city: 'Khartum',
+        landmark: 'Burj al-Fatih',
+        description:
+          'Ein 130 Meter hohes Hotel am Blauen Nil an der Stelle, wo sich beide Nile treffen, geformt wie ein Segel. Ein Geschenk Libyens, 2008 eröffnet, ist es heute das Wahrzeichen der Hauptstadt.',
+      },
+      ru: {
+        city: 'Хартум',
+        landmark: 'Бурдж аль-Фатих',
+        description:
+          '130-метровый отель на Голубом Ниле у места слияния двух рек, по форме напоминающий парус. Подарок Ливии, открытый в 2008 году, стал главным ориентиром столицы.',
+      },
+      it: {
+        city: 'Khartum',
+        landmark: 'Burj Al-Fateh',
+        description:
+          'Un albergo di 130 metri sul Nilo Azzurro nel punto in cui i due Nili si incontrano, a forma di vela. Dono della Libia inaugurato nel 2008, è oggi il simbolo della capitale.',
       },
     },
   },

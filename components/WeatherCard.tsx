@@ -6,12 +6,20 @@ import { describeCodeLabel, localClock, timeLabel, windDirectionLabel } from '@/
 import WeatherIcon from './WeatherIcon';
 import { useLang } from './LangProvider';
 
+type SceneOption = { id: string; label: string };
+
 type Props = {
   place: Place;
-  landmark: Landmark | { landmark: string; description: string; credit: PhotoCredit };
+  landmark:
+    | Landmark
+    | { landmark: string; description: string; credit: PhotoCredit; country?: string };
   weather: WeatherBundle;
   /** The landmark blurb only appears in the expanded sheet and on desktop. */
   showDescription?: boolean;
+  /** Every curated view of this city; more than one adds a switch next to the name. */
+  scenes?: SceneOption[];
+  activeSceneId?: string | null;
+  onSelectScene?: (id: string) => void;
 };
 
 function Metric({
@@ -72,13 +80,21 @@ const icons = {
   ),
 };
 
-export default function WeatherCard({ place, landmark, weather, showDescription = false }: Props) {
+export default function WeatherCard({
+  place,
+  landmark,
+  weather,
+  showDescription = false,
+  scenes = [],
+  activeSceneId = null,
+  onSelectScene,
+}: Props) {
   const { lang, t } = useLang();
   const { current, daily, timezone } = weather;
   const conditionText = describeCodeLabel(lang, current.code);
   const today = daily[0];
   const rainChance = Math.round(today?.precipitationProbability ?? 0);
-  const region = [place.country, place.admin1]
+  const region = [landmark.country || place.country, place.admin1]
     .filter((value): value is string => Boolean(value))
     .filter((value) => normalizeArabic(value) !== normalizeArabic(place.name))
     .join(' · ');
@@ -97,7 +113,34 @@ export default function WeatherCard({ place, landmark, weather, showDescription 
           <h1 className="font-display text-[2.125rem] font-extrabold leading-tight text-shadow-cinema sm:text-[2.5rem]">
             {place.name}
           </h1>
-          <p className="mt-0.5 truncate text-xs font-semibold text-brand">{landmark.landmark}</p>
+          <div className="mt-0.5 flex min-w-0 items-center gap-2">
+            <p className="min-w-0 truncate text-xs font-semibold text-brand">{landmark.landmark}</p>
+            {scenes.length > 1 && onSelectScene && (
+              <div
+                role="tablist"
+                aria-label={t('scenesLabel')}
+                className="flex shrink-0 items-center gap-1"
+              >
+                {scenes.map((option) => {
+                  const active = option.id === activeSceneId;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      aria-label={option.label}
+                      title={option.label}
+                      onClick={() => onSelectScene(option.id)}
+                      className={`h-1.5 rounded-full transition-all ${
+                        active ? 'w-4 bg-brand' : 'w-1.5 bg-cream/35 hover:bg-cream/60'
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="shrink-0 text-end">
@@ -105,8 +148,12 @@ export default function WeatherCard({ place, landmark, weather, showDescription 
           <p className="text-sm font-semibold text-white/85" dir="ltr">
             {localClock(timezone, lang)}
           </p>
+          {/* Each time is isolated, so «٠٦:٢٩ ص» keeps its marker inside the run
+              and the pair stays in sunrise-then-sunset order in RTL too. */}
           <p className="mt-0.5 text-[10px] text-cream/45" dir="ltr">
-            {timeLabel(weather.sunrise, lang)} · {timeLabel(weather.sunset, lang)}
+            <span className="inline-block [unicode-bidi:isolate]">{timeLabel(weather.sunrise, lang)}</span>
+            <span aria-hidden> · </span>
+            <span className="inline-block [unicode-bidi:isolate]">{timeLabel(weather.sunset, lang)}</span>
           </p>
         </div>
       </div>

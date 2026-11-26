@@ -165,26 +165,103 @@ const normalized = LANDMARKS.map((item) => {
   };
 });
 
+function scoreKey(key: string, q: string): number {
+  if (key === q) return 100;
+  if (q.length >= 3 && (key.startsWith(q) || q.startsWith(key))) return 70;
+  if (q.length >= 4 && (key.includes(q) || q.includes(key))) return 50;
+  return 0;
+}
+
+/**
+ * Every scene that matches the query equally well, in catalogue order. A city with
+ * two curated views (Jerusalem, Doha) therefore answers with both.
+ */
+export function findLandmarks(query: string): Landmark[] {
+  const q = normalizeArabic(query);
+  if (!q) return [];
+
+  const hits: { item: Landmark; score: number }[] = [];
+  let best = 0;
+  for (const { item, keys } of normalized) {
+    let score = 0;
+    for (const key of keys) score = Math.max(score, scoreKey(key, q));
+    if (!score) continue;
+    hits.push({ item, score });
+    best = Math.max(best, score);
+  }
+  return hits.filter((hit) => hit.score === best).map((hit) => hit.item);
+}
+
 /** Finds the curated backdrop that best matches a searched city. */
 export function findLandmark(query: string): Landmark | null {
-  const q = normalizeArabic(query);
-  if (!q) return null;
+  return findLandmarks(query)[0] ?? null;
+}
 
-  let best: { item: Landmark; score: number } | null = null;
+export function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
+  const rad = (deg: number) => (deg * Math.PI) / 180;
+  const dLat = rad(bLat - aLat);
+  const dLon = rad(bLon - aLon);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+}
 
-  for (const { item, keys } of normalized) {
-    for (const key of keys) {
-      let score = 0;
-      if (key === q) score = 100;
-      else if (q.length >= 3 && (key.startsWith(q) || q.startsWith(key))) score = 70;
-      else if (q.length >= 4 && (key.includes(q) || q.includes(key))) score = 50;
-      // Ties go to the later entry, so a newly curated scene supersedes an older
-      // one for the same city (Doha's Museum of Islamic Art over the West Bay view).
-      if (score && (!best || score >= best.score)) best = { item, score };
+/** How far a curated scene may sit from a geocoded city and still represent it. */
+const SCENE_RADIUS_KM = 60;
+/** A name shared across a border ("Jerusalem") still needs the scene to be nearby. */
+const SHARED_NAME_RADIUS_KM = 120;
+/** Two scenes closer than this are views of the same city. */
+const SAME_CITY_KM = 15;
+
+function nearestLandmark(place: Place): Landmark | null {
+  let best: { item: Landmark; km: number } | null = null;
+  for (const item of LANDMARKS) {
+    if (place.countryCode && item.countryCode !== place.countryCode) continue;
+    const km = distanceKm(place.latitude, place.longitude, item.latitude, item.longitude);
+    if (km <= SCENE_RADIUS_KM && (!best || km < best.km)) best = { item, km };
+  }
+  return best?.item ?? null;
+}
+
+/**
+ * Scene for a geocoded place. The name is matched first, but a name that is shared
+ * by two countries ("Jerusalem") resolves to the scene in the place's own country,
+ * or failing that to the nearest scene of that name.
+ */
+export function landmarkForPlace(place: Place | null): Landmark | null {
+  if (!place) return null;
+
+  const named = findLandmarks(place.name);
+  const candidates = named.length ? named : place.admin1 ? findLandmarks(place.admin1) : [];
+
+  if (candidates.length) {
+    const local = candidates.find(
+      (item) => !place.countryCode || item.countryCode === place.countryCode
+    );
+    if (local) return local;
+
+    let nearest: { item: Landmark; km: number } | null = null;
+    for (const item of candidates) {
+      const km = distanceKm(place.latitude, place.longitude, item.latitude, item.longitude);
+      if (!nearest || km < nearest.km) nearest = { item, km };
     }
+    // Paris, Texas must not borrow the Eiffel Tower.
+    return nearest && nearest.km <= SHARED_NAME_RADIUS_KM ? nearest.item : null;
   }
 
-  return best?.item ?? null;
+  return nearestLandmark(place);
+}
+
+/** All curated scenes of the same city, primary first, so both views stay reachable. */
+export function scenesForPlace(place: Place, primary: Landmark | null): Landmark[] {
+  const near = (item: Landmark) =>
+    distanceKm(place.latitude, place.longitude, item.latitude, item.longitude) <= SAME_CITY_KM;
+
+  const others = LANDMARKS.filter(
+    (item) => item.id !== primary?.id && near(item)
+  );
+  return primary ? [primary, ...others] : others;
 }
 
 export function landmarkById(id: string): Landmark | null {

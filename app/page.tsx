@@ -13,9 +13,11 @@ import {
   fallbackSceneImage,
   fallbackSceneText,
   findLandmark,
+  landmarkForPlace,
   localizedText,
   placeFromLandmark,
   sceneImageSrc,
+  scenesForPlace,
 } from '@/lib/landmarks';
 import type { Landmark, Place, WeatherBundle } from '@/lib/types';
 import { themeFor } from '@/lib/theme';
@@ -55,48 +57,14 @@ async function fetchWeather(place: Place): Promise<WeatherBundle> {
   return data as WeatherBundle;
 }
 
-function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
-  const rad = (value: number) => (value * Math.PI) / 180;
-  const dLat = rad(bLat - aLat);
-  const dLon = rad(bLon - aLon);
-  const h =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.sin(dLon / 2) ** 2;
-  return 2 * 6371 * Math.asin(Math.sqrt(h));
-}
-
-/** Curated scene whose own coordinates sit under the geocoded place. */
-function nearestLandmark(place: Place): Landmark | null {
-  let best: { item: Landmark; km: number } | null = null;
-  for (const item of LANDMARKS) {
-    if (item.countryCode !== place.countryCode) continue;
-    const km = distanceKm(place.latitude, place.longitude, item.latitude, item.longitude);
-    if (km <= 20 && (!best || km < best.km)) best = { item, km };
-  }
-  return best?.item ?? null;
-}
-
-function landmarkFor(place: Place | null): Landmark | null {
-  if (!place) return null;
-  const named = findLandmark(place.name) ?? (place.admin1 ? findLandmark(place.admin1) : null);
-  // Paris, Texas must not borrow the Eiffel Tower.
-  if (named) {
-    if (place.countryCode && named.countryCode && place.countryCode !== named.countryCode) return null;
-    return named;
-  }
-  // A geocoder translating the name ("روما", "Rom") still lands on the archive
-  // scene when the coordinates match the curated city.
-  return nearestLandmark(place);
-}
-
-function sceneFor(place: Place | null, lang: Lang) {
-  const item = landmarkFor(place);
+function sceneFor(place: Place | null, lang: Lang, item: Landmark | null) {
   if (!item) {
     return { ...fallbackSceneImage(place?.latitude), ...fallbackSceneText(lang) };
   }
   const text = localizedText(item, lang);
   return {
     landmark: text.landmark,
+    country: text.country,
     description: text.description,
     image: item.image,
     credit: item.credit,
@@ -130,8 +98,16 @@ export default function HomePage() {
   const landingRef = useRef<HTMLElement | null>(null);
   placeRef.current = place;
 
-  const scene = useMemo(() => sceneFor(place, lang), [place, lang]);
-  const theme = useMemo(() => themeFor(landmarkFor(place) ?? place), [place]);
+  // A city can hold several curated views (Jerusalem, Doha); the anchor is the one
+  // the search resolved to, and `curatedId` lets the card switch between them.
+  const anchor = useMemo(() => landmarkForPlace(place), [place]);
+  const scenes = useMemo(() => (place ? scenesForPlace(place, anchor) : []), [place, anchor]);
+  const activeScene = useMemo(
+    () => scenes.find((item) => item.id === curatedId) ?? anchor ?? null,
+    [scenes, curatedId, anchor]
+  );
+  const scene = useMemo(() => sceneFor(place, lang, activeScene), [place, lang, activeScene]);
+  const theme = useMemo(() => themeFor(activeScene ?? place), [activeScene, place]);
   const { session, loading: authLoading } = useAuth();
   const deepLinkDone = useRef(false);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -187,7 +163,7 @@ export default function HomePage() {
 
       try {
         const curated = payload.place
-          ? landmarkFor(payload.place)
+          ? landmarkForPlace(payload.place)
           : findLandmark(payload.text);
         let resolved = payload.place ?? (curated ? placeFromLandmark(curated, lang) : null);
 
@@ -204,13 +180,13 @@ export default function HomePage() {
 
         // A geocoded name ("Chichén Itzá", "Giza") keeps the archive backdrop, so
         // the card should carry the curated, translated name of that scene.
-        const curatedMatch = curated ?? landmarkFor(resolved);
+        const curatedMatch = curated ?? landmarkForPlace(resolved);
         if (curatedMatch) {
           const localized = localizedText(curatedMatch, lang);
           resolved = { ...resolved, name: localized.city, country: localized.country };
         }
 
-        warmImage(sceneFor(resolved, lang).image);
+        warmImage(sceneFor(resolved, lang, curatedMatch).image);
 
         // Enter the scene immediately: the backdrop paints while the weather lands.
         setPlace(resolved);
@@ -281,6 +257,16 @@ export default function HomePage() {
   }, [lang, curatedId]);
 
 
+  const selectScene = useCallback(
+    (id: string) => {
+      const item = scenes.find((entry) => entry.id === id);
+      if (!item) return;
+      warmImage(item.image);
+      setCuratedId(id);
+    },
+    [scenes]
+  );
+
   const handleBack = useCallback(() => {
     setStage('leaving');
     // Pull the camera back at the same moment the scene fades, so the globe
@@ -298,7 +284,8 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (authLoading || !session || !langReady || deepLinkDone.current) return;
+    if (authLoading || !session) return;
+    if (!langReady || deepLinkDone.current) return;
     deepLinkDone.current = true;
     const city = new URLSearchParams(window.location.search).get('city');
     if (city) runSearch({ place: null, text: city });
@@ -434,6 +421,12 @@ export default function HomePage() {
             place={place}
             scene={scene}
             theme={theme}
+            scenes={scenes.map((item) => ({
+              id: item.id,
+              label: localizedText(item, lang).landmark,
+            }))}
+            activeSceneId={activeScene?.id ?? null}
+            onSelectScene={selectScene}
             error={weatherError}
             onRetry={() => {
               if (place) void loadWeather(place);

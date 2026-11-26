@@ -15,7 +15,10 @@ import LogoutButton from './LogoutButton';
 import WeatherCard from './WeatherCard';
 import WeatherEffects from './WeatherEffects';
 
-type Scene = Pick<Landmark, 'landmark' | 'description' | 'image' | 'credit' | 'focus' | 'zoom'>;
+type Scene = Pick<Landmark, 'landmark' | 'description' | 'image' | 'credit' | 'focus' | 'zoom'> & {
+  /** Country of the scene itself, so the card follows the photo when both are shown. */
+  country?: string;
+};
 
 type Props = {
   place: Place;
@@ -28,6 +31,10 @@ type Props = {
   onRetry?: () => void;
   onBack: () => void;
   leaving?: boolean;
+  /** All curated views of this city; the card offers a switch when there are several. */
+  scenes?: { id: string; label: string }[];
+  activeSceneId?: string | null;
+  onSelectScene?: (id: string) => void;
 };
 
 const CALM: EffectConfig = {
@@ -101,6 +108,9 @@ export default function WeatherView({
   onRetry,
   onBack,
   leaving = false,
+  scenes = [],
+  activeSceneId = null,
+  onSelectScene,
 }: Props) {
   const { t } = useLang();
   const [loaded, setLoaded] = useState(false);
@@ -272,10 +282,10 @@ export default function WeatherView({
                   onPointerCancel={onPointerUp}
                   aria-expanded={expanded}
                   aria-label={t('dragHint')}
-                  className="flex w-full touch-none flex-col items-center gap-1 pb-1.5 pt-0.5"
+                  className="mb-3 flex w-full touch-none flex-col items-center gap-1.5"
                 >
-                  <span className="h-1 w-10 rounded-full bg-cream/35" />
-                  <span className="flex items-center gap-1 text-[10px] text-cream/55">
+                  <span className="h-1 w-10 rounded-full bg-cream/40" />
+                  <span className="flex items-center gap-1 rounded-full bg-black/35 px-2.5 py-1 text-[10px] text-cream/70 backdrop-blur-sm">
                     <svg
                       viewBox="0 0 24 24"
                       className={`h-3 w-3 transition-transform ${expanded ? 'rotate-180' : ''}`}
@@ -297,6 +307,9 @@ export default function WeatherView({
                   landmark={scene}
                   weather={weather}
                   showDescription={desktop || expanded}
+                  scenes={scenes}
+                  activeSceneId={activeSceneId}
+                  onSelectScene={onSelectScene}
                 />
               ) : error ? (
                 <ErrorCard message={error} onRetry={onRetry} />
