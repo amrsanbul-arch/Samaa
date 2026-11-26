@@ -82,6 +82,26 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  ET: { ar: 'إثيوبيا', en: 'Ethiopia', de: 'Äthiopien', ru: 'Эфиопия', it: 'Etiopia' },
+  TZ: { ar: 'تنزانيا', en: 'Tanzania', de: 'Tansania', ru: 'Танзания', it: 'Tanzania' },
+  UG: { ar: 'أوغندا', en: 'Uganda', de: 'Uganda', ru: 'Уганда', it: 'Uganda' },
+  GH: { ar: 'غانا', en: 'Ghana', de: 'Ghana', ru: 'Гана', it: 'Ghana' },
+  CI: { ar: 'ساحل العاج', en: 'Côte d’Ivoire', de: 'Elfenbeinküste', ru: 'Кот-д’Ивуар', it: 'Costa d’Avorio' },
+  SN: { ar: 'السنغال', en: 'Senegal', de: 'Senegal', ru: 'Сенегал', it: 'Senegal' },
+  LY: { ar: 'ليبيا', en: 'Libya', de: 'Libyen', ru: 'Ливия', it: 'Libia' },
+  AO: { ar: 'أنغولا', en: 'Angola', de: 'Angola', ru: 'Ангола', it: 'Angola' },
+  ZM: { ar: 'زامبيا', en: 'Zambia', de: 'Sambia', ru: 'Замбия', it: 'Zambia' },
+  ZW: { ar: 'زيمبابوي', en: 'Zimbabwe', de: 'Simbabwe', ru: 'Зимбабве', it: 'Zimbabwe' },
+  BW: { ar: 'بوتسوانا', en: 'Botswana', de: 'Botsuana', ru: 'Ботсвана', it: 'Botswana' },
+  NA: { ar: 'ناميبيا', en: 'Namibia', de: 'Namibia', ru: 'Намибия', it: 'Namibia' },
+  MZ: { ar: 'موزمبيق', en: 'Mozambique', de: 'Mosambik', ru: 'Мозамбик', it: 'Mozambico' },
+  MG: { ar: 'مدغشقر', en: 'Madagascar', de: 'Madagaskar', ru: 'Мадагаскар', it: 'Madagascar' },
+  MU: { ar: 'موريشيوس', en: 'Mauritius', de: 'Mauritius', ru: 'Маврикий', it: 'Mauritius' },
+  RW: { ar: 'رواندا', en: 'Rwanda', de: 'Ruanda', ru: 'Руанда', it: 'Ruanda' },
+  BI: { ar: 'بوروندي', en: 'Burundi', de: 'Burundi', ru: 'Бурунди', it: 'Burundi' },
+  CD: { ar: 'جمهورية الكونغو الديمقراطية', en: 'DR Congo', de: 'DR Kongo', ru: 'ДР Конго', it: 'RD del Congo' },
+  CG: { ar: 'جمهورية الكونغو', en: 'Republic of the Congo', de: 'Republik Kongo', ru: 'Республика Конго', it: 'Repubblica del Congo' },
+  CM: { ar: 'الكاميرون', en: 'Cameroon', de: 'Kamerun', ru: 'Камерун', it: 'Camerun' },
   AL: { ar: 'ألبانيا', en: 'Albania', de: 'Albanien', ru: 'Албания', it: 'Albania' },
   MK: { ar: 'مقدونيا الشمالية', en: 'North Macedonia', de: 'Nordmazedonien', ru: 'Северная Македония', it: 'Macedonia del Nord' },
   ME: { ar: 'الجبل الأسود', en: 'Montenegro', de: 'Montenegro', ru: 'Черногория', it: 'Montenegro' },
@@ -6129,6 +6149,918 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Basilica di San Pietro',
         description:
           'La grande basilica del Vaticano, con la cupola di Michelangelo e la facciata a colonne che chiude piazza San Pietro.',
+      },
+    },
+  },
+  {
+    id: 'lalibela',
+    countryCode: 'ET',
+    timezone: 'Africa/Addis_Ababa',
+    latitude: 12.0316,
+    longitude: 39.0412,
+    image: commons('Bete Giyorgis 01.jpg'),
+    credit: credit('Bete Giyorgis 01.jpg'),
+    aliases: [
+      'لاليبيلا', 'lalibela', 'ethiopia', 'إثيوبيا', 'rock-hewn churches',
+      'الكنائس المنحوتة في الصخر', 'addis ababa', 'أديس أبابا',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'لاليبيلا',
+        landmark: 'الكنائس المنحوتة في الصخر',
+        description:
+          'إحدى عشرة كنيسة نُحتت في الصخر ونزلت إلى عمق الأرض في القرن الثاني عشر، وما زالت تُستخدم للصلاة، وتُعد من عجائب العمارة الإثيوبية.',
+      },
+      en: {
+        city: 'Lalibela',
+        landmark: 'Rock-Hewn Churches',
+        description:
+          'Eleven churches cut down into the rock in the twelfth century and still in use for worship, the great feat of Ethiopian architecture.',
+      },
+      de: {
+        city: 'Lalibela',
+        landmark: 'Felsenkirchen',
+        description:
+          'Elf Kirchen, die im 12. Jahrhundert in den Fels hinabgehauen wurden und bis heute für Gottesdienste genutzt werden – die große Leistung der äthiopischen Baukunst.',
+      },
+      ru: {
+        city: 'Лалибэла',
+        landmark: 'Скальные церкви',
+        description:
+          'Одиннадцать церквей, вырубленных в скале в XII веке и до сих пор служащих для богослужений, — вершина эфиопского зодчества.',
+      },
+      it: {
+        city: 'Lalibela',
+        landmark: 'Chiese rupestri',
+        description:
+          'Undici chiese scavate nella roccia nel XII secolo e ancora usate per il culto: la grande prova dell’architettura etiope.',
+      },
+    },
+  },
+  {
+    id: 'moshi',
+    countryCode: 'TZ',
+    timezone: 'Africa/Dar_es_Salaam',
+    latitude: -3.35,
+    longitude: 37.3333,
+    image: commons('Mount Kilimanjaro,Moshi 1.jpg'),
+    credit: credit('Mount Kilimanjaro,Moshi 1.jpg'),
+    aliases: [
+      'موشي', 'moshi', 'tanzania', 'تنزانيا', 'kilimanjaro', 'كليمنجارو', 'mount kilimanjaro',
+      'جبل كليمنجارو', 'dodoma', 'دودوما',
+    ],
+    copy: {
+      ar: {
+        city: 'موشي',
+        landmark: 'جبل كليمنجارو',
+        description:
+          'أعلى قمة في أفريقيا، بركان خامد بقمة مكسوة بالثلج يرتفع ٥٨٩٥ متراً فوق السهول القريبة من موشي.',
+      },
+      en: {
+        city: 'Moshi',
+        landmark: 'Mount Kilimanjaro',
+        description:
+          'Africa’s highest mountain, a dormant volcano with a snow-capped summit 5,895 metres above the plains near Moshi.',
+      },
+      de: {
+        city: 'Moshi',
+        landmark: 'Kilimandscharo',
+        description:
+          'Afrikas höchster Berg, ein ruhender Vulkan mit schneebedecktem Gipfel, 5.895 Meter über der Ebene bei Moshi.',
+      },
+      ru: {
+        city: 'Моши',
+        landmark: 'Килиманджаро',
+        description:
+          'Высочайшая гора Африки: спящий вулкан со снежной вершиной, 5 895 метров над равнинами близ Моши.',
+      },
+      it: {
+        city: 'Moshi',
+        landmark: 'Kilimangiaro',
+        description:
+          'La montagna più alta dell’Africa: un vulcano quiescente con la cima innevata, 5.895 metri sopra la pianura vicino a Moshi.',
+      },
+    },
+  },
+  {
+    id: 'kampala',
+    countryCode: 'UG',
+    timezone: 'Africa/Kampala',
+    latitude: 0.3163,
+    longitude: 32.5822,
+    image: commons('Gadafi Mosque ......(Old Kampala Muslim Center).jpg'),
+    credit: credit('Gadafi Mosque ......(Old Kampala Muslim Center).jpg'),
+    aliases: [
+      'كمبالا', 'kampala', 'uganda', 'أوغندا', 'uganda national mosque',
+      'المسجد الوطني الأوغندي', 'gaddafi mosque',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'كمبالا',
+        landmark: 'المسجد الوطني الأوغندي',
+        description:
+          'مسجد على تلة في كمبالا بقبة ذهبية ومآذن شاهقة، بُني في السبعينيات ويتسع لآلاف المصلين، ومن سطحه تُرى المدينة كلها.',
+      },
+      en: {
+        city: 'Kampala',
+        landmark: 'Uganda National Mosque',
+        description:
+          'A mosque on a Kampala hill with a golden dome and tall minarets, built in the 1970s for thousands of worshippers; its roof opens the whole city to view.',
+      },
+      de: {
+        city: 'Kampala',
+        landmark: 'Nationalmoschee von Uganda',
+        description:
+          'Eine Moschee auf einem Hügel von Kampala mit goldener Kuppel und hohen Minaretten, in den 1970er-Jahren für Tausende Gläubige erbaut; vom Dach sieht man die ganze Stadt.',
+      },
+      ru: {
+        city: 'Кампала',
+        landmark: 'Национальная мечеть Уганды',
+        description:
+          'Мечеть на холме Кампалы с золотым куполом и высокими минаретами, построенная в 1970-х на тысячи молящихся; с её крыши виден весь город.',
+      },
+      it: {
+        city: 'Kampala',
+        landmark: 'Moschea nazionale dell’Uganda',
+        description:
+          'Una moschea su una collina di Kampala con cupola dorata e minareti alti, costruita negli anni Settanta per migliaia di fedeli; dal tetto si vede tutta la città.',
+      },
+    },
+  },
+  {
+    id: 'accra',
+    countryCode: 'GH',
+    timezone: 'Africa/Accra',
+    latitude: 5.556,
+    longitude: -0.1969,
+    image: commons('Black Star Gate located in Accra.jpg'),
+    credit: credit('Black Star Gate located in Accra.jpg'),
+    aliases: [
+      'أكرا', 'accra', 'ghana', 'غانا', 'black star square', 'ساحة النجمة السوداء',
+      'independence arch', 'قوس الاستقلال',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'أكرا',
+        landmark: 'ساحة النجمة السوداء',
+        description:
+          'ساحة واسعة على ساحل أكرا فيها قوس الاستقلال ونصب الجندي المجهول، أُعدت لاستعراضات الاستقلال في الستينيات.',
+      },
+      en: {
+        city: 'Accra',
+        landmark: 'Black Star Square',
+        description:
+          'A vast square on the Accra shore with the Independence Arch and the Unknown Soldier monument, laid out for independence parades in the 1960s.',
+      },
+      de: {
+        city: 'Accra',
+        landmark: 'Black Star Square',
+        description:
+          'Ein weiter Platz an der Küste von Accra mit Unabhängigkeitsbogen und Denkmal des unbekannten Soldaten, in den 1960er-Jahren für die Unabhängigkeitsparaden angelegt.',
+      },
+      ru: {
+        city: 'Аккра',
+        landmark: 'Площадь Чёрной звезды',
+        description:
+          'Огромная площадь на берегу Аккры с аркой Независимости и памятником Неизвестному солдату, созданная для парадов независимости в 1960-х.',
+      },
+      it: {
+        city: 'Accra',
+        landmark: 'Black Star Square',
+        description:
+          'Una grande piazza sulla costa di Accra con l’Arco dell’Indipendenza e il monumento al Milite Ignoto, creata per le parate dell’indipendenza negli anni Sessanta.',
+      },
+    },
+  },
+  {
+    id: 'yamoussoukro',
+    countryCode: 'CI',
+    timezone: 'Africa/Abidjan',
+    latitude: 6.8015,
+    longitude: -5.2862,
+    image: commons('Basilique notre Dame de la Paix de Yamoussoukro 9.jpg'),
+    credit: credit('Basilique notre Dame de la Paix de Yamoussoukro 9.jpg'),
+    aliases: [
+      'ياموسوكرو', 'yamoussoukro', 'ivory coast', 'ساحل العاج', 'côte d\'ivoire', 'basilica',
+      'كاتدرائية سيدة السلام', 'basilica of our lady of peace',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'ياموسوكرو',
+        landmark: 'كاتدرائية سيدة السلام',
+        description:
+          'أكبر كنيسة في العالم بمساحتها، بناها الرئيس هوفويت بوانيي في ياموسوكرو، وقبتها ترتفع ١٥٨ متراً فوق أعمدة رخامية.',
+      },
+      en: {
+        city: 'Yamoussoukro',
+        landmark: 'Basilica of Our Lady of Peace',
+        description:
+          'The largest church in the world by area, built by President Houphouët-Boigny at Yamoussoukro, its dome rising 158 metres above marble colonnades.',
+      },
+      de: {
+        city: 'Yamoussoukro',
+        landmark: 'Basilika Unserer Lieben Frau des Friedens',
+        description:
+          'Die flächengrößte Kirche der Welt, von Präsident Houphouët-Boigny in Yamoussoukro errichtet; ihre Kuppel steigt 158 Meter über Marmorkolonnaden.',
+      },
+      ru: {
+        city: 'Ямусукро',
+        landmark: 'Базилика Богоматери Мира',
+        description:
+          'Крупнейший по площади храм мира, построенный президентом Уфуэ-Буаньи в Ямусукро: купол поднимается на 158 метров над мраморными колоннадами.',
+      },
+      it: {
+        city: 'Yamoussoukro',
+        landmark: 'Basilica di Nostra Signora della Pace',
+        description:
+          'La chiesa più grande del mondo per superficie, voluta dal presidente Houphouët-Boigny a Yamoussoukro, con la cupola a 158 metri sopra colonnati di marmo.',
+      },
+    },
+  },
+  {
+    id: 'dakar',
+    countryCode: 'SN',
+    timezone: 'Africa/Dakar',
+    latitude: 14.7282,
+    longitude: -17.4913,
+    image: commons('African Renaissance Monument (5502494604).jpg'),
+    credit: credit('African Renaissance Monument (5502494604).jpg'),
+    aliases: [
+      'داكار', 'dakar', 'senegal', 'السنغال', 'african renaissance monument',
+      'نصب النهضة الأفريقية', 'renaissance monument',
+    ],
+    capital: true,
+    focus: '50% 25%',
+    copy: {
+      ar: {
+        city: 'داكار',
+        landmark: 'نصب النهضة الأفريقية',
+        description:
+          'نصب من البرونز ارتفاعه ٤٩ متراً على تلة في داكار، يصوّر رجلاً يحمل طفلاً وامرأة تنظر إلى الأفق، وافتُتح عام ٢٠١٠.',
+      },
+      en: {
+        city: 'Dakar',
+        landmark: 'African Renaissance Monument',
+        description:
+          'A 49-metre bronze monument on a hill in Dakar showing a man carrying a child and a woman looking to the horizon, unveiled in 2010.',
+      },
+      de: {
+        city: 'Dakar',
+        landmark: 'Denkmal der Afrikanischen Renaissance',
+        description:
+          'Ein 49 Meter hohes Bronzedenkmal auf einem Hügel in Dakar: ein Mann mit Kind und eine Frau, die zum Horizont blickt; 2010 enthüllt.',
+      },
+      ru: {
+        city: 'Дакар',
+        landmark: 'Монумент африканского возрождения',
+        description:
+          '49-метровый бронзовый монумент на холме в Дакаре: мужчина с ребёнком и женщина, смотрящая к горизонту; открыт в 2010 году.',
+      },
+      it: {
+        city: 'Dakar',
+        landmark: 'Monumento della Rinascita Africana',
+        description:
+          'Un monumento in bronzo di 49 metri su una collina di Dakar: un uomo con un bambino e una donna che guarda l’orizzonte; inaugurato nel 2010.',
+      },
+    },
+  },
+  {
+    id: 'al-khums',
+    countryCode: 'LY',
+    timezone: 'Africa/Tripoli',
+    latitude: 32.648,
+    longitude: 14.262,
+    image: commons('Leptis Magna, Al-Khums, Libya 4.jpg'),
+    credit: credit('Leptis Magna, Al-Khums, Libya 4.jpg'),
+    aliases: [
+      'الخمس', 'al khums', 'khums', 'libya', 'ليبيا', 'leptis magna', 'لبدة الكبرى', 'لبدة',
+      'tripoli', 'طرابلس',
+    ],
+    copy: {
+      ar: {
+        city: 'الخمس',
+        landmark: 'لبدة الكبرى',
+        description:
+          'مدينة رومانية على الساحل عند الخمس، فيها قوس سيبتيموس سيفيروس والمسرح والسوق، وهي من أكبر آثار الإمبراطورية الرومانية في أفريقيا.',
+      },
+      en: {
+        city: 'Al Khums',
+        landmark: 'Leptis Magna',
+        description:
+          'A Roman city on the coast at Al Khums with the arch of Septimius Severus, a theatre and a market, among the greatest Roman remains in Africa.',
+      },
+      de: {
+        city: 'Al Khums',
+        landmark: 'Leptis Magna',
+        description:
+          'Eine römische Stadt an der Küste bei Al Khums mit dem Bogen des Septimius Severus, Theater und Markt – unter den bedeutendsten Römerresten Afrikas.',
+      },
+      ru: {
+        city: 'Аль-Хумс',
+        landmark: 'Лептис-Магна',
+        description:
+          'Римский город на побережье у Аль-Хумса с аркой Септимия Севера, театром и рынком — одни из величайших римских руин Африки.',
+      },
+      it: {
+        city: 'Al Khums',
+        landmark: 'Leptis Magna',
+        description:
+          'Una città romana sulla costa presso Al Khums con l’arco di Settimio Severo, il teatro e il mercato: tra le maggiori rovine romane d’Africa.',
+      },
+    },
+  },
+  {
+    id: 'luanda',
+    countryCode: 'AO',
+    timezone: 'Africa/Luanda',
+    latitude: -8.8368,
+    longitude: 13.2343,
+    image: commons('Luanda-SMiguelFort1.jpg'),
+    credit: credit('Luanda-SMiguelFort1.jpg'),
+    aliases: [
+      'لواندا', 'luanda', 'angola', 'أنغولا', 'fortaleza de sao miguel', 'قلعة ساو ميغيل',
+      'sao miguel fortress',
+    ],
+    capital: true,
+    focus: '50% 40%',
+    copy: {
+      ar: {
+        city: 'لواندا',
+        landmark: 'قلعة ساو ميغيل',
+        description:
+          'قلعة برتغالية من القرن السادس عشر على مرتفع يطل على خليج لواندا، كانت تحرس المدينة القديمة وتضم اليوم متحفاً عسكرياً.',
+      },
+      en: {
+        city: 'Luanda',
+        landmark: 'Fortaleza de São Miguel',
+        description:
+          'A sixteenth-century Portuguese fortress on the height above Luanda bay, guarding the old town and now housing a military museum.',
+      },
+      de: {
+        city: 'Luanda',
+        landmark: 'Fortaleza de São Miguel',
+        description:
+          'Eine portugiesische Festung aus dem 16. Jahrhundert auf der Anhöhe über der Bucht von Luanda, die die Altstadt bewachte und heute ein Militärmuseum birgt.',
+      },
+      ru: {
+        city: 'Луанда',
+        landmark: 'Крепость Сан-Мигел',
+        description:
+          'Португальская крепость XVI века на высоте над бухтой Луанды, охранявшая старый город; сегодня в ней военный музей.',
+      },
+      it: {
+        city: 'Luanda',
+        landmark: 'Fortezza di São Miguel',
+        description:
+          'Una fortezza portoghese del Cinquecento sull’altura sopra la baia di Luanda, a guardia della città vecchia; oggi ospita un museo militare.',
+      },
+    },
+  },
+  {
+    id: 'livingstone',
+    countryCode: 'ZM',
+    timezone: 'Africa/Lusaka',
+    latitude: -17.925,
+    longitude: 25.855,
+    image: commons('Cataratas Victoria, Zambia-Zimbabue, 2018-07-27, DD 05.jpg'),
+    credit: credit('Cataratas Victoria, Zambia-Zimbabue, 2018-07-27, DD 05.jpg'),
+    aliases: [
+      'ليفينغستون', 'livingstone', 'zambia', 'زامبيا', 'victoria falls', 'شلالات فيكتوريا',
+      'lusaka', 'لوساكا',
+    ],
+    copy: {
+      ar: {
+        city: 'ليفينغستون',
+        landmark: 'شلالات فيكتوريا',
+        description:
+          'شلالات على نهر الزامبيزي يبلغ عرضها ١٧٠٨ أمتار، يتصاعد رذاذها مئات الأمتار وتُرى من ليفينغستون على الضفة الزامبية.',
+      },
+      en: {
+        city: 'Livingstone',
+        landmark: 'Victoria Falls',
+        description:
+          'A waterfall 1,708 metres wide on the Zambezi whose spray rises hundreds of metres, seen from Livingstone on the Zambian bank.',
+      },
+      de: {
+        city: 'Livingstone',
+        landmark: 'Victoriafälle',
+        description:
+          'Ein 1.708 Meter breiter Wasserfall des Sambesi, dessen Gischt hunderte Meter hoch steigt und von Livingstone am sambischen Ufer zu sehen ist.',
+      },
+      ru: {
+        city: 'Ливингстон',
+        landmark: 'Водопад Виктория',
+        description:
+          'Водопад шириной 1 708 метров на Замбези: его брызги поднимаются на сотни метров и видны из Ливингстона на замбийском берегу.',
+      },
+      it: {
+        city: 'Livingstone',
+        landmark: 'Cascate Vittoria',
+        description:
+          'Una cascata larga 1.708 metri sullo Zambesi, con gli spruzzi che salgono per centinaia di metri e si vedono da Livingstone, sulla riva zambiana.',
+      },
+    },
+  },
+  {
+    id: 'masvingo',
+    countryCode: 'ZW',
+    timezone: 'Africa/Harare',
+    latitude: -20.2731,
+    longitude: 30.9344,
+    image: commons('East Wall Great Enclosure (47614139601).jpg'),
+    credit: credit('East Wall Great Enclosure (47614139601).jpg'),
+    aliases: [
+      'ماسفينغو', 'masvingo', 'zimbabwe', 'زيمبابوي', 'great zimbabwe', 'زيمبابوي الكبرى',
+      'harare', 'هراري',
+    ],
+    copy: {
+      ar: {
+        city: 'ماسفينغو',
+        landmark: 'زيمبابوي الكبرى',
+        description:
+          'أطلال مدينة حجرية بُنيت بلا ملاط بين القرنين الحادي عشر والخامس عشر، وأسوارها الحجرية الضخمة هي التي أعطت البلاد اسمها.',
+      },
+      en: {
+        city: 'Masvingo',
+        landmark: 'Great Zimbabwe',
+        description:
+          'The ruins of a dry-stone city built between the eleventh and fifteenth centuries, whose massive walls gave the country its name.',
+      },
+      de: {
+        city: 'Masvingo',
+        landmark: 'Groß-Simbabwe',
+        description:
+          'Die Ruinen einer Trockenmauerstadt aus dem 11. bis 15. Jahrhundert, deren gewaltige Mauern dem Land seinen Namen gaben.',
+      },
+      ru: {
+        city: 'Масвинго',
+        landmark: 'Большой Зимбабве',
+        description:
+          'Руины города сухой кладки XI–XV веков; его огромные стены дали стране имя.',
+      },
+      it: {
+        city: 'Masvingo',
+        landmark: 'Grande Zimbabwe',
+        description:
+          'Le rovine di una città in pietra a secco costruita tra l’XI e il XV secolo, le cui mura imponenti hanno dato il nome al paese.',
+      },
+    },
+  },
+  {
+    id: 'gaborone',
+    countryCode: 'BW',
+    timezone: 'Africa/Gaborone',
+    latitude: -24.6454,
+    longitude: 25.9064,
+    image: commons('Three Dikgosi monument in Gaborone.jpg'),
+    credit: credit('Three Dikgosi monument in Gaborone.jpg'),
+    aliases: [
+      'غابورون', 'gaborone', 'botswana', 'بوتسوانا', 'three dikgosi', 'نصب الديكغوسي الثلاثة',
+      'dikgosi',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'غابورون',
+        landmark: 'نصب الديكغوسي الثلاثة',
+        description:
+          'نصب من البرونز لثلاثة من زعماء الباتسوانا في وسط غابورون، أُقيم عام ٢٠٠٥ تخليداً لدورهم في تشكيل الأمة.',
+      },
+      en: {
+        city: 'Gaborone',
+        landmark: 'Three Dikgosi Monument',
+        description:
+          'A bronze monument to three Batswana chiefs in central Gaborone, put up in 2005 to honour their part in shaping the nation.',
+      },
+      de: {
+        city: 'Gaborone',
+        landmark: 'Drei-Dikgosi-Denkmal',
+        description:
+          'Ein Bronzedenkmal für drei Häuptlinge der Batswana im Zentrum von Gaborone, 2005 zur Ehre ihres Anteils an der Nationsbildung errichtet.',
+      },
+      ru: {
+        city: 'Габороне',
+        landmark: 'Памятник трём дикгоси',
+        description:
+          'Бронзовый монумент трём вождям батсвана в центре Габороне, установленный в 2005 году в честь их роли в создании нации.',
+      },
+      it: {
+        city: 'Gaborone',
+        landmark: 'Monumento ai Tre Dikgosi',
+        description:
+          'Un monumento in bronzo a tre capi batswana nel centro di Gaborone, eretto nel 2005 per il loro ruolo nella nascita della nazione.',
+      },
+    },
+  },
+  {
+    id: 'sesriem',
+    countryCode: 'NA',
+    timezone: 'Africa/Windhoek',
+    latitude: -24.49,
+    longitude: 15.8,
+    image: commons('006 Dune 45 in Sossusvlei at sunrise Photo by Giles Laurent.jpg'),
+    credit: credit('006 Dune 45 in Sossusvlei at sunrise Photo by Giles Laurent.jpg'),
+    aliases: [
+      'سيسريم', 'sesriem', 'namibia', 'ناميبيا', 'sossusvlei', 'سوسوسفلي', 'dune 45',
+      'كثيب 45', 'windhoek', 'ويندهوك',
+    ],
+    copy: {
+      ar: {
+        city: 'سيسريم',
+        landmark: 'كثبان سوسوسفلي',
+        description:
+          'كثبان رملية حمراء عالية تحيط ببحيرة طينية جافة في صحراء ناميب، وأشهرها كثيب ٤٥ الذي يتوهج عند الشروق.',
+      },
+      en: {
+        city: 'Sesriem',
+        landmark: 'Sossusvlei Dunes',
+        description:
+          'High red dunes around a dry clay pan in the Namib desert, the most famous being Dune 45, which glows at sunrise.',
+      },
+      de: {
+        city: 'Sesriem',
+        landmark: 'Dünen von Sossusvlei',
+        description:
+          'Hohe rote Dünen um eine trockene Tonpfanne in der Namib, die berühmteste ist die Düne 45, die bei Sonnenaufgang glüht.',
+      },
+      ru: {
+        city: 'Сесрим',
+        landmark: 'Дюны Сосусвлей',
+        description:
+          'Высокие красные дюны вокруг сухой глинистой впадины в Намибе; самая известная — дюна 45, светящаяся на рассвете.',
+      },
+      it: {
+        city: 'Sesriem',
+        landmark: 'Dune di Sossusvlei',
+        description:
+          'Dune rosse alte attorno a una piana di argilla asciutta nel Namib; la più famosa è la duna 45, che brilla all’alba.',
+      },
+    },
+  },
+  {
+    id: 'mozambique-island',
+    countryCode: 'MZ',
+    timezone: 'Africa/Maputo',
+    latitude: -15.0288,
+    longitude: 40.7444,
+    image: commons('São Sebastião Fortress - View.jpg'),
+    credit: credit('São Sebastião Fortress - View.jpg'),
+    aliases: [
+      'جزيرة موزمبيق', 'mozambique island', 'ilha de moçambique', 'mozambique', 'موزمبيق',
+      'fort sao sebastiao', 'حصن ساو سباستيان', 'maputo', 'مابوتو',
+    ],
+    copy: {
+      ar: {
+        city: 'جزيرة موزمبيق',
+        landmark: 'حصن ساو سباستيان',
+        description:
+          'حصن برتغالي من القرن السادس عشر على طرف جزيرة موزمبيق، بأبراجه الحجرية وجدرانه المطلة على المحيط الهندي.',
+      },
+      en: {
+        city: 'Mozambique Island',
+        landmark: 'Fort São Sebastião',
+        description:
+          'A sixteenth-century Portuguese fort at the tip of Mozambique Island, with stone bastions and walls facing the Indian Ocean.',
+      },
+      de: {
+        city: 'Mosambik-Insel',
+        landmark: 'Forte São Sebastião',
+        description:
+          'Eine portugiesische Festung aus dem 16. Jahrhundert an der Spitze der Insel Mosambik, mit Steinbastionen und Mauern zum Indischen Ozean.',
+      },
+      ru: {
+        city: 'Остров Мозамбик',
+        landmark: 'Форт Сан-Себастьян',
+        description:
+          'Португальский форт XVI века на оконечности острова Мозамбик, с каменными бастионами и стенами, обращёнными к Индийскому океану.',
+      },
+      it: {
+        city: 'Isola di Mozambico',
+        landmark: 'Forte São Sebastião',
+        description:
+          'Un forte portoghese del Cinquecento all’estremità dell’isola di Mozambico, con bastioni in pietra e mura verso l’Oceano Indiano.',
+      },
+    },
+  },
+  {
+    id: 'morondava',
+    countryCode: 'MG',
+    timezone: 'Indian/Antananarivo',
+    latitude: -20.2887,
+    longitude: 44.3178,
+    image: commons('Avenue of the Baobabs at Sunset.jpg'),
+    credit: credit('Avenue of the Baobabs at Sunset.jpg'),
+    aliases: [
+      'موروندافا', 'morondava', 'madagascar', 'مدغشقر', 'avenue of the baobabs',
+      'جادة أشجار الباوباب', 'baobabs', 'antananarivo', 'أنتاناناريفو',
+    ],
+    copy: {
+      ar: {
+        city: 'موروندافا',
+        landmark: 'جادة أشجار الباوباب',
+        description:
+          'صف من أشجار الباوباب الضخمة على طريق ترابي قرب موروندافا، جذوعها المنتفخة عمرها قرون.',
+      },
+      en: {
+        city: 'Morondava',
+        landmark: 'Avenue of the Baobabs',
+        description:
+          'A row of huge baobabs along a dirt road near Morondava, their swollen trunks centuries old.',
+      },
+      de: {
+        city: 'Morondava',
+        landmark: 'Baobaballee',
+        description:
+          'Eine Reihe riesiger Baobabs an einer Piste bei Morondava, deren geschwollene Stämme Jahrhunderte alt sind.',
+      },
+      ru: {
+        city: 'Мурундава',
+        landmark: 'Аллея баобабов',
+        description:
+          'Ряд огромных баобабов вдоль грунтовой дороги близ Мурундавы; их раздутые стволы стоят века.',
+      },
+      it: {
+        city: 'Morondava',
+        landmark: 'Viale dei baobab',
+        description:
+          'Una fila di baobab enormi lungo una pista sterrata vicino a Morondava, con tronchi rigonfi secolari.',
+      },
+    },
+  },
+  {
+    id: 'le-morne',
+    countryCode: 'MU',
+    timezone: 'Indian/Mauritius',
+    latitude: -20.4788,
+    longitude: 57.3038,
+    image: commons('Le Morne Peninsula in Mauritius (53697779236).jpg'),
+    credit: credit('Le Morne Peninsula in Mauritius (53697779236).jpg'),
+    aliases: [
+      'لو مورن', 'le morne', 'mauritius', 'موريشيوس', 'le morne brabant', 'جبل لو مورن',
+      'port louis', 'بورت لويس',
+    ],
+    copy: {
+      ar: {
+        city: 'لو مورن',
+        landmark: 'جبل لو مورن برابان',
+        description:
+          'جبل صخري منفرد يرتفع من البحر في الطرف الجنوبي الغربي لموريشيوس، وكان ملاذاً للعبيد الهاربين، وهو اليوم موقع تراث عالمي.',
+      },
+      en: {
+        city: 'Le Morne',
+        landmark: 'Le Morne Brabant',
+        description:
+          'A lone rock mountain rising from the sea at the south-western tip of Mauritius, once a refuge for escaped slaves and now a World Heritage site.',
+      },
+      de: {
+        city: 'Le Morne',
+        landmark: 'Le Morne Brabant',
+        description:
+          'Ein einzelner Felsberg am Südwestzipfel von Mauritius, einst Zuflucht entlaufener Sklaven und heute Welterbe.',
+      },
+      ru: {
+        city: 'Ле-Морн',
+        landmark: 'Ле-Морн-Брабан',
+        description:
+          'Одинокая скала-гора на юго-западе Маврикия, когда-то убежище беглых рабов, а ныне объект Всемирного наследия.',
+      },
+      it: {
+        city: 'Le Morne',
+        landmark: 'Le Morne Brabant',
+        description:
+          'Una montagna isolata che sorge dal mare all’estremità sud-occidentale di Mauritius, un tempo rifugio di schiavi fuggiaschi e oggi patrimonio mondiale.',
+      },
+    },
+  },
+  {
+    id: 'kigali',
+    countryCode: 'RW',
+    timezone: 'Africa/Kigali',
+    latitude: -1.9311,
+    longitude: 30.0606,
+    image: commons('אתר ההנצחה לרצח העם ברואנדה בקיגאלי 05.jpg'),
+    credit: credit('אתר ההנצחה לרצח העם ברואנדה בקיגאלי 05.jpg'),
+    aliases: [
+      'كيغالي', 'kigali', 'rwanda', 'رواندا', 'kigali genocide memorial',
+      'نصب كيغالي التذكاري', 'genocide memorial',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'كيغالي',
+        landmark: 'نصب كيغالي التذكاري للإبادة',
+        description:
+          'نصب تذكاري على تلة في كيغالي يضم مقابر جماعية وحدائق، ويكرّم ضحايا الإبادة الجماعية عام ١٩٩٤.',
+      },
+      en: {
+        city: 'Kigali',
+        landmark: 'Kigali Genocide Memorial',
+        description:
+          'A memorial on a hill in Kigali with mass graves and gardens, honouring the victims of the 1994 genocide.',
+      },
+      de: {
+        city: 'Kigali',
+        landmark: 'Gedenkstätte des Völkermords',
+        description:
+          'Eine Gedenkstätte auf einem Hügel in Kigali mit Massengräbern und Gärten zum Gedenken an die Opfer des Völkermords von 1994.',
+      },
+      ru: {
+        city: 'Кигали',
+        landmark: 'Мемориал геноцида',
+        description:
+          'Мемориал на холме в Кигали с братскими могилами и садами в память о жертвах геноцида 1994 года.',
+      },
+      it: {
+        city: 'Kigali',
+        landmark: 'Memoriale del genocidio',
+        description:
+          'Un memoriale su una collina di Kigali con fosse comuni e giardini, in memoria delle vittime del genocidio del 1994.',
+      },
+    },
+  },
+  {
+    id: 'bujumbura',
+    countryCode: 'BI',
+    timezone: 'Africa/Bujumbura',
+    latitude: -3.3819,
+    longitude: 29.3614,
+    image: commons('Cathédrale Regina Mundi de Bujumbura, 2024-3.jpg'),
+    credit: credit('Cathédrale Regina Mundi de Bujumbura, 2024-3.jpg'),
+    aliases: [
+      'بوجومبورا', 'bujumbura', 'burundi', 'بوروندي', 'cathédrale regina mundi',
+      'regina mundi', 'كاتدرائية ريجينا موندي', 'bujumbura cathedral', 'gitega', 'غيتيغا',
+    ],
+    copy: {
+      ar: {
+        city: 'بوجومبورا',
+        landmark: 'كاتدرائية ريجينا موندي',
+        description:
+          'كاتدرائية من القرن العشرين في وسط بوجومبورا، ببرجها المربع العالي وواجهتها الفاتحة، وهي من أكبر كنائس البلاد.',
+      },
+      en: {
+        city: 'Bujumbura',
+        landmark: 'Cathédrale Regina Mundi',
+        description:
+          'A twentieth-century cathedral in central Bujumbura with a tall square tower and pale façade, among the largest churches in the country.',
+      },
+      de: {
+        city: 'Bujumbura',
+        landmark: 'Kathedrale Regina Mundi',
+        description:
+          'Eine Kathedrale des 20. Jahrhunderts im Zentrum von Bujumbura mit hohem quadratischem Turm und heller Fassade, eine der größten Kirchen des Landes.',
+      },
+      ru: {
+        city: 'Бужумбура',
+        landmark: 'Собор Регина Мунди',
+        description:
+          'Кафедральный собор XX века в центре Бужумбуры с высокой квадратной башней и светлым фасадом, одна из крупнейших церквей страны.',
+      },
+      it: {
+        city: 'Bujumbura',
+        landmark: 'Cattedrale Regina Mundi',
+        description:
+          'Una cattedrale del Novecento nel centro di Bujumbura, con alta torre quadrata e facciata chiara, tra le maggiori chiese del paese.',
+      },
+    },
+  },
+  {
+    id: 'goma',
+    countryCode: 'CD',
+    timezone: 'Africa/Lubumbashi',
+    latitude: -1.6741,
+    longitude: 29.2284,
+    image: commons('Mountain Gorilla (Humba family) – Virunga National Park (30).jpg'),
+    credit: credit('Mountain Gorilla (Humba family) – Virunga National Park (30).jpg'),
+    aliases: [
+      'غوما', 'goma', 'dr congo', 'democratic republic of the congo', 'الكونغو الديمقراطية',
+      'virunga', 'فيرونغا', 'virunga national park', 'حديقة فيرونغا', 'kinshasa', 'كينشاسا',
+    ],
+    copy: {
+      ar: {
+        city: 'غوما',
+        landmark: 'حديقة فيرونغا الوطنية',
+        description:
+          'أقدم حديقة وطنية في أفريقيا، على الحدود مع أوغندا ورواندا، تعيش فيها غوريلات الجبال في غابات البراكين الخضراء.',
+      },
+      en: {
+        city: 'Goma',
+        landmark: 'Virunga National Park',
+        description:
+          'Africa’s oldest national park, on the borders with Uganda and Rwanda, where mountain gorillas live in the green forests of the volcanoes.',
+      },
+      de: {
+        city: 'Goma',
+        landmark: 'Virunga-Nationalpark',
+        description:
+          'Afrikas ältester Nationalpark an den Grenzen zu Uganda und Ruanda, in dessen grünen Vulkanwäldern Berggorillas leben.',
+      },
+      ru: {
+        city: 'Гома',
+        landmark: 'Национальный парк Вирунга',
+        description:
+          'Старейший национальный парк Африки на границах с Угандой и Руандой, где в зелёных лесах вулканов живут горные гориллы.',
+      },
+      it: {
+        city: 'Goma',
+        landmark: 'Parco nazionale del Virunga',
+        description:
+          'Il più antico parco nazionale d’Africa, ai confini con Uganda e Ruanda, dove i gorilla di montagna vivono nelle verdi foreste dei vulcani.',
+      },
+    },
+  },
+  {
+    id: 'brazzaville',
+    countryCode: 'CG',
+    timezone: 'Africa/Brazzaville',
+    latitude: -4.2661,
+    longitude: 15.2832,
+    image: commons('Brazzaville - Basilique Sainte-Anne-du-Congo.jpg'),
+    credit: credit('Brazzaville - Basilique Sainte-Anne-du-Congo.jpg'),
+    aliases: [
+      'برازافيل', 'brazzaville', 'congo', 'republic of the congo', 'جمهورية الكونغو',
+      'basilique sainte-anne', 'كاتدرائية القديسة آن',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'برازافيل',
+        landmark: 'كاتدرائية القديسة آن',
+        description:
+          'كنيسة من القرن التاسع عشر في برازافيل، بُني هيكلها من الطوب الأحمر على شكل حزمة سعف نخيل، وسقفها من القرميد الأخضر.',
+      },
+      en: {
+        city: 'Brazzaville',
+        landmark: 'Basilique Sainte-Anne',
+        description:
+          'A nineteenth-century church in Brazzaville whose red-brick shell is shaped like a bundle of palm fronds, under a green-tiled roof.',
+      },
+      de: {
+        city: 'Brazzaville',
+        landmark: 'Basilika Sainte-Anne',
+        description:
+          'Eine Kirche des 19. Jahrhunderts in Brazzaville, deren roter Backsteinbau wie ein Bündel Palmwedel geformt ist, mit grünem Ziegeldach.',
+      },
+      ru: {
+        city: 'Браззавиль',
+        landmark: 'Базилика Святой Анны',
+        description:
+          'Церковь XIX века в Браззавиле: краснокирпичный корпус в форме пучка пальмовых листьев и зелёная черепичная крыша.',
+      },
+      it: {
+        city: 'Brazzaville',
+        landmark: 'Basilica di Sant’Anna',
+        description:
+          'Una chiesa ottocentesca a Brazzaville, con il guscio in mattoni rossi a forma di fascio di foglie di palma e il tetto in tegole verdi.',
+      },
+    },
+  },
+  {
+    id: 'buea',
+    countryCode: 'CM',
+    timezone: 'Africa/Douala',
+    latitude: 4.1534,
+    longitude: 9.2423,
+    image: commons('Mount Fako.jpg'),
+    credit: credit('Mount Fako.jpg'),
+    aliases: [
+      'بويا', 'buea', 'cameroon', 'الكاميرون', 'mount cameroon', 'جبل الكاميرون', 'yaounde',
+      'ياوندي',
+    ],
+    focus: '35% 50%',
+    copy: {
+      ar: {
+        city: 'بويا',
+        landmark: 'جبل الكاميرون',
+        description:
+          'بركان نشط يرتفع ٤٠٤٠ متراً فوق خليج بيافرا، وهو أعلى قمة في غرب أفريقيا، ويطل على بويا والسهول الساحلية.',
+      },
+      en: {
+        city: 'Buea',
+        landmark: 'Mount Cameroon',
+        description:
+          'An active volcano rising 4,040 metres above the Bight of Biafra, the highest peak in West Africa, looking over Buea and the coastal plain.',
+      },
+      de: {
+        city: 'Buea',
+        landmark: 'Kamerunberg',
+        description:
+          'Ein aktiver Vulkan, 4.040 Meter über der Bucht von Biafra, der höchste Gipfel Westafrikas, mit Blick über Buea und die Küstenebene.',
+      },
+      ru: {
+        city: 'Буэа',
+        landmark: 'Камерун',
+        description:
+          'Действующий вулкан высотой 4 040 метров над заливом Биафра, высшая точка Западной Африки, над Буэа и прибрежной равниной.',
+      },
+      it: {
+        city: 'Buea',
+        landmark: 'Monte Camerun',
+        description:
+          'Un vulcano attivo alto 4.040 metri sulla baia di Biafra, la vetta più alta dell’Africa occidentale, sopra Buea e la piana costiera.',
       },
     },
   },
