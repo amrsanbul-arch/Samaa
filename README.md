@@ -149,4 +149,7 @@ at night from the International Space Station” (ISS073-E-422279), NASA, **publ
 <https://commons.wikimedia.org/wiki/File:Egypt%E2%80%99s_Nile_River_stretches_is_pictured_at_night_from_the_International_Space_Station_(iss073e0422279).jpg>
 
 Cropped to 2.08:1 with the lit Nile band in the lower third, exported to WebP
-(2400 px and 1200 px, 176 KB and 48 KB) with a JPEG fallback for older browsers.
+(2400 px and 1200 px, 176 KB and 48 KB) with a JPEG fallback for older browsers
+
+
+.
