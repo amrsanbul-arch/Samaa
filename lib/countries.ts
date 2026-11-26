@@ -82,6 +82,21 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  GA: { ar: 'الغابون', en: 'Gabon', de: 'Gabun', ru: 'Габон', it: 'Gabon' },
+  TD: { ar: 'تشاد', en: 'Chad', de: 'Tschad', ru: 'Чад', it: 'Ciad' },
+  NE: { ar: 'النيجر', en: 'Niger', de: 'Niger', ru: 'Нигер', it: 'Niger' },
+  ML: { ar: 'مالي', en: 'Mali', de: 'Mali', ru: 'Мали', it: 'Mali' },
+  BF: { ar: 'بوركينا فاسو', en: 'Burkina Faso', de: 'Burkina Faso', ru: 'Буркина-Фасо', it: 'Burkina Faso' },
+  SL: { ar: 'سيراليون', en: 'Sierra Leone', de: 'Sierra Leone', ru: 'Сьерра-Леоне', it: 'Sierra Leone' },
+  LR: { ar: 'ليبيريا', en: 'Liberia', de: 'Liberia', ru: 'Либерия', it: 'Liberia' },
+  GN: { ar: 'غينيا', en: 'Guinea', de: 'Guinea', ru: 'Гвинея', it: 'Guinea' },
+  GW: { ar: 'غينيا بيساو', en: 'Guinea-Bissau', de: 'Guinea-Bissau', ru: 'Гвинея-Бисау', it: 'Guinea-Bissau' },
+  GM: { ar: 'غامبيا', en: 'The Gambia', de: 'Gambia', ru: 'Гамбия', it: 'Gambia' },
+  TG: { ar: 'توغو', en: 'Togo', de: 'Togo', ru: 'Того', it: 'Togo' },
+  BJ: { ar: 'بنين', en: 'Benin', de: 'Benin', ru: 'Бенин', it: 'Benin' },
+  CF: { ar: 'جمهورية أفريقيا الوسطى', en: 'Central African Republic', de: 'Zentralafrikanische Republik', ru: 'ЦАР', it: 'Repubblica Centrafricana' },
+  SS: { ar: 'جنوب السودان', en: 'South Sudan', de: 'Südsudan', ru: 'Южный Судан', it: 'Sud Sudan' },
+  SO: { ar: 'الصومال', en: 'Somalia', de: 'Somalia', ru: 'Сомали', it: 'Somalia' },
   ET: { ar: 'إثيوبيا', en: 'Ethiopia', de: 'Äthiopien', ru: 'Эфиопия', it: 'Etiopia' },
   TZ: { ar: 'تنزانيا', en: 'Tanzania', de: 'Tansania', ru: 'Танзания', it: 'Tanzania' },
   UG: { ar: 'أوغندا', en: 'Uganda', de: 'Uganda', ru: 'Уганда', it: 'Uganda' },
@@ -7061,6 +7076,695 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Monte Camerun',
         description:
           'Un vulcano attivo alto 4.040 metri sulla baia di Biafra, la vetta più alta dell’Africa occidentale, sopra Buea e la piana costiera.',
+      },
+    },
+  },
+  {
+    id: 'libreville',
+    countryCode: 'GA',
+    timezone: 'Africa/Libreville',
+    latitude: 0.3924,
+    longitude: 9.4536,
+    image: commons('Cathédrale Saint-Pierre de Libreville, Gabon - 2023.jpg'),
+    credit: credit('Cathédrale Saint-Pierre de Libreville, Gabon - 2023.jpg'),
+    aliases: [
+      'ليبرفيل', 'libreville', 'gabon', 'الغابون', 'cathedrale saint-pierre',
+      'cathédrale saint-pierre', 'كاتدرائية القديس بطرس', 'saint-pierre',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'ليبرفيل',
+        landmark: 'كاتدرائية القديس بطرس',
+        description:
+          'كاتدرائية في قلب ليبرفيل ببرج مربع وواجهة فاتحة، بُنيت في مطلع القرن العشرين، وهي من معالم العاصمة الغابونية.',
+      },
+      en: {
+        city: 'Libreville',
+        landmark: 'Cathédrale Saint-Pierre',
+        description:
+          'A cathedral in the heart of Libreville with a square tower and pale façade, built in the early twentieth century and one of the landmarks of the Gabonese capital.',
+      },
+      de: {
+        city: 'Libreville',
+        landmark: 'Kathedrale Saint-Pierre',
+        description:
+          'Eine Kathedrale im Herzen von Libreville mit quadratischem Turm und heller Fassade, Anfang des 20. Jahrhunderts erbaut und eines der Wahrzeichen der Hauptstadt.',
+      },
+      ru: {
+        city: 'Либревиль',
+        landmark: 'Собор Святого Петра',
+        description:
+          'Собор в центре Либревиля с квадратной башней и светлым фасадом, построенный в начале XX века, — одна из примет габонской столицы.',
+      },
+      it: {
+        city: 'Libreville',
+        landmark: 'Cattedrale di San Pietro',
+        description:
+          'Una cattedrale nel cuore di Libreville con torre quadrata e facciata chiara, costruita all’inizio del Novecento e tra i simboli della capitale.',
+      },
+    },
+  },
+  {
+    id: 'ndjamena',
+    countryCode: 'TD',
+    timezone: 'Africa/Ndjamena',
+    latitude: 12.1067,
+    longitude: 15.0444,
+    image: commons('Grande mosquée de Gaoui.jpg'),
+    credit: credit('Grande mosquée de Gaoui.jpg'),
+    aliases: [
+      'نجامينا', 'ndjamena', 'n\'djamena', 'chad', 'تشاد', 'grande mosquee de gaoui',
+      'الجامع الكبير في غاوي', 'gaoui', 'غاوي',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'نجامينا',
+        landmark: 'الجامع الكبير في غاوي',
+        description:
+          'مسجد من الطوب اللبن بمئذنة نحيلة وقبة بيضاء في قرية غاوي قرب نجامينا، بُني على الطراز الساحلي ويُعد من أجمل مساجد تشاد.',
+      },
+      en: {
+        city: 'N’Djamena',
+        landmark: 'Grande Mosquée de Gaoui',
+        description:
+          'A mud-brick mosque with a slender minaret and white dome in the village of Gaoui near N’Djamena, built in the Sahelian manner and among Chad’s finest.',
+      },
+      de: {
+        city: 'N’Djamena',
+        landmark: 'Große Moschee von Gaoui',
+        description:
+          'Eine Lehmmoschee mit schlankem Minarett und weißer Kuppel im Dorf Gaoui bei N’Djamena, im Sahelstil erbaut und eine der schönsten des Tschad.',
+      },
+      ru: {
+        city: 'Нджамена',
+        landmark: 'Большая мечеть Гауи',
+        description:
+          'Глинобитная мечеть со стройным минаретом и белым куполом в селении Гауи близ Нджамены, построенная в сахельском стиле.',
+      },
+      it: {
+        city: 'N’Djamena',
+        landmark: 'Grande Moschea di Gaoui',
+        description:
+          'Una moschea in terra cruda con minareto snello e cupola bianca nel villaggio di Gaoui, vicino a N’Djamena, in stile saheliano.',
+      },
+    },
+  },
+  {
+    id: 'niamey',
+    countryCode: 'NE',
+    timezone: 'Africa/Niamey',
+    latitude: 13.5052,
+    longitude: 2.1099,
+    image: commons('Niger, Niamey, Pont Kennedy (1).jpg'),
+    credit: credit('Niger, Niamey, Pont Kennedy (1).jpg'),
+    aliases: [
+      'نيامي', 'niamey', 'niger', 'النيجر', 'pont kennedy', 'kennedy bridge', 'جسر كينيدي',
+      'grand mosque of niamey', 'الجامع الكبير',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'نيامي',
+        landmark: 'جسر كينيدي',
+        description:
+          'جسر يعبر نهر النيجر عند نيامي، افتُتح عام ١٩٧٠ وحمل اسم الرئيس الأمريكي، وهو أطول جسر في البلاد ويربط ضفتي العاصمة.',
+      },
+      en: {
+        city: 'Niamey',
+        landmark: 'Kennedy Bridge',
+        description:
+          'A bridge over the Niger at Niamey, opened in 1970 and named for the American president, the country’s longest and the link between the two banks of the capital.',
+      },
+      de: {
+        city: 'Niamey',
+        landmark: 'Kennedy-Brücke',
+        description:
+          'Eine Brücke über den Niger bei Niamey, 1970 eröffnet und nach dem amerikanischen Präsidenten benannt, die längste des Landes und die Verbindung beider Ufer der Hauptstadt.',
+      },
+      ru: {
+        city: 'Ниамей',
+        landmark: 'Мост Кеннеди',
+        description:
+          'Мост через Нигер у Ниамея, открытый в 1970 году и названный в честь американского президента; самый длинный в стране, он связывает два берега столицы.',
+      },
+      it: {
+        city: 'Niamey',
+        landmark: 'Ponte Kennedy',
+        description:
+          'Un ponte sul Niger a Niamey, aperto nel 1970 e intitolato al presidente americano: il più lungo del paese, collega le due rive della capitale.',
+      },
+    },
+  },
+  {
+    id: 'djenne',
+    countryCode: 'ML',
+    timezone: 'Africa/Bamako',
+    latitude: 13.9051,
+    longitude: -4.5553,
+    image: commons('The Great Clay Mosque in Djenne, Mali.jpg'),
+    credit: credit('The Great Clay Mosque in Djenne, Mali.jpg'),
+    aliases: [
+      'جني', 'djenne', 'djenné', 'mali', 'مالي', 'great mosque of djenne',
+      'الجامع الكبير في جني', 'bamako', 'باماكو',
+    ],
+    copy: {
+      ar: {
+        city: 'جني',
+        landmark: 'الجامع الكبير في جني',
+        description:
+          'أكبر مبنى من الطين في العالم، تُعيد البلدة طلاءه كل عام في مهرجان، بجدرانه الشاهقة وأوتاده الخشبية البارزة.',
+      },
+      en: {
+        city: 'Djenné',
+        landmark: 'Great Mosque of Djenné',
+        description:
+          'The largest mud-brick building in the world, re-plastered by the whole town each year in a festival, with tall walls and projecting timber beams.',
+      },
+      de: {
+        city: 'Djenné',
+        landmark: 'Große Moschee von Djenné',
+        description:
+          'Das größte Lehmbauwerk der Welt, das die Stadt jedes Jahr in einem Fest neu verputzt, mit hohen Wänden und vorstehenden Holzbalken.',
+      },
+      ru: {
+        city: 'Дженне',
+        landmark: 'Большая мечеть',
+        description:
+          'Крупнейшая в мире постройка из глины: город каждый год заново обмазывает её в дни праздника; высокие стены и выступающие деревянные балки.',
+      },
+      it: {
+        city: 'Djenné',
+        landmark: 'Grande Moschea di Djenné',
+        description:
+          'Il più grande edificio in terra cruda del mondo, reintonacato ogni anno dalla città durante una festa, con mura alte e travi di legno sporgenti.',
+      },
+    },
+  },
+  {
+    id: 'bobo-dioulasso',
+    countryCode: 'BF',
+    timezone: 'Africa/Ouagadougou',
+    latitude: 11.177,
+    longitude: -4.297,
+    image: commons('Moschee von Bobo-Dioulasso.jpg'),
+    credit: credit('Moschee von Bobo-Dioulasso.jpg'),
+    aliases: [
+      'بوبو ديولاسو', 'bobo-dioulasso', 'bobo dioulasso', 'burkina faso', 'بوركينا فاسو',
+      'grand mosque of bobo-dioulasso', 'الجامع الكبير في بوبو ديولاسو', 'ouagadougou',
+      'واغادوغو',
+    ],
+    copy: {
+      ar: {
+        city: 'بوبو ديولاسو',
+        landmark: 'الجامع الكبير',
+        description:
+          'مسجد من الطين بأبراج ومآذن خشبية في بوبو ديولاسو، وهو من أقدم مساجد بوركينا فاسو وأجملها بأسلوب السودان الغربي.',
+      },
+      en: {
+        city: 'Bobo-Dioulasso',
+        landmark: 'Grand Mosque of Bobo-Dioulasso',
+        description:
+          'A mud-brick mosque with timber towers and minarets in Bobo-Dioulasso, among the oldest and finest in Burkina Faso, in the western Sudanese manner.',
+      },
+      de: {
+        city: 'Bobo-Dioulasso',
+        landmark: 'Große Moschee von Bobo-Dioulasso',
+        description:
+          'Eine Lehmmoschee mit Holztürmen und Minaretten in Bobo-Dioulasso, eine der ältesten und schönsten Burkina Fasos im westsudanesischen Stil.',
+      },
+      ru: {
+        city: 'Бобо-Диуласо',
+        landmark: 'Большая мечеть',
+        description:
+          'Глинобитная мечеть с деревянными башнями и минаретами в Бобо-Диуласо, одна из старейших и красивейших в Буркина-Фасо.',
+      },
+      it: {
+        city: 'Bobo-Dioulasso',
+        landmark: 'Grande Moschea di Bobo-Dioulasso',
+        description:
+          'Una moschea in terra cruda con torri e minareti di legno a Bobo-Dioulasso, tra le più antiche e belle del Burkina Faso.',
+      },
+    },
+  },
+  {
+    id: 'freetown',
+    countryCode: 'SL',
+    timezone: 'Africa/Freetown',
+    latitude: 8.4984,
+    longitude: -13.2608,
+    image: commons('Freetown-aerialview.jpg'),
+    credit: credit('Freetown-aerialview.jpg'),
+    aliases: [
+      'فريتاون', 'freetown', 'sierra leone', 'سيراليون', 'freetown harbour', 'ميناء فريتاون',
+      'harbour',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'فريتاون',
+        landmark: 'ميناء فريتاون',
+        description:
+          'ميناء فريتاون على المحيط الأطلسي، حيث تتكئ المدينة على تلال خضراء وتنزل إلى خليج واسع فيه قوارب الصيد والعبّارات.',
+      },
+      en: {
+        city: 'Freetown',
+        landmark: 'Freetown Harbour',
+        description:
+          'The harbour of Freetown on the Atlantic, where the city leans against green hills and drops to a wide bay of fishing boats and ferries.',
+      },
+      de: {
+        city: 'Freetown',
+        landmark: 'Hafen von Freetown',
+        description:
+          'Der Hafen von Freetown am Atlantik: Die Stadt lehnt sich an grüne Hügel und fällt zu einer weiten Bucht mit Fischerbooten und Fähren ab.',
+      },
+      ru: {
+        city: 'Фритаун',
+        landmark: 'Порт Фритауна',
+        description:
+          'Порт Фритауна на Атлантике: город прижат к зелёным холмам и спускается к широкой бухте с рыбацкими лодками и паромами.',
+      },
+      it: {
+        city: 'Freetown',
+        landmark: 'Porto di Freetown',
+        description:
+          'Il porto di Freetown sull’Atlantico, dove la città si appoggia a colline verdi e scende a una baia ampia di barche e traghetti.',
+      },
+    },
+  },
+  {
+    id: 'monrovia',
+    countryCode: 'LR',
+    timezone: 'Africa/Monrovia',
+    latitude: 6.3005,
+    longitude: -10.7969,
+    image: commons('City Hall, Monrovia, Liberia.JPG'),
+    credit: credit('City Hall, Monrovia, Liberia.JPG'),
+    aliases: [
+      'مونروفيا', 'monrovia', 'liberia', 'ليبيريا', 'monrovia city hall', 'دار بلدية مونروفيا',
+      'city hall',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'مونروفيا',
+        landmark: 'دار بلدية مونروفيا',
+        description:
+          'مبنى بلدية مونروفيا بواجهته المستقيمة وأعمدته، يقف في وسط العاصمة الليبيرية عند تقاطع طرق رئيسية.',
+      },
+      en: {
+        city: 'Monrovia',
+        landmark: 'Monrovia City Hall',
+        description:
+          'The city hall of Monrovia, with its straight front and columns, standing in the middle of the Liberian capital at a main crossroads.',
+      },
+      de: {
+        city: 'Monrovia',
+        landmark: 'Rathaus von Monrovia',
+        description:
+          'Das Rathaus von Monrovia mit gerader Front und Säulen, mitten in der liberianischen Hauptstadt an einer Hauptkreuzung.',
+      },
+      ru: {
+        city: 'Монровия',
+        landmark: 'Мэрия Монровии',
+        description:
+          'Здание мэрии Монровии с прямым фасадом и колоннами, в центре либерийской столицы на главном перекрёстке.',
+      },
+      it: {
+        city: 'Monrovia',
+        landmark: 'Municipio di Monrovia',
+        description:
+          'Il municipio di Monrovia, con fronte lineare e colonne, nel centro della capitale liberiana a un crocevia principale.',
+      },
+    },
+  },
+  {
+    id: 'conakry',
+    countryCode: 'GN',
+    timezone: 'Africa/Conakry',
+    latitude: 9.5353,
+    longitude: -13.6841,
+    image: commons('Grande Mosquée Fayçal de Conakry 1.jpg'),
+    credit: credit('Grande Mosquée Fayçal de Conakry 1.jpg'),
+    aliases: [
+      'كوناكري', 'conakry', 'guinea', 'غينيا', 'grand mosque of conakry',
+      'الجامع الكبير في كوناكري', 'faisal mosque', 'مسجد فيصل',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'كوناكري',
+        landmark: 'الجامع الكبير في كوناكري',
+        description:
+          'مسجد كبير في كوناكري بقبة ومآذن بيضاء، بُني في الستينيات، ويُعد من أكبر مساجد غرب أفريقيا.',
+      },
+      en: {
+        city: 'Conakry',
+        landmark: 'Grand Mosque of Conakry',
+        description:
+          'A large mosque in Conakry with white dome and minarets, built in the 1960s and among the biggest in West Africa.',
+      },
+      de: {
+        city: 'Conakry',
+        landmark: 'Große Moschee von Conakry',
+        description:
+          'Eine große Moschee in Conakry mit weißer Kuppel und Minaretten, in den 1960er-Jahren erbaut und eine der größten Westafrikas.',
+      },
+      ru: {
+        city: 'Конакри',
+        landmark: 'Большая мечеть',
+        description:
+          'Большая мечеть в Конакри с белым куполом и минаретами, построенная в 1960-х, одна из крупнейших в Западной Африке.',
+      },
+      it: {
+        city: 'Conakry',
+        landmark: 'Grande Moschea di Conakry',
+        description:
+          'Una grande moschea a Conakry con cupola bianca e minareti, costruita negli anni Sessanta, tra le maggiori dell’Africa occidentale.',
+      },
+    },
+  },
+  {
+    id: 'bissau',
+    countryCode: 'GW',
+    timezone: 'Africa/Bissau',
+    latitude: 11.8636,
+    longitude: -15.5977,
+    image: commons('Catedral de Bissau (2).jpg'),
+    credit: credit('Catedral de Bissau (2).jpg'),
+    aliases: [
+      'بيساو', 'bissau', 'guinea-bissau', 'غينيا بيساو', 'bissau cathedral', 'كاتدرائية بيساو',
+      'cathedral',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'بيساو',
+        landmark: 'كاتدرائية بيساو',
+        description:
+          'كاتدرائية في وسط بيساو ببرج جرس عالٍ ونوافذ مقوسة، بُنيت في العهد البرتغالي وتطل على الشوارع المحيطة.',
+      },
+      en: {
+        city: 'Bissau',
+        landmark: 'Bissau Cathedral',
+        description:
+          'A cathedral in central Bissau with a tall bell tower and arched windows, built in Portuguese times and facing the streets around it.',
+      },
+      de: {
+        city: 'Bissau',
+        landmark: 'Kathedrale von Bissau',
+        description:
+          'Eine Kathedrale im Zentrum von Bissau mit hohem Glockenturm und Bogenfenstern, in portugiesischer Zeit erbaut.',
+      },
+      ru: {
+        city: 'Бисау',
+        landmark: 'Собор Бисау',
+        description:
+          'Собор в центре Бисау с высокой колокольней и арочными окнами, построенный в португальские времена.',
+      },
+      it: {
+        city: 'Bissau',
+        landmark: 'Cattedrale di Bissau',
+        description:
+          'Una cattedrale nel centro di Bissau con alta torre campanaria e finestre ad arco, costruita in epoca portoghese.',
+      },
+    },
+  },
+  {
+    id: 'banjul',
+    countryCode: 'GM',
+    timezone: 'Africa/Banjul',
+    latitude: 13.4601,
+    longitude: -16.5819,
+    image: commons('Gambia, Banjul, Arch 22.jpg'),
+    credit: credit('Gambia, Banjul, Arch 22.jpg'),
+    aliases: [
+      'بانجول', 'banjul', 'gambia', 'the gambia', 'غامبيا', 'arch 22', 'قوس 22',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'بانجول',
+        landmark: 'قوس 22',
+        description:
+          'قوس ضخم عند مدخل بانجول ارتفاعه ٣٥ متراً، بُني عام ١٩٩٦ لإحياء ذكرى الانقلاب، ومن أعلاه تُرى المدينة ومصب النهر.',
+      },
+      en: {
+        city: 'Banjul',
+        landmark: 'Arch 22',
+        description:
+          'A 35-metre arch at the entrance to Banjul, raised in 1996 to mark the coup, with a view from the top over the city and the river mouth.',
+      },
+      de: {
+        city: 'Banjul',
+        landmark: 'Arch 22',
+        description:
+          'Ein 35 Meter hoher Bogen am Eingang von Banjul, 1996 zum Gedenken an den Putsch errichtet, mit Blick von oben über Stadt und Flussmündung.',
+      },
+      ru: {
+        city: 'Банжул',
+        landmark: 'Арка 22',
+        description:
+          '35-метровая арка на въезде в Банжул, поставленная в 1996 году в память о перевороте; сверху видны город и устье реки.',
+      },
+      it: {
+        city: 'Banjul',
+        landmark: 'Arch 22',
+        description:
+          'Un arco alto 35 metri all’ingresso di Banjul, eretto nel 1996 per ricordare il colpo di Stato, con vista dall’alto sulla città e sulla foce del fiume.',
+      },
+    },
+  },
+  {
+    id: 'lome',
+    countryCode: 'TG',
+    timezone: 'Africa/Lome',
+    latitude: 6.1298,
+    longitude: 1.2161,
+    image: commons('Monument de l\'indépendance du Togo à Lomé 12.jpg'),
+    credit: credit('Monument de l\'indépendance du Togo à Lomé 12.jpg'),
+    aliases: [
+      'لومي', 'lome', 'lomé', 'togo', 'توغو', 'monument de l\'independance', 'نصب الاستقلال',
+      'independence monument',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'لومي',
+        landmark: 'نصب الاستقلال',
+        description:
+          'نصب في وسط لومي من ثلاث كتل حجرية تحيط بتمثال يقطع السلاسل، أُقيم في الستينيات تخليداً لاستقلال توغو عام ١٩٦٠.',
+      },
+      en: {
+        city: 'Lomé',
+        landmark: 'Monument de l’Indépendance',
+        description:
+          'A monument in central Lomé of three stone slabs around a figure breaking free of chains, raised in the 1960s to mark Togo’s independence in 1960.',
+      },
+      de: {
+        city: 'Lomé',
+        landmark: 'Unabhängigkeitsdenkmal',
+        description:
+          'Ein Denkmal im Zentrum von Lomé: drei Steinplatten um eine Figur, die Ketten sprengt, in den 1960er-Jahren zur Erinnerung an die Unabhängigkeit Togos 1960 errichtet.',
+      },
+      ru: {
+        city: 'Ломе',
+        landmark: 'Монумент независимости',
+        description:
+          'Монумент в центре Ломе: три каменные стелы вокруг фигуры, разрывающей цепи; установлен в 1960-х в честь независимости Того 1960 года.',
+      },
+      it: {
+        city: 'Lomé',
+        landmark: 'Monumento dell’Indipendenza',
+        description:
+          'Un monumento nel centro di Lomé: tre lastre di pietra attorno a una figura che spezza le catene, eretto negli anni Sessanta per l’indipendenza del Togo nel 1960.',
+      },
+    },
+  },
+  {
+    id: 'abomey',
+    countryCode: 'BJ',
+    timezone: 'Africa/Porto-Novo',
+    latitude: 7.1833,
+    longitude: 1.9833,
+    image: commons('Royal Palaces of Abomey-133471.jpg'),
+    credit: credit('Royal Palaces of Abomey-133471.jpg'),
+    aliases: [
+      'أبومي', 'abomey', 'benin', 'بنين', 'royal palaces of abomey', 'القصور الملكية في أبومي',
+      'porto-novo', 'بورتو نوفو',
+    ],
+    copy: {
+      ar: {
+        city: 'أبومي',
+        landmark: 'القصور الملكية في أبومي',
+        description:
+          'مجموعة قصور من الطين كان يحكم منها ملوك داهومي، بجدران مزخرفة ورموز وأبواب خشبية، وهي اليوم موقع تراث عالمي.',
+      },
+      en: {
+        city: 'Abomey',
+        landmark: 'Royal Palaces of Abomey',
+        description:
+          'A group of earthen palaces from which the kings of Dahomey ruled, with decorated walls, symbols and carved doors, now a World Heritage site.',
+      },
+      de: {
+        city: 'Abomey',
+        landmark: 'Königspaläste von Abomey',
+        description:
+          'Eine Gruppe von Lehm-Palästen, von denen die Könige von Dahomey herrschten, mit verzierten Wänden, Symbolen und geschnitzten Türen, heute Welterbe.',
+      },
+      ru: {
+        city: 'Абомей',
+        landmark: 'Королевские дворцы Абомея',
+        description:
+          'Комплекс глинобитных дворцов, откуда правили цари Дагомеи; украшенные стены, символы и резные двери, ныне объект Всемирного наследия.',
+      },
+      it: {
+        city: 'Abomey',
+        landmark: 'Palazzi reali di Abomey',
+        description:
+          'Un gruppo di palazzi in terra cruda da cui governavano i re del Dahomey, con pareti decorate, simboli e porte intagliate, oggi patrimonio mondiale.',
+      },
+    },
+  },
+  {
+    id: 'bangui',
+    countryCode: 'CF',
+    timezone: 'Africa/Bangui',
+    latitude: 4.3667,
+    longitude: 18.5833,
+    image: commons('Bangui City Centre.jpg'),
+    credit: credit('Bangui City Centre.jpg'),
+    aliases: [
+      'بانغي', 'bangui', 'central african republic', 'جمهورية أفريقيا الوسطى', 'oubangui',
+      'أوبانغي', 'bangui city centre',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'بانغي',
+        landmark: 'وسط مدينة بانغي',
+        description:
+          'قلب بانغي على ضفة نهر أوبانغي، حيث المباني الاستعمارية والأسواق والجسر الذي يعبر إلى الكونغو.',
+      },
+      en: {
+        city: 'Bangui',
+        landmark: 'Bangui City Centre',
+        description:
+          'The centre of Bangui on the Oubangui river, with colonial buildings, markets and the bridge that crosses to Congo.',
+      },
+      de: {
+        city: 'Bangui',
+        landmark: 'Zentrum von Bangui',
+        description:
+          'Das Zentrum von Bangui am Oubangui, mit Kolonialbauten, Märkten und der Brücke in den Kongo.',
+      },
+      ru: {
+        city: 'Банги',
+        landmark: 'Центр Банги',
+        description:
+          'Центр Банги на реке Убанги: колониальные здания, рынки и мост, ведущий в Конго.',
+      },
+      it: {
+        city: 'Bangui',
+        landmark: 'Centro di Bangui',
+        description:
+          'Il centro di Bangui sul fiume Oubangui, con edifici coloniali, mercati e il ponte che porta in Congo.',
+      },
+    },
+  },
+  {
+    id: 'juba',
+    countryCode: 'SS',
+    timezone: 'Africa/Juba',
+    latitude: 4.8517,
+    longitude: 31.5825,
+    image: commons('Juba Nile Bridge.jpg'),
+    credit: credit('Juba Nile Bridge.jpg'),
+    aliases: [
+      'جوبا', 'juba', 'south sudan', 'جنوب السودان', 'juba bridge', 'جسر جوبا', 'nile bridge',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'جوبا',
+        landmark: 'جسر جوبا على النيل',
+        description:
+          'جسر يعبر النيل الأبيض عند جوبا، طوله نحو نصف كيلومتر، ويربط المدينة بالضفة الغربية.',
+      },
+      en: {
+        city: 'Juba',
+        landmark: 'Juba Nile Bridge',
+        description:
+          'A bridge over the White Nile at Juba, roughly half a kilometre long, linking the city to the western bank.',
+      },
+      de: {
+        city: 'Juba',
+        landmark: 'Nilstraßenbrücke bei Juba',
+        description:
+          'Eine Brücke über den Weißen Nil bei Juba, rund einen halben Kilometer lang, die die Stadt mit dem Westufer verbindet.',
+      },
+      ru: {
+        city: 'Джуба',
+        landmark: 'Мост через Белый Нил',
+        description:
+          'Мост через Белый Нил у Джубы длиной около полукилометра, соединяющий город с западным берегом.',
+      },
+      it: {
+        city: 'Juba',
+        landmark: 'Ponte sul Nilo Bianco',
+        description:
+          'Un ponte sul Nilo Bianco a Juba, lungo circa mezzo chilometro, che collega la città alla riva occidentale.',
+      },
+    },
+  },
+  {
+    id: 'mogadishu',
+    countryCode: 'SO',
+    timezone: 'Africa/Mogadishu',
+    latitude: 2.0361,
+    longitude: 45.3314,
+    image: commons('Isbahaysiga Mosque 01.jpg'),
+    credit: credit('Isbahaysiga Mosque 01.jpg'),
+    aliases: [
+      'مقديشو', 'mogadishu', 'somalia', 'الصومال', 'isbahaysiga', 'جامع إسباهيسيغا',
+      'arba\'a rukun', 'arba rukun mosque', 'مسجد الأربعة أركان',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'مقديشو',
+        landmark: 'جامع إسباهيسيغا',
+        description:
+          'أكبر مسجد في الصومال، بُني عام ١٩٨٧ بقبة ومئذنة بيضاء، ويقف على طريق مكة في قلب مقديشو.',
+      },
+      en: {
+        city: 'Mogadishu',
+        landmark: 'Isbahaysiga Mosque',
+        description:
+          'Somalia’s largest mosque, built in 1987 with a white dome and minaret, standing on Makka al-Mukarama Road in the heart of Mogadishu.',
+      },
+      de: {
+        city: 'Mogadischu',
+        landmark: 'Isbahaysiga-Moschee',
+        description:
+          'Somalias größte Moschee, 1987 mit weißer Kuppel und Minarett erbaut, an der Makka-al-Mukarama-Straße im Herzen von Mogadischu.',
+      },
+      ru: {
+        city: 'Могадишо',
+        landmark: 'Мечеть Исбахайсига',
+        description:
+          'Крупнейшая мечеть Сомали, построенная в 1987 году с белым куполом и минаретом, на улице Мекки в центре Могадишо.',
+      },
+      it: {
+        city: 'Mogadiscio',
+        landmark: 'Moschea Isbahaysiga',
+        description:
+          'La più grande moschea della Somalia, costruita nel 1987 con cupola e minareto bianchi, sulla via della Mecca nel cuore di Mogadiscio.',
       },
     },
   },
