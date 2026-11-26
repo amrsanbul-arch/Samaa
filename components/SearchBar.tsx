@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { Place } from '@/lib/types';
+import { localeRegion } from '@/lib/i18n';
 import { useLang } from './LangProvider';
 
 type Props = {
@@ -41,8 +42,10 @@ export default function SearchBar({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
+        const region = localeRegion();
+        const hint = region ? `&cc=${region}` : '';
         const response = await fetch(
-          `/api/geocode?q=${encodeURIComponent(query)}&lang=${lang}`,
+          `/api/geocode?q=${encodeURIComponent(query)}&lang=${lang}${hint}`,
           { signal: controller.signal }
         );
         const data = (await response.json()) as { results: Place[] };

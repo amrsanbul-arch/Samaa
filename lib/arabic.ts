@@ -10,7 +10,8 @@ export function normalizeArabic(input: string): string {
     .replace(/ة/g, 'ه')
     .replace(/ؤ/g, 'و')
     .replace(/ئ/g, 'ي')
-    .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
+    // Slugs ("chichen-itza") and names ("Chichén Itzá") must collide.
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }

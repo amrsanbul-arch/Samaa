@@ -22,14 +22,18 @@ import { themeFor } from '@/lib/theme';
 import AuthGate from '@/components/AuthGate';
 import { useAuth } from '@/components/AuthProvider';
 import LogoutButton from '@/components/LogoutButton';
-import type { Lang } from '@/lib/i18n';
+import { localeRegion, type Lang } from '@/lib/i18n';
 
 type Stage = 'idle' | 'flying' | 'weather' | 'leaving';
 
 const EXIT_MS = 620;
 
 async function geocodeFirst(query: string, lang: Lang): Promise<Place | null> {
-  const response = await fetch(`/api/geocode?q=${encodeURIComponent(query)}&lang=${lang}`);
+  const region = localeRegion();
+  const hint = region ? `&cc=${region}` : '';
+  const response = await fetch(
+    `/api/geocode?q=${encodeURIComponent(query)}&lang=${lang}${hint}`
+  );
   if (!response.ok) throw new Error('geocode');
   const data = (await response.json()) as { results?: Place[] };
   return data.results?.[0] ?? null;
@@ -51,13 +55,38 @@ async function fetchWeather(place: Place): Promise<WeatherBundle> {
   return data as WeatherBundle;
 }
 
+function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
+  const rad = (value: number) => (value * Math.PI) / 180;
+  const dLat = rad(bLat - aLat);
+  const dLon = rad(bLon - aLon);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+}
+
+/** Curated scene whose own coordinates sit under the geocoded place. */
+function nearestLandmark(place: Place): Landmark | null {
+  let best: { item: Landmark; km: number } | null = null;
+  for (const item of LANDMARKS) {
+    if (item.countryCode !== place.countryCode) continue;
+    const km = distanceKm(place.latitude, place.longitude, item.latitude, item.longitude);
+    if (km <= 20 && (!best || km < best.km)) best = { item, km };
+  }
+  return best?.item ?? null;
+}
+
 function landmarkFor(place: Place | null): Landmark | null {
   if (!place) return null;
-  const match = findLandmark(place.name) ?? (place.admin1 ? findLandmark(place.admin1) : null);
-  if (!match) return null;
+  const named = findLandmark(place.name) ?? (place.admin1 ? findLandmark(place.admin1) : null);
   // Paris, Texas must not borrow the Eiffel Tower.
-  if (place.countryCode && match.countryCode && place.countryCode !== match.countryCode) return null;
-  return match;
+  if (named) {
+    if (place.countryCode && named.countryCode && place.countryCode !== named.countryCode) return null;
+    return named;
+  }
+  // A geocoder translating the name ("روما", "Rom") still lands on the archive
+  // scene when the coordinates match the curated city.
+  return nearestLandmark(place);
 }
 
 function sceneFor(place: Place | null, lang: Lang) {
@@ -173,13 +202,21 @@ export default function HomePage() {
           return;
         }
 
+        // A geocoded name ("Chichén Itzá", "Giza") keeps the archive backdrop, so
+        // the card should carry the curated, translated name of that scene.
+        const curatedMatch = curated ?? landmarkFor(resolved);
+        if (curatedMatch) {
+          const localized = localizedText(curatedMatch, lang);
+          resolved = { ...resolved, name: localized.city, country: localized.country };
+        }
+
         warmImage(sceneFor(resolved, lang).image);
 
         // Enter the scene immediately: the backdrop paints while the weather lands.
         setPlace(resolved);
         setWeather(null);
         setWeatherError(null);
-        setCuratedId((curated ?? landmarkFor(resolved))?.id ?? null);
+        setCuratedId(curatedMatch?.id ?? null);
         lastQuery.current = payload.text;
         setFlyTo({ lat: resolved.latitude, lng: resolved.longitude });
         setStage('weather');

@@ -625,6 +625,26 @@ export function localeOf(lang: Lang): string {
   return langMeta(lang).locale;
 }
 
+/**
+ * ISO region of the browser's language (e.g. "ar-EG" → "EG"), used as a soft
+ * hint so a city search prefers the visitor's own country on a name tie.
+ */
+export function localeRegion(): string {
+  if (typeof navigator === 'undefined') return '';
+  const tags = [...(navigator.languages ?? []), navigator.language ?? ''];
+  for (const tag of tags) {
+    if (!tag) continue;
+    try {
+      const region = new Intl.Locale(tag).region;
+      if (region) return region.toUpperCase();
+    } catch {
+      const match = tag.split('-').find((part) => /^[A-Za-z]{2}$/.test(part) && part !== tag);
+      if (match) return match.toUpperCase();
+    }
+  }
+  return '';
+}
+
 export function dirOf(lang: Lang): 'rtl' | 'ltr' {
   return langMeta(lang).dir;
 }
