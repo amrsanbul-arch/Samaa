@@ -82,6 +82,26 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  AL: { ar: 'ألبانيا', en: 'Albania', de: 'Albanien', ru: 'Албания', it: 'Albania' },
+  MK: { ar: 'مقدونيا الشمالية', en: 'North Macedonia', de: 'Nordmazedonien', ru: 'Северная Македония', it: 'Macedonia del Nord' },
+  ME: { ar: 'الجبل الأسود', en: 'Montenegro', de: 'Montenegro', ru: 'Черногория', it: 'Montenegro' },
+  BA: { ar: 'البوسنة والهرسك', en: 'Bosnia and Herzegovina', de: 'Bosnien und Herzegowina', ru: 'Босния и Герцеговина', it: 'Bosnia ed Erzegovina' },
+  XK: { ar: 'كوسوفو', en: 'Kosovo', de: 'Kosovo', ru: 'Косово', it: 'Kosovo' },
+  SI: { ar: 'سلوفينيا', en: 'Slovenia', de: 'Slowenien', ru: 'Словения', it: 'Slovenia' },
+  SK: { ar: 'سلوفاكيا', en: 'Slovakia', de: 'Slowakei', ru: 'Словакия', it: 'Slovacchia' },
+  MD: { ar: 'مولدوفا', en: 'Moldova', de: 'Moldau', ru: 'Молдова', it: 'Moldavia' },
+  BY: { ar: 'بيلاروسيا', en: 'Belarus', de: 'Belarus', ru: 'Беларусь', it: 'Bielorussia' },
+  LT: { ar: 'ليتوانيا', en: 'Lithuania', de: 'Litauen', ru: 'Литва', it: 'Lituania' },
+  LV: { ar: 'لاتفيا', en: 'Latvia', de: 'Lettland', ru: 'Латвия', it: 'Lettonia' },
+  EE: { ar: 'إستونيا', en: 'Estonia', de: 'Estland', ru: 'Эстония', it: 'Estonia' },
+  MT: { ar: 'مالطا', en: 'Malta', de: 'Malta', ru: 'Мальта', it: 'Malta' },
+  CY: { ar: 'قبرص', en: 'Cyprus', de: 'Zypern', ru: 'Кипр', it: 'Cipro' },
+  LU: { ar: 'لوكسمبورغ', en: 'Luxembourg', de: 'Luxemburg', ru: 'Люксембург', it: 'Lussemburgo' },
+  MC: { ar: 'موناكو', en: 'Monaco', de: 'Monaco', ru: 'Монако', it: 'Monaco' },
+  AD: { ar: 'أندورا', en: 'Andorra', de: 'Andorra', ru: 'Андорра', it: 'Andorra' },
+  LI: { ar: 'ليختنشتاين', en: 'Liechtenstein', de: 'Liechtenstein', ru: 'Лихтенштейн', it: 'Liechtenstein' },
+  SM: { ar: 'سان مارينو', en: 'San Marino', de: 'San Marino', ru: 'Сан-Марино', it: 'San Marino' },
+  VA: { ar: 'الفاتيكان', en: 'Vatican City', de: 'Vatikanstadt', ru: 'Ватикан', it: 'Città del Vaticano' },
   BD: { ar: 'بنغلاديش', en: 'Bangladesh', de: 'Bangladesch', ru: 'Бангладеш', it: 'Bangladesh' },
   LK: { ar: 'سريلانكا', en: 'Sri Lanka', de: 'Sri Lanka', ru: 'Шри-Ланка', it: 'Sri Lanka' },
   NP: { ar: 'نيبال', en: 'Nepal', de: 'Nepal', ru: 'Непал', it: 'Nepal' },
@@ -5195,6 +5215,920 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Fortezza di Belgrado (Kalemegdan)',
         description:
           'Una fortezza sul crinale dove la Sava incontra il Danubio; il suo parco Kalemegdan è oggi il passeggio e il belvedere del centro di Belgrado.',
+      },
+    },
+  },
+  {
+    id: 'tirana',
+    countryCode: 'AL',
+    timezone: 'Europe/Tirane',
+    latitude: 41.3274,
+    longitude: 19.8187,
+    image: commons('Xhamia e Et\'hem Beut 1.jpg'),
+    credit: credit('Xhamia e Et\'hem Beut 1.jpg'),
+    aliases: [
+      'تيرانا', 'tirana', 'albania', 'ألبانيا', 'ethem bey', 'إثيم باي', 'et\'hem bey mosque',
+      'مسجد إثيم باي',
+    ],
+    capital: true,
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'تيرانا',
+        landmark: 'مسجد إثيم باي',
+        description:
+          'مسجد صغير في قلب ساحة سكاندربيغ، بدأ بناؤه في أواخر القرن الثامن عشر، وتغطي جدرانه وأروقته لوحات جدارية بأشجار وشلالات ومدن.',
+      },
+      en: {
+        city: 'Tirana',
+        landmark: 'Et’hem Bey Mosque',
+        description:
+          'A small mosque on Skanderbeg Square, begun in the late eighteenth century, its walls and portico painted with trees, waterfalls and city views.',
+      },
+      de: {
+        city: 'Tirana',
+        landmark: 'Et’hem-Bey-Moschee',
+        description:
+          'Eine kleine Moschee am Skanderbeg-Platz, Ende des 18. Jahrhunderts begonnen; Wände und Vorhalle sind mit Bäumen, Wasserfällen und Stadtansichten ausgemalt.',
+      },
+      ru: {
+        city: 'Тирана',
+        landmark: 'Мечеть Этема Бея',
+        description:
+          'Небольшая мечеть на площади Скандербега, заложенная в конце XVIII века; стены и портик расписаны деревьями, водопадами и видами города.',
+      },
+      it: {
+        city: 'Tirana',
+        landmark: 'Moschea di Et’hem Bey',
+        description:
+          'Una piccola moschea su piazza Skanderbeg, iniziata alla fine del Settecento, con pareti e portico dipinti di alberi, cascate e vedute della città.',
+      },
+    },
+  },
+  {
+    id: 'skopje',
+    countryCode: 'MK',
+    timezone: 'Europe/Skopje',
+    latitude: 42.0007,
+    longitude: 21.4328,
+    image: commons('Tower and West Wall of Skopje Fortress, North Macedonia, 2026.jpg'),
+    credit: credit('Tower and West Wall of Skopje Fortress, North Macedonia, 2026.jpg'),
+    aliases: [
+      'سكوبيه', 'skopje', 'macedonia', 'مقدونيا', 'north macedonia', 'مقدونيا الشمالية',
+      'kale', 'كالي', 'skopje fortress', 'قلعة سكوبيه',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'سكوبيه',
+        landmark: 'قلعة كالي',
+        description:
+          'أسوار من العصور الوسطى تتوج تلة فوق نهر فاردار، بُنيت على أساسات بيزنطية وأعاد العثمانيون بناءها، ومنها يُرى وسط سكوبيه كله.',
+      },
+      en: {
+        city: 'Skopje',
+        landmark: 'Kale Fortress',
+        description:
+          'Medieval walls crowning the hill above the Vardar, raised on Byzantine foundations and rebuilt in Ottoman times; the whole centre of Skopje lies below.',
+      },
+      de: {
+        city: 'Skopje',
+        landmark: 'Festung Kale',
+        description:
+          'Mittelalterliche Mauern auf dem Hügel über dem Vardar, auf byzantinischen Fundamenten errichtet und in osmanischer Zeit erneuert; darunter liegt das ganze Zentrum von Skopje.',
+      },
+      ru: {
+        city: 'Скопье',
+        landmark: 'Крепость Кале',
+        description:
+          'Средневековые стены на холме над Вардаром, возведённые на византийском основании и перестроенные в османское время; внизу лежит весь центр Скопье.',
+      },
+      it: {
+        city: 'Skopje',
+        landmark: 'Fortezza Kale',
+        description:
+          'Mura medievali sulla collina sopra il Vardar, alzate su fondamenta bizantine e ricostruite in età ottomana; sotto si stende tutto il centro di Skopje.',
+      },
+    },
+  },
+  {
+    id: 'sveti-stefan',
+    countryCode: 'ME',
+    timezone: 'Europe/Podgorica',
+    latitude: 42.2569,
+    longitude: 18.897,
+    image: commons('Sveti Stefan (06).jpg'),
+    credit: credit('Sveti Stefan (06).jpg'),
+    aliases: [
+      'سفيتي ستيفان', 'sveti stefan', 'montenegro', 'الجبل الأسود', 'podgorica', 'بودغوريتسا',
+    ],
+    copy: {
+      ar: {
+        city: 'سفيتي ستيفان',
+        landmark: 'جزيرة سفيتي ستيفان',
+        description:
+          'جزيرة صغيرة صارت بلدة من الحجر على ساحل البحر الأدرياتيكي، تصلها بالبر رقبة رملية ضيقة، وكانت قرية صيادين ثم صارت منتجعاً.',
+      },
+      en: {
+        city: 'Sveti Stefan',
+        landmark: 'Sveti Stefan',
+        description:
+          'A tiny island turned stone town on the Adriatic coast, joined to the mainland by a narrow sandy isthmus; once a fishing village, now a resort.',
+      },
+      de: {
+        city: 'Sveti Stefan',
+        landmark: 'Sveti Stefan',
+        description:
+          'Eine winzige Insel, die zur steinernen Stadt wurde, durch einen schmalen Sanddamm mit dem Festland verbunden; einst Fischerdorf, heute ein Resort.',
+      },
+      ru: {
+        city: 'Свети-Стефан',
+        landmark: 'Свети-Стефан',
+        description:
+          'Крошечный остров, ставший каменным городком на Адриатике и соединённый с берегом узкой песчаной косой; когда-то рыбацкая деревня, теперь курорт.',
+      },
+      it: {
+        city: 'Sveti Stefan',
+        landmark: 'Sveti Stefan',
+        description:
+          'Una minuscola isola diventata città di pietra sull’Adriatico, unita alla terraferma da un sottile istmo sabbioso; un tempo villaggio di pescatori, oggi resort.',
+      },
+    },
+  },
+  {
+    id: 'mostar',
+    countryCode: 'BA',
+    timezone: 'Europe/Sarajevo',
+    latitude: 43.3363,
+    longitude: 17.8148,
+    image: commons('Mostar Stari Most BW 2024-10-01 13-00-05.jpg'),
+    credit: credit('Mostar Stari Most BW 2024-10-01 13-00-05.jpg'),
+    aliases: [
+      'موستار', 'mostar', 'bosnia', 'البوسنة والهرسك', 'bosnia and herzegovina', 'stari most',
+      'الجسر القديم', 'sarajevo', 'سراييفو',
+    ],
+    focus: '30% 35%',
+    copy: {
+      ar: {
+        city: 'موستار',
+        landmark: 'الجسر القديم (ستاري موست)',
+        description:
+          'جسر حجري بقوس واحد من القرن السادس عشر يعبر نهر نيريتفا في موستار، أعاده الحرفيون بالحجر نفسه بعد تدميره في التسعينيات.',
+      },
+      en: {
+        city: 'Mostar',
+        landmark: 'Stari Most (Old Bridge)',
+        description:
+          'A single-arch stone bridge of the sixteenth century across the Neretva in Mostar, rebuilt by craftsmen from the same stone after its destruction in the 1990s.',
+      },
+      de: {
+        city: 'Mostar',
+        landmark: 'Stari Most (Alte Brücke)',
+        description:
+          'Eine steinerne Bogenbrücke aus dem 16. Jahrhundert über die Neretva in Mostar, nach ihrer Zerstörung in den 1990er-Jahren von Handwerkern aus demselben Stein wieder errichtet.',
+      },
+      ru: {
+        city: 'Мостар',
+        landmark: 'Старый мост (Стари-Мост)',
+        description:
+          'Каменный однопролётный мост XVI века через Неретву в Мостаре, заново сложенный мастерами из того же камня после разрушения в 1990-х.',
+      },
+      it: {
+        city: 'Mostar',
+        landmark: 'Stari Most (Ponte Vecchio)',
+        description:
+          'Un ponte di pietra a un solo arco del Cinquecento sulla Neretva a Mostar, ricostruito dagli artigiani con la stessa pietra dopo la distruzione negli anni Novanta.',
+      },
+    },
+  },
+  {
+    id: 'pristina',
+    countryCode: 'XK',
+    timezone: 'Europe/Belgrade',
+    latitude: 42.6727,
+    longitude: 21.1669,
+    image: commons('Biblioteca Nacional, Pristina, Kosovo, 2014-04-16, DD 14.JPG'),
+    credit: credit('Biblioteca Nacional, Pristina, Kosovo, 2014-04-16, DD 14.JPG'),
+    aliases: [
+      'بريشتينا', 'pristina', 'kosovo', 'كوسوفو', 'national library of kosovo',
+      'المكتبة الوطنية في كوسوفو', 'biblioteka',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'بريشتينا',
+        landmark: 'المكتبة الوطنية في كوسوفو',
+        description:
+          'مبنى أبيض تتشابك فيه مكعبات وقباب شبكية، صممه أندريا موتشاناكوفيتش عام ١٩٧٢، ويُعد أغرب مباني بريشتينا وأكثرها جدلاً.',
+      },
+      en: {
+        city: 'Pristina',
+        landmark: 'National Library of Kosovo',
+        description:
+          'A white building of interlocking cubes and lattice domes designed by Andrija Mutnjaković in 1972, the strangest and most argued-over building in Pristina.',
+      },
+      de: {
+        city: 'Pristina',
+        landmark: 'Nationalbibliothek des Kosovo',
+        description:
+          'Ein weißer Bau aus verschachtelten Würfeln und Gitterkuppeln von Andrija Mutnjaković (1972), das seltsamste und umstrittenste Gebäude Pristinas.',
+      },
+      ru: {
+        city: 'Приштина',
+        landmark: 'Национальная библиотека Косова',
+        description:
+          'Белое здание из сросшихся кубов и решётчатых куполов, спроектированное Андрией Мутняковичем в 1972 году, — самое странное и спорное в Приштине.',
+      },
+      it: {
+        city: 'Pristina',
+        landmark: 'Biblioteca nazionale del Kosovo',
+        description:
+          'Un edificio bianco di cubi incastrati e cupole a reticolo progettato da Andrija Mutnjaković nel 1972, il più strano e discusso di Pristina.',
+      },
+    },
+  },
+  {
+    id: 'bled',
+    countryCode: 'SI',
+    timezone: 'Europe/Ljubljana',
+    latitude: 46.3601,
+    longitude: 14.0848,
+    image: commons('Bled Island & Bled Castle (1).jpg'),
+    credit: credit('Bled Island & Bled Castle (1).jpg'),
+    aliases: [
+      'بليد', 'bled', 'slovenia', 'سلوفينيا', 'lake bled', 'بحيرة بليد', 'bled island',
+      'ljubljana', 'ليوبليانا',
+    ],
+    copy: {
+      ar: {
+        city: 'بليد',
+        landmark: 'بحيرة بليد',
+        description:
+          'بحيرة جبلية صغيرة تطفو في وسطها جزيرة عليها كنيسة وبرج جرس، وفوق ضفتها الغربية قلعة بليد على جرف صخري.',
+      },
+      en: {
+        city: 'Bled',
+        landmark: 'Lake Bled',
+        description:
+          'A small alpine lake with a church and bell tower on an island in the middle, and Bled Castle on a cliff above the western shore.',
+      },
+      de: {
+        city: 'Bled',
+        landmark: 'Bleder See',
+        description:
+          'Ein kleiner Alpensee mit Kirche und Glockenturm auf einer Insel in der Mitte und der Burg Bled auf einer Felswand über dem Westufer.',
+      },
+      ru: {
+        city: 'Блед',
+        landmark: 'Бледское озеро',
+        description:
+          'Небольшое альпийское озеро с церковью и звонницей на островке посредине и замком Блед на скале над западным берегом.',
+      },
+      it: {
+        city: 'Bled',
+        landmark: 'Lago di Bled',
+        description:
+          'Un piccolo lago alpino con una chiesa e un campanile su un isolotto al centro e il castello di Bled su una rupe sopra la riva ovest.',
+      },
+    },
+  },
+  {
+    id: 'bratislava',
+    countryCode: 'SK',
+    timezone: 'Europe/Bratislava',
+    latitude: 48.1482,
+    longitude: 17.1067,
+    image: commons('Bratislava Castle with Danube.jpeg'),
+    credit: credit('Bratislava Castle with Danube.jpeg'),
+    aliases: [
+      'براتيسلافا', 'bratislava', 'slovakia', 'سلوفاكيا', 'bratislava castle',
+      'قلعة براتيسلافا',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'براتيسلافا',
+        landmark: 'قلعة براتيسلافا',
+        description:
+          'قلعة بيضاء بأربعة أبراج في زواياها تجلس على تلة فوق الدانوب، وتُرى من معظم أنحاء المدينة القديمة.',
+      },
+      en: {
+        city: 'Bratislava',
+        landmark: 'Bratislava Castle',
+        description:
+          'A white castle with four corner towers on a hill above the Danube, visible from most of the old town.',
+      },
+      de: {
+        city: 'Bratislava',
+        landmark: 'Burg Bratislava',
+        description:
+          'Eine weiße Burg mit vier Ecktürmen auf einem Hügel über der Donau, von fast überall in der Altstadt zu sehen.',
+      },
+      ru: {
+        city: 'Братислава',
+        landmark: 'Братиславский град',
+        description:
+          'Белый замок с четырьмя угловыми башнями на холме над Дунаем, видный почти из любой точки старого города.',
+      },
+      it: {
+        city: 'Bratislava',
+        landmark: 'Castello di Bratislava',
+        description:
+          'Un castello bianco con quattro torri angolari su una collina sopra il Danubio, visibile da quasi tutta la città vecchia.',
+      },
+    },
+  },
+  {
+    id: 'orhei',
+    countryCode: 'MD',
+    timezone: 'Europe/Chisinau',
+    latitude: 47.383,
+    longitude: 28.825,
+    image: commons('Monasterio Orheiul Vechi, Orhei, Moldavia, 2023-11-02, DD 06.jpg'),
+    credit: credit('Monasterio Orheiul Vechi, Orhei, Moldavia, 2023-11-02, DD 06.jpg'),
+    aliases: [
+      'أورهي', 'orhei', 'moldova', 'مولدوفا', 'orheiul vechi', 'أورهيول فيكي', 'chisinau',
+      'كيشيناو', 'old orhei',
+    ],
+    focus: '70% 40%',
+    copy: {
+      ar: {
+        city: 'أورهي',
+        landmark: 'أورهيول فيكي',
+        description:
+          'دير محفور في جرف من الحجر الجيري فوق منعطف نهر راوت، على بعد نحو أربعين كيلومتراً من كيشيناو، نُحت في الصخر على مدى قرون.',
+      },
+      en: {
+        city: 'Orhei',
+        landmark: 'Orheiul Vechi',
+        description:
+          'A monastery cut into a limestone cliff above a bend of the Răut river, some 40 km from Chișinău, hollowed out over centuries.',
+      },
+      de: {
+        city: 'Orhei',
+        landmark: 'Orheiul Vechi',
+        description:
+          'Ein in eine Kalksteinwand über einer Flussschleife des Răut gehauenes Kloster, rund 40 km von Chișinău entfernt, über Jahrhunderte aus dem Fels geschlagen.',
+      },
+      ru: {
+        city: 'Орхей',
+        landmark: 'Старый Орхей',
+        description:
+          'Монастырь, вырубленный в известняковой скале над излучиной Реута, примерно в 40 км от Кишинёва; его выдалбливали в камне столетиями.',
+      },
+      it: {
+        city: 'Orhei',
+        landmark: 'Orheiul Vechi',
+        description:
+          'Un monastero scavato in una parete di calcare sopra un’ansa del Răut, a circa 40 km da Chișinău, intagliato nella roccia nei secoli.',
+      },
+    },
+  },
+  {
+    id: 'mir',
+    countryCode: 'BY',
+    timezone: 'Europe/Minsk',
+    latitude: 53.4517,
+    longitude: 26.4709,
+    image: commons('Mir Castle 2023-07-02 6022.jpg'),
+    credit: credit('Mir Castle 2023-07-02 6022.jpg'),
+    aliases: [
+      'مير', 'mir', 'belarus', 'بيلاروسيا', 'mir castle', 'قلعة مير', 'minsk', 'مينسك',
+    ],
+    copy: {
+      ar: {
+        city: 'مير',
+        landmark: 'قلعة مير',
+        description:
+          'قلعة من الطوب الأحمر ببرج مدخل وأسوار وأبراج زاوية، بُنيت في القرن السادس عشر في بلدة مير جنوب غرب مينسك.',
+      },
+      en: {
+        city: 'Mir',
+        landmark: 'Mir Castle',
+        description:
+          'A red-brick castle with a gate tower, walls and corner towers, built in the sixteenth century in the town of Mir south-west of Minsk.',
+      },
+      de: {
+        city: 'Mir',
+        landmark: 'Burg Mir',
+        description:
+          'Eine Burg aus rotem Backstein mit Torturm, Mauern und Ecktürmen, im 16. Jahrhundert im Ort Mir südwestlich von Minsk erbaut.',
+      },
+      ru: {
+        city: 'Мир',
+        landmark: 'Мирский замок',
+        description:
+          'Замок из красного кирпича с въездной башней, стенами и угловыми башнями, построенный в XVI веке в Мире юго-западнее Минска.',
+      },
+      it: {
+        city: 'Mir',
+        landmark: 'Castello di Mir',
+        description:
+          'Un castello in mattoni rossi con torre d’ingresso, mura e torri angolari, costruito nel Cinquecento a Mir, a sud-ovest di Minsk.',
+      },
+    },
+  },
+  {
+    id: 'vilnius',
+    countryCode: 'LT',
+    timezone: 'Europe/Vilnius',
+    latitude: 54.6892,
+    longitude: 25.2798,
+    image: commons('Gedimino pilis by Augustas Didzgalvis.jpg'),
+    credit: credit('Gedimino pilis by Augustas Didzgalvis.jpg'),
+    aliases: [
+      'فيلنيوس', 'vilnius', 'lithuania', 'ليتوانيا', 'gediminas', 'غيديميناس',
+      'gediminas tower', 'برج غيديميناس',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'فيلنيوس',
+        landmark: 'برج غيديميناس',
+        description:
+          'برج مثمن من الطوب الأحمر على تلة في وسط فيلنيوس، وهو ما بقي من قلعة غيديميناس، ويطل على البلدة القديمة.',
+      },
+      en: {
+        city: 'Vilnius',
+        landmark: 'Gediminas’ Tower',
+        description:
+          'An octagonal red-brick tower on the hill in the middle of Vilnius, the last piece of Gediminas’ castle, looking down on the old town.',
+      },
+      de: {
+        city: 'Vilnius',
+        landmark: 'Gediminas-Turm',
+        description:
+          'Ein achteckiger Backsteinturm auf dem Hügel mitten in Vilnius, der letzte Rest der Burg Gediminas’, mit Blick auf die Altstadt.',
+      },
+      ru: {
+        city: 'Вильнюс',
+        landmark: 'Башня Гедимина',
+        description:
+          'Восьмигранная кирпичная башня на холме в центре Вильнюса — последняя часть замка Гедимина, с видом на старый город.',
+      },
+      it: {
+        city: 'Vilnius',
+        landmark: 'Torre di Gediminas',
+        description:
+          'Una torre ottagonale in mattoni rossi sulla collina al centro di Vilnius, ultimo resto del castello di Gediminas, affacciata sulla città vecchia.',
+      },
+    },
+  },
+  {
+    id: 'riga',
+    countryCode: 'LV',
+    timezone: 'Europe/Riga',
+    latitude: 56.9474,
+    longitude: 24.1064,
+    image: commons('House of Blackheads at Dusk 3, Riga, Latvia - Diliff.jpg'),
+    credit: credit('House of Blackheads at Dusk 3, Riga, Latvia - Diliff.jpg'),
+    aliases: [
+      'ريغا', 'riga', 'latvia', 'لاتفيا', 'blackheads', 'الرؤوس السوداء',
+      'house of the blackheads', 'بيت ذوي الرؤوس السوداء',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'ريغا',
+        landmark: 'بيت ذوي الرؤوس السوداء',
+        description:
+          'بيت نقابة التجار في ريغا، بواجهة مزخرفة وأقواس ونوافذ مزدوجة، أعيد بناؤه بعد الحرب العالمية الثانية في ساحة دار البلدية.',
+      },
+      en: {
+        city: 'Riga',
+        landmark: 'House of the Blackheads',
+        description:
+          'The guild house of Riga’s Blackheads, with a carved façade, arcades and double windows, rebuilt after the Second World War on the Town Hall Square.',
+      },
+      de: {
+        city: 'Riga',
+        landmark: 'Schwarzhäupterhaus',
+        description:
+          'Das Gildehaus der Rigaer Schwarzhäupter mit verzierter Fassade, Arkaden und Doppelfenstern, nach dem Zweiten Weltkrieg am Rathausplatz wieder errichtet.',
+      },
+      ru: {
+        city: 'Рига',
+        landmark: 'Дом Черноголовых',
+        description:
+          'Дом гильдии рижских Черноголовых с резным фасадом, аркадами и сдвоенными окнами, воссозданный после Второй мировой войны на Ратушной площади.',
+      },
+      it: {
+        city: 'Riga',
+        landmark: 'Casa delle Teste Nere',
+        description:
+          'La casa della gilda delle Teste Nere di Riga, con facciata intagliata, arcate e finestre binate, ricostruita dopo la Seconda guerra mondiale sulla piazza del Municipio.',
+      },
+    },
+  },
+  {
+    id: 'tallinn',
+    countryCode: 'EE',
+    timezone: 'Europe/Tallinn',
+    latitude: 59.4374,
+    longitude: 24.7453,
+    image: commons('Raekoja plats Tallinn 2015.jpg'),
+    credit: credit('Raekoja plats Tallinn 2015.jpg'),
+    aliases: [
+      'تالين', 'tallinn', 'estonia', 'إستونيا', 'town hall square', 'ساحة دار البلدية',
+      'raekoja plats', 'town hall',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'تالين',
+        landmark: 'ساحة دار البلدية',
+        description:
+          'ساحة حجرية في قلب تالين القديمة، تتوسطها دار بلدية من القرن الرابع عشر ببرجها المائل، وتحيط بها بيوت التجار.',
+      },
+      en: {
+        city: 'Tallinn',
+        landmark: 'Town Hall Square',
+        description:
+          'The stone square at the heart of Tallinn’s old town, with its fourteenth-century town hall and leaning tower, ringed by merchants’ houses.',
+      },
+      de: {
+        city: 'Tallinn',
+        landmark: 'Rathausplatz',
+        description:
+          'Der steinerne Platz im Herzen der Altstadt von Tallinn mit dem Rathaus aus dem 14. Jahrhundert und seinem schiefen Turm, umgeben von Kaufmannshäusern.',
+      },
+      ru: {
+        city: 'Таллин',
+        landmark: 'Ратушная площадь',
+        description:
+          'Каменная площадь в сердце старого Таллина с ратушей XIV века и её наклонной башней, в окружении купеческих домов.',
+      },
+      it: {
+        city: 'Tallinn',
+        landmark: 'Piazza del Municipio',
+        description:
+          'La piazza di pietra nel cuore della città vecchia di Tallinn, con il municipio trecentesco e la torre pendente, circondata da case di mercanti.',
+      },
+    },
+  },
+  {
+    id: 'valletta',
+    countryCode: 'MT',
+    timezone: 'Europe/Malta',
+    latitude: 35.8997,
+    longitude: 14.5148,
+    image: commons('Concatedral de San Juan, La Valeta, isla de Malta, Malta, 2021-08-25, DD 246-248 HDR.jpg'),
+    credit: credit('Concatedral de San Juan, La Valeta, isla de Malta, Malta, 2021-08-25, DD 246-248 HDR.jpg'),
+    aliases: [
+      'فاليتا', 'valletta', 'malta', 'مالطا', 'st john\'s co-cathedral',
+      'كاتدرائية القديس يوحنا', 'st john', 'co-cathedral',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'فاليتا',
+        landmark: 'كاتدرائية القديس يوحنا',
+        description:
+          'كنيسة من القرن السادس عشر في فاليتا، واجهتها المتواضعة تخفي داخلاً باروكياً مذهّباً وأرضية من شواهد رخامية.',
+      },
+      en: {
+        city: 'Valletta',
+        landmark: 'St John’s Co-Cathedral',
+        description:
+          'A sixteenth-century church in Valletta whose plain façade hides a gilded Baroque interior and a floor of marble tombstones.',
+      },
+      de: {
+        city: 'Valletta',
+        landmark: 'St.-Johannes-Konkathedrale',
+        description:
+          'Eine Kirche des 16. Jahrhunderts in Valletta, deren schlichte Fassade einen vergoldeten Barockraum und einen Boden aus Marmorgrabplatten verbirgt.',
+      },
+      ru: {
+        city: 'Валлетта',
+        landmark: 'Собор Святого Иоанна',
+        description:
+          'Церковь XVI века в Валлетте: за скромным фасадом скрыт золочёный барочный интерьер и мраморный пол из надгробных плит.',
+      },
+      it: {
+        city: 'La Valletta',
+        landmark: 'Concattedrale di San Giovanni',
+        description:
+          'Una chiesa del Cinquecento a La Valletta: la facciata sobria nasconde un interno barocco dorato e un pavimento di lastre tombali in marmo.',
+      },
+    },
+  },
+  {
+    id: 'paphos',
+    countryCode: 'CY',
+    timezone: 'Asia/Nicosia',
+    latitude: 34.6641,
+    longitude: 32.6272,
+    image: commons('Petra tou romiou 5.jpg'),
+    credit: credit('Petra tou romiou 5.jpg'),
+    aliases: [
+      'بافوس', 'paphos', 'cyprus', 'قبرص', 'aphrodite\'s rock', 'صخرة أفروديت',
+      'petra tou romiou', 'nicosia', 'نيقوسيا',
+    ],
+    copy: {
+      ar: {
+        city: 'بافوس',
+        landmark: 'صخرة أفروديت',
+        description:
+          'صخرة كبيرة في البحر على ساحل بافوس، تقول الأسطورة إن أفروديت وُلدت من الزبد عندها، وتُعرف محلياً بصخرة الرومي.',
+      },
+      en: {
+        city: 'Paphos',
+        landmark: 'Aphrodite’s Rock',
+        description:
+          'A sea stack off the Paphos coast where, legend says, Aphrodite rose from the foam; locally it is Petra tou Romiou, the rock of the Roman.',
+      },
+      de: {
+        city: 'Paphos',
+        landmark: 'Felsen der Aphrodite',
+        description:
+          'Ein Felsen im Meer vor der Küste von Paphos, an dem der Sage nach Aphrodite aus dem Schaum stieg; lokal Petra tou Romiou, der Felsen des Romanos.',
+      },
+      ru: {
+        city: 'Пафос',
+        landmark: 'Скала Афродиты',
+        description:
+          'Скала в море у берегов Пафоса, где, по легенде, из пены вышла Афродита; местное имя — Петра ту Ромиу.',
+      },
+      it: {
+        city: 'Pafo',
+        landmark: 'Roccia di Afrodite',
+        description:
+          'Uno scoglio in mare davanti alla costa di Pafo dove, secondo la leggenda, Afrodite nacque dalla schiuma; qui si chiama Petra tou Romiou.',
+      },
+    },
+  },
+  {
+    id: 'luxembourg-city',
+    countryCode: 'LU',
+    timezone: 'Europe/Luxembourg',
+    latitude: 49.6126,
+    longitude: 6.1345,
+    image: commons('Casemates du Bock Luxembourg - Lëtzebuerg 30.jpg'),
+    credit: credit('Casemates du Bock Luxembourg - Lëtzebuerg 30.jpg'),
+    aliases: [
+      'لوكسمبورغ', 'luxembourg', 'luxembourg city', 'lëtzebuerg', 'bock casemates',
+      'سراديب بوك', 'casemates',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'مدينة لوكسمبورغ',
+        landmark: 'سراديب بوك',
+        description:
+          'شبكة من الأنفاق محفورة في صخرة بوك تحت المدينة، بدأت في القرن السابع عشر وتمتد كيلومترات في الصخر.',
+      },
+      en: {
+        city: 'Luxembourg City',
+        landmark: 'Bock Casemates',
+        description:
+          'A network of tunnels cut into the Bock rock beneath Luxembourg City, begun in the seventeenth century and running for kilometres through the stone.',
+      },
+      de: {
+        city: 'Luxemburg',
+        landmark: 'Kasematten vom Bock',
+        description:
+          'Ein Netz von Tunneln im Bockfelsen unter der Stadt Luxemburg, im 17. Jahrhundert begonnen und kilometerlang durch den Fels getrieben.',
+      },
+      ru: {
+        city: 'Люксембург',
+        landmark: 'Катакомбы Бок',
+        description:
+          'Сеть туннелей, вырубленных в скале Бок под городом Люксембург; начало ей положено в XVII веке, и она тянется на километры.',
+      },
+      it: {
+        city: 'Lussemburgo',
+        landmark: 'Casematte del Bock',
+        description:
+          'Una rete di gallerie scavate nella roccia del Bock sotto la città di Lussemburgo, iniziata nel Seicento e lunga chilometri.',
+      },
+    },
+  },
+  {
+    id: 'monte-carlo',
+    countryCode: 'MC',
+    timezone: 'Europe/Monaco',
+    latitude: 43.7396,
+    longitude: 7.427,
+    image: commons('Casino de Montecarlo, Mónaco, 2016-06-23, DD 05.jpg'),
+    credit: credit('Casino de Montecarlo, Mónaco, 2016-06-23, DD 05.jpg'),
+    aliases: [
+      'مونتي كارلو', 'monte carlo', 'monaco', 'موناكو', 'casino', 'كازينو مونتي كارلو',
+      'monte carlo casino', 'monaco-ville',
+    ],
+    copy: {
+      ar: {
+        city: 'مونتي كارلو',
+        landmark: 'كازينو مونتي كارلو',
+        description:
+          'مبنى الكازينو ببرجيه وقبته، صممه شارل غارنييه عام ١٨٧٨، ويقف على حافة البحر في موناكو.',
+      },
+      en: {
+        city: 'Monte Carlo',
+        landmark: 'Monte Carlo Casino',
+        description:
+          'The casino of Monte Carlo with its twin towers and dome, designed by Charles Garnier in 1878 and standing at the edge of the sea in Monaco.',
+      },
+      de: {
+        city: 'Monte Carlo',
+        landmark: 'Casino von Monte Carlo',
+        description:
+          'Das Casino von Monte Carlo mit zwei Türmen und Kuppel, 1878 von Charles Garnier entworfen, am Meer in Monaco gelegen.',
+      },
+      ru: {
+        city: 'Монте-Карло',
+        landmark: 'Казино Монте-Карло',
+        description:
+          'Казино с двумя башнями и куполом, спроектированное Шарлем Гарнье в 1878 году, стоит у самого моря в Монако.',
+      },
+      it: {
+        city: 'Monte Carlo',
+        landmark: 'Casinò di Monte Carlo',
+        description:
+          'Il casinò di Monte Carlo con le due torri e la cupola, progettato da Charles Garnier nel 1878 e affacciato sul mare a Monaco.',
+      },
+    },
+  },
+  {
+    id: 'andorra-la-vella',
+    countryCode: 'AD',
+    timezone: 'Europe/Andorra',
+    latitude: 42.5078,
+    longitude: 1.5211,
+    image: commons('Casa de la Vall, Andorra la Vieja, Andorra, 2013-12-30, DD 01.JPG'),
+    credit: credit('Casa de la Vall, Andorra la Vieja, Andorra, 2013-12-30, DD 01.JPG'),
+    aliases: [
+      'أندورا لا فيلا', 'andorra la vella', 'andorra', 'أندورا', 'casa de la vall',
+      'دار الوادي',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'أندورا لا فيلا',
+        landmark: 'دار الوادي',
+        description:
+          'بيت حجري من القرن السادس عشر في أندورا لا فيلا، كان مقر البرلمان الأندوري، ببرجه الحجري ونوافذه الصغيرة.',
+      },
+      en: {
+        city: 'Andorra la Vella',
+        landmark: 'Casa de la Vall',
+        description:
+          'A sixteenth-century stone house in Andorra la Vella that served as the country’s parliament, with its stone tower and small windows.',
+      },
+      de: {
+        city: 'Andorra la Vella',
+        landmark: 'Casa de la Vall',
+        description:
+          'Ein steinernes Haus aus dem 16. Jahrhundert in Andorra la Vella, einst Sitz des Parlaments, mit Steinturm und kleinen Fenstern.',
+      },
+      ru: {
+        city: 'Андорра-ла-Велья',
+        landmark: 'Каса-де-ла-Валь',
+        description:
+          'Каменный дом XVI века в Андорра-ла-Велье, где заседал парламент страны, с каменной башней и маленькими окнами.',
+      },
+      it: {
+        city: 'Andorra la Vella',
+        landmark: 'Casa de la Vall',
+        description:
+          'Una casa di pietra del Cinquecento ad Andorra la Vella, sede del parlamento del paese, con la torre in pietra e le finestre piccole.',
+      },
+    },
+  },
+  {
+    id: 'vaduz',
+    countryCode: 'LI',
+    timezone: 'Europe/Vaduz',
+    latitude: 47.1324,
+    longitude: 9.5107,
+    image: commons('Château de Vaduz - 2022.jpg'),
+    credit: credit('Château de Vaduz - 2022.jpg'),
+    aliases: [
+      'فادوتس', 'vaduz', 'liechtenstein', 'ليختنشتاين', 'vaduz castle', 'قلعة فادوتس',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'فادوتس',
+        landmark: 'قلعة فادوتس',
+        description:
+          'قلعة على مرتفع صخري فوق فادوتس، وهي مقر إقامة أمير ليختنشتاين، وتُرى من كل أنحاء العاصمة الصغيرة.',
+      },
+      en: {
+        city: 'Vaduz',
+        landmark: 'Vaduz Castle',
+        description:
+          'A castle on a rocky terrace above Vaduz, the residence of the Prince of Liechtenstein, visible from all over the small capital.',
+      },
+      de: {
+        city: 'Vaduz',
+        landmark: 'Schloss Vaduz',
+        description:
+          'Eine Burg auf einer Felsenterrasse über Vaduz, Residenz des Fürsten von Liechtenstein, von überall in der kleinen Hauptstadt zu sehen.',
+      },
+      ru: {
+        city: 'Вадуц',
+        landmark: 'Замок Вадуц',
+        description:
+          'Замок на скалистой террасе над Вадуцем, резиденция князя Лихтенштейна, виден из любой точки маленькой столицы.',
+      },
+      it: {
+        city: 'Vaduz',
+        landmark: 'Castello di Vaduz',
+        description:
+          'Un castello su una terrazza rocciosa sopra Vaduz, residenza del principe del Liechtenstein, visibile da tutta la piccola capitale.',
+      },
+    },
+  },
+  {
+    id: 'san-marino',
+    countryCode: 'SM',
+    timezone: 'Europe/Rome',
+    latitude: 43.9353,
+    longitude: 12.4496,
+    image: commons('Fortress of Guaita 2013-09-19.jpg'),
+    credit: credit('Fortress of Guaita 2013-09-19.jpg'),
+    aliases: [
+      'سان مارينو', 'san marino', 'city of san marino', 'guaita', 'غوايتا', 'guaita tower',
+      'برج غوايتا',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'مدينة سان مارينو',
+        landmark: 'برج غوايتا',
+        description:
+          'أقدم أبراج سان مارينو الثلاثة، بُني في القرن الحادي عشر على حافة جبل تيتانو، وتنحدر المدينة خلفه.',
+      },
+      en: {
+        city: 'City of San Marino',
+        landmark: 'Guaita Tower',
+        description:
+          'The oldest of San Marino’s three towers, built in the eleventh century on the edge of Mount Titano, with the town falling away behind it.',
+      },
+      de: {
+        city: 'San Marino',
+        landmark: 'Guaita-Turm',
+        description:
+          'Der älteste der drei Türme von San Marino, im 11. Jahrhundert am Rand des Monte Titano errichtet, mit der Stadt im Rücken.',
+      },
+      ru: {
+        city: 'Сан-Марино',
+        landmark: 'Башня Гуаита',
+        description:
+          'Старейшая из трёх башен Сан-Марино, построенная в XI веке на краю Монте-Титано, за ней спускается город.',
+      },
+      it: {
+        city: 'Città di San Marino',
+        landmark: 'Torre Guaita',
+        description:
+          'La più antica delle tre torri di San Marino, costruita nell’XI secolo sul bordo del monte Titano, con la città che scende alle spalle.',
+      },
+    },
+  },
+  {
+    id: 'vatican-city',
+    countryCode: 'VA',
+    timezone: 'Europe/Vatican',
+    latitude: 41.9022,
+    longitude: 12.4563,
+    image: commons('Basilica di San Pietro in Vaticano September 2015-1a.jpg'),
+    credit: credit('Basilica di San Pietro in Vaticano September 2015-1a.jpg'),
+    aliases: [
+      'الفاتيكان', 'vatican', 'vatican city', 'st peter\'s basilica', 'كاتدرائية القديس بطرس',
+      'saint peter', 'st peter',
+    ],
+    capital: true,
+    copy: {
+      ar: {
+        city: 'الفاتيكان',
+        landmark: 'كاتدرائية القديس بطرس',
+        description:
+          'كنيسة الفاتيكان الكبرى بقبتها التي صممها مايكل أنجلو وواجهتها ذات الأعمدة، تقف في نهاية ساحة القديس بطرس.',
+      },
+      en: {
+        city: 'Vatican City',
+        landmark: 'St. Peter’s Basilica',
+        description:
+          'The great basilica of the Vatican, its dome by Michelangelo and its colonnaded façade closing the end of Saint Peter’s Square.',
+      },
+      de: {
+        city: 'Vatikanstadt',
+        landmark: 'Petersdom',
+        description:
+          'Die große Basilika des Vatikans, deren Kuppel von Michelangelo stammt und deren Säulenfront den Petersplatz abschließt.',
+      },
+      ru: {
+        city: 'Ватикан',
+        landmark: 'Собор Святого Петра',
+        description:
+          'Главная базилика Ватикана: купол Микеланджело и колонный фасад, замыкающий площадь Святого Петра.',
+      },
+      it: {
+        city: 'Città del Vaticano',
+        landmark: 'Basilica di San Pietro',
+        description:
+          'La grande basilica del Vaticano, con la cupola di Michelangelo e la facciata a colonne che chiude piazza San Pietro.',
       },
     },
   },
