@@ -1,4 +1,4 @@
-# سماء · Samaa 
+# سماء · Samaa🌥️
 
 
 سماء (Samaa) is a cinematic weather experience for cities around the world in five languages. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions.
