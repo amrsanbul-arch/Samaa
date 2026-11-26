@@ -178,6 +178,9 @@ export default function HomePage() {
         if (!resolved) {
           setStage('flying');
           resolved = await geocodeFirst(payload.text, lang);
+          // "Blue Lagoon" is also a lake in South Africa: when the geocoder lands
+          // on a place with no curated scene, the landmark the visitor typed wins.
+          if (curated && resolved && !landmarkForPlace(resolved)) resolved = null;
         }
 
         if (!resolved && curated) resolved = placeFromLandmark(curated, lang);

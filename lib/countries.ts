@@ -790,6 +790,8 @@ export const COUNTRIES: CountryScene[] = [
     credit: credit('Sultan_Qaboos_Grand_Mosque_(19889998133).jpg'),
     aliases: [
       'مسقط', 'muscat', 'سلطنة عمان',
+      'sultan qaboos grand mosque', 'grand mosque muscat',
+      'جامع السلطان قابوس', 'جامع السلطان قابوس الأكبر',
     ],
     zoom: 1.3,
     copy: {
@@ -924,6 +926,7 @@ export const COUNTRIES: CountryScene[] = [
     credit: credit('The Rock of Raouché, or Pigeon Rock.jpg'),
     aliases: [
       'بيروت', 'beirut', 'لبنان',
+      'pigeon rocks', 'pigeon rock', 'raouche', 'raouché', 'صخرة الروشة', 'صخور الروشة', 'الروشة',
     ],
     copy: {
       ar: {
