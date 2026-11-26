@@ -93,6 +93,8 @@ export type Landmark = {
   aliases: string[];
   /** IANA zone, needed for countries that span several zones. */
   timezone?: string;
+  /** True when the city is a capital, so the card can say «Capital of …». */
+  capital?: boolean;
   /** CSS object-position used to keep the subject in frame on tall screens. */
   focus?: string;
   /** Extra zoom on tall screens, anchored at the bottom so low subjects stay visible. */

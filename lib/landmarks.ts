@@ -32,6 +32,7 @@ function toLandmark(scene: CountryScene): Landmark {
     longitude: scene.longitude,
     aliases: scene.aliases,
     timezone: scene.timezone,
+    capital: scene.capital,
     focus: scene.focus,
     zoom: scene.zoom,
     theme: scene.theme,
@@ -197,6 +198,18 @@ export function findLandmark(query: string): Landmark | null {
   return findLandmarks(query)[0] ?? null;
 }
 
+/**
+ * True when the query is a name of the scene's own city — not a landmark, an
+ * alias or a neighbouring city that merely borrows the backdrop.
+ */
+export function isSceneCity(item: Landmark, query: string): boolean {
+  const q = normalizeArabic(query);
+  if (!q) return false;
+  const scene = SCENE_BY_ID.get(item.id);
+  const names = scene ? Object.values(scene.copy).map((copy) => copy.city) : [item.city, item.cityEn];
+  return names.map(normalizeArabic).includes(q);
+}
+
 export function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
   const rad = (deg: number) => (deg * Math.PI) / 180;
   const dLat = rad(bLat - aLat);
@@ -266,6 +279,39 @@ export function scenesForPlace(place: Place, primary: Landmark | null): Landmark
 
 export function landmarkById(id: string): Landmark | null {
   return LANDMARKS.find((item) => item.id === id) ?? null;
+}
+
+/** The geocoder files Jerusalem under Israel; a Palestinian scene this close wins. */
+const LOCAL_SCENE_KM = 25;
+
+/**
+ * Country label for a geocoded place. Palestinian places get the localised name of
+ * Palestine (the geocoder leaves their country blank), and a city whose curated
+ * scene is Palestinian — Jerusalem — is labelled the same way as that scene.
+ */
+export function placeCountry(
+  place: Place,
+  lang: Lang
+): { name: string; code: string; admin1?: string } {
+  if ((place.countryCode ?? '').toUpperCase() === 'PS') {
+    return { name: COUNTRY_NAMES.PS[lang], code: 'PS', admin1: place.admin1 };
+  }
+
+  const scene = landmarkForPlace(place);
+  if (
+    scene?.countryCode === 'PS' &&
+    distanceKm(place.latitude, place.longitude, scene.latitude, scene.longitude) <= LOCAL_SCENE_KM
+  ) {
+    // The district the geocoder files Jerusalem under belongs to the other side of
+    // this label, so only the country is shown.
+    return { name: COUNTRY_NAMES.PS[lang], code: 'PS' };
+  }
+
+  return { name: place.country, code: place.countryCode, admin1: place.admin1 };
+}
+
+export function placeCountryName(place: Place, lang: Lang): string {
+  return placeCountry(place, lang).name;
 }
 
 export const FEATURED_LANDMARKS = FEATURED_IDS.map((id) => landmarkById(id)!).filter(Boolean);

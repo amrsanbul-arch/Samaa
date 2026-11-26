@@ -13,8 +13,10 @@ import {
   fallbackSceneImage,
   fallbackSceneText,
   findLandmark,
+  isSceneCity,
   landmarkForPlace,
   localizedText,
+  placeCountryName,
   placeFromLandmark,
   sceneImageSrc,
   scenesForPlace,
@@ -65,6 +67,8 @@ function sceneFor(place: Place | null, lang: Lang, item: Landmark | null) {
   return {
     landmark: text.landmark,
     country: text.country,
+    // Only the city itself is a capital: Hebron borrows Jerusalem's scene, not its title.
+    capital: Boolean(item.capital && isSceneCity(item, place?.name ?? '')),
     description: text.description,
     image: item.image,
     credit: item.credit,
@@ -165,12 +169,18 @@ export default function HomePage() {
         const curated = payload.place
           ? landmarkForPlace(payload.place)
           : findLandmark(payload.text);
-        let resolved = payload.place ?? (curated ? placeFromLandmark(curated, lang) : null);
+        // A curated city skips the geocoder; a landmark name or an alias ("Hebron")
+        // still geocodes, so the card keeps the name of the city that was searched.
+        let resolved =
+          payload.place ??
+          (curated && isSceneCity(curated, payload.text) ? placeFromLandmark(curated, lang) : null);
 
         if (!resolved) {
           setStage('flying');
           resolved = await geocodeFirst(payload.text, lang);
         }
+
+        if (!resolved && curated) resolved = placeFromLandmark(curated, lang);
 
         if (!resolved) {
           setError(t('notFound', { q: payload.text }));
@@ -181,10 +191,12 @@ export default function HomePage() {
         // A geocoded name ("Chichén Itzá", "Giza") keeps the archive backdrop, so
         // the card should carry the curated, translated name of that scene.
         const curatedMatch = curated ?? landmarkForPlace(resolved);
-        if (curatedMatch) {
+        if (curatedMatch && isSceneCity(curatedMatch, resolved.name)) {
           const localized = localizedText(curatedMatch, lang);
           resolved = { ...resolved, name: localized.city, country: localized.country };
         }
+
+        resolved = { ...resolved, country: placeCountryName(resolved, lang) };
 
         warmImage(sceneFor(resolved, lang, curatedMatch).image);
 
@@ -227,9 +239,11 @@ export default function HomePage() {
     const current = placeRef.current;
     if (!current) return;
 
+    // A city that only borrowed a scene ("Hebron") keeps its own name and is looked
+    // up again; the scene's city itself is translated locally.
     if (curatedId) {
       const item = LANDMARKS.find((entry) => entry.id === curatedId);
-      if (item) {
+      if (item && isSceneCity(item, current.name)) {
         const localized = placeFromLandmark(item, lang);
         setPlace(localized);
         window.history.replaceState(null, '', `?city=${encodeURIComponent(localized.name)}`);
@@ -244,7 +258,10 @@ export default function HomePage() {
     geocodeFirst(query, lang)
       .then((next) => {
         if (cancelled || !next) return;
-        setPlace(next);
+        setPlace({
+          ...next,
+          country: placeCountryName(next, lang) || next.country,
+        });
         window.history.replaceState(null, '', `?city=${encodeURIComponent(next.name)}`);
       })
       .catch(() => {

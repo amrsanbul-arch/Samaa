@@ -33,6 +33,8 @@ export type CountryScene = {
   credit: PhotoCredit;
   aliases: string[];
   copy: Record<Lang, SceneText>;
+  /** Marks a capital city, so the card can say «Capital of …» instead of the bare country. */
+  capital?: boolean;
   /** CSS object-position used to keep the subject in frame on tall screens. */
   focus?: string;
   /** Extra zoom on tall screens, anchored at the bottom so low subjects stay visible. */
@@ -3876,17 +3878,18 @@ export const COUNTRIES: CountryScene[] = [
   },
   {
     id: 'jerusalem',
-    countryCode: 'IL',
-    timezone: 'Asia/Jerusalem',
+    countryCode: 'PS',
+    timezone: 'Asia/Hebron',
     latitude: 31.7767,
     longitude: 35.2345,
     image: commons('Westernwall2.jpg'),
     credit: credit('Westernwall2.jpg'),
     aliases: [
-      'القدس', 'jerusalem', 'israel', 'إسرائيل',
+      'القدس', 'jerusalem', 'palestine', 'فلسطين',
       'western wall', 'حائط البراق', 'الحائط الغربي', 'kotel',
       'wailing wall',
     ],
+    capital: true,
     focus: '50% 45%',
     theme: 'nile',
     copy: {
@@ -3936,6 +3939,7 @@ export const COUNTRIES: CountryScene[] = [
       'haram al-sharif', 'الحرم القدسي',
       'hebron', 'الخليل', 'خليل الرحمن',
     ],
+    capital: true,
     focus: '50% 45%',
     theme: 'sunset',
     copy: {

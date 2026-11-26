@@ -18,6 +18,8 @@ import WeatherEffects from './WeatherEffects';
 type Scene = Pick<Landmark, 'landmark' | 'description' | 'image' | 'credit' | 'focus' | 'zoom'> & {
   /** Country of the scene itself, so the card follows the photo when both are shown. */
   country?: string;
+  /** True when the scene's city is a capital. */
+  capital?: boolean;
 };
 
 type Props = {

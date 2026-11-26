@@ -2,6 +2,7 @@
 
 import type { Landmark, PhotoCredit, Place, WeatherBundle } from '@/lib/types';
 import { normalizeArabic } from '@/lib/arabic';
+import { placeCountry } from '@/lib/landmarks';
 import { describeCodeLabel, localClock, timeLabel, windDirectionLabel } from '@/lib/weather';
 import WeatherIcon from './WeatherIcon';
 import { useLang } from './LangProvider';
@@ -12,7 +13,13 @@ type Props = {
   place: Place;
   landmark:
     | Landmark
-    | { landmark: string; description: string; credit: PhotoCredit; country?: string };
+    | {
+        landmark: string;
+        description: string;
+        credit: PhotoCredit;
+        country?: string;
+        capital?: boolean;
+      };
   weather: WeatherBundle;
   /** The landmark blurb only appears in the expanded sheet and on desktop. */
   showDescription?: boolean;
@@ -94,7 +101,11 @@ export default function WeatherCard({
   const conditionText = describeCodeLabel(lang, current.code);
   const today = daily[0];
   const rainChance = Math.round(today?.precipitationProbability ?? 0);
-  const region = [landmark.country || place.country, place.admin1]
+  // The card names the country of the place, not of the geocoder: Jerusalem and
+  // every Palestinian city read «Palestine», and a capital says so.
+  const label = placeCountry(place, lang);
+  const country = landmark.country || label.name || place.country;
+  const region = (landmark.capital ? [t('capitalOf', { country })] : [country, label.admin1])
     .filter((value): value is string => Boolean(value))
     .filter((value) => normalizeArabic(value) !== normalizeArabic(place.name))
     .join(' · ');

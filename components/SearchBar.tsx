@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Place } from '@/lib/types';
 import { localeRegion } from '@/lib/i18n';
+import { placeCountry } from '@/lib/landmarks';
 import { useLang } from './LangProvider';
 
 type Props = {
@@ -198,30 +199,33 @@ export default function SearchBar({
           role="listbox"
           className="panel absolute inset-x-0 bottom-[calc(100%+0.6rem)] z-50 max-h-[46vh] overflow-y-auto rounded-[14px] p-1.5 no-scrollbar animate-fadeIn"
         >
-          {results.map((place, index) => (
-            <li key={`${place.id}-${index}`} role="option" aria-selected={index === active}>
-              <button
-                type="button"
-                onClick={() => submit(place)}
-                onMouseEnter={() => setActive(index)}
-                className={`flex w-full items-center justify-between gap-3 rounded-[10px] px-3 py-2.5 text-start transition ${
-                  index === active ? 'bg-cream/10' : 'hover:bg-cream/10'
-                }`}
-              >
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold text-white sm:text-base">
-                    {place.name}
+          {results.map((place, index) => {
+            const country = placeCountry(place, lang);
+            return (
+              <li key={`${place.id}-${index}`} role="option" aria-selected={index === active}>
+                <button
+                  type="button"
+                  onClick={() => submit(place)}
+                  onMouseEnter={() => setActive(index)}
+                  className={`flex w-full items-center justify-between gap-3 rounded-[10px] px-3 py-2.5 text-start transition ${
+                    index === active ? 'bg-cream/10' : 'hover:bg-cream/10'
+                  }`}
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-semibold text-white sm:text-base">
+                      {place.name}
+                    </span>
+                    <span className="block truncate text-xs text-cream/50">
+                      {[country.admin1, country.name].filter(Boolean).join(' · ')}
+                    </span>
                   </span>
-                  <span className="block truncate text-xs text-cream/50">
-                    {[place.admin1, place.country].filter(Boolean).join(' · ')}
+                  <span className="shrink-0 rounded-full border border-cream/20 px-2 py-0.5 text-[10px] tracking-wide text-cream/55">
+                    {country.code}
                   </span>
-                </span>
-                <span className="shrink-0 rounded-full border border-cream/20 px-2 py-0.5 text-[10px] tracking-wide text-cream/55">
-                  {place.countryCode}
-                </span>
-              </button>
-            </li>
-          ))}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
