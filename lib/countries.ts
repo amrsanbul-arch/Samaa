@@ -82,6 +82,22 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  KI: { ar: 'كيريباتي', en: 'Kiribati', de: 'Kiribati', ru: 'Кирибати', it: 'Kiribati' },
+  TV: { ar: 'توفالو', en: 'Tuvalu', de: 'Tuvalu', ru: 'Тувалу', it: 'Tuvalu' },
+  NR: { ar: 'ناورو', en: 'Nauru', de: 'Nauru', ru: 'Науру', it: 'Nauru' },
+  PW: { ar: 'بالاو', en: 'Palau', de: 'Palau', ru: 'Палау', it: 'Palau' },
+  MH: { ar: 'جزر مارشال', en: 'Marshall Islands', de: 'Marshallinseln', ru: 'Маршалловы Острова', it: 'Isole Marshall' },
+  FM: { ar: 'ميكرونيزيا', en: 'Micronesia', de: 'Mikronesien', ru: 'Микронезия', it: 'Micronesia' },
+  DO: { ar: 'جمهورية الدومينيكان', en: 'Dominican Republic', de: 'Dominikanische Republik', ru: 'Доминиканская Республика', it: 'Repubblica Dominicana' },
+  JM: { ar: 'جامايكا', en: 'Jamaica', de: 'Jamaika', ru: 'Ямайка', it: 'Giamaica' },
+  CU: { ar: 'كوبا', en: 'Cuba', de: 'Kuba', ru: 'Куба', it: 'Cuba' },
+  BS: { ar: 'الباهاما', en: 'Bahamas', de: 'Bahamas', ru: 'Багамские Острова', it: 'Bahamas' },
+  HT: { ar: 'هايتي', en: 'Haiti', de: 'Haiti', ru: 'Гаити', it: 'Haiti' },
+  TT: { ar: 'ترينيداد وتوباغو', en: 'Trinidad and Tobago', de: 'Trinidad und Tobago', ru: 'Тринидад и Тобаго', it: 'Trinidad e Tobago' },
+  BB: { ar: 'بربادوس', en: 'Barbados', de: 'Barbados', ru: 'Барбадос', it: 'Barbados' },
+  GD: { ar: 'غرينادا', en: 'Grenada', de: 'Grenada', ru: 'Гренада', it: 'Grenada' },
+  LC: { ar: 'سانت لوسيا', en: 'Saint Lucia', de: 'St. Lucia', ru: 'Сент-Люсия', it: 'Saint Lucia' },
+  DM: { ar: 'دومينيكا', en: 'Dominica', de: 'Dominica', ru: 'Доминика', it: 'Dominica' },
   DJ: { ar: 'جيبوتي', en: 'Djibouti', de: 'Dschibuti', ru: 'Джибути', it: 'Gibuti' },
   ER: { ar: 'إريتريا', en: 'Eritrea', de: 'Eritrea', ru: 'Эритрея', it: 'Eritrea' },
   MW: { ar: 'مالاوي', en: 'Malawi', de: 'Malawi', ru: 'Малави', it: 'Malawi' },
@@ -8615,6 +8631,745 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Palazzo Reale',
         description:
           'Il palazzo di legno dei re di Tonga a Nukuʻalofa, costruito nel 1867, con tetto rosso e verande bianche rivolte alla laguna.',
+      },
+    },
+  },
+  {
+    id: 'tarawa',
+    countryCode: 'KI',
+    timezone: 'Pacific/Tarawa',
+    latitude: 1.3295,
+    longitude: 172.978,
+    image: commons('Kiribatiparliament.jpg'),
+    credit: credit('Kiribatiparliament.jpg'),
+    aliases: [
+      'تاراوا', 'tarawa', 'south tarawa', 'kiribati', 'كيريباتي', 'parliament of kiribati',
+      'برلمان كيريباتي',
+    ],
+    capital: true,
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'تاراوا',
+        landmark: 'برلمان كيريباتي',
+        description:
+          'برلمان كيريباتي في بيريكي، بُني على هيئة مانهاب، بيت الاجتماع الكبير في الجزر، بسقفه القشّي الشاهق.',
+      },
+      en: {
+        city: 'Tarawa',
+        landmark: 'Kiribati Parliament',
+        description:
+          'Kiribati’s parliament in Bairiki, built in the form of a maneaba, the great island meeting house, with a steep thatched roof.',
+      },
+      de: {
+        city: 'Tarawa',
+        landmark: 'Parlament von Kiribati',
+        description:
+          'Das Parlament von Kiribati in Bairiki, erbaut in der Form eines Maneaba, des großen Versammlungshauses der Inseln, mit steilem Reetdach.',
+      },
+      ru: {
+        city: 'Тарава',
+        landmark: 'Парламент Кирибати',
+        description:
+          'Парламент Кирибати в Баирики, построенный в форме манеабы — большого островного дома собраний, с крутой соломенной крышей.',
+      },
+      it: {
+        city: 'Tarawa',
+        landmark: 'Parlamento di Kiribati',
+        description:
+          'Il parlamento di Kiribati a Bairiki, costruito a forma di maneaba, la grande casa delle riunioni delle isole, con il tetto di paglia ripido.',
+      },
+    },
+  },
+  {
+    id: 'funafuti',
+    countryCode: 'TV',
+    timezone: 'Pacific/Funafuti',
+    latitude: -8.5243,
+    longitude: 179.194,
+    image: commons('Tuvalu - Funafuti - Beach.jpg'),
+    credit: credit('Tuvalu - Funafuti - Beach.jpg'),
+    aliases: [
+      'فونافوتي', 'funafuti', 'tuvalu', 'توفالو', 'funafuti lagoon', 'بحيرة فونافوتي',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'فونافوتي',
+        landmark: 'بحيرة فونافوتي',
+        description:
+          'البحيرة داخل جزيرة فونافوتي المرجانية، ممر عريض من مياه فاتحة بين الحيد المرجاني والقرى، تدخله القوارب وسفن الشحن.',
+      },
+      en: {
+        city: 'Funafuti',
+        landmark: 'Funafuti Lagoon',
+        description:
+          'The lagoon inside Funafuti atoll, a wide channel of pale water between the reef and the villages, where canoes and the odd cargo ship come in.',
+      },
+      de: {
+        city: 'Funafuti',
+        landmark: 'Lagune von Funafuti',
+        description:
+          'Die Lagune im Funafuti-Atoll, ein breiter, heller Wasserweg zwischen Riff und Dörfern, in den Kanoes und gelegentlich ein Frachtschiff einlaufen.',
+      },
+      ru: {
+        city: 'Фунафути',
+        landmark: 'Лагуна Фунафути',
+        description:
+          'Лагуна внутри атолла Фунафути — широкий светлый пролив между рифом и деревнями, куда заходят каноэ и редкие грузовые суда.',
+      },
+      it: {
+        city: 'Funafuti',
+        landmark: 'Laguna di Funafuti',
+        description:
+          'La laguna dentro l’atollo di Funafuti, un ampio canale d’acqua chiara tra la barriera e i villaggi, dove entrano canoe e qualche nave cargo.',
+      },
+    },
+  },
+  {
+    id: 'buada',
+    countryCode: 'NR',
+    timezone: 'Pacific/Nauru',
+    latitude: -0.5333,
+    longitude: 166.917,
+    image: commons('NauruBuada077.jpg'),
+    credit: credit('NauruBuada077.jpg'),
+    aliases: [
+      'بوادا', 'buada', 'nauru', 'ناورو', 'buada lagoon', 'بحيرة بوادا', 'yaren', 'يارين',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'بوادا',
+        landmark: 'بحيرة بوادا',
+        description:
+          'بحيرة مالحة في وسط ناورو، تحيط بها أشجار النخيل وحدائق الخضروات، وهي المسطح المائي الوحيد في الجزيرة.',
+      },
+      en: {
+        city: 'Buada',
+        landmark: 'Buada Lagoon',
+        description:
+          'A brackish lagoon in the middle of Nauru, ringed by coconut palms and vegetable plots, the only standing water on the island.',
+      },
+      de: {
+        city: 'Buada',
+        landmark: 'Buada-Lagune',
+        description:
+          'Eine Brackwasserlagune mitten auf Nauru, umringt von Kokospalmen und Gemüsebeeten, das einzige stehende Gewässer der Insel.',
+      },
+      ru: {
+        city: 'Буада',
+        landmark: 'Лагуна Буада',
+        description:
+          'Солоноватая лагуна в центре Науру, окружённая кокосовыми пальмами и огородами, единственный водоём острова.',
+      },
+      it: {
+        city: 'Buada',
+        landmark: 'Laguna di Buada',
+        description:
+          'Una laguna salmastra al centro di Nauru, circondata da palme da cocco e orti, l’unica acqua ferma dell’isola.',
+      },
+    },
+  },
+  {
+    id: 'koror',
+    countryCode: 'PW',
+    timezone: 'Pacific/Palau',
+    latitude: 7.3426,
+    longitude: 134.479,
+    image: commons('Rock-Islands-Palau-1-2016-sea-view-Luka-Peternel.jpg'),
+    credit: credit('Rock-Islands-Palau-1-2016-sea-view-Luka-Peternel.jpg'),
+    aliases: [
+      'كورور', 'koror', 'palau', 'بالاو', 'rock islands', 'الجزر الصخرية', 'ngerulmud',
+      'نغيرولمود',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'كورور',
+        landmark: 'الجزر الصخرية',
+        description:
+          'الجزر الصخرية قبالة كورور: جزر جيرية على شكل فطر تكسوها الغابة، داخل بحيرة مياهها خضراء فاتحة.',
+      },
+      en: {
+        city: 'Koror',
+        landmark: 'Rock Islands',
+        description:
+          'The Rock Islands off Koror: mushroom-shaped limestone islets under forest, standing in a lagoon of pale green water.',
+      },
+      de: {
+        city: 'Koror',
+        landmark: 'Rock Islands',
+        description:
+          'Die Rock Islands vor Koror: pilzförmige Kalkinseln mit Wald, in einer Lagune aus hellgrünem Wasser.',
+      },
+      ru: {
+        city: 'Корор',
+        landmark: 'Скалистые острова',
+        description:
+          'Скалистые острова у Корор: грибовидные известняковые островки под лесом, в лагуне бледно-зелёной воды.',
+      },
+      it: {
+        city: 'Koror',
+        landmark: 'Rock Islands',
+        description:
+          'Le Rock Islands al largo di Koror: isolotti calcarei a forma di fungo ricoperti di foresta, in una laguna d’acqua verde chiaro.',
+      },
+    },
+  },
+  {
+    id: 'majuro',
+    countryCode: 'MH',
+    timezone: 'Pacific/Majuro',
+    latitude: 7.1164,
+    longitude: 171.186,
+    image: commons('Alele Museum Aussenansicht.JPG'),
+    credit: credit('Alele Museum Aussenansicht.JPG'),
+    aliases: [
+      'ماجورو', 'majuro', 'marshall islands', 'جزر مارشال', 'alele', 'alele museum',
+      'متحف أليلي',
+    ],
+    capital: true,
+    focus: '55% 50%',
+    copy: {
+      ar: {
+        city: 'ماجورو',
+        landmark: 'متحف أليلي',
+        description:
+          'متحف أليلي والمكتبة العامة في ماجورو، المتحف الوطني الصغير للبلاد، وحافظ خرائط الملاحة المارشالية وصورها.',
+      },
+      en: {
+        city: 'Majuro',
+        landmark: 'Alele Museum',
+        description:
+          'The Alele Museum and Public Library in Majuro, the country’s small national museum, keeper of Marshallese navigation charts and photographs.',
+      },
+      de: {
+        city: 'Majuro',
+        landmark: 'Alele-Museum',
+        description:
+          'Das Alele Museum und die Bibliothek in Majuro, das kleine Nationalmuseum des Landes, Hüter der marshallischen Navigationskarten und Fotografien.',
+      },
+      ru: {
+        city: 'Маджуро',
+        landmark: 'Музей Алеле',
+        description:
+          'Музей Алеле и публичная библиотека в Маджуро — небольшой национальный музей страны, хранитель маршалльских навигационных карт и фотографий.',
+      },
+      it: {
+        city: 'Majuro',
+        landmark: 'Museo Alele',
+        description:
+          'L’Alele Museum e la biblioteca pubblica a Majuro, il piccolo museo nazionale del paese, custode delle carte nautiche e delle fotografie marshallesi.',
+      },
+    },
+  },
+  {
+    id: 'pohnpei',
+    countryCode: 'FM',
+    timezone: 'Pacific/Pohnpei',
+    latitude: 6.9167,
+    longitude: 158.15,
+    image: commons('Nan Madol, Pohnpei.jpg'),
+    credit: credit('Nan Madol, Pohnpei.jpg'),
+    aliases: [
+      'بونبي', 'pohnpei', 'micronesia', 'ميكرونيزيا', 'nan madol', 'نان مادول', 'palikir',
+      'باليكير',
+    ],
+    copy: {
+      ar: {
+        city: 'بونبي',
+        landmark: 'نان مادول',
+        description:
+          'نان مادول قبالة بونبي: مدينة من أعمدة البازلت المكوّمة على جزر صغيرة وقنوات، بُنيت بين القرنين الثاني عشر والسابع عشر وغمرتها الأشجار.',
+      },
+      en: {
+        city: 'Pohnpei',
+        landmark: 'Nan Madol',
+        description:
+          'Nan Madol off Pohnpei: a city of basalt logs piled into islets and canals, built between the twelfth and seventeenth centuries and now overgrown.',
+      },
+      de: {
+        city: 'Pohnpei',
+        landmark: 'Nan Madol',
+        description:
+          'Nan Madol vor Pohnpei: eine Stadt aus Basaltstämmen, zu Inselchen und Kanälen aufgeschichtet, zwischen dem 12. und 17. Jahrhundert erbaut und heute überwachsen.',
+      },
+      ru: {
+        city: 'Понпеи',
+        landmark: 'Нан-Мадол',
+        description:
+          'Нан-Мадол у Понпеи: город из базальтовых брёвен, сложенных в островки и каналы, построенный между XII и XVII веками и заросший.',
+      },
+      it: {
+        city: 'Pohnpei',
+        landmark: 'Nan Madol',
+        description:
+          'Nan Madol al largo di Pohnpei: una città di tronchi di basalto ammassati in isolotti e canali, costruita tra il XII e il XVII secolo e oggi invasa dalla vegetazione.',
+      },
+    },
+  },
+  {
+    id: 'santo_domingo',
+    countryCode: 'DO',
+    timezone: 'America/Santo_Domingo',
+    latitude: 18.473,
+    longitude: -69.884,
+    image: commons('Calle las Damas, Santo Domingo, Zona Colonial.jpg'),
+    credit: credit('Calle las Damas, Santo Domingo, Zona Colonial.jpg'),
+    aliases: [
+      'سانتو دومينغو', 'santo domingo', 'dominican republic', 'جمهورية الدومينيكان',
+      'zona colonial', 'الحي الاستعماري', 'calle las damas',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'سانتو دومينغو',
+        landmark: 'الحي الاستعماري',
+        description:
+          'شارع كايي لاس داماس في حي سانتو دومينغو الاستعماري، أقدم شوارع أول مدينة أوروبية في الأمريكتين، تصطف عليه البيوت الحجرية.',
+      },
+      en: {
+        city: 'Santo Domingo',
+        landmark: 'Zona Colonial',
+        description:
+          'Calle Las Damas in Santo Domingo’s colonial quarter, the oldest street of the first European city in the Americas, lined with stone houses.',
+      },
+      de: {
+        city: 'Santo Domingo',
+        landmark: 'Kolonialviertel',
+        description:
+          'Die Calle Las Damas im Kolonialviertel von Santo Domingo, die älteste Straße der ersten europäischen Stadt Amerikas, gesäumt von Steinhäusern.',
+      },
+      ru: {
+        city: 'Санто-Доминго',
+        landmark: 'Колониальный квартал',
+        description:
+          'Улица Калье-лас-Дамас в колониальном квартале Санто-Доминго — старейшая улица первого европейского города Америки, с каменными домами.',
+      },
+      it: {
+        city: 'Santo Domingo',
+        landmark: 'Zona Colonial',
+        description:
+          'Calle Las Damas nel quartiere coloniale di Santo Domingo, la via più antica della prima città europea delle Americhe, fiancheggiata da case di pietra.',
+      },
+    },
+  },
+  {
+    id: 'ocho_rios',
+    countryCode: 'JM',
+    timezone: 'America/Jamaica',
+    latitude: 18.4074,
+    longitude: -77.1031,
+    image: commons('Jamaica Ocho Rios Dunn\'s River Falls 1.jpg'),
+    credit: credit('Jamaica Ocho Rios Dunn\'s River Falls 1.jpg'),
+    aliases: [
+      'أوتشو ريوس', 'ocho rios', 'jamaica', 'جامايكا', 'dunn\'s river falls', 'شلالات نهر دن',
+      'كينغستون', 'kingston',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'أوتشو ريوس',
+        landmark: 'شلالات نهر دن',
+        description:
+          'شلالات نهر دن قرب أوتشو ريوس: مدرجات من الحجر الجيري يهبط عليها النهر، يصعدها الزوار متشابكي الأيدي.',
+      },
+      en: {
+        city: 'Ocho Rios',
+        landmark: 'Dunn’s River Falls',
+        description:
+          'Dunn’s River Falls above Ocho Rios: a stair of limestone terraces the river drops over, climbed in a chain of hands by visitors.',
+      },
+      de: {
+        city: 'Ocho Rios',
+        landmark: 'Dunn’s River Falls',
+        description:
+          'Die Dunn’s River Falls bei Ocho Rios: Kalksteinterrassen, über die der Fluss fällt, die Besucher Hand in Hand hinaufsteigen.',
+      },
+      ru: {
+        city: 'Очо-Риос',
+        landmark: 'Водопад Даннс-Ривер',
+        description:
+          'Водопад Даннс-Ривер у Очо-Риос: известняковые террасы, по которым падает река; посетители поднимаются по ним цепочкой.',
+      },
+      it: {
+        city: 'Ocho Rios',
+        landmark: 'Dunn’s River Falls',
+        description:
+          'Le Dunn’s River Falls sopra Ocho Rios: terrazze calcaree su cui cade il fiume, che i visitatori salgono tenendosi per mano.',
+      },
+    },
+  },
+  {
+    id: 'havana_capitolio',
+    countryCode: 'CU',
+    timezone: 'America/Havana',
+    latitude: 23.136,
+    longitude: -82.359,
+    image: commons('National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg'),
+    credit: credit('National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg'),
+    aliases: [
+      'هافانا', 'havana', 'habana', 'cuba', 'كوبا', 'el capitolio', 'الكابيتوليو', 'capitolio',
+    ],
+    capital: true,
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'هافانا',
+        landmark: 'الكابيتوليو',
+        description:
+          'كابيتوليو هافانا، اكتمل عام ١٩٢٩ بقبة أعلى من قبة كابيتول واشنطن، وتقف أمامه السيارات الأمريكية المطلية في باسيو ديل برادو.',
+      },
+      en: {
+        city: 'Havana',
+        landmark: 'El Capitolio',
+        description:
+          'Havana’s Capitolio, finished in 1929 with a dome higher than the one in Washington, faced by painted American cars on the Paseo del Prado.',
+      },
+      de: {
+        city: 'Havanna',
+        landmark: 'El Capitolio',
+        description:
+          'Das Capitolio in Havanna, 1929 vollendet, mit einer Kuppel höher als die in Washington, davor bunte amerikanische Oldtimer auf dem Paseo del Prado.',
+      },
+      ru: {
+        city: 'Гавана',
+        landmark: 'Капитолий',
+        description:
+          'Капитолий Гаваны, достроенный в 1929 году: купол выше вашингтонского, перед ним — раскрашенные американские автомобили на Пасео-дель-Прадо.',
+      },
+      it: {
+        city: 'L’Avana',
+        landmark: 'El Capitolio',
+        description:
+          'Il Capitolio de L’Avana, terminato nel 1929 con una cupola più alta di quella di Washington, davanti alle auto americane dipinte sul Paseo del Prado.',
+      },
+    },
+  },
+  {
+    id: 'nassau',
+    countryCode: 'BS',
+    timezone: 'America/Nassau',
+    latitude: 25.074,
+    longitude: -77.34,
+    image: commons('Bahamas - Nassau, Queens Staircase - panoramio.jpg'),
+    credit: credit('Bahamas - Nassau, Queens Staircase - panoramio.jpg'),
+    aliases: [
+      'ناساو', 'nassau', 'bahamas', 'الباهاما', 'queen\'s staircase', 'queens staircase',
+      'سلّم الملكة', 'سلالم الملكة',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'ناساو',
+        landmark: 'سلّم الملكة',
+        description:
+          'ست وستون درجة نُحتت في الحجر الجيري يدوياً في تسعينيات القرن الثامن عشر، ممر بارد من الصخر وأشجار التين يصعد من ناساو.',
+      },
+      en: {
+        city: 'Nassau',
+        landmark: 'Queen’s Staircase',
+        description:
+          'Sixty-six steps cut into the limestone by hand in the 1790s, a cool corridor of rock and fig trees that leads up out of Nassau.',
+      },
+      de: {
+        city: 'Nassau',
+        landmark: 'Queen’s Staircase',
+        description:
+          'Sechsundsechzig in den 1790er-Jahren von Hand in den Kalkstein gehauene Stufen, ein kühler Gang aus Fels und Feigenbäumen über Nassau.',
+      },
+      ru: {
+        city: 'Нассау',
+        landmark: 'Лестница королевы',
+        description:
+          'Шестьдесят шесть ступеней, вырубленных в известняке вручную в 1790-х: прохладный коридор из камня и фикусов над Нассау.',
+      },
+      it: {
+        city: 'Nassau',
+        landmark: 'Queen’s Staircase',
+        description:
+          'Sessantasei gradini scavati a mano nel calcare negli anni Novanta del Settecento, un corridoio fresco di roccia e fichi che sale da Nassau.',
+      },
+    },
+  },
+  {
+    id: 'milot',
+    countryCode: 'HT',
+    timezone: 'America/Port-au-Prince',
+    latitude: 19.6167,
+    longitude: -72.2167,
+    image: commons('Citadelle Laferrière Aerial View.jpg'),
+    credit: credit('Citadelle Laferrière Aerial View.jpg'),
+    aliases: [
+      'ميلو', 'milot', 'haiti', 'هايتي', 'citadelle laferriere', 'citadelle', 'قلعة لافيريير',
+      'بورت أو برانس', 'port-au-prince',
+    ],
+    copy: {
+      ar: {
+        city: 'ميلو',
+        landmark: 'قلعة لافيريير',
+        description:
+          'قلعة لافيريير على جبلها فوق ميلو، أكبر حصن في الأمريكتين، بُني بعد ١٨٠٤ في وجه عودة الفرنسيين.',
+      },
+      en: {
+        city: 'Milot',
+        landmark: 'Citadelle Laferrière',
+        description:
+          'The Citadelle Laferrière on its mountain above Milot, the largest fortress in the Americas, built after 1804 against a French return.',
+      },
+      de: {
+        city: 'Milot',
+        landmark: 'Citadelle Laferrière',
+        description:
+          'Die Citadelle Laferrière auf ihrem Berg über Milot, die größte Festung Amerikas, nach 1804 gegen eine Rückkehr der Franzosen errichtet.',
+      },
+      ru: {
+        city: 'Мило',
+        landmark: 'Крепость Лаферьер',
+        description:
+          'Крепость Лаферьер на горе над Мило — крупнейшая крепость Америки, построенная после 1804 года на случай возвращения французов.',
+      },
+      it: {
+        city: 'Milot',
+        landmark: 'Citadelle Laferrière',
+        description:
+          'La Citadelle Laferrière sulla sua montagna sopra Milot, la più grande fortezza delle Americhe, costruita dopo il 1804 contro un ritorno dei francesi.',
+      },
+    },
+  },
+  {
+    id: 'pigeon_point',
+    countryCode: 'TT',
+    timezone: 'America/Port_of_Spain',
+    latitude: 11.15,
+    longitude: -60.8333,
+    image: commons('Pigeon Point beach.jpg'),
+    credit: credit('Pigeon Point beach.jpg'),
+    aliases: [
+      'بيجن بوينت', 'pigeon point', 'trinidad and tobago', 'ترينيداد وتوباغو', 'tobago',
+      'توباغو', 'بورت أوف سبين', 'port of spain',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'بيجن بوينت',
+        landmark: 'شاطئ بيجن بوينت',
+        description:
+          'بيجن بوينت في توباغو: رصيف طويل مسقوف بالقش فوق مياه ضحلة، ورمال بيضاء وبحر أخضر فاتح من حيد بوكو.',
+      },
+      en: {
+        city: 'Pigeon Point',
+        landmark: 'Pigeon Point Beach',
+        description:
+          'Pigeon Point on Tobago: a long jetty of thatch over shallow water, white sand and the pale green sea of the Buccoo Reef.',
+      },
+      de: {
+        city: 'Pigeon Point',
+        landmark: 'Pigeon Point',
+        description:
+          'Pigeon Point auf Tobago: ein langer, mit Stroh gedeckter Steg über flachem Wasser, weißer Sand und das hellgrüne Meer des Buccoo-Riffs.',
+      },
+      ru: {
+        city: 'Пиджен-Пойнт',
+        landmark: 'Пляж Пиджен-Пойнт',
+        description:
+          'Пиджен-Пойнт на Тобаго: длинный причал под соломенной крышей над мелководьем, белый песок и бледно-зелёное море рифа Бакку.',
+      },
+      it: {
+        city: 'Pigeon Point',
+        landmark: 'Pigeon Point',
+        description:
+          'Pigeon Point a Tobago: un lungo pontile coperto di paglia su acque basse, sabbia bianca e il mare verde chiaro della barriera di Buccoo.',
+      },
+    },
+  },
+  {
+    id: 'bridgetown',
+    countryCode: 'BB',
+    timezone: 'America/Barbados',
+    latitude: 13.097,
+    longitude: -59.613,
+    image: commons('Barbados - Bridgetown Parliament - panoramio.jpg'),
+    credit: credit('Barbados - Bridgetown Parliament - panoramio.jpg'),
+    aliases: [
+      'بريدجتاون', 'bridgetown', 'barbados', 'بربادوس', 'parliament buildings',
+      'مباني البرلمان',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'بريدجتاون',
+        landmark: 'مباني البرلمان',
+        description:
+          'مباني البرلمان القوطية الجديدة في بريدجتاون على شارع برود، وبرج ساعة يعلو الساحة العامة.',
+      },
+      en: {
+        city: 'Bridgetown',
+        landmark: 'Parliament Buildings',
+        description:
+          'The neo-Gothic Parliament Buildings of Barbados on Broad Street in Bridgetown, with a clock tower over the public square.',
+      },
+      de: {
+        city: 'Bridgetown',
+        landmark: 'Parlamentsgebäude',
+        description:
+          'Die neugotischen Parliament Buildings von Barbados in der Broad Street in Bridgetown, mit einem Uhrturm über dem öffentlichen Platz.',
+      },
+      ru: {
+        city: 'Бриджтаун',
+        landmark: 'Здания парламента',
+        description:
+          'Неоготические здания парламента Барбадоса на Брод-стрит в Бриджтауне с часовой башней над площадью.',
+      },
+      it: {
+        city: 'Bridgetown',
+        landmark: 'Edifici del Parlamento',
+        description:
+          'Gli edifici neogotici del Parlamento di Barbados su Broad Street a Bridgetown, con la torre dell’orologio sopra la piazza.',
+      },
+    },
+  },
+  {
+    id: 'st_georges',
+    countryCode: 'GD',
+    timezone: 'America/Grenada',
+    latitude: 12.056,
+    longitude: -61.749,
+    image: commons('Grand Anse Beach Grenada.jpg'),
+    credit: credit('Grand Anse Beach Grenada.jpg'),
+    aliases: [
+      'سانت جورج', 'st george\'s', 'saint george\'s', 'grenada', 'غرينادا', 'grand anse',
+      'خليج غراند آنس',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'سانت جورج',
+        landmark: 'خليج غراند آنس',
+        description:
+          'خليج غراند آنس قرب سانت جورج: أميال من الرمال خلف حيد مرجاني، وهو الشاطئ الذي تعتبره غرينادا حديقتها الأمامية.',
+      },
+      en: {
+        city: 'St. George’s',
+        landmark: 'Grand Anse Beach',
+        description:
+          'Grand Anse Bay outside St. George’s: two miles of sand behind a reef, the beach Grenada treats as its front garden.',
+      },
+      de: {
+        city: 'St. George’s',
+        landmark: 'Grand Anse',
+        description:
+          'Die Grand Anse Bay vor St. George’s: Kilometer um Kilometer Sand hinter einem Riff, der Strand, den Grenada als Vorgarten betrachtet.',
+      },
+      ru: {
+        city: 'Сент-Джорджес',
+        landmark: 'Пляж Гранд-Анс',
+        description:
+          'Бухта Гранд-Анс у Сент-Джорджеса: километры песка за рифом — пляж, который Гренада считает своим парадным садом.',
+      },
+      it: {
+        city: 'St. George’s',
+        landmark: 'Grand Anse',
+        description:
+          'La baia di Grand Anse fuori St. George’s: chilometri di sabbia dietro una barriera, la spiaggia che Grenada considera il suo giardino.',
+      },
+    },
+  },
+  {
+    id: 'soufriere',
+    countryCode: 'LC',
+    timezone: 'America/St_Lucia',
+    latitude: 13.856,
+    longitude: -61.058,
+    image: commons('Soufriere town and the Pitons, Saint Lucia (wide view).jpg'),
+    credit: credit('Soufriere town and the Pitons, Saint Lucia (wide view).jpg'),
+    aliases: [
+      'سوفريير', 'soufriere', 'soufrière', 'saint lucia', 'سانت لوسيا', 'the pitons', 'pitons',
+      'البيتون', 'كاستريس', 'castries',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'سوفريير',
+        landmark: 'قمتا البيتون',
+        description:
+          'البيتون فوق سوفريير: برجان بركانيان، غروس وبيتي، يصعدان من البحر مباشرة إلى ٧٧٠ و٧٤٣ متراً.',
+      },
+      en: {
+        city: 'Soufrière',
+        landmark: 'The Pitons',
+        description:
+          'The Pitons above Soufrière: two volcanic spires, Gros and Petit, rising straight out of the sea to 770 and 743 metres.',
+      },
+      de: {
+        city: 'Soufrière',
+        landmark: 'Die Pitons',
+        description:
+          'Die Pitons über Soufrière: zwei Vulkankegel, Gros und Petit, die 770 und 743 Meter hoch direkt aus dem Meer steigen.',
+      },
+      ru: {
+        city: 'Суфриер',
+        landmark: 'Питоны',
+        description:
+          'Питоны над Суфриером: два вулканических пика, Гро-Питон и Пти-Питон, поднимаются прямо из моря на 770 и 743 метра.',
+      },
+      it: {
+        city: 'Soufrière',
+        landmark: 'I Pitons',
+        description:
+          'I Pitons sopra Soufrière: due guglie vulcaniche, Gros e Petit, che salgono dritte dal mare fino a 770 e 743 metri.',
+      },
+    },
+  },
+  {
+    id: 'laudat',
+    countryCode: 'DM',
+    timezone: 'America/Dominica',
+    latitude: 15.3333,
+    longitude: -61.3333,
+    image: commons('Dominica Boiling Lake.jpg'),
+    credit: credit('Dominica Boiling Lake.jpg'),
+    aliases: [
+      'لودا', 'laudat', 'dominica', 'دومينيكا', 'boiling lake', 'بحيرة الغليان', 'roseau',
+      'روزو',
+    ],
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'لودا',
+        landmark: 'بحيرة الغليان',
+        description:
+          'بحيرة الغليان في مورن تروا بيتون: فوهة غازية مغمورة بالماء تتفقّع وتتصاعد منها الأبخرة في قاع فوهتها، ولا يُوصل إليها إلا سيراً.',
+      },
+      en: {
+        city: 'Laudat',
+        landmark: 'Boiling Lake',
+        description:
+          'Boiling Lake in the Morne Trois Pitons: a flooded fumarole that bubbles and steams at the bottom of its crater, reached only on foot.',
+      },
+      de: {
+        city: 'Laudat',
+        landmark: 'Boiling Lake',
+        description:
+          'Der Boiling Lake in den Morne Trois Pitons: eine überflutete Fumarole, die am Kraterboden brodelt und dampft und nur zu Fuß erreichbar ist.',
+      },
+      ru: {
+        city: 'Лода',
+        landmark: 'Кипящее озеро',
+        description:
+          'Кипящее озеро в массиве Морн-Труа-Питон: затопленная фумарола, бурлящая и дымящая на дне кратера, добраться можно только пешком.',
+      },
+      it: {
+        city: 'Laudat',
+        landmark: 'Boiling Lake',
+        description:
+          'Il Boiling Lake nelle Morne Trois Pitons: una fumarola allagata che ribolle e fuma sul fondo del cratere, raggiungibile solo a piedi.',
       },
     },
   },
