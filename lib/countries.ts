@@ -85,6 +85,17 @@ export const COUNTRY_NAMES: Record<string, CountryName> = {
   ES: { ar: 'إسبانيا', en: 'Spain', de: 'Spanien', ru: 'Испания', it: 'Spagna' },
   RU: { ar: 'روسيا', en: 'Russia', de: 'Russland', ru: 'Россия', it: 'Russia' },
   NL: { ar: 'هولندا', en: 'Netherlands', de: 'Niederlande', ru: 'Нидерланды', it: 'Paesi Bassi' },
+  CH: { ar: 'سويسرا', en: 'Switzerland', de: 'Schweiz', ru: 'Швейцария', it: 'Svizzera' },
+  AT: { ar: 'النمسا', en: 'Austria', de: 'Österreich', ru: 'Австрия', it: 'Austria' },
+  PT: { ar: 'البرتغال', en: 'Portugal', de: 'Portugal', ru: 'Португалия', it: 'Portogallo' },
+  PE: { ar: 'بيرو', en: 'Peru', de: 'Peru', ru: 'Перу', it: 'Perù' },
+  CZ: { ar: 'التشيك', en: 'Czechia', de: 'Tschechien', ru: 'Чехия', it: 'Cechia' },
+  HU: { ar: 'المجر', en: 'Hungary', de: 'Ungarn', ru: 'Венгрия', it: 'Ungheria' },
+  PL: { ar: 'بولندا', en: 'Poland', de: 'Polen', ru: 'Польша', it: 'Polonia' },
+  IE: { ar: 'أيرلندا', en: 'Ireland', de: 'Irland', ru: 'Ирландия', it: 'Irlanda' },
+  BE: { ar: 'بلجيكا', en: 'Belgium', de: 'Belgien', ru: 'Бельгия', it: 'Belgio' },
+  SE: { ar: 'السويد', en: 'Sweden', de: 'Schweden', ru: 'Швеция', it: 'Svezia' },
+  NO: { ar: 'النرويج', en: 'Norway', de: 'Norwegen', ru: 'Норвегия', it: 'Norvegia' },
   GR: { ar: 'اليونان', en: 'Greece', de: 'Griechenland', ru: 'Греция', it: 'Grecia' },
   US: { ar: 'الولايات المتحدة', en: 'United States', de: 'Vereinigte Staaten', ru: 'США', it: 'Stati Uniti' },
   CA: { ar: 'كندا', en: 'Canada', de: 'Kanada', ru: 'Канада', it: 'Canada' },
@@ -2160,43 +2171,43 @@ export const COUNTRIES: CountryScene[] = [
     id: 'seoul',
     countryCode: 'KR',
     timezone: 'Asia/Seoul',
-    latitude: 37.5665,
-    longitude: 126.978,
-    image: commons('Seoul%20night%20skyline%202018.jpg'),
-    credit: credit('Seoul%20night%20skyline%202018.jpg'),
+    latitude: 37.5796,
+    longitude: 126.977,
+    image: commons('Gyeonghoeru (Royal Banquet Hall) at Gyeongbokgung Palace, Seoul.jpg'),
+    credit: credit('Gyeonghoeru (Royal Banquet Hall) at Gyeongbokgung Palace, Seoul.jpg'),
     aliases: [
-      'سيول', 'سول', 'seoul',
+      'سيول', 'سول', 'seoul', 'gyeongbokgung', 'قصر جيونغ بوك',
     ],
     copy: {
       ar: {
         city: 'سيول',
-        landmark: 'برج سيول N',
+        landmark: 'قصر جيونغ بوك',
         description:
-          'برج سيول N يقف على جبل نامسان في قلب العاصمة، وتحته يعبر نهر هان المدينة بين عشرات الجسور المضاءة. ليلاً يمتلئ الأفق بالضوء الأزرق والأحمر حتى الجبال.',
+          'قصر سلالة جوسون الذي بُني عام 1395 عند سفح جبل بوغاك، وفيه قاعة العرش وبحيرة هيانغوونجيونغ. الحرّاس بزيّهم التقليدي يتبادلون الحراسة أمام بوابته كل ساعة.',
       },
       en: {
         city: 'Seoul',
-        landmark: 'N Seoul Tower',
+        landmark: 'Gyeongbokgung Palace',
         description:
-          'N Seoul Tower stands on Namsan in the middle of the capital, and below it the Han River crosses the city under dozens of lit bridges. At night the skyline fills with blue and red light out to the mountains.',
+          'The Joseon palace built in 1395 at the foot of Bugaksan, with the throne hall and the Hyangwonjeong pavilion on its pond. Guards in traditional dress change at its gate every hour.',
       },
       de: {
         city: 'Seoul',
-        landmark: 'Der N Seoul Tower',
+        landmark: 'Der Gyeongbokgung-Palast',
         description:
-          'Der N Seoul Tower steht auf dem Namsan mitten in der Hauptstadt; darunter durchquert der Han-Fluss die Stadt unter Dutzenden beleuchteten Brücken. Nachts füllt sich der Horizont mit blauem und rotem Licht bis zu den Bergen.',
+          'Der Palast der Joseon-Dynastie, 1395 am Fuß des Bugaksan errichtet, mit Thronhalle und dem Pavillon Hyangwonjeong auf seinem Teich. Vor dem Tor wechselt stündlich die Wache in traditioneller Kleidung.',
       },
       ru: {
         city: 'Сеул',
-        landmark: 'Башня N Seoul',
+        landmark: 'Дворец Кёнбоккун',
         description:
-          'Башня N Seoul стоит на горе Намсан в центре столицы, а под ней река Хан пересекает город под десятками освещённых мостов. Ночью горизонт наполняется синим и красным светом до самых гор.',
+          'Дворец династии Чосон, построенный в 1395 году у подножия Пугаксана: тронный зал и павильон Хянгвонджон на пруду. У ворот каждый час сменяется караул в традиционной одежде.',
       },
       it: {
         city: 'Seul',
-        landmark: 'La N Seoul Tower',
+        landmark: 'Il palazzo Gyeongbokgung',
         description:
-          'La N Seoul Tower sorge sul Namsan nel cuore della capitale, e sotto di essa il fiume Han attraversa la città fra decine di ponti illuminati. Di notte la skyline si riempie di luce blu e rossa fino alle montagne.',
+          'Il palazzo della dinastia Joseon, costruito nel 1395 ai piedi del Bugaksan, con la sala del trono e il padiglione Hyangwonjeong sul laghetto. Davanti al cancello ogni ora cambia la guardia in abiti tradizionali.',
       },
     },
   },
@@ -2728,6 +2739,578 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Il Mazar-e-Quaid',
         description:
           'Il Mazar-e-Quaid, con la cupola di marmo bianco, sta su una collina sopra Karachi dal 1971. Al tramonto il marmo brilla e il mausoleo sembra galleggiare sopra la città.',
+      },
+    },
+  },
+  {
+    id: 'kinderdijk',
+    countryCode: 'NL',
+    timezone: 'Europe/Amsterdam',
+    latitude: 51.8842,
+    longitude: 4.6389,
+    image: commons('KinderdijkMolens02.jpg'),
+    credit: credit('KinderdijkMolens02.jpg'),
+    aliases: [
+      'كيندردايك', 'كندردايك', 'kinderdijk',
+    ],
+    copy: {
+      ar: {
+        city: 'كيندردايك',
+        landmark: 'طواحين كيندردايك',
+        description:
+          'تسع عشرة طاحونة هوائية بُنيت حول 1740 ما زالت تضخ الماء من الأراضي المنخفضة، مصطفّة على الجداول التي تصبّ في نهر ليك. عند الغروب تقف على ماء ساكن ولا يبقى في القصب إلا صوت الريح.',
+      },
+      en: {
+        city: 'Kinderdijk',
+        landmark: 'The Kinderdijk windmills',
+        description:
+          'Nineteen windmills built around 1740 still pump water off the low fields, strung along the canals that drain into the Lek. At dusk they stand on still water and the wind is the only sound in the reeds.',
+      },
+      de: {
+        city: 'Kinderdijk',
+        landmark: 'Die Windmühlen von Kinderdijk',
+        description:
+          'Neunzehn um 1740 erbaute Windmühlen pumpen noch immer Wasser aus den tiefen Feldern, aufgereiht an den Kanälen zur Lek. In der Dämmerung stehen sie am stillen Wasser, und im Schilf ist nur der Wind zu hören.',
+      },
+      ru: {
+        city: 'Киндердейк',
+        landmark: 'Мельницы Киндердейка',
+        description:
+          'Девятнадцать мельниц, построенных около 1740 года, до сих пор откачивают воду с низких полей вдоль каналов, ведущих к Леку. В сумерках они стоят над тихой водой, и в камышах слышен только ветер.',
+      },
+      it: {
+        city: 'Kinderdijk',
+        landmark: 'I mulini di Kinderdijk',
+        description:
+          'Diciannove mulini costruiti attorno al 1740 pompano ancora l’acqua dai campi bassi, allineati lungo i canali che portano al Lek. Al tramonto stanno sull’acqua ferma e nei canneti resta solo il vento.',
+      },
+    },
+  },
+  {
+    id: 'zermatt',
+    countryCode: 'CH',
+    timezone: 'Europe/Zurich',
+    latitude: 46.0207,
+    longitude: 7.7491,
+    image: commons('Matterhorn_from_Domhütte_-_2.jpg'),
+    credit: credit('Matterhorn_from_Domhütte_-_2.jpg'),
+    aliases: [
+      'زيرمات', 'زرمات', 'zermatt', 'matterhorn', 'ماترهورن',
+    ],
+    copy: {
+      ar: {
+        city: 'زيرمات',
+        landmark: 'قمة ماترهورن',
+        description:
+          'هرم من الجرانيت يرتفع 4478 متراً فوق زيرمات، القرية الخالية من السيارات في وادي ماتر. في الصباح الباكر يتورّد وجهه الشمالي بينما يبقى الوادي في الظل.',
+      },
+      en: {
+        city: 'Zermatt',
+        landmark: 'The Matterhorn',
+        description:
+          'A 4,478-metre granite pyramid above Zermatt, a village with no cars in the Matter valley. Early in the morning its north face turns pink while the valley stays in shadow.',
+      },
+      de: {
+        city: 'Zermatt',
+        landmark: 'Das Matterhorn',
+        description:
+          'Eine 4.478 Meter hohe Granitpyramide über Zermatt, einem autofreien Dorf im Mattertal. Früh am Morgen färbt sich die Nordwand rosa, während das Tal noch im Schatten liegt.',
+      },
+      ru: {
+        city: 'Церматт',
+        landmark: 'Маттерхорн',
+        description:
+          'Гранитная пирамида высотой 4 478 метров над Церматтом, деревней без автомобилей в долине Маттер. Ранним утром северная стена розовеет, а долина остаётся в тени.',
+      },
+      it: {
+        city: 'Zermatt',
+        landmark: 'Il Cervino',
+        description:
+          'Una piramide di granito di 4.478 metri sopra Zermatt, paese senza auto nella Mattertal. Al mattino presto la parete nord si colora di rosa mentre la valle resta in ombra.',
+      },
+    },
+  },
+  {
+    id: 'vienna',
+    countryCode: 'AT',
+    timezone: 'Europe/Vienna',
+    latitude: 48.1845,
+    longitude: 16.3122,
+    image: commons('Wien_-_Schloss_Schönbrunn.JPG'),
+    credit: credit('Wien_-_Schloss_Schönbrunn.JPG'),
+    aliases: [
+      'فيينا', 'vienna', 'wien', 'schönbrunn', 'schonbrunn', 'شونبرون',
+    ],
+    copy: {
+      ar: {
+        city: 'فيينا',
+        landmark: 'قصر شونبرون',
+        description:
+          'قصر هايزبورغ الصيفي الذي صمّمه فيشر فون إرلاخ في نهاية القرن السابع عشر: 1441 غرفة وحدائق هندسية تصعد إلى تل غلوريت. عند الغروب يصعد الناس التل ليروا القصر في ضوء منخفض.',
+      },
+      en: {
+        city: 'Vienna',
+        landmark: 'Schönbrunn Palace',
+        description:
+          'The Habsburg summer palace, designed by Fischer von Erlach at the end of the seventeenth century: 1,441 rooms and formal gardens climbing to the Gloriette. At sunset people walk up the hill to see the palace in low light.',
+      },
+      de: {
+        city: 'Wien',
+        landmark: 'Schloss Schönbrunn',
+        description:
+          'Das Sommerpalais der Habsburger, Ende des 17. Jahrhunderts von Fischer von Erlach entworfen: 1.441 Räume und barocke Gärten bis zur Gloriette. Bei Sonnenuntergang gehen die Menschen auf den Hügel, um das Schloss im flachen Licht zu sehen.',
+      },
+      ru: {
+        city: 'Вена',
+        landmark: 'Дворец Шёнбрунн',
+        description:
+          'Летний дворец Габсбургов, спроектированный Фишером фон Эрлахом в конце XVII века: 1 441 зал и регулярные сады, поднимающиеся к Глориетте. На закате люди поднимаются на холм, чтобы увидеть дворец в низком свете.',
+      },
+      it: {
+        city: 'Vienna',
+        landmark: 'La reggia di Schönbrunn',
+        description:
+          'La residenza estiva degli Asburgo, progettata da Fischer von Erlach alla fine del Seicento: 1.441 stanze e giardini formali che salgono alla Gloriette. Al tramonto la gente sale sulla collina per vedere il palazzo nella luce bassa.',
+      },
+    },
+  },
+  {
+    id: 'lisbon',
+    countryCode: 'PT',
+    timezone: 'Europe/Lisbon',
+    latitude: 38.6916,
+    longitude: -9.216,
+    image: commons('Torre_Belém_April_2009-4a.jpg'),
+    credit: credit('Torre_Belém_April_2009-4a.jpg'),
+    aliases: [
+      'لشبونة', 'لشبونه', 'lisbon', 'lisboa', 'lisbona', 'torre de belém',
+    ],
+    copy: {
+      ar: {
+        city: 'لشبونة',
+        landmark: 'برج بيليم',
+        description:
+          'برج من عصر الاكتشافات اكتمل عام 1519 على ضفة نهر تاجة ليحرس ميناء لشبونة. حجره المنحوت كالحبال وشرفاته المطلة على الماء جعلته رمزاً للبرتغال.',
+      },
+      en: {
+        city: 'Lisbon',
+        landmark: 'Belém Tower',
+        description:
+          'A tower from the Age of Discovery, finished in 1519 on the Tagus to guard the harbour of Lisbon. Stone carved to look like ropes and a terrace over the water made it the emblem of Portugal.',
+      },
+      de: {
+        city: 'Lissabon',
+        landmark: 'Der Torre de Belém',
+        description:
+          'Ein Turm aus dem Zeitalter der Entdeckungen, 1519 am Tejo vollendet, um den Hafen von Lissabon zu schützen. Wie Taue gehauener Stein und die Terrasse über dem Wasser machten ihn zum Wahrzeichen Portugals.',
+      },
+      ru: {
+        city: 'Лиссабон',
+        landmark: 'Башня Белен',
+        description:
+          'Башня эпохи Великих географических открытий, достроенная в 1519 году на Тежу для защиты лиссабонской гавани. Камень, вырезанный как канаты, и терраса над водой сделали её символом Португалии.',
+      },
+      it: {
+        city: 'Lisbona',
+        landmark: 'La Torre di Belém',
+        description:
+          'Una torre dell’età delle scoperte, completata nel 1519 sul Tago per difendere il porto di Lisbona. La pietra intagliata come corde e la terrazza sull’acqua l’hanno resa l’emblema del Portogallo.',
+      },
+    },
+  },
+  {
+    id: 'cusco',
+    countryCode: 'PE',
+    timezone: 'America/Lima',
+    latitude: -13.5319,
+    longitude: -71.9675,
+    image: commons('Machu_Picchu,_2023_(012).jpg'),
+    credit: credit('Machu_Picchu,_2023_(012).jpg'),
+    aliases: [
+      'كوسكو', 'كوزكو', 'cusco', 'cuzco', 'machu picchu', 'ماتشو بيتشو',
+    ],
+    copy: {
+      ar: {
+        city: 'كوسكو',
+        landmark: 'ماتشو بيتشو',
+        description:
+          'قلعة الإنكا على حافة جرف على ارتفاع 2430 متراً، بين قمم الأنديز ووادي أوروبامبا. بُنيت من حجارة تنتظم دون ملاط قبل نحو ستة قرون، وظلّت مجهولة للعالم حتى 1911.',
+      },
+      en: {
+        city: 'Cusco',
+        landmark: 'Machu Picchu',
+        description:
+          'An Inca citadel on a ridge at 2,430 metres, between Andean peaks and the Urubamba valley. Built of stone fitted without mortar some six centuries ago, it stayed unknown to the world until 1911.',
+      },
+      de: {
+        city: 'Cusco',
+        landmark: 'Machu Picchu',
+        description:
+          'Eine Inkafestung auf einem Grat auf 2.430 Metern, zwischen Andengipfeln und dem Urubamba-Tal. Vor rund sechs Jahrhunderten ohne Mörtel gefügt, blieb sie bis 1911 unbekannt.',
+      },
+      ru: {
+        city: 'Куско',
+        landmark: 'Мачу-Пикчу',
+        description:
+          'Крепость инков на гребне высотой 2 430 метров между вершинами Анд и долиной Урубамбы. Сложенная из камня без раствора около шести веков назад, она оставалась неизвестной до 1911 года.',
+      },
+      it: {
+        city: 'Cusco',
+        landmark: 'Machu Picchu',
+        description:
+          'Una cittadella inca su un crinale a 2.430 metri, tra le vette andine e la valle dell’Urubamba. Costruita in pietra senza malta circa sei secoli fa, rimase sconosciuta al mondo fino al 1911.',
+      },
+    },
+  },
+  {
+    id: 'magelang',
+    countryCode: 'ID',
+    timezone: 'Asia/Jakarta',
+    latitude: -7.4698,
+    longitude: 110.2177,
+    image: commons('Borobudur Sunrise and Volcano View.jpg'),
+    credit: credit('Borobudur Sunrise and Volcano View.jpg'),
+    aliases: [
+      'ماجيلانج', 'ماجيلانغ', 'magelang', 'borobudur', 'بوروبودور',
+    ],
+    copy: {
+      ar: {
+        city: 'ماجيلانج',
+        landmark: 'معبد بوروبودور',
+        description:
+          'أكبر معبد بوذي في العالم، بُني في القرن التاسع من ست طبقات مربعة وثلاث دائرية تحمل 504 تماثيل بوذا. عند الفجر يرتفع الضباب عن الوادي ويظهر بركان ميرابي خلف المعبد.',
+      },
+      en: {
+        city: 'Magelang',
+        landmark: 'Borobudur',
+        description:
+          'The largest Buddhist temple in the world, raised in the ninth century as six square terraces and three round ones carrying 504 Buddha figures. At dawn mist lifts off the valley and Mount Merapi appears behind it.',
+      },
+      de: {
+        city: 'Magelang',
+        landmark: 'Borobudur',
+        description:
+          'Der größte buddhistische Tempel der Welt, im 9. Jahrhundert aus sechs quadratischen und drei runden Terrassen mit 504 Buddha-Figuren errichtet. Im Morgengrauen steigt der Nebel aus dem Tal, und der Merapi erscheint dahinter.',
+      },
+      ru: {
+        city: 'Магеланг',
+        landmark: 'Боробудур',
+        description:
+          'Крупнейший буддийский храм мира, возведённый в IX веке: шесть квадратных и три круглых террасы с 504 статуями Будды. На рассвете туман поднимается из долины, и за храмом показывается Мерапи.',
+      },
+      it: {
+        city: 'Magelang',
+        landmark: 'Borobudur',
+        description:
+          'Il più grande tempio buddhista del mondo, eretto nel IX secolo con sei terrazze quadrate e tre circolari che portano 504 figure di Buddha. All’alba la nebbia sale dalla valle e dietro appare il Merapi.',
+      },
+    },
+  },
+  {
+    id: 'prague',
+    countryCode: 'CZ',
+    timezone: 'Europe/Prague',
+    latitude: 50.0865,
+    longitude: 14.4114,
+    image: commons('Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg'),
+    credit: credit('Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg'),
+    aliases: [
+      'براغ', 'براج', 'prague', 'praha', 'praga', 'charles bridge', 'جسر تشارلز',
+    ],
+    copy: {
+      ar: {
+        city: 'براغ',
+        landmark: 'جسر تشارلز',
+        description:
+          'بدأ بناء الجسر عام 1357 ليصل البلدة القديمة بقلعة براغ عبر نهر فلتافا، وتنتصب على جانبيه ثلاثون منحوتة. في الصباح الباكر يخلو من الزحام ويستقر ضوء الفجر على الحجر.',
+      },
+      en: {
+        city: 'Prague',
+        landmark: 'Charles Bridge',
+        description:
+          'Begun in 1357 to link the Old Town with Prague Castle across the Vltava, with thirty statues along its parapet. Early in the morning it empties of crowds and dawn light sits on the stone.',
+      },
+      de: {
+        city: 'Prag',
+        landmark: 'Die Karlsbrücke',
+        description:
+          '1357 begonnen, um die Altstadt über die Moldau mit der Prager Burg zu verbinden, mit dreißig Statuen an der Brüstung. Früh am Morgen leert sie sich, und das Morgenlicht liegt auf dem Stein.',
+      },
+      ru: {
+        city: 'Прага',
+        landmark: 'Карлов мост',
+        description:
+          'Мост начали строить в 1357 году, чтобы связать Старый город с Пражским градом через Влтаву; на парапете тридцать статуй. Ранним утром толпа расходится, и рассветный свет ложится на камень.',
+      },
+      it: {
+        city: 'Praga',
+        landmark: 'Il Ponte Carlo',
+        description:
+          'Iniziato nel 1357 per collegare la Città Vecchia al Castello di Praga attraverso la Moldava, con trenta statue sulla balaustra. Al mattino presto si svuota e la luce dell’alba resta sulla pietra.',
+      },
+    },
+  },
+  {
+    id: 'budapest',
+    countryCode: 'HU',
+    timezone: 'Europe/Budapest',
+    latitude: 47.5072,
+    longitude: 19.0457,
+    image: commons('Hungarian_Parliament_Building_from_across_the_Danube,_2025-01-11.jpg'),
+    credit: credit('Hungarian_Parliament_Building_from_across_the_Danube,_2025-01-11.jpg'),
+    aliases: [
+      'بودابست', 'بودابيست', 'budapest', 'hungarian parliament',
+    ],
+    copy: {
+      ar: {
+        city: 'بودابست',
+        landmark: 'مبنى البرلمان الهنغاري',
+        description:
+          'مبنى قوطي جديد اكتمل عام 1904 على ضفة الدانوب، بقبة مركزية و691 غرفة وأبراج مستوحاة من العمارة القوطية الإنجليزية. ليلاً يضاء بكامله وينعكس في النهر.',
+      },
+      en: {
+        city: 'Budapest',
+        landmark: 'The Hungarian Parliament',
+        description:
+          'A neo-Gothic parliament finished in 1904 on the Danube, with a central dome, 691 rooms and spires borrowed from English Gothic. At night it is lit end to end and doubled in the river.',
+      },
+      de: {
+        city: 'Budapest',
+        landmark: 'Das ungarische Parlament',
+        description:
+          'Ein neugotisches Parlament, 1904 an der Donau vollendet, mit Kuppel, 691 Räumen und Türmen nach englischem Vorbild. Nachts ist es ganz beleuchtet und verdoppelt sich im Fluss.',
+      },
+      ru: {
+        city: 'Будапешт',
+        landmark: 'Здание венгерского парламента',
+        description:
+          'Неоготический парламент, достроенный в 1904 году на Дунае: центральный купол, 691 зал и шпили в духе английской готики. Ночью он освещён целиком и повторяется в реке.',
+      },
+      it: {
+        city: 'Budapest',
+        landmark: 'Il Parlamento ungherese',
+        description:
+          'Un parlamento neogotico completato nel 1904 sul Danubio, con cupola centrale, 691 stanze e guglie di gusto gotico inglese. Di notte è illuminato per intero e si raddoppia nel fiume.',
+      },
+    },
+  },
+  {
+    id: 'krakow',
+    countryCode: 'PL',
+    timezone: 'Europe/Warsaw',
+    latitude: 50.054,
+    longitude: 19.9354,
+    image: commons('Wawel_(4).jpg'),
+    credit: credit('Wawel_(4).jpg'),
+    aliases: [
+      'كراكوف', 'كراكاو', 'krakow', 'kraków', 'cracow', 'krakau', 'wawel', 'فافل',
+    ],
+    copy: {
+      ar: {
+        city: 'كراكوف',
+        landmark: 'قلعة فافل',
+        description:
+          'مقر ملوك بولندا على تل فوق نهر فيستولا، وفيه كاتدرائية تاجوا فيها قروناً وفناء نهضوي من القرن السادس عشر. تحت القلعة يمتد كهف التنين الذي يحرس المدينة في الحكاية.',
+      },
+      en: {
+        city: 'Krakow',
+        landmark: 'Wawel Castle',
+        description:
+          'The seat of Poland’s kings on a hill above the Vistula, with the cathedral where they were crowned and a Renaissance courtyard. Below it runs the dragon’s cave that guards the city in legend.',
+      },
+      de: {
+        city: 'Krakau',
+        landmark: 'Das Wawel-Schloss',
+        description:
+          'Der Sitz der polnischen Könige auf einem Hügel über der Weichsel, mit der Krönungskathedrale und einem Renaissance-Innenhof. Darunter liegt die Drachenhöhle, die in der Sage die Stadt bewacht.',
+      },
+      ru: {
+        city: 'Краков',
+        landmark: 'Вавельский замок',
+        description:
+          'Резиденция польских королей на холме над Вислой: собор, где их короновали, и ренессансный двор. Под холмом — пещера дракона, который в легенде охраняет город.',
+      },
+      it: {
+        city: 'Cracovia',
+        landmark: 'Il castello del Wawel',
+        description:
+          'La sede dei re di Polonia su una collina sopra la Vistola, con la cattedrale delle incoronazioni e un cortile rinascimentale. Sotto corre la grotta del drago che nella leggenda protegge la città.',
+      },
+    },
+  },
+  {
+    id: 'cliffs-of-moher',
+    countryCode: 'IE',
+    timezone: 'Europe/Dublin',
+    latitude: 52.9715,
+    longitude: -9.4309,
+    image: commons('Cliffs-Of-Moher-OBriens-From-South.JPG'),
+    credit: credit('Cliffs-Of-Moher-OBriens-From-South.JPG'),
+    aliases: [
+      'منحدرات موهر', 'مقاطعة كلير', 'cliffs of moher', 'moher', 'county clare',
+    ],
+    copy: {
+      ar: {
+        city: 'مقاطعة كلير',
+        landmark: 'منحدرات موهر',
+        description:
+          'جرف بحري يرتفع 214 متراً فوق المحيط الأطلسي على الساحل الغربي لأيرلندا. على قمته برج أوبراين الذي بُني عام 1835، وفي الأيام الصافية تظهر جزر آران في الأفق.',
+      },
+      en: {
+        city: 'County Clare',
+        landmark: 'The Cliffs of Moher',
+        description:
+          'Sea cliffs rising 214 metres straight out of the Atlantic on Ireland’s west coast, with O’Brien’s Tower built in 1835 on the highest point. On clear days the Aran Islands sit on the horizon.',
+      },
+      de: {
+        city: 'County Clare',
+        landmark: 'Die Cliffs of Moher',
+        description:
+          '214 Meter hohe Klippen, die an Irlands Westküste senkrecht in den Atlantik fallen; auf dem höchsten Punkt steht O’Brien’s Tower von 1835. An klaren Tagen liegen die Aran-Inseln am Horizont.',
+      },
+      ru: {
+        city: 'Графство Клэр',
+        landmark: 'Скалы Мохер',
+        description:
+          'Скалы высотой 214 метров, отвесно падающие в Атлантику на западе Ирландии; на высшей точке стоит башня О’Брайена, построенная в 1835 году. В ясные дни на горизонте видны Аранские острова.',
+      },
+      it: {
+        city: 'Contea di Clare',
+        landmark: 'Le Cliffs of Moher',
+        description:
+          'Falesie alte 214 metri che cadono a picco sull’Atlantico sulla costa occidentale irlandese, con la O’Brien’s Tower del 1835 sul punto più alto. Nelle giornate limpide all’orizzonte si vedono le isole Aran.',
+      },
+    },
+  },
+  {
+    id: 'brussels',
+    countryCode: 'BE',
+    timezone: 'Europe/Brussels',
+    latitude: 50.8467,
+    longitude: 4.3525,
+    image: commons('Grand-Place,_Brussels_-_panorama,_June_2018.jpg'),
+    credit: credit('Grand-Place,_Brussels_-_panorama,_June_2018.jpg'),
+    aliases: [
+      'بروكسل', 'بروكسيل', 'brussels', 'bruxelles', 'brüssel', 'grand place',
+    ],
+    copy: {
+      ar: {
+        city: 'بروكسل',
+        landmark: 'الساحة الكبرى',
+        description:
+          'ساحة تحيط بها بيوت النقابات من القرون الوسطى أعيد بناؤها بعد قصف 1695، ويقف في صدرها برج البلدية بارتفاع 96 متراً. كل سنتين في آب/أغسطس تُفرش الحجارة ببساط من زهور البغونية.',
+      },
+      en: {
+        city: 'Brussels',
+        landmark: 'The Grand-Place',
+        description:
+          'A square enclosed by medieval guildhalls rebuilt after the 1695 bombardment, with the 96-metre town hall spire at its head. Every second August the stones are covered with a carpet of begonias.',
+      },
+      de: {
+        city: 'Brüssel',
+        landmark: 'Der Grand-Place',
+        description:
+          'Ein Platz, umschlossen von mittelalterlichen Zunfthäusern, die nach dem Beschuss von 1695 neu errichtet wurden; vorn steht der 96 Meter hohe Rathausturm. Jeden zweiten August liegt ein Teppich aus Begonien auf dem Pflaster.',
+      },
+      ru: {
+        city: 'Брюссель',
+        landmark: 'Гранд-Плас',
+        description:
+          'Площадь в кольце средневековых цеховых домов, отстроенных после обстрела 1695 года; впереди — 96-метровая башня ратуши. Каждые два года в августе камни покрывает ковёр из бегоний.',
+      },
+      it: {
+        city: 'Bruxelles',
+        landmark: 'La Grand-Place',
+        description:
+          'Una piazza chiusa tra le case delle corporazioni medievali ricostruite dopo il bombardamento del 1695, con la torre del municipio alta 96 metri. Ogni due anni in agosto le pietre si coprono di un tappeto di begonie.',
+      },
+    },
+  },
+  {
+    id: 'stockholm',
+    countryCode: 'SE',
+    timezone: 'Europe/Stockholm',
+    latitude: 59.3268,
+    longitude: 18.0717,
+    image: commons('The_Royal_Palace_(15891592359).jpg'),
+    credit: credit('The_Royal_Palace_(15891592359).jpg'),
+    aliases: [
+      'ستوكهولم', 'stockholm', 'stockholms slott',
+    ],
+    copy: {
+      ar: {
+        city: 'ستوكهولم',
+        landmark: 'القصر الملكي',
+        description:
+          'أكبر قصر في أوروبا ما زال مسكناً ملكياً: 1430 غرفة خلف واجهة بُنيت بين 1697 و1760 على الماء. ليلاً يضاء وجهه الجنوبي وينعكس في الميناء القديم.',
+      },
+      en: {
+        city: 'Stockholm',
+        landmark: 'The Royal Palace',
+        description:
+          'The largest palace in Europe still used as a royal residence: 1,430 rooms behind a facade built between 1697 and 1760 on the water. At night its south front is lit and doubled in the old harbour.',
+      },
+      de: {
+        city: 'Stockholm',
+        landmark: 'Das Königliche Schloss',
+        description:
+          'Das größte Schloss Europas, das noch als Residenz dient: 1.430 Räume hinter einer Fassade von 1697 bis 1760 am Wasser. Nachts ist die Südfront beleuchtet und spiegelt sich im alten Hafen.',
+      },
+      ru: {
+        city: 'Стокгольм',
+        landmark: 'Королевский дворец',
+        description:
+          'Крупнейший дворец Европы, до сих пор служащий резиденцией: 1 430 залов за фасадом, построенным между 1697 и 1760 годами у воды. Ночью южный фасад подсвечен и повторяется в Старой гавани.',
+      },
+      it: {
+        city: 'Stoccolma',
+        landmark: 'Il Palazzo Reale',
+        description:
+          'Il più grande palazzo d’Europa ancora residenza reale: 1.430 stanze dietro una facciata costruita tra il 1697 e il 1760 sull’acqua. Di notte la fronte sud è illuminata e si raddoppia nel porto vecchio.',
+      },
+    },
+  },
+  {
+    id: 'geiranger',
+    countryCode: 'NO',
+    timezone: 'Europe/Oslo',
+    latitude: 62.101,
+    longitude: 7.2065,
+    image: commons('Geirangerfjord_.jpg'),
+    credit: credit('Geirangerfjord_.jpg'),
+    aliases: [
+      'جيرانجير', 'غيرانغير', 'geiranger', 'geirangerfjord',
+    ],
+    copy: {
+      ar: {
+        city: 'جيرانجير',
+        landmark: 'مضيق جيرانجير',
+        description:
+          'فرع من مضيق ستورفيورد يبلغ عمقه 260 متراً بين جدران ترتفع 1700 متر، وفيه شلالات «الأخوات السبع». القرية على الضفة تعيش على العبّارات وسفن الصيف.',
+      },
+      en: {
+        city: 'Geiranger',
+        landmark: 'Geirangerfjord',
+        description:
+          'A branch of the Storfjord 260 metres deep between walls that rise 1,700 metres, with the Seven Sisters falls dropping into it. The village on the shore lives by the ferries and the summer ships.',
+      },
+      de: {
+        city: 'Geiranger',
+        landmark: 'Der Geirangerfjord',
+        description:
+          'Ein 260 Meter tiefer Arm des Storfjords zwischen Wänden, die 1.700 Meter aufragen, mit den Sieben Schwestern, die hineinfallen. Das Dorf am Ufer lebt von Fähren und Sommerschiffen.',
+      },
+      ru: {
+        city: 'Гейрангер',
+        landmark: 'Гейрангер-фьорд',
+        description:
+          'Ответвление Стур-фьорда глубиной 260 метров между стенами высотой 1 700 метров, с водопадом «Семь сестёр». Деревня на берегу живёт паромами и летними судами.',
+      },
+      it: {
+        city: 'Geiranger',
+        landmark: 'Il Geirangerfjord',
+        description:
+          'Un ramo dello Storfjord profondo 260 metri tra pareti alte 1.700 metri, con le Sette Sorelle che vi cadono dentro. Il villaggio sulla riva vive di traghetti e navi estive.',
       },
     },
   },
