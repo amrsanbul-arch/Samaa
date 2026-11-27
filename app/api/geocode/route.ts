@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { isExcludedCountryQuery, isExcludedPlaceCode } from '@/lib/excluded';
 
 type OpenMeteoResult = {
   id: number;
@@ -28,7 +29,8 @@ export async function GET(request: Request) {
   // Region of the visitor's UI language: a soft hint, never a hard filter.
   const hint = (searchParams.get('cc') ?? '').trim().toUpperCase();
 
-  if (query.length < 2) {
+  // A country the site does not serve is not a city: answer like any other miss.
+  if (query.length < 2 || isExcludedCountryQuery(query)) {
     return NextResponse.json({ results: [] });
   }
 
@@ -63,6 +65,7 @@ export async function GET(request: Request) {
 
     const merged = new Map<number, { item: OpenMeteoResult; index: number }>();
     [...(primary.results ?? []), ...(secondary.results ?? [])].forEach((item, index) => {
+      if (isExcludedPlaceCode(item.country_code)) return;
       if (!merged.has(item.id)) merged.set(item.id, { item, index });
     });
 

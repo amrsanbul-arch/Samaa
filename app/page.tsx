@@ -13,6 +13,7 @@ import {
   fallbackSceneImage,
   fallbackSceneText,
   findLandmark,
+  isExcludedPlace,
   isSceneCity,
   landmarkForPlace,
   localizedText,
@@ -182,6 +183,9 @@ export default function HomePage() {
           // on a place with no curated scene, the landmark the visitor typed wins.
           if (curated && resolved && !landmarkForPlace(resolved)) resolved = null;
         }
+
+        // A place in an excluded country is treated as not found, not as a scene.
+        if (isExcludedPlace(resolved)) resolved = null;
 
         if (!resolved && curated) resolved = placeFromLandmark(curated, lang);
 

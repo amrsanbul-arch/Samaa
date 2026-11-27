@@ -275,7 +275,6 @@ export const COUNTRY_NAMES: Record<string, CountryName> = {
   NZ: { ar: 'نيوزيلندا', en: 'New Zealand', de: 'Neuseeland', ru: 'Новая Зеландия', it: 'Nuova Zelanda' },
   CL: { ar: 'تشيلي', en: 'Chile', de: 'Chile', ru: 'Чили', it: 'Cile' },
   CO: { ar: 'كولومبيا', en: 'Colombia', de: 'Kolumbien', ru: 'Колумбия', it: 'Colombia' },
-  IL: { ar: 'إسرائيل', en: 'Israel', de: 'Israel', ru: 'Израиль', it: 'Israele' },
   PS: { ar: 'فلسطين', en: 'Palestine', de: 'Palästina', ru: 'Палестина', it: 'Palestina' },
   IR: { ar: 'إيران', en: 'Iran', de: 'Iran', ru: 'Иран', it: 'Iran' },
 };

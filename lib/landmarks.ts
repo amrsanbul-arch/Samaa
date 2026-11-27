@@ -2,6 +2,7 @@ import type { Landmark, Place } from './types';
 import { normalizeArabic } from './arabic';
 import type { Lang } from './i18n';
 import { COUNTRIES, COUNTRY_NAMES, commons, credit, type CountryScene } from './countries';
+import { isExcludedPlaceCode } from './excluded';
 
 export type LandmarkText = {
   city: string;
@@ -281,8 +282,13 @@ export function landmarkById(id: string): Landmark | null {
   return LANDMARKS.find((item) => item.id === id) ?? null;
 }
 
-/** The geocoder files Jerusalem under Israel; a Palestinian scene this close wins. */
+/** A curated Palestinian scene this close decides the label of the city. */
 const LOCAL_SCENE_KM = 25;
+
+/**
+ * A place that still arrives from an excluded country is labelled Palestine
+ * rather than named; the geocoder normally drops those places before this.
+ */
 
 /**
  * Country label for a geocoded place. Palestinian places get the localised name of
@@ -293,7 +299,8 @@ export function placeCountry(
   place: Place,
   lang: Lang
 ): { name: string; code: string; admin1?: string } {
-  if ((place.countryCode ?? '').toUpperCase() === 'PS') {
+  const code = (place.countryCode ?? '').toUpperCase();
+  if (code === 'PS' || isExcludedPlaceCode(code)) {
     return { name: COUNTRY_NAMES.PS[lang], code: 'PS', admin1: place.admin1 };
   }
 
@@ -312,6 +319,11 @@ export function placeCountry(
 
 export function placeCountryName(place: Place, lang: Lang): string {
   return placeCountry(place, lang).name;
+}
+
+/** True for a place the site refuses to serve, whatever route produced it. */
+export function isExcludedPlace(place: Place | null): boolean {
+  return isExcludedPlaceCode(place?.countryCode);
 }
 
 export const FEATURED_LANDMARKS = FEATURED_IDS.map((id) => landmarkById(id)!).filter(Boolean);
