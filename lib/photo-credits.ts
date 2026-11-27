@@ -9,6 +9,13 @@ import type { PhotoCredit } from './types';
  * entry here falls back to the source page with no photographer.
  */
 export const PHOTO_CREDITS: Record<string, Omit<PhotoCredit, 'label' | 'source'>> = {
+  "Hebron Cave of the Patriarchs.jpg": {
+    photographer: "Djampa",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+    url: "https://commons.wikimedia.org/wiki/File:Hebron_Cave_of_the_Patriarchs.jpg",
+    changes: "Resized to 1600 px wide by the site's image proxy; cropped to fill the screen. No other changes.",
+  },
   "Antigua English Harbour Nelson's Dockyard 2.jpg": {
     photographer: "Dr. Thomas Liptak",
     license: "CC BY 4.0",

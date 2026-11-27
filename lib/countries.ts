@@ -4069,7 +4069,6 @@ export const COUNTRIES: CountryScene[] = [
       'القدس', 'jerusalem', 'palestine', 'فلسطين',
       'dome of the rock', 'قبة الصخرة', 'المسجد الأقصى', 'al-aqsa',
       'haram al-sharif', 'الحرم القدسي',
-      'hebron', 'الخليل', 'خليل الرحمن',
     ],
     capital: true,
     focus: '50% 45%',
@@ -4104,6 +4103,54 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'La Cupola della Roccia',
         description:
           'Una cupola dorata su un santuario ottagonale sull’Haram al-Sharif, costruito da Abd al-Malik tra il 691 e il 692. La roccia e i mosaici ne fanno uno degli edifici islamici più antichi conservati.',
+      },
+    },
+  },
+  {
+    id: 'hebron',
+    countryCode: 'PS',
+    timezone: 'Asia/Hebron',
+    latitude: 31.5247,
+    longitude: 35.1105,
+    image: commons('Hebron Cave of the Patriarchs.jpg'),
+    credit: credit('Hebron Cave of the Patriarchs.jpg'),
+    aliases: [
+      'الخليل', 'hebron', 'حبرون', 'خليل الرحمن', 'الخليل الرحمن',
+      'ibrahimi mosque', 'الحرم الإبراهيمي', 'cave of the patriarchs',
+      'مغارة المكفيلة', 'المسجد الإبراهيمي',
+    ],
+    focus: '55% 50%',
+    theme: 'nile',
+    copy: {
+      ar: {
+        city: 'الخليل',
+        landmark: 'الحرم الإبراهيمي',
+        description:
+          'الحرم الإبراهيمي في قلب الخليل، بناء هيرودي ضخم عمره ألفا سنة يضمّ مقامات إبراهيم وإسحاق ويعقوب وزوجاتهم، وصار جزء منه مسجداً بعد الفتح الإسلامي.',
+      },
+      en: {
+        city: 'Hebron',
+        landmark: 'Ibrahimi Mosque',
+        description:
+          'The Ibrahimi Mosque in the heart of Hebron: a massive Herodian building two thousand years old that holds the tombs of Abraham, Isaac and Jacob and their wives, part of it made a mosque after the Islamic conquest.',
+      },
+      de: {
+        city: 'Hebron',
+        landmark: 'Ibrahimi-Moschee',
+        description:
+          'Die Ibrahimi-Moschee im Herzen Hebrons: ein gewaltiger herodianischer Bau von vor zweitausend Jahren mit den Gräbern von Abraham, Isaak und Jakob und ihren Frauen; ein Teil wurde nach der islamischen Eroberung zur Moschee.',
+      },
+      ru: {
+        city: 'Хеврон',
+        landmark: 'Мечеть Ибрагими',
+        description:
+          'Мечеть Ибрагими в центре Хеврона: огромное иродианское сооружение двухтысячелетней давности с гробницами Ибрахима, Исхака и Якуба и их жён; часть его стала мечетью после исламского завоевания.',
+      },
+      it: {
+        city: 'Hebron',
+        landmark: 'Moschea Ibrahimi',
+        description:
+          'La moschea Ibrahimi nel cuore di Hebron: un imponente edificio erodiano di duemila anni fa che custodisce le tombe di Abramo, Isacco e Giacobbe e delle loro mogli; una parte divenne moschea dopo la conquista islamica.',
       },
     },
   },
