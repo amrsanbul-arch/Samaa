@@ -82,6 +82,26 @@ export const credit = (file: string): PhotoCredit => {
 
 /** Localised country names, keyed by ISO 3166-1 alpha-2 code. */
 export const COUNTRY_NAMES: Record<string, CountryName> = {
+  AG: { ar: 'أنتيغوا وبربودا', en: 'Antigua and Barbuda', de: 'Antigua und Barbuda', ru: 'Антигуа и Барбуда', it: 'Antigua e Barbuda' },
+  KN: { ar: 'سانت كيتس ونيفيس', en: 'Saint Kitts and Nevis', de: 'St. Kitts und Nevis', ru: 'Сент-Китс и Невис', it: 'Saint Kitts e Nevis' },
+  VC: { ar: 'سانت فينسنت والغرينادين', en: 'Saint Vincent and the Grenadines', de: 'St. Vincent und die Grenadinen', ru: 'Сент-Винсент и Гренадины', it: 'Saint Vincent e Grenadine' },
+  BZ: { ar: 'بليز', en: 'Belize', de: 'Belize', ru: 'Белиз', it: 'Belize' },
+  GT: { ar: 'غواتيمالا', en: 'Guatemala', de: 'Guatemala', ru: 'Гватемала', it: 'Guatemala' },
+  HN: { ar: 'هندوراس', en: 'Honduras', de: 'Honduras', ru: 'Гондурас', it: 'Honduras' },
+  SV: { ar: 'السلفادور', en: 'El Salvador', de: 'El Salvador', ru: 'Сальвадор', it: 'El Salvador' },
+  NI: { ar: 'نيكاراغوا', en: 'Nicaragua', de: 'Nicaragua', ru: 'Никарагуа', it: 'Nicaragua' },
+  CR: { ar: 'كوستاريكا', en: 'Costa Rica', de: 'Costa Rica', ru: 'Коста-Рика', it: 'Costa Rica' },
+  PA: { ar: 'بنما', en: 'Panama', de: 'Panama', ru: 'Панама', it: 'Panama' },
+  EC: { ar: 'الإكوادور', en: 'Ecuador', de: 'Ecuador', ru: 'Эквадор', it: 'Ecuador' },
+  VE: { ar: 'فنزويلا', en: 'Venezuela', de: 'Venezuela', ru: 'Венесуэла', it: 'Venezuela' },
+  GY: { ar: 'غيانا', en: 'Guyana', de: 'Guyana', ru: 'Гайана', it: 'Guyana' },
+  SR: { ar: 'سورينام', en: 'Suriname', de: 'Suriname', ru: 'Суринам', it: 'Suriname' },
+  BO: { ar: 'بوليفيا', en: 'Bolivia', de: 'Bolivien', ru: 'Боливия', it: 'Bolivia' },
+  PY: { ar: 'باراغواي', en: 'Paraguay', de: 'Paraguay', ru: 'Парагвай', it: 'Paraguay' },
+  UY: { ar: 'أوروغواي', en: 'Uruguay', de: 'Uruguay', ru: 'Уругвай', it: 'Uruguay' },
+  TL: { ar: 'تيمور الشرقية', en: 'Timor-Leste', de: 'Osttimor', ru: 'Восточный Тимор', it: 'Timor Est' },
+  BN: { ar: 'بروناي', en: 'Brunei', de: 'Brunei', ru: 'Бруней', it: 'Brunei' },
+  KP: { ar: 'كوريا الشمالية', en: 'North Korea', de: 'Nordkorea', ru: 'Северная Корея', it: 'Corea del Nord' },
   KI: { ar: 'كيريباتي', en: 'Kiribati', de: 'Kiribati', ru: 'Кирибати', it: 'Kiribati' },
   TV: { ar: 'توفالو', en: 'Tuvalu', de: 'Tuvalu', ru: 'Тувалу', it: 'Tuvalu' },
   NR: { ar: 'ناورو', en: 'Nauru', de: 'Nauru', ru: 'Науру', it: 'Nauru' },
@@ -9370,6 +9390,931 @@ export const COUNTRIES: CountryScene[] = [
         landmark: 'Boiling Lake',
         description:
           'Il Boiling Lake nelle Morne Trois Pitons: una fumarola allagata che ribolle e fuma sul fondo del cratere, raggiungibile solo a piedi.',
+      },
+    },
+  },
+  {
+    id: 'english_harbour',
+    countryCode: 'AG',
+    timezone: 'America/Antigua',
+    latitude: 17.0064,
+    longitude: -61.7625,
+    image: commons('Antigua English Harbour Nelson\'s Dockyard 2.jpg'),
+    credit: credit('Antigua English Harbour Nelson\'s Dockyard 2.jpg'),
+    aliases: [
+      'إنجلش هاربر', 'english harbour', 'antigua', 'antigua and barbuda', 'أنتيغوا وبربودا',
+      'nelson\'s dockyard', 'nelson dockyard', 'نيلسون دوكيارد', 'سانت جون', 'st john\'s',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'إنجلش هاربر',
+        landmark: 'نيلسون دوكيارد',
+        description:
+          'الترسانة في إنجلش هاربر حيث كانت البحرية البريطانية تُصلح سفنها منذ ١٧٤٥، وهي اليوم مرسى تحيط به مخازن جورجية ونخيل.',
+      },
+      en: {
+        city: 'English Harbour',
+        landmark: 'Nelson’s Dockyard',
+        description:
+          'The dockyard at English Harbour where the British navy careened and refitted ships from 1745, now a marina ringed by Georgian storehouses and palms.',
+      },
+      de: {
+        city: 'English Harbour',
+        landmark: 'Nelson’s Dockyard',
+        description:
+          'Die Werft in English Harbour, wo die britische Marine ab 1745 Schiffe kielholte und ausrüstete, heute ein Yachthafen zwischen georgianischen Speichern und Palmen.',
+      },
+      ru: {
+        city: 'Инглиш-Харбор',
+        landmark: 'Верфь Нельсона',
+        description:
+          'Верфь в Инглиш-Харбор, где с 1745 года британский флот килевал и оснащал корабли; теперь это марина среди георгианских складов и пальм.',
+      },
+      it: {
+        city: 'English Harbour',
+        landmark: 'Nelson’s Dockyard',
+        description:
+          'Il cantiere di English Harbour dove la marina britannica carenava e armava le navi dal 1745, oggi un porto turistico tra magazzini georgiani e palme.',
+      },
+    },
+  },
+  {
+    id: 'brimstone_hill',
+    countryCode: 'KN',
+    timezone: 'America/St_Kitts',
+    latitude: 17.3469,
+    longitude: -62.8372,
+    image: commons('Saint Kitts - Brimstone Hill Fortress 02.JPG'),
+    credit: credit('Saint Kitts - Brimstone Hill Fortress 02.JPG'),
+    aliases: [
+      'سانت كيتس', 'saint kitts', 'st kitts', 'saint kitts and nevis', 'سانت كيتس ونيفيس',
+      'brimstone hill', 'حصن بريمستون هيل', 'باستير', 'basseterre',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'سانت كيتس',
+        landmark: 'حصن بريمستون هيل',
+        description:
+          'حصن بدأ عام ١٦٩٠ على تل بركاني يطل على البحر، جدرانه من الحجر الداكن ومدافعه موجهة إلى الممر بين الجزر.',
+      },
+      en: {
+        city: 'Saint Kitts',
+        landmark: 'Brimstone Hill Fortress',
+        description:
+          'A fortress begun in 1690 on a volcanic hill above the sea, its walls of dark stone and cannon aimed at the channel between the islands.',
+      },
+      de: {
+        city: 'St. Kitts',
+        landmark: 'Brimstone-Hill-Festung',
+        description:
+          'Eine ab 1690 auf einem Vulkanhügel über dem Meer errichtete Festung, mit dunklen Steinmauern und Kanonen zum Kanal zwischen den Inseln.',
+      },
+      ru: {
+        city: 'Сент-Китс',
+        landmark: 'Крепость Бримстоун-Хилл',
+        description:
+          'Крепость, начатая в 1690 году на вулканическом холме над морем: тёмные стены и пушки, нацеленные на пролив между островами.',
+      },
+      it: {
+        city: 'Saint Kitts',
+        landmark: 'Fortezza di Brimstone Hill',
+        description:
+          'Una fortezza iniziata nel 1690 su una collina vulcanica sopra il mare, con mura di pietra scura e cannoni puntati sul canale tra le isole.',
+      },
+    },
+  },
+  {
+    id: 'tobago_cays',
+    countryCode: 'VC',
+    timezone: 'America/St_Vincent',
+    latitude: 12.6333,
+    longitude: -61.35,
+    image: commons('TobagoCaysAerial.jpg'),
+    credit: credit('TobagoCaysAerial.jpg'),
+    aliases: [
+      'جزر توباغو كيز', 'tobago cays', 'saint vincent and the grenadines',
+      'سانت فينسنت والغرينادين', 'grenadines', 'غرينادين', 'كينغستاون', 'kingstown',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'جزر توباغو كيز',
+        landmark: 'جزر توباغو كيز',
+        description:
+          'خمس جزر صغيرة داخل حيد على شكل حدوة فرس في غرينادين، لا يُوصل إليها إلا بالقارب، ومياهها ضحلة حتى ترى السلاحف تسبح.',
+      },
+      en: {
+        city: 'Tobago Cays',
+        landmark: 'Tobago Cays',
+        description:
+          'Five small cays inside a horseshoe reef in the Grenadines, reached only by boat, with water shallow enough to see the turtles move.',
+      },
+      de: {
+        city: 'Tobago Cays',
+        landmark: 'Tobago Cays',
+        description:
+          'Fünf kleine Inselchen in einem hufeisenförmigen Riff der Grenadinen, nur per Boot erreichbar, mit Wasser so flach, dass man die Schildkröten schwimmen sieht.',
+      },
+      ru: {
+        city: 'Тобаго-Киз',
+        landmark: 'Острова Тобаго-Киз',
+        description:
+          'Пять малых островков внутри рифа-подковы на Гренадинах, добраться можно только на лодке; вода так мелка, что видно плывущих черепах.',
+      },
+      it: {
+        city: 'Tobago Cays',
+        landmark: 'Tobago Cays',
+        description:
+          'Cinque piccoli isolotti dentro una barriera a ferro di cavallo nelle Grenadine, raggiungibili solo in barca, con acqua così bassa da vedere le tartarughe nuotare.',
+      },
+    },
+  },
+  {
+    id: 'belize_city',
+    countryCode: 'BZ',
+    timezone: 'America/Belize',
+    latitude: 17.5046,
+    longitude: -88.1962,
+    image: commons('Belize Blue Hole (TMP) (16912331906).jpg'),
+    credit: credit('Belize Blue Hole (TMP) (16912331906).jpg'),
+    aliases: [
+      'مدينة بليز', 'belize city', 'belize', 'بليز', 'great blue hole', 'الثقب الأزرق الكبير',
+      'بلموبان', 'belmopan', 'lighthouse reef',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'مدينة بليز',
+        landmark: 'الثقب الأزرق الكبير',
+        description:
+          'حفرة دائرية قطرها ٣٠٠ متر في حيد لايتهاوس، دائرتها الزرقاء العميقة محفورة في المياه الضحلة الفاتحة، اشتهرت بفضل جاك إيف كوستو.',
+      },
+      en: {
+        city: 'Belize City',
+        landmark: 'Great Blue Hole',
+        description:
+          'A round sinkhole 300 metres across in Lighthouse Reef, its deep blue circle cut into the pale shallows, made famous by Jacques Cousteau.',
+      },
+      de: {
+        city: 'Belize City',
+        landmark: 'Great Blue Hole',
+        description:
+          'Ein runder Einsturzdolomit von 300 Metern Durchmesser im Lighthouse Reef, dessen tiefblaue Kreis in die hellen Untiefen geschnitten ist, berühmt durch Jacques Cousteau.',
+      },
+      ru: {
+        city: 'Белиз-Сити',
+        landmark: 'Большая голубая дыра',
+        description:
+          'Круглая воронка диаметром 300 метров в рифе Лайтхаус: её тёмно-синий круг прорезан в бледной отмели, прославлен Жаком-Ивом Кусто.',
+      },
+      it: {
+        city: 'Belize City',
+        landmark: 'Great Blue Hole',
+        description:
+          'Una dolina circolare di 300 metri nel Lighthouse Reef, il cui cerchio blu profondo è inciso nelle secche chiare, resa celebre da Jacques Cousteau.',
+      },
+    },
+  },
+  {
+    id: 'tikal',
+    countryCode: 'GT',
+    timezone: 'America/Guatemala',
+    latitude: 16.9333,
+    longitude: -89.8833,
+    image: commons('Tikal Temple II.jpg'),
+    credit: credit('Tikal Temple II.jpg'),
+    aliases: [
+      'فلوريس', 'flores', 'guatemala', 'غواتيمالا', 'tikal', 'تيكال', 'غواتيمالا سيتي',
+      'guatemala city', 'peten',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'فلوريس',
+        landmark: 'تيكال',
+        description:
+          'المعبد الثاني فوق الساحة الكبرى في تيكال، هرم مدرّج من الحجر الجيري ينهض من غابة بيتين شمال غواتيمالا.',
+      },
+      en: {
+        city: 'Flores',
+        landmark: 'Tikal',
+        description:
+          'Temple II above the Great Plaza of Tikal, a stepped pyramid of limestone that rises out of the Petén forest of northern Guatemala.',
+      },
+      de: {
+        city: 'Flores',
+        landmark: 'Tikal',
+        description:
+          'Der Tempel II über dem Großen Platz von Tikal, eine Stufenpyramide aus Kalkstein, die aus dem Petén-Wald Nordguatemalas steigt.',
+      },
+      ru: {
+        city: 'Флорес',
+        landmark: 'Тикаль',
+        description:
+          'Храм II над Великой площадью Тикаля: ступенчатая пирамида из известняка поднимается из лесов Петена на севере Гватемалы.',
+      },
+      it: {
+        city: 'Flores',
+        landmark: 'Tikal',
+        description:
+          'Il Tempio II sopra la Grande Piazza di Tikal, una piramide a gradoni di calcare che sorge dalla foresta del Petén nel nord del Guatemala.',
+      },
+    },
+  },
+  {
+    id: 'copan',
+    countryCode: 'HN',
+    timezone: 'America/Tegucigalpa',
+    latitude: 14.8386,
+    longitude: -89.1572,
+    image: commons('Copan Ruins - panoramio.jpg'),
+    credit: credit('Copan Ruins - panoramio.jpg'),
+    aliases: [
+      'كوبان رويناس', 'copan ruinas', 'copan', 'honduras', 'هندوراس', 'copán', 'تيغوسيغالبا',
+      'tegucigalpa',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'كوبان رويناس',
+        landmark: 'آثار كوبان',
+        description:
+          'أكروبول كوبان في غرب هندوراس، سلالمه ومسلّاته منقوشة بوجوه المايا ورموزهم في القرن الثامن.',
+      },
+      en: {
+        city: 'Copán Ruinas',
+        landmark: 'Copán Ruins',
+        description:
+          'The acropolis of Copán in western Honduras, its stairways and stelae carved with the faces and glyphs of the Maya in the eighth century.',
+      },
+      de: {
+        city: 'Copán Ruinas',
+        landmark: 'Ruinen von Copán',
+        description:
+          'Die Akropolis von Copán im Westen Honduras’, deren Treppen und Stelen im 8. Jahrhundert mit Gesichtern und Glyphen der Maya gemeißelt wurden.',
+      },
+      ru: {
+        city: 'Копан-Руинас',
+        landmark: 'Руины Копана',
+        description:
+          'Акрополь Копана на западе Гондураса: его лестницы и стелы высечены лицами и глифами майя в VIII веке.',
+      },
+      it: {
+        city: 'Copán Ruinas',
+        landmark: 'Rovine di Copán',
+        description:
+          'L’acropoli di Copán nell’Honduras occidentale, con scale e stele incise con volti e glifi maya nell’VIII secolo.',
+      },
+    },
+  },
+  {
+    id: 'santa_ana',
+    countryCode: 'SV',
+    timezone: 'America/El_Salvador',
+    latitude: 13.9942,
+    longitude: -89.5597,
+    image: commons('Laguna cratérica del Volcán de Santa Ana - El Salvador.jpg'),
+    credit: credit('Laguna cratérica del Volcán de Santa Ana - El Salvador.jpg'),
+    aliases: [
+      'سانتا آنا', 'santa ana', 'el salvador', 'السلفادور', 'santa ana volcano',
+      'بركان سانتا آنا', 'سان سلفادور', 'san salvador',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'سانتا آنا',
+        landmark: 'بركان سانتا آنا',
+        description:
+          'بحيرة الفوهة داخل بركان سانتا آنا، ماؤها أخضر فاتح على رماد رمادي، وهو أعلى براكين السلفادور عند ٢٣٨١ متراً.',
+      },
+      en: {
+        city: 'Santa Ana',
+        landmark: 'Santa Ana Volcano',
+        description:
+          'The crater lake inside Santa Ana volcano, its water pale green against grey ash, the highest of El Salvador’s volcanoes at 2,381 metres.',
+      },
+      de: {
+        city: 'Santa Ana',
+        landmark: 'Santa-Ana-Vulkan',
+        description:
+          'Der Kratersee im Santa-Ana-Vulkan, hellgrün gegen graue Asche, der höchste Vulkan El Salvadors mit 2.381 Metern.',
+      },
+      ru: {
+        city: 'Санта-Ана',
+        landmark: 'Вулкан Санта-Ана',
+        description:
+          'Кратерное озеро вулкана Санта-Ана: бледно-зелёная вода на сером пепле, высочайший вулкан Сальвадора — 2381 метр.',
+      },
+      it: {
+        city: 'Santa Ana',
+        landmark: 'Vulcano Santa Ana',
+        description:
+          'Il lago craterico del vulcano Santa Ana, acqua verde chiaro sulla cenere grigia, il più alto vulcano di El Salvador con 2.381 metri.',
+      },
+    },
+  },
+  {
+    id: 'granada_ni',
+    countryCode: 'NI',
+    timezone: 'America/Managua',
+    latitude: 11.93,
+    longitude: -85.956,
+    image: commons('Cathedral of Granada at sunset.jpg'),
+    credit: credit('Cathedral of Granada at sunset.jpg'),
+    aliases: [
+      'غرناطة', 'granada', 'nicaragua', 'نيكاراغوا', 'granada cathedral', 'كاتدرائية غرناطة',
+      'ماناغوا', 'managua',
+    ],
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'غرناطة',
+        landmark: 'كاتدرائية غرناطة',
+        description:
+          'كاتدرائية غرناطة الصفراء على ساحتها، أُعيد بناؤها في عشرينيات القرن العشرين على هيكل الكنيسة الاستعمارية، وبرج ساعتها يعلو المدينة المطلة على البحيرة.',
+      },
+      en: {
+        city: 'Granada',
+        landmark: 'Granada Cathedral',
+        description:
+          'The yellow cathedral of Granada on its plaza, rebuilt in the 1920s on the shell of the colonial church, with a clock tower over the lake-facing town.',
+      },
+      de: {
+        city: 'Granada',
+        landmark: 'Kathedrale von Granada',
+        description:
+          'Die gelbe Kathedrale von Granada an ihrem Platz, in den 1920er-Jahren auf den Mauern der Kolonialkirche neu errichtet, mit einem Uhrturm über der Stadt am See.',
+      },
+      ru: {
+        city: 'Гранада',
+        landmark: 'Собор Гранады',
+        description:
+          'Жёлтый собор Гранады на своей площади, отстроенный в 1920-х на стенах колониальной церкви, с часовой башней над городом у озера.',
+      },
+      it: {
+        city: 'Granada',
+        landmark: 'Cattedrale di Granada',
+        description:
+          'La cattedrale gialla di Granada sulla sua piazza, ricostruita negli anni Venti sulle mura della chiesa coloniale, con la torre dell’orologio sopra la città sul lago.',
+      },
+    },
+  },
+  {
+    id: 'la_fortuna',
+    countryCode: 'CR',
+    timezone: 'America/Costa_Rica',
+    latitude: 10.471,
+    longitude: -84.644,
+    image: commons('Arenal Volcano 01.jpg'),
+    credit: credit('Arenal Volcano 01.jpg'),
+    aliases: [
+      'لا فورتونا', 'la fortuna', 'costa rica', 'كوستاريكا', 'arenal', 'arenal volcano',
+      'بركان أرينال', 'سان خوسيه', 'san jose',
+    ],
+    focus: '28% 45%',
+    copy: {
+      ar: {
+        city: 'لا فورتونا',
+        landmark: 'بركان أرينال',
+        description:
+          'أرينال فوق لا فورتونا، مخروط بارتفاع ١٦٧٠ متراً قذف الحمم كل ليلة حتى ٢٠١٠، ولا يزال يضع قبعة من السحاب معظم الأصيل.',
+      },
+      en: {
+        city: 'La Fortuna',
+        landmark: 'Arenal Volcano',
+        description:
+          'Arenal above La Fortuna, a cone of 1,670 metres that poured lava nightly until 2010 and still carries a cap of cloud most afternoons.',
+      },
+      de: {
+        city: 'La Fortuna',
+        landmark: 'Arenal',
+        description:
+          'Der Arenal über La Fortuna, ein 1.670 Meter hoher Kegel, der bis 2010 Nacht für Nacht Lava spie und an den meisten Nachmittagen eine Wolkenkappe trägt.',
+      },
+      ru: {
+        city: 'Ла-Фортуна',
+        landmark: 'Вулкан Ареналь',
+        description:
+          'Ареналь над Ла-Фортуной — конус высотой 1670 метров, изливавший лаву каждую ночь до 2010 года и почти каждый вечер укрытый облаком.',
+      },
+      it: {
+        city: 'La Fortuna',
+        landmark: 'Vulcano Arenal',
+        description:
+          'L’Arenal sopra La Fortuna, un cono di 1.670 metri che fino al 2010 versava lava ogni notte e che quasi ogni pomeriggio porta un cappello di nuvole.',
+      },
+    },
+  },
+  {
+    id: 'panama_city',
+    countryCode: 'PA',
+    timezone: 'America/Panama',
+    latitude: 8.9833,
+    longitude: -79.5167,
+    image: commons('Miraflores Locks, Panama Canal..jpg'),
+    credit: credit('Miraflores Locks, Panama Canal..jpg'),
+    aliases: [
+      'مدينة بنما', 'panama city', 'panama', 'بنما', 'panama canal', 'قناة بنما',
+      'miraflores locks', 'هويس ميرافلوريس',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'مدينة بنما',
+        landmark: 'هويس ميرافلوريس',
+        description:
+          'هويس ميرافلوريس في قناة بنما، حيث تُرفع السفن ١٦ متراً على درجتين بين المحيط الهادئ وبحيرة غاتون.',
+      },
+      en: {
+        city: 'Panama City',
+        landmark: 'Miraflores Locks',
+        description:
+          'The Miraflores locks of the Panama Canal, where ships are lifted 16 metres in two steps between the Pacific and Gatún Lake.',
+      },
+      de: {
+        city: 'Panama-Stadt',
+        landmark: 'Miraflores-Schleusen',
+        description:
+          'Die Miraflores-Schleusen des Panamakanals, in denen Schiffe in zwei Stufen 16 Meter zwischen Pazifik und Gatún-See gehoben werden.',
+      },
+      ru: {
+        city: 'Панама',
+        landmark: 'Шлюзы Мирафлорес',
+        description:
+          'Шлюзы Мирафлорес Панамского канала: суда поднимают на 16 метров в две ступени между Тихим океаном и озером Гатун.',
+      },
+      it: {
+        city: 'Panama',
+        landmark: 'Chiuse di Miraflores',
+        description:
+          'Le chiuse di Miraflores del canale di Panama, dove le navi salgono di 16 metri in due passi tra il Pacifico e il lago Gatún.',
+      },
+    },
+  },
+  {
+    id: 'puerto_ayora',
+    countryCode: 'EC',
+    timezone: 'Pacific/Galapagos',
+    latitude: -0.7426,
+    longitude: -90.3136,
+    image: commons('Bartolome Island, Galapagos (50122421803).jpg'),
+    credit: credit('Bartolome Island, Galapagos (50122421803).jpg'),
+    aliases: [
+      'بويرتو أيورا', 'puerto ayora', 'ecuador', 'الإكوادور', 'galapagos', 'galápagos',
+      'bartolome', 'بارتولومي', 'كيتو', 'quito',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'بويرتو أيورا',
+        landmark: 'جزيرة بارتولومي',
+        description:
+          'بارتولومي في غالاباغوس، مخروط بركاني وشاطئ رفيع تحت صخر بيناكل، في مياه تتقاسمها أسود البحر مع البطاريق.',
+      },
+      en: {
+        city: 'Puerto Ayora',
+        landmark: 'Bartolomé Island',
+        description:
+          'Bartolomé in the Galápagos, a spatter cone and a thin beach under the older tuff of Pinnacle Rock, in water the sea lions share with penguins.',
+      },
+      de: {
+        city: 'Puerto Ayora',
+        landmark: 'Bartolomé',
+        description:
+          'Bartolomé auf den Galápagos: ein Schlackenkegel und ein schmaler Strand unter dem Tuff von Pinnacle Rock, im Wasser teilen sich Seelöwen und Pinguine.',
+      },
+      ru: {
+        city: 'Пуэрто-Айора',
+        landmark: 'Остров Бартоломе',
+        description:
+          'Бартоломе на Галапагосах: шлаковый конус и узкий пляж под туфом скалы Пиннакл, в воде морские львы делят место с пингвинами.',
+      },
+      it: {
+        city: 'Puerto Ayora',
+        landmark: 'Isola Bartolomé',
+        description:
+          'Bartolomé alle Galápagos: un cono di scorie e una spiaggia sottile sotto il tufo di Pinnacle Rock, in acqua condivisa da leoni marini e pinguini.',
+      },
+    },
+  },
+  {
+    id: 'canaima',
+    countryCode: 'VE',
+    timezone: 'America/Caracas',
+    latitude: 6.24,
+    longitude: -62.87,
+    image: commons('Salto del Angel-Canaima-Venezuela18.JPG'),
+    credit: credit('Salto del Angel-Canaima-Venezuela18.JPG'),
+    aliases: [
+      'كانايما', 'canaima', 'venezuela', 'فنزويلا', 'angel falls', 'salto angel', 'شلال آنخل',
+      'كاراكاس', 'caracas',
+    ],
+    copy: {
+      ar: {
+        city: 'كانايما',
+        landmark: 'شلال آنخل',
+        description:
+          'شلال آنخل يهبط ٩٧٩ متراً من جبل أويان تيبوي المسطح، وهو أعلى شلال على الأرض، ويُوصل إليه بالقارب عبر نهري كاراو وتشورون.',
+      },
+      en: {
+        city: 'Canaima',
+        landmark: 'Angel Falls',
+        description:
+          'Salto Ángel dropping 979 metres off the table mountain Auyán-tepui, the highest waterfall on Earth, reached by boat up the Carrao and Churún rivers.',
+      },
+      de: {
+        city: 'Canaima',
+        landmark: 'Salto Ángel',
+        description:
+          'Der Salto Ángel stürzt 979 Meter vom Tafelberg Auyán-tepui, der höchste Wasserfall der Erde, erreichbar per Boot über Carrao und Churún.',
+      },
+      ru: {
+        city: 'Канайма',
+        landmark: 'Водопад Анхель',
+        description:
+          'Сальто-Анхель падает на 979 метров с плоскогорья Ауян-тепуи — самый высокий водопад Земли; добраться можно на лодке по рекам Каррао и Чурун.',
+      },
+      it: {
+        city: 'Canaima',
+        landmark: 'Salto Ángel',
+        description:
+          'Il Salto Ángel precipita per 979 metri dal tepui Auyán, la cascata più alta della Terra, raggiungibile in barca lungo i fiumi Carrao e Churún.',
+      },
+    },
+  },
+  {
+    id: 'kaieteur',
+    countryCode: 'GY',
+    timezone: 'America/Guyana',
+    latitude: 5.1745,
+    longitude: -59.4784,
+    image: commons('Kaieteur Falls, Guyana (23035888153).jpg'),
+    credit: credit('Kaieteur Falls, Guyana (23035888153).jpg'),
+    aliases: [
+      'كايتور', 'kaieteur', 'guyana', 'غيانا', 'kaieteur falls', 'شلالات كايتور', 'جورج تاون',
+      'georgetown',
+    ],
+    copy: {
+      ar: {
+        city: 'كايتور',
+        landmark: 'شلالات كايتور',
+        description:
+          'كايتور على نهر بوتارو، هبوط واحد بطول ٢٢٦ متراً في وادٍ أخضر، أربعة أضعاف ارتفاع شلالات نياغارا، ويُوصل إليه بطائرة صغيرة.',
+      },
+      en: {
+        city: 'Kaieteur',
+        landmark: 'Kaieteur Falls',
+        description:
+          'Kaieteur on the Potaro river, a single drop of 226 metres into a gorge of green, four times the height of Niagara and reached by small plane.',
+      },
+      de: {
+        city: 'Kaieteur',
+        landmark: 'Kaieteur-Fälle',
+        description:
+          'Der Kaieteur am Potaro, ein einzelner Fall von 226 Metern in eine grüne Schlucht, viermal so hoch wie die Niagarafälle, erreichbar mit dem Kleinflugzeug.',
+      },
+      ru: {
+        city: 'Кайетур',
+        landmark: 'Водопад Кайетур',
+        description:
+          'Кайетур на реке Потаро — единый сброс в 226 метров в зелёное ущелье, вчетверо выше Ниагары; добраться можно малым самолётом.',
+      },
+      it: {
+        city: 'Kaieteur',
+        landmark: 'Cascate Kaieteur',
+        description:
+          'Il Kaieteur sul fiume Potaro, un salto unico di 226 metri in una gola verde, quattro volte Niagara, raggiungibile con un piccolo aereo.',
+      },
+    },
+  },
+  {
+    id: 'paramaribo',
+    countryCode: 'SR',
+    timezone: 'America/Paramaribo',
+    latitude: 5.852,
+    longitude: -55.2038,
+    image: commons('Kathedraal 1.jpg'),
+    credit: credit('Kathedraal 1.jpg'),
+    aliases: [
+      'باراماريبو', 'paramaribo', 'suriname', 'سورينام', 'cathedral', 'الكاتدرائية',
+      'saint peter and paul',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'باراماريبو',
+        landmark: 'كاتدرائية بطرس وبولس',
+        description:
+          'كاتدرائية بطرس وبولس الخشبية في باراماريبو، بناء قوطي أصفر وأسود من ١٨٨٥، يُقال إنه أكبر مبنى خشبي في الأمريكتين.',
+      },
+      en: {
+        city: 'Paramaribo',
+        landmark: 'Sts. Peter and Paul Cathedral',
+        description:
+          'The wooden cathedral of Saints Peter and Paul in Paramaribo, a yellow and black Gothic confection of 1885, said to be the largest wooden building in the Americas.',
+      },
+      de: {
+        city: 'Paramaribo',
+        landmark: 'Kathedrale St. Peter und Paul',
+        description:
+          'Die hölzerne Kathedrale St. Peter und Paul in Paramaribo, eine gelb-schwarze neugotische Schöpfung von 1885, angeblich der größte Holzbau Amerikas.',
+      },
+      ru: {
+        city: 'Парамарибо',
+        landmark: 'Собор Петра и Павла',
+        description:
+          'Деревянный собор Петра и Павла в Парамарибо — жёлто-чёрная готическая постройка 1885 года, считающаяся крупнейшим деревянным зданием Америки.',
+      },
+      it: {
+        city: 'Paramaribo',
+        landmark: 'Cattedrale dei Santi Pietro e Paolo',
+        description:
+          'La cattedrale di legno dei Santi Pietro e Paolo a Paramaribo, una costruzione gotica gialla e nera del 1885, ritenuta il più grande edificio in legno delle Americhe.',
+      },
+    },
+  },
+  {
+    id: 'uyuni',
+    countryCode: 'BO',
+    timezone: 'America/La_Paz',
+    latitude: -20.4624,
+    longitude: -66.825,
+    image: commons('Isla del Pescado, Salar de Uyuni, Bolivia, 2016-02-04, DD 42.JPG'),
+    credit: credit('Isla del Pescado, Salar de Uyuni, Bolivia, 2016-02-04, DD 42.JPG'),
+    aliases: [
+      'أويوني', 'uyuni', 'bolivia', 'بوليفيا', 'salar de uyuni', 'سالار دي أويوني', 'لا باز',
+      'la paz', 'sucre', 'سوكري',
+    ],
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'أويوني',
+        landmark: 'سالار دي أويوني',
+        description:
+          'جزيرة السمكة في سالار دي أويوني، نتوء تغطيه الصبّار على مسطح ملحي مساحته ١٠٥٨٢ كيلومتراً مربعاً، وهو الأكبر على الأرض.',
+      },
+      en: {
+        city: 'Uyuni',
+        landmark: 'Salar de Uyuni',
+        description:
+          'Isla del Pescado in the Salar de Uyuni, a cactus-covered outcrop on a salt flat 10,582 square kilometres wide, the largest on Earth.',
+      },
+      de: {
+        city: 'Uyuni',
+        landmark: 'Salar de Uyuni',
+        description:
+          'Die Isla del Pescado im Salar de Uyuni, ein kaktusbewachsener Fels auf einer Salzfläche von 10.582 Quadratkilometern, der größten der Erde.',
+      },
+      ru: {
+        city: 'Уюни',
+        landmark: 'Салар-де-Уюни',
+        description:
+          'Остров Исла-дель-Пескадо в Салар-де-Уюни — поросший кактусами выход скал на солончаке площадью 10 582 км², крупнейшем на Земле.',
+      },
+      it: {
+        city: 'Uyuni',
+        landmark: 'Salar de Uyuni',
+        description:
+          'L’Isla del Pescado nel Salar de Uyuni, un affioramento coperto di cactus su una distesa di sale di 10.582 chilometri quadrati, la più grande della Terra.',
+      },
+    },
+  },
+  {
+    id: 'asuncion',
+    countryCode: 'PY',
+    timezone: 'America/Asuncion',
+    latitude: -25.2775,
+    longitude: -57.635,
+    image: commons('Palacio de los Lopez, Asunción PAR.jpg'),
+    credit: credit('Palacio de los Lopez, Asunción PAR.jpg'),
+    aliases: [
+      'أسونسيون', 'asuncion', 'asunción', 'paraguay', 'باراغواي', 'palacio de lopez',
+      'قصر لوبيز',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'أسونسيون',
+        landmark: 'قصر لوبيز',
+        description:
+          'قصر لوبيز في أسونسيون، مقر حكومة باراغواي الأبيض منذ ١٨٩٢، وشرفاته تطل على خليج نهر باراغواي.',
+      },
+      en: {
+        city: 'Asunción',
+        landmark: 'Palacio de López',
+        description:
+          'The Palacio de López in Asunción, the white seat of Paraguay’s government since 1892, its verandas facing the bay of the Paraguay river.',
+      },
+      de: {
+        city: 'Asunción',
+        landmark: 'Palacio de López',
+        description:
+          'Der Palacio de López in Asunción, seit 1892 der weiße Sitz der Regierung Paraguays, dessen Veranden zur Bucht des Paraguay-Flusses zeigen.',
+      },
+      ru: {
+        city: 'Асунсьон',
+        landmark: 'Дворец Лопеса',
+        description:
+          'Дворец Лопеса в Асунсьоне — белая резиденция правительства Парагвая с 1892 года, его веранды обращены к заливу реки Парагвай.',
+      },
+      it: {
+        city: 'Asunción',
+        landmark: 'Palacio de López',
+        description:
+          'Il Palacio de López ad Asunción, sede bianca del governo del Paraguay dal 1892, con le verande rivolte alla baia del fiume Paraguay.',
+      },
+    },
+  },
+  {
+    id: 'montevideo',
+    countryCode: 'UY',
+    timezone: 'America/Montevideo',
+    latitude: -34.9011,
+    longitude: -56.1645,
+    image: commons('Plaza Independencia, Montevideo.jpg'),
+    credit: credit('Plaza Independencia, Montevideo.jpg'),
+    aliases: [
+      'مونتيفيديو', 'montevideo', 'uruguay', 'أوروغواي', 'plaza independencia',
+      'ساحة الاستقلال',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'مونتيفيديو',
+        landmark: 'ساحة الاستقلال',
+        description:
+          'ساحة الاستقلال في وسط مونتيفيديو، يعلوها قصر سالفو ويقف عند طرفها باب المدينة القديم.',
+      },
+      en: {
+        city: 'Montevideo',
+        landmark: 'Plaza Independencia',
+        description:
+          'Plaza Independencia in the middle of Montevideo, with the Salvo Palace rising at its head and the old city gate at its foot.',
+      },
+      de: {
+        city: 'Montevideo',
+        landmark: 'Plaza Independencia',
+        description:
+          'Die Plaza Independencia im Zentrum von Montevideo, mit dem Salvo-Palast an ihrer Spitze und dem alten Stadttor an ihrem Fuß.',
+      },
+      ru: {
+        city: 'Монтевидео',
+        landmark: 'Площадь Независимости',
+        description:
+          'Площадь Независимости в центре Монтевидео: во главе её — дворец Сальво, у подножия — старые городские ворота.',
+      },
+      it: {
+        city: 'Montevideo',
+        landmark: 'Plaza Independencia',
+        description:
+          'Plaza Independencia nel centro di Montevideo, con il Palazzo Salvo in cima e l’antica porta della città ai suoi piedi.',
+      },
+    },
+  },
+  {
+    id: 'dili',
+    countryCode: 'TL',
+    timezone: 'Asia/Dili',
+    latitude: -8.5569,
+    longitude: 125.56,
+    image: commons('Cristo Rei Dili Timor Leste 2.jpg'),
+    credit: credit('Cristo Rei Dili Timor Leste 2.jpg'),
+    aliases: [
+      'ديلي', 'dili', 'timor-leste', 'timor leste', 'تيمور الشرقية', 'cristo rei',
+      'تمثال المسيح الملك',
+    ],
+    capital: true,
+    focus: '55% 45%',
+    copy: {
+      ar: {
+        city: 'ديلي',
+        landmark: 'تمثال المسيح الملك',
+        description:
+          'تمثال المسيح الملك في ديلي، ارتفاعه ٢٧ متراً على رأس برّي شرق المدينة، يتلفّت إلى الخليج من تلّ من العشب الجاف.',
+      },
+      en: {
+        city: 'Dili',
+        landmark: 'Cristo Rei',
+        description:
+          'The Cristo Rei of Dili, a 27-metre statue on a headland east of the city, looking back over the bay from a hill of dry grass.',
+      },
+      de: {
+        city: 'Dili',
+        landmark: 'Cristo Rei',
+        description:
+          'Cristo Rei von Dili, eine 27 Meter hohe Statue auf einer Landzunge östlich der Stadt, die von einem Hügel aus trockenem Gras über die Bucht blickt.',
+      },
+      ru: {
+        city: 'Дили',
+        landmark: 'Кристу-Рей',
+        description:
+          'Кристу-Рей в Дили — статуя высотой 27 метров на мысу к востоку от города, смотрит на залив с холма сухой травы.',
+      },
+      it: {
+        city: 'Dili',
+        landmark: 'Cristo Rei',
+        description:
+          'Il Cristo Rei di Dili, una statua di 27 metri su un promontorio a est della città, che guarda la baia da una collina d’erba secca.',
+      },
+    },
+  },
+  {
+    id: 'bandar_seri_begawan',
+    countryCode: 'BN',
+    timezone: 'Asia/Brunei',
+    latitude: 4.8895,
+    longitude: 114.942,
+    image: commons('Sultan Omar Ali Saifuddin Mosque 02.jpg'),
+    credit: credit('Sultan Omar Ali Saifuddin Mosque 02.jpg'),
+    aliases: [
+      'بندر سري بيغاوان', 'bandar seri begawan', 'brunei', 'بروناي',
+      'sultan omar ali saifuddien mosque', 'مسجد السلطان عمر علي سيف الدين',
+    ],
+    capital: true,
+    focus: '50% 50%',
+    copy: {
+      ar: {
+        city: 'بندر سري بيغاوان',
+        landmark: 'مسجد السلطان عمر علي سيف الدين',
+        description:
+          'مسجد السلطان عمر علي سيف الدين في بندر سري بيغاوان، بقبته الرخامية ومركبه على حافة البحيرة، يُضاء ذهبياً بعد الغروب.',
+      },
+      en: {
+        city: 'Bandar Seri Begawan',
+        landmark: 'Sultan Omar Ali Saifuddien Mosque',
+        description:
+          'The Sultan Omar Ali Saifuddien Mosque in Bandar Seri Begawan, its marble dome and lagoon-side barge lit gold after dark.',
+      },
+      de: {
+        city: 'Bandar Seri Begawan',
+        landmark: 'Sultan-Omar-Ali-Saifuddien-Moschee',
+        description:
+          'Die Sultan-Omar-Ali-Saifuddien-Moschee in Bandar Seri Begawan, deren Marmorkuppel und Lagunenboot nach Einbruch der Dunkelheit golden leuchten.',
+      },
+      ru: {
+        city: 'Бандар-Сери-Бегаван',
+        landmark: 'Мечеть Султана Омара Али Сайфуддина',
+        description:
+          'Мечеть Султана Омара Али Сайфуддина в Бандар-Сери-Бегаване: мраморный купол и лодка у лагуны золотятся после заката.',
+      },
+      it: {
+        city: 'Bandar Seri Begawan',
+        landmark: 'Moschea Sultan Omar Ali Saifuddien',
+        description:
+          'La moschea Sultan Omar Ali Saifuddien a Bandar Seri Begawan, con la cupola di marmo e la barca sulla laguna illuminate d’oro dopo il buio.',
+      },
+    },
+  },
+  {
+    id: 'pyongyang',
+    countryCode: 'KP',
+    timezone: 'Asia/Pyongyang',
+    latitude: 39.0195,
+    longitude: 125.742,
+    image: commons('Tower of the Juche Idea - panoramio.jpg'),
+    credit: credit('Tower of the Juche Idea - panoramio.jpg'),
+    aliases: [
+      'بيونغ يانغ', 'pyongyang', 'north korea', 'كوريا الشمالية', 'juche tower',
+      'برج فكرة جوتشي', 'tower of the juche idea',
+    ],
+    capital: true,
+    focus: '50% 45%',
+    copy: {
+      ar: {
+        city: 'بيونغ يانغ',
+        landmark: 'برج فكرة جوتشي',
+        description:
+          'برج فكرة جوتشي في بيونغ يانغ، ١٧٠ متراً من الجرانيت ولهب أحمر فوق نهر تايدونغ، أُقيم عام ١٩٨٢ لعيد ميلاد كيم إيل سونغ السبعين.',
+      },
+      en: {
+        city: 'Pyongyang',
+        landmark: 'Juche Tower',
+        description:
+          'The Tower of the Juche Idea in Pyongyang, 170 metres of granite and a red flame above the Taedong river, raised in 1982 for Kim Il-sung’s seventieth birthday.',
+      },
+      de: {
+        city: 'Pjöngjang',
+        landmark: 'Turm der Juche-Idee',
+        description:
+          'Der Turm der Juche-Idee in Pjöngjang, 170 Meter Granit und eine rote Flamme über dem Taedong, 1982 zu Kim Il-sungs 70. Geburtstag errichtet.',
+      },
+      ru: {
+        city: 'Пхеньян',
+        landmark: 'Монумент идей чучхе',
+        description:
+          'Монумент идей чучхе в Пхеньяне: 170 метров гранита и красное пламя над рекой Тэдонган, возведён в 1982 году к 70-летию Ким Ир Сена.',
+      },
+      it: {
+        city: 'Pyongyang',
+        landmark: 'Torre Juche',
+        description:
+          'La Torre dell’idea Juche a Pyongyang, 170 metri di granito e una fiamma rossa sopra il Taedong, eretta nel 1982 per i settant’anni di Kim Il-sung.',
       },
     },
   },
