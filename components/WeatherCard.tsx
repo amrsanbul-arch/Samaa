@@ -124,33 +124,8 @@ export default function WeatherCard({
           <h1 className="font-display text-[2.125rem] font-extrabold leading-tight text-shadow-cinema sm:text-[2.5rem]">
             {place.name}
           </h1>
-          <div className="mt-0.5 flex min-w-0 items-center gap-2">
-            <p className="min-w-0 truncate text-xs font-semibold text-brand">{landmark.landmark}</p>
-            {scenes.length > 1 && onSelectScene && (
-              <div
-                role="tablist"
-                aria-label={t('scenesLabel')}
-                className="flex shrink-0 items-center gap-1"
-              >
-                {scenes.map((option) => {
-                  const active = option.id === activeSceneId;
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={active}
-                      aria-label={option.label}
-                      title={option.label}
-                      onClick={() => onSelectScene(option.id)}
-                      className={`h-1.5 rounded-full transition-all ${
-                        active ? 'w-4 bg-brand' : 'w-1.5 bg-cream/35 hover:bg-cream/60'
-                      }`}
-                    />
-                  );
-                })}
-              </div>
-            )}
+          <div className="mt-0.5 min-w-0">
+            <p className="truncate text-xs font-semibold text-brand">{landmark.landmark}</p>
           </div>
         </div>
 
@@ -169,7 +144,37 @@ export default function WeatherCard({
         </div>
       </div>
 
-      <div className="mt-2 flex items-end justify-between gap-3">
+      {scenes.length > 1 && onSelectScene && (
+        <div
+          role="tablist"
+          aria-label={t('scenesLabel')}
+          className="relative z-20 mt-1 flex items-center gap-0.5"
+        >
+          {scenes.map((option) => {
+            const active = option.id === activeSceneId;
+            return (
+              <button
+                key={option.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-label={option.label}
+                title={option.label}
+                onClick={() => onSelectScene(option.id)}
+                className="group grid h-8 w-8 place-items-center rounded-full transition active:scale-95"
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-all ${
+                    active ? 'w-5 bg-brand' : 'w-1.5 bg-cream/35 group-hover:bg-cream/70'
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="pointer-events-none mt-1 flex items-end justify-between gap-3">
         <div className="flex items-start" dir="ltr">
           <span className="font-display text-[5.5rem] font-extrabold leading-[0.8] tracking-tight text-shadow-cinema sm:text-[8rem]">
             {Math.round(current.temperature)}
