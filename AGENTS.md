@@ -41,6 +41,8 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 - The credit is visible twice: as the caption under the card blurb (`components/WeatherCard.tsx`, links to the file page, tooltip carries photographer + licence) and on `/credits`, which lists every landmark with a thumbnail, photographer, licence link, source and the change made. `/credits` is public, unlike the scenes.
 - Trim import noise from artist strings ("… from Hamm, Deutschland", long Commons templates) when regenerating credits; keep the real name, not the uploader's signature block.
 - Pick photos whose subject survives the card overlay: the weather card covers the left ~40% of the viewport, so a landmark centred or right of centre reads better. Long, thin panoramas and heavy window reflections look fine in a thumbnail sheet and bad as a backdrop.
+- When Commons search finds nothing for an obscure landmark, query by coordinates (`action=query&list=geosearch&gscoord=lat|lon&gsradius=4000&gsnamespace=6`) or walk the category; both surface files that the text index misses. `Special:FilePath` returns 404 if the file name is truncated, so store the exact `title` returned by `imageinfo`, never a shortened one.
+- A handful of Commons files carry {{Copyrighted free use}} instead of a CC tag (e.g. the Alele Museum photo). They are usable: record the licence as "Copyrighted free use" and link `https://commons.wikimedia.org/wiki/Template:Copyrighted_free_use` in `licenseUrl`, since `LicenseUrl` is empty for them.
 
 ## Conventions
 
