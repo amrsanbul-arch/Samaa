@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { useLang } from '@/components/LangProvider';
 import { LANDMARKS, localizedText, sceneThumbSrc } from '@/lib/landmarks';
+import { CHANGES_STANDARD, CHANGES_VARIANT } from '@/lib/photo-credits';
 
 /**
  * Attribution for every landmark photo. Each row is generated from the same
@@ -10,6 +11,13 @@ import { LANDMARKS, localizedText, sceneThumbSrc } from '@/lib/landmarks';
  */
 export default function CreditsPage() {
   const { lang, t } = useLang();
+
+  // The notes are stored once, in English; the page shows them in the UI language.
+  const changeNote = (changes: string) => {
+    if (changes === CHANGES_STANDARD) return t('changesStandard');
+    if (changes === CHANGES_VARIANT) return t('changesVariant');
+    return changes;
+  };
 
   const entries = useMemo(
     () =>
@@ -90,7 +98,7 @@ export default function CreditsPage() {
                   </div>
                   <div className="flex gap-1.5">
                     <dt className="shrink-0 text-cream/40">{t('changesLabel')}:</dt>
-                    <dd className="min-w-0">{item.credit.changes}</dd>
+                    <dd className="min-w-0">{changeNote(item.credit.changes)}</dd>
                   </div>
                 </dl>
               </div>
