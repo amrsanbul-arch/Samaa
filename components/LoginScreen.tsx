@@ -322,7 +322,9 @@ export default function LoginScreen() {
             {action}
           </button>
 
-          <p className="mt-3 text-center text-[12px] leading-relaxed text-[#A1A4A5]">{t('authTerms')}</p>
+          <p className="mt-3 text-center text-[12px] leading-relaxed text-[#A1A4A5]">
+            {t(mode === 'signup' ? 'authTermsSignup' : 'authTerms')}
+          </p>
         </form>
 
         {mode !== 'reset' && (
