@@ -176,6 +176,7 @@ export default function SearchBar({
           type="button"
           onClick={() => submit(active >= 0 ? results[active] : null)}
           disabled={pending}
+          aria-label={t('searchButton')}
           className={`group flex shrink-0 items-center gap-2 rounded-[10px] bg-brand font-semibold text-[#0B1220] transition hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 ${
             compact ? 'px-4 py-2 text-sm' : 'px-5 py-3 text-sm sm:px-6 sm:text-base'
           }`}

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Cinematic weather app (سماء / Samaa) for cities worldwide. Next.js 14 App Router, Tailwind 3, react-globe.gl. Five UI languages: ar (RTL), en, de, ru, it.
+Cinematic weather app (سماء / Samaa) for cities worldwide. Next.js 14 App Router, Tailwind 3. Five UI languages: ar (RTL), en, de, ru, it. There is no 3D globe and no WebGL: a visitor lands straight in a city scene, and a plain search screen is the only fallback.
 
 Curated landmarks cover major cities on every continent; any other city falls back to the neutral scene.
 
@@ -13,8 +13,9 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 
 ## Architecture notes
 
-- `app/page.tsx` is the state machine: `idle` (globe) → `flying` (only while geocoding) → `weather` → `leaving` (scene fades while the globe pulls back). `?city=` and `?lang=` deep links are resolved once, and only after `useLang().ready` so the place name matches the detected language.
-- The landing is never unmounted: the scene is a `fixed inset-0 z-40` overlay, and the globe stays behind it so the exit zoom-out is visible.
+- `app/page.tsx` is a two-state view: no place (search screen) or a place (the scene, `fixed inset-0 z-40`). `?city=` and `?lang=` deep links are resolved once, and only after `useLang().ready` so the place name matches the detected language.
+- `/` opens the visitor's own city, in this order: the `?city=` deep link, then the city saved in this browser (`lib/home-city.ts`, `samaa:home-city`), then the city the edge reports for the request IP via `GET /api/home-city`. That route reads `x-vercel-ip-city/country/latitude/longitude`, refuses excluded countries, prefers a curated scene whose own city matches the reported name, else geocodes the name, else takes the nearest curated scene to the coordinates, and never caches (`no-store`). Anything the visitor picks through the search box is saved as the new home city, so the next visit opens it.
+- With nothing to go on, the search screen stays; the scene header carries a «تغيير مدينتي» button that opens the same search in a `role="dialog"` overlay, so no visitor is ever trapped in one city.
 - `weather` may be `null` inside `WeatherView` — the scene renders with a skeleton card while the first forecast loads. Do not gate the overlay on weather.
 - City data lives in `lib/countries.ts`: one `COUNTRIES` object per curated place, carrying the photo, credit, IANA `timezone`, coordinates, aliases and copy in all five languages, plus `COUNTRY_NAMES` for localised country names. Adding a country or city means appending one object at the end of `COUNTRIES` (plus its name in `COUNTRY_NAMES` if it is new) — no other file changes, which is how the country batches land. `lib/landmarks.ts` only derives from it (`LANDMARKS`, `findLandmark`, `localizedText`, `placeFromLandmark`).
 - `timezone` is per landmark, not per country: the US, Canada, Brazil, Mexico and Australia span several zones, and sunrise/sunset (and the night palette) depend on the right one.
@@ -29,14 +30,13 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 - Backdrops are `object-cover`; on phones a landscape photo crops to a narrow vertical slice, so each landmark may set `focus` (object-position) and `zoom` (bottom-anchored scale, applied only under `@media (max-aspect-ratio: 4/5)`).
 - `lib/weather.ts` maps WMO codes to `ConditionKey`s (labels live in `lib/i18n.ts`) and to the effect config consumed by `components/WeatherEffects.tsx` and `lib/ambience.ts`.
 - Localisation: `lib/i18n.ts` holds the UI dictionary, condition and compass labels plus `detectLang`; per-city copy lives in `lib/countries.ts` (`copy.ar|en|de|ru|it`) and is surfaced by `localizedText()`. `LangProvider` sets `<html lang dir>` and persists to `samaa:lang`.
-- Globe texture follows the device clock (06:00–18:00 → `earth-day.jpg`), recomputed every minute in `app/page.tsx`. `GlobeStage` takes `paused` so the render loop stops while the scene covers the globe.
 - Two localised clock times must never be concatenated into one Arabic string: bidi reorders the markers around the digits. Wrap each in an `[unicode-bidi:isolate]` element inside a `dir="ltr"` line, as the sunrise/sunset pair in `components/WeatherCard.tsx` does.
 - `app/favicon.ico` mirrors `app/icon.svg` (same mark, 16/32/48/64 px) so clients that request the legacy path get the logo instead of a 404; regenerate it if the icon changes.
 - `lang`/`dir` are rendered on the server from the `samaa:lang` cookie, falling back to `Accept-Language` (`lib/i18n.ts#fromAcceptLanguage`), so `/` is dynamic. The provider writes the cookie whenever the language changes; do not move detection back into a client effect or the first paint flips direction.
 
 ## Photo attribution
 
-- Every scene's `image` must have a matching entry in `lib/photo-credits.ts` (`PHOTO_CREDITS`, keyed by the decoded file name) with photographer, licence name + licence URL, the Commons file page and a `changes` note. `credit()` in `lib/countries.ts` builds the caption from that map; a missing entry degrades to "Wikimedia Commons contributor" instead of an invented name.
+- Every scene's `image` must have a matching entry in `lib/photo-credits.ts` (`PHOTO_CREDITS`, keyed by the decoded file name) with photographer, licence name + licence URL, the Commons file page and a `changes` note. `credit()` in `lib/countries.ts` builds the caption from that map; a missing entry degrades to "Wikimedia Commons contributor" instead of an invented name. The `changes` note is stored once in English: `CHANGES_STANDARD` / `CHANGES_VARIANT` in `lib/photo-credits.ts` are the only two values, and `/credits` renders them through `t('changesStandard')` / `t('changesVariant')` so no English leaks into the Arabic page.
 - Verify metadata from Commons before adding a file: `https://commons.wikimedia.org/w/api.php?action=query&titles=File:NAME&prop=imageinfo&iiprop=extmetadata&format=json` (Artist, LicenseShortName, LicenseUrl, ImageDescription). Do not infer a licence from the file page's layout.
 - The credit is visible twice: as the caption under the card blurb (`components/WeatherCard.tsx`, links to the file page, tooltip carries photographer + licence) and on `/credits`, which lists every landmark with a thumbnail, photographer, licence link, source and the change made. `/credits` is public, unlike the scenes.
 - Trim import noise from artist strings ("… from Hamm, Deutschland", long Commons templates) when regenerating credits; keep the real name, not the uploader's signature block.
@@ -49,18 +49,20 @@ Curated landmarks cover major cities on every continent; any other city falls ba
 - UI copy comes from `t()` in `lib/i18n.ts` — never hardcode a string in a component. Use logical Tailwind utilities (`ms-*`, `me-*`, `start-*`, `end-*`) and mirror directional icons with `rtl:rotate-180` / `ltr:rotate-180`.
 - Each city resolves to a palette in `lib/theme.ts` (`nile` / `sea` / `sunset`), rendered as a `.theme-*` class on the scene and on the landing. Those classes set `--brand-rgb`, `--scrim-rgb`, `--cream-rgb`, `--panel-rgb`, `--extra-rgb` plus `--font-display`/`--font-body`; Tailwind reads the colour channels through `brand`/`scrim`/`cream`/`panel`/`extra`, so a new colour must be added in `tailwind.config.ts` and as a channel in `globals.css`. Arabic pairs Cairo/Tajawal/Amiri with the theme; Latin and Cyrillic fall back to Montserrat/Poppins/Playfair via `html:not([lang='ar'])`.
 - Forecast times are wall-clock strings from the API. Format them with `timeLabel(iso, lang)` — never `new Date(iso)` plus a `timeZone`, that shifts sunrise/sunset by the visitor's offset.
-- The landing `<main>` is kept mounted for the exit animation and switched to `inert` while the scene is open; keep it that way so hidden chips stay unclickable and out of the tab order.
 - Tailwind opacity modifiers must come from the default scale (0, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100) or use arbitrary values (`bg-white/[0.06]`). Values like `/8`, `/12`, `/35`, `/45` are silently dropped.
 - Keep animations CSS/SVG based; the app targets mid-range phones.
+- Small controls need a real target: the scene pager dots are 6 px visuals inside 32×32 buttons in their own row (`components/WeatherCard.tsx`), and the temperature block is `pointer-events-none`, or the glyph box swallows the taps.
+- The empty search box is not a dead end: pressing the search action focuses the input and shows `t('searchEmptyHint')` instead of doing nothing, and the action keeps an `aria-label` because its label is icon-only on phones.
+- Unknown addresses land on `app/not-found.tsx`: Arabic, RTL, brand-marked, with links home and to `/credits`.
 
 ## Auth
 
-- `/login` is the entry point. `components/AuthGate.tsx` keeps the globe and the city scenes behind a Supabase session and sends visitors without one to `/login`.
+- `/login` is the entry point. `components/AuthGate.tsx` keeps the city scenes behind a Supabase session and sends visitors without one to `/login`.
 - `lib/supabase.ts` reads the environment **on the server** (`readAuthConfig`) because Next only inlines `NEXT_PUBLIC_*` into the browser bundle; the deployment's `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` / `VITE_ENABLE_APPLE_LOGIN` names are accepted too. Missing values mean `configured: false`: no client is created, the login form is disabled behind a banner, and nothing throws.
 - `components/AuthProvider.tsx` owns the session (`getSession` + `onAuthStateChange`), `signIn`, `signUp`, `signInWithProvider`, `resetPassword` and `signOut`. `lib/auth-errors.ts` maps Supabase's English messages onto `t()` keys; never surface `error.message` directly.
 - Supabase validates OAuth providers server-side, so a disabled provider never reaches our code — it comes back as `#error=…&error_description=…`. `LoginScreen` reads that on mount, translates it and strips the hash with `replaceState`.
 - The login page is deliberately monochrome (Resend reference): `#F0F0F0` text on `#191B1E` fields, `#333B3E` borders, `#141517` inverted primary, Inter for Latin and Cairo for Arabic, no panels, no accent colour and no GitHub button — the official four-colour Google "G" inside the Google button is the only colour on the page. The overlay is `bg-black/[0.76]` plus a black radial; that pair is what keeps the `#A1A4A5` labels above 4.5:1 over the brightest part of the Nile photo.
-- The `?city=` deep link waits for `session` before running: its `history.replaceState` desyncs the App Router while `AuthGate` is navigating to `/login`, which leaves a blank page.
+- The `?city=` deep link (and the home-city resolution) waits for `session` before running: its `history.replaceState` desyncs the App Router while `AuthGate` is navigating to `/login`, which leaves a blank page.
 
 ## Gotchas
 
