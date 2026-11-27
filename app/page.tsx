@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import GlobeStage from '@/components/GlobeStage';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import SearchBar from '@/components/SearchBar';
 import Starfield from '@/components/Starfield';
@@ -28,10 +27,9 @@ import AuthGate from '@/components/AuthGate';
 import { useAuth } from '@/components/AuthProvider';
 import LogoutButton from '@/components/LogoutButton';
 import { localeRegion, type Lang } from '@/lib/i18n';
+import { readHomeCity, saveHomeCity } from '@/lib/home-city';
 
-type Stage = 'idle' | 'flying' | 'weather' | 'leaving';
-
-const EXIT_MS = 620;
+type HomeResponse = { place?: Place | null };
 
 async function geocodeFirst(query: string, lang: Lang): Promise<Place | null> {
   const region = localeRegion();
@@ -87,10 +85,10 @@ function warmImage(url: string) {
 
 export default function HomePage() {
   const { lang, ready: langReady, t } = useLang();
-  const [stage, setStage] = useState<Stage>('idle');
+  const [homeChecked, setHomeChecked] = useState(false);
   const [place, setPlace] = useState<Place | null>(null);
   const [weather, setWeather] = useState<WeatherBundle | null>(null);
-  const [flyTo, setFlyTo] = useState<{ lat: number; lng: number } | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [daytime, setDaytime] = useState(true);
@@ -100,7 +98,6 @@ export default function HomePage() {
   const lastQuery = useRef('');
   const placeRef = useRef<Place | null>(null);
   const langRef = useRef(lang);
-  const landingRef = useRef<HTMLElement | null>(null);
   placeRef.current = place;
 
   // A city can hold several curated views (Jerusalem, Doha); the anchor is the one
@@ -113,9 +110,8 @@ export default function HomePage() {
   );
   const scene = useMemo(() => sceneFor(place, lang, activeScene), [place, lang, activeScene]);
   const theme = useMemo(() => themeFor(activeScene ?? place), [activeScene, place]);
-  const { session, loading: authLoading } = useAuth();
-  const deepLinkDone = useRef(false);
-  const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { loading: authLoading } = useAuth();
+  const homeResolved = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -126,13 +122,6 @@ export default function HomePage() {
     const timer = setInterval(update, 60_000);
     return () => clearInterval(timer);
   }, []);
-
-  useEffect(
-    () => () => {
-      if (exitTimer.current) clearTimeout(exitTimer.current);
-    },
-    []
-  );
 
   // Warm the featured backdrops once the landing screen is idle so the first tap
   // paints instantly even on a slow connection.
@@ -157,14 +146,45 @@ export default function HomePage() {
     [t]
   );
 
+  /** Shows a resolved place at once; the backdrop paints while the weather lands. */
+  const openPlace = useCallback(
+    (resolved: Place, match: Landmark | null, query: string) => {
+      warmImage(sceneFor(resolved, lang, match).image);
+      setPlace(resolved);
+      setWeather(null);
+      setWeatherError(null);
+      setCuratedId(match?.id ?? null);
+      lastQuery.current = query;
+      setError(null);
+      setSearchOpen(false);
+      window.history.replaceState(null, '', `?city=${encodeURIComponent(resolved.name)}`);
+      void loadWeather(resolved);
+    },
+    [lang, loadWeather]
+  );
+
+  /** Opens a place that arrived already resolved (saved city, IP location). */
+  const openResolved = useCallback(
+    (target: Place) => {
+      const match = landmarkForPlace(target);
+      const localized =
+        match && isSceneCity(match, target.name) ? placeFromLandmark(match, lang) : target;
+      openPlace(
+        { ...localized, country: placeCountryName(localized, lang) || localized.country },
+        match,
+        target.name
+      );
+    },
+    [lang, openPlace]
+  );
+
   const runSearch = useCallback(
     async (payload: { place: Place | null; text: string }) => {
-      if (pending) return;
+      if (pending) return false;
 
       setError(null);
       setPending(true);
       setPendingText(payload.text);
-      if (exitTimer.current) clearTimeout(exitTimer.current);
 
       try {
         const curated = payload.place
@@ -177,7 +197,6 @@ export default function HomePage() {
           (curated && isSceneCity(curated, payload.text) ? placeFromLandmark(curated, lang) : null);
 
         if (!resolved) {
-          setStage('flying');
           resolved = await geocodeFirst(payload.text, lang);
           // "Blue Lagoon" is also a lake in South Africa: when the geocoder lands
           // on a place with no curated scene, the landmark the visitor typed wins.
@@ -191,8 +210,7 @@ export default function HomePage() {
 
         if (!resolved) {
           setError(t('notFound', { q: payload.text }));
-          setStage('idle');
-          return;
+          return false;
         }
 
         // A geocoded name ("Chichén Itzá", "Giza") keeps the archive backdrop, so
@@ -205,19 +223,10 @@ export default function HomePage() {
 
         resolved = { ...resolved, country: placeCountryName(resolved, lang) };
 
-        warmImage(sceneFor(resolved, lang, curatedMatch).image);
-
-        // Enter the scene immediately: the backdrop paints while the weather lands.
-        setPlace(resolved);
-        setWeather(null);
-        setWeatherError(null);
-        setCuratedId(curatedMatch?.id ?? null);
-        lastQuery.current = payload.text;
-        setFlyTo({ lat: resolved.latitude, lng: resolved.longitude });
-        setStage('weather');
-        window.history.replaceState(null, '', `?city=${encodeURIComponent(resolved.name)}`);
-
-        void loadWeather(resolved);
+        openPlace(resolved, curatedMatch, payload.text);
+        // Every city the visitor picks becomes the city `/` opens next time.
+        saveHomeCity(resolved);
+        return true;
       } catch (caught) {
         const message = caught instanceof Error ? caught.message : '';
         setError(
@@ -227,14 +236,13 @@ export default function HomePage() {
               ? t('geocodeError')
               : t('genericError')
         );
-        setStage('idle');
         setPlace(null);
-        setFlyTo(null);
+        return false;
       } finally {
         setPending(false);
       }
     },
-    [pending, lang, t, loadWeather]
+    [pending, lang, t, openPlace]
   );
 
   // Re-resolve the place name when the language changes: curated cities are
@@ -292,63 +300,76 @@ export default function HomePage() {
   );
 
   const handleBack = useCallback(() => {
-    setStage('leaving');
-    // Pull the camera back at the same moment the scene fades, so the globe
-    // zoom-out is revealed rather than played after the fact.
-    setFlyTo(null);
-    exitTimer.current = setTimeout(() => {
-      setStage('idle');
-      setPlace(null);
-      setWeather(null);
-      setWeatherError(null);
-      setCuratedId(null);
-      setError(null);
-      window.history.replaceState(null, '', window.location.pathname);
-    }, EXIT_MS);
+    setPlace(null);
+    setWeather(null);
+    setWeatherError(null);
+    setCuratedId(null);
+    setError(null);
+    setSearchOpen(false);
+    window.history.replaceState(null, '', window.location.pathname);
   }, []);
 
+  /**
+   * `/` opens the visitor's city directly: the deep link when there is one, else
+   * the city this browser saved, else the edge's IP location, else the search box.
+   */
   useEffect(() => {
-    if (authLoading || !session) return;
-    if (!langReady || deepLinkDone.current) return;
-    deepLinkDone.current = true;
+    if (!langReady || authLoading || homeResolved.current) return;
+    homeResolved.current = true;
+
     const city = new URLSearchParams(window.location.search).get('city');
-    if (city) runSearch({ place: null, text: city });
-  }, [authLoading, session, langReady, runSearch]);
+    if (city) {
+      void runSearch({ place: null, text: city });
+      return;
+    }
+
+    const saved = readHomeCity();
+    if (saved) {
+      openResolved(saved);
+      setHomeChecked(true);
+      return;
+    }
+
+    let cancelled = false;
+    fetch('/api/home-city')
+      .then((response) => (response.ok ? (response.json() as Promise<HomeResponse>) : null))
+      .then((data) => {
+        if (cancelled) return;
+        const next = data?.place ?? null;
+        if (next) {
+          saveHomeCity(next);
+          openResolved(next);
+        }
+        setHomeChecked(true);
+      })
+      .catch(() => {
+        if (!cancelled) setHomeChecked(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authLoading, langReady, runSearch, openResolved]);
 
   const pickLandmark = (landmark: Landmark) => {
     runSearch({ place: placeFromLandmark(landmark, lang), text: landmark.city });
   };
 
-  const overlayOpen = (stage === 'weather' || stage === 'leaving') && Boolean(place);
-  const landingHidden = stage === 'weather';
-
-  // The landing stays mounted (the exit animation needs the globe) but must not
-  // be focusable or clickable while the scene covers it.
-  useEffect(() => {
-    const node = landingRef.current as (HTMLElement & { inert?: boolean }) | null;
-    if (node) node.inert = overlayOpen;
-  }, [overlayOpen]);
+  const handleOverlaySearch = useCallback(
+    async (payload: { place: Place | null; text: string }) => {
+      const opened = await runSearch(payload);
+      if (opened) setSearchOpen(false);
+    },
+    [runSearch]
+  );
 
   return (
     <AuthGate>
-      <main
-        ref={landingRef}
-        className={`theme-nile relative flex min-h-[100svh] flex-col overflow-hidden bg-[#0B1220] transition-opacity duration-500 ${
-          landingHidden ? 'pointer-events-none opacity-0' : 'opacity-100'
-        }`}
-        aria-hidden={overlayOpen}
-      >
+      {!place && (
+      <main className="theme-nile relative flex min-h-[100svh] flex-col overflow-hidden bg-[#0B1220]">
         <Starfield dim={daytime} daylight={daytime} />
 
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[68svh] sm:h-[74svh]">
-          <div className="pointer-events-auto absolute left-1/2 top-1/2 aspect-square w-[min(100vw,72svh,700px)] -translate-x-1/2 -translate-y-1/2">
-            <GlobeStage
-              className="h-full w-full"
-              flyTo={flyTo}
-              daylight={daytime}
-              paused={stage === 'weather'}
-            />
-          </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#0B1220]" />
         </div>
 
@@ -376,9 +397,7 @@ export default function HomePage() {
           </div>
         </header>
 
-        <div className="relative z-10 flex-1" />
-
-        <div className="relative z-20 px-4 pb-[max(1.25rem,var(--safe-bottom))] sm:px-8">
+        <div className="relative z-20 flex flex-1 flex-col justify-center px-4 pb-[max(1.25rem,var(--safe-bottom))] pt-6 sm:px-8">
           <div className="mx-auto w-full max-w-2xl">
             <div className="mb-4 text-center sm:text-start">
               <h1 className="font-display text-[1.75rem] font-bold leading-tight text-shadow-cinema sm:text-4xl">
@@ -425,22 +444,19 @@ export default function HomePage() {
           </div>
         </div>
 
-        {stage === 'flying' && (
+        {(!homeChecked || pending) && (
           <div className="pointer-events-none absolute inset-0 z-30 grid place-items-center">
             <div className="panel flex items-center gap-3 rounded-full px-5 py-3 text-sm text-cream/90 animate-fadeIn">
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-cream/25 border-t-brand" />
-              {t('flying', { city: place?.name ?? pendingText })}
+              {homeChecked ? t('flying', { city: pendingText }) : t('detectingCity')}
             </div>
           </div>
         )}
       </main>
+      )}
 
-      {overlayOpen && place && (
-        <div
-          className={`fixed inset-0 z-40 ${
-            stage === 'leaving' ? 'animate-fadeOut' : 'animate-fadeIn'
-          }`}
-        >
+      {place && (
+        <div className="fixed inset-0 z-40 animate-fadeIn">
           <WeatherView
             place={place}
             scene={scene}
@@ -457,8 +473,52 @@ export default function HomePage() {
             }}
             weather={weather}
             onBack={handleBack}
-            leaving={stage === 'leaving'}
+            onOpenSearch={() => setSearchOpen(true)}
           />
+        </div>
+      )}
+
+      {searchOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('changeCity')}
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/70 p-4 pt-[max(4rem,12svh)] backdrop-blur-sm"
+          onClick={() => setSearchOpen(false)}
+        >
+          <div
+            className="panel mx-auto w-full max-w-xl rounded-2xl p-4 sm:p-5"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <div>
+                <p className="font-display text-lg font-bold text-white">{t('changeCity')}</p>
+                <p className="mt-1 text-[11px] leading-relaxed text-cream/50">{t('changeCityHint')}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                aria-label={t('closeSearch')}
+                className="panel-solid focus-ring grid h-9 w-9 shrink-0 place-items-center rounded-full text-white/80 transition hover:bg-panel active:scale-95"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6 6 18" />
+                </svg>
+              </button>
+            </div>
+
+            <SearchBar onSubmit={handleOverlaySearch} pending={pending} />
+
+            {error && (
+              <div className="mt-3 flex items-start gap-2 rounded-xl border border-red-400/25 bg-red-500/10 px-3 py-2 text-xs text-red-100">
+                <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 8v4M12 16h.01" />
+                </svg>
+                <p>{error}</p>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </AuthGate>

@@ -32,6 +32,8 @@ type Props = {
   error?: string | null;
   onRetry?: () => void;
   onBack: () => void;
+  /** Opens the city search, so a visitor can move to another city from any scene. */
+  onOpenSearch: () => void;
   leaving?: boolean;
   /** All curated views of this city; the card offers a switch when there are several. */
   scenes?: { id: string; label: string }[];
@@ -109,6 +111,7 @@ export default function WeatherView({
   error = null,
   onRetry,
   onBack,
+  onOpenSearch,
   leaving = false,
   scenes = [],
   activeSceneId = null,
@@ -248,6 +251,26 @@ export default function WeatherView({
           </div>
 
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              aria-label={t('changeCity')}
+              title={t('changeCity')}
+              className="panel-solid focus-ring flex h-10 items-center gap-2 rounded-full px-3 text-white/85 transition hover:bg-panel active:scale-95 sm:px-3.5"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.9"
+                strokeLinecap="round"
+              >
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="m16 16 4 4" />
+              </svg>
+              <span className="hidden text-[11px] font-semibold sm:inline">{t('changeCity')}</span>
+            </button>
             <SoundToggle effects={effects} />
             <LanguageSwitcher />
             <LogoutButton />
