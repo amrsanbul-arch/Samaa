@@ -27,6 +27,8 @@ export default function SearchBar({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const [loading, setLoading] = useState(false);
+  /** Shown when the search action is pressed with an empty box. */
+  const [hint, setHint] = useState<string | null>(null);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -76,7 +78,12 @@ export default function SearchBar({
 
   const submit = (place: Place | null) => {
     const query = place?.name ?? text.trim();
-    if (!query) return;
+    if (!query) {
+      setHint(t('searchEmptyHint'));
+      inputRef.current?.focus();
+      return;
+    }
+    setHint(null);
     setOpen(false);
     if (place) setText(place.name);
     onSubmit({ place, text: query });
@@ -123,7 +130,10 @@ export default function SearchBar({
           <input
             ref={inputRef}
             value={text}
-            onChange={(event) => setText(event.target.value)}
+            onChange={(event) => {
+              setText(event.target.value);
+              setHint(null);
+            }}
             onFocus={() => setOpen(results.length > 0)}
             onKeyDown={onKeyDown}
             autoFocus={autoFocus}
@@ -165,7 +175,7 @@ export default function SearchBar({
         <button
           type="button"
           onClick={() => submit(active >= 0 ? results[active] : null)}
-          disabled={pending || (!text.trim() && active < 0)}
+          disabled={pending}
           className={`group flex shrink-0 items-center gap-2 rounded-[10px] bg-brand font-semibold text-[#0B1220] transition hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 ${
             compact ? 'px-4 py-2 text-sm' : 'px-5 py-3 text-sm sm:px-6 sm:text-base'
           }`}
@@ -192,6 +202,16 @@ export default function SearchBar({
           )}
         </button>
       </div>
+
+      {hint && (
+        <p
+          role="status"
+          aria-live="polite"
+          className="mt-2 rounded-lg border border-brand/30 bg-brand/10 px-3 py-2 text-[12px] leading-relaxed text-brand"
+        >
+          {hint}
+        </p>
+      )}
 
       {showList && (
         <ul
