@@ -1,22 +1,22 @@
 # سماء · Samaa🌥️
 
 
-سماء (Samaa) is a cinematic weather experience for cities around the world in five languages. It opens on a slowly rotating 3D Earth, flies to the city you search for, and then reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions.
+سماء (Samaa) is a cinematic weather experience for cities around the world in five languages. It opens on your own city — from the IP location on a first visit, then from the city you saved — and reveals a full-screen landmark scene with live weather, a 7-day forecast, ambient sound, and weather effects that react to the real conditions. Any other city is one search away.
 
 ## Features
 
 - **Five languages** — Arabic (RTL), English, German, Russian and Italian. The language is auto-detected from the browser, can be switched from the header, is stored locally, and can be forced with `?lang=de`. UI copy, weather conditions, dates, city names and landmark descriptions are all localised.
-- **3D globe landing** — `react-globe.gl` / three.js Earth with a starfield, city beacons and slow auto-rotation. The texture follows the visitor's device clock: blue-marble day map between 06:00 and 18:00, city-lights night map after that.
+- **Your city first** — `/` opens the visitor's own city: the IP-reported city on a first visit (with the visitor's real coordinates, so the weather is theirs), then whatever city they last picked, remembered in the browser. A plain search screen is the fallback, and no WebGL is involved.
 - **Search** — any city on Earth, typed in Arabic, English or its translated name, with debounced suggestions from the Open-Meteo geocoding API (requested in the active language and ranked by the provider's relevance, so the biggest matching city comes first).
-- **Instant entry** — the scene opens as soon as the place resolves (about 40 ms for curated cities); the photo paints first and the glass card follows when the forecast lands. The globe dive itself is a 700 ms zoom.
-- **Cinematic exit** — pressing back pulls the camera out to orbit altitude while the scene fades, so you always return to the globe rather than cutting to it.
+- **Instant entry** — the scene opens as soon as the place resolves (about 40 ms for curated cities); the photo paints first and the glass card follows when the forecast lands.
+- **Change city anywhere** — the scene header carries a «تغيير مدينتي» button that opens the search over the scene, so a visitor is never stuck in one city; the new pick becomes the saved home city.
 - **Live weather** — current conditions (temperature, wind, humidity, rain chance, sunrise/sunset) plus a 7-day forecast. Open-Meteo is the primary source; if it times out or refuses the request, the route transparently falls back to MET Norway, so the scene still fills in. No API key for either.
-- **Landmark scenes** — a curated backdrop for 52 cities across every continent (Pyramids, Burj Khalifa, Eiffel Tower, Shibuya, Table Mountain, Sydney Opera House…), with a Ken Burns drift and a glass card overlay. Any other city gets a neutral scene picked by latitude band: tropical, temperate or northern.
+- **Landmark scenes** — a curated backdrop for 221 places across every continent (Pyramids, Burj Khalifa, Eiffel Tower, Shibuya, Table Mountain, Sydney Opera House…), with a Ken Burns drift and a glass card overlay. Any other city gets a neutral scene picked by latitude band: tropical, temperate or northern.
 - **Weather effects** — rain, snow, fog, clouds, lightning and a sun flare driven by the fetched conditions, all CSS/SVG based so they stay smooth on phones.
 - **Ambient sound** — rain, wind and fog beds plus thunder are synthesised with the Web Audio API (no audio files), toggled by the speaker button and remembered across visits.
 - **Swipe-up card** — on phones the glass card starts as a peek and rises on swipe, so the landmark photo is unobstructed on arrival.
 - **Honest loading state** — if the forecast really cannot be fetched the card shows a short message and a retry button instead of an endless skeleton, and the credit line names the provider that answered.
-- **Login-first** — `/login` is the first screen, built as a monochrome mirror of the Resend login page (email + password, sign-up, password reset, Google/Apple) on a NASA night shot of the Nile. The globe and every city scene sit behind a Supabase session, and the header carries a sign-out button.
+- **Login-first** — `/login` is the first screen, built as a monochrome mirror of the Resend login page (email + password, sign-up, password reset, Google/Apple) on a NASA night shot of the Nile. Every city scene sits behind a Supabase session, and the header carries a sign-out button.
 - **RTL + LTR** — Cairo/Tajawal for Arabic and Inter for Latin/Cyrillic, logical properties, mirrored icons, safe-area padding, responsive from 360 px up.
 
 ## Stack
@@ -25,7 +25,6 @@
 | --- | --- |
 | Framework | Next.js 14 (App Router) |
 | Styling | Tailwind CSS 3 |
-| 3D | react-globe.gl + three.js |
 | Data | Open-Meteo (geocoding + forecast, primary), MET Norway (forecast fallback), no keys required |
 | Audio | Web Audio API (procedural ambience) |
 
@@ -80,8 +79,6 @@ components/
   LangProvider.tsx      language context: detection, persistence, <html lang dir>
   LanguageSwitcher.tsx  header dropdown with the five locales
   SoundToggle.tsx       ambience on/off, persists the choice
-  GlobeStage.tsx        hero: globe + headline + search + city chips
-  GlobeScene.tsx        react-globe.gl wrapper (day/night textures, flight, zoom-out)
   SearchBar.tsx         input, debounced suggestions, keyboard support
   WeatherView.tsx       full-screen landmark scene, swipe-up sheet, skeleton state
   WeatherCard.tsx       glass card: city, temperature, metrics, description
@@ -135,7 +132,6 @@ Cities without an entry still work — they fall back to a neutral horizon scene
 - **Resilience.** `/api/weather` answers from a 10-minute in-memory cache, aborts a slow upstream after 3.5 s, opens a 5-minute circuit breaker after repeated Open-Meteo failures, and serves a stale reading rather than nothing.
 - **Typography.** `html[lang]` drives the font stack: Arabic switches to Cairo/Tajawal, every other locale uses Inter (Latin + Cyrillic). `dir` flips with the language and the arrow icons mirror through `rtl:`/`ltr:` variants.
 - **Sound.** Browsers only allow audio after a gesture, so the ambience starts muted; the toggle is the gesture that unlocks the AudioContext.
-- **Textures.** The globe uses local files in `public/textures`, so the landing page has no third-party dependency at runtime.
 
 ## Credits
 
