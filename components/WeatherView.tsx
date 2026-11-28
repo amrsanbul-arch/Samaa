@@ -142,6 +142,10 @@ export default function WeatherView({
   );
 
   useEffect(() => {
+    setLoaded(false);
+  }, [scene.image]);
+
+  useEffect(() => {
     const element = sheetRef.current;
     if (!element) return;
     const observer = new ResizeObserver(() => setSheetHeight(element.offsetHeight));
@@ -277,11 +281,11 @@ export default function WeatherView({
           </div>
         </header>
 
-        <div className="mt-4 max-w-2xl animate-fadeIn sm:mt-10">
+        <div className="mt-4 max-w-2xl animate-fadeIn sm:mt-10 lg:mt-12 lg:max-w-4xl">
           <p className="text-[10px] tracking-[0.3em] text-brand [text-shadow:0_1px_10px_rgba(0,0,0,0.8)]">
             {t('sceneEyebrow')}
           </p>
-          <h2 className="mt-1 font-display text-xl font-bold leading-tight text-shadow-cinema sm:text-4xl">
+          <h2 className="mt-1 font-display text-xl font-bold leading-tight text-shadow-cinema sm:text-4xl lg:text-5xl lg:leading-[1.15]">
             {scene.landmark}
           </h2>
           <div className="mt-2 h-px w-14 bg-brand/60" />
@@ -290,13 +294,13 @@ export default function WeatherView({
         <div className="mt-auto w-full pt-4">
           <div
             ref={sheetRef}
-            className="mx-auto flex w-full max-w-6xl flex-col gap-3 lg:flex-row lg:items-end lg:justify-between"
+            className="mx-auto flex w-full max-w-6xl flex-col gap-3 lg:max-w-7xl lg:flex-row lg:items-end lg:gap-6 lg:justify-between"
             style={{
               transform: `translateY(${offset}px)`,
               transition: dragStart.current === null ? 'transform 420ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
             }}
           >
-            <div className="lg:w-[28rem] lg:shrink-0">
+            <div className="lg:w-[32rem] lg:shrink-0">
               <div className="lg:hidden">
                 <button
                   type="button"
@@ -344,7 +348,7 @@ export default function WeatherView({
             </div>
 
             {weather && (
-              <div className="lg:max-w-2xl lg:flex-1">
+              <div className="min-w-0 lg:flex-1">
                 <ForecastStrip daily={weather.daily} />
               </div>
             )}

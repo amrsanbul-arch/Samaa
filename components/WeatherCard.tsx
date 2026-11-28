@@ -111,7 +111,7 @@ export default function WeatherCard({
     .join(' · ');
 
   return (
-    <section className="panel animate-fadeUp p-4 sm:p-5">
+    <section className="panel animate-fadeUp p-4 sm:p-5 lg:rounded-2xl lg:p-6">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="flex items-center gap-1 text-[11px] text-cream/70">
@@ -121,7 +121,7 @@ export default function WeatherCard({
             </svg>
             <span className="truncate">{region}</span>
           </p>
-          <h1 className="font-display text-[2.125rem] font-extrabold leading-tight text-shadow-cinema sm:text-[2.5rem]">
+          <h1 className="font-display text-[2.125rem] font-extrabold leading-tight text-shadow-cinema sm:text-[2.5rem] lg:text-5xl">
             {place.name}
           </h1>
           <div className="mt-0.5 min-w-0">
@@ -176,7 +176,7 @@ export default function WeatherCard({
 
       <div className="pointer-events-none mt-1 flex items-end justify-between gap-3">
         <div className="flex items-start" dir="ltr">
-          <span className="font-display text-[5.5rem] font-extrabold leading-[0.8] tracking-tight text-shadow-cinema sm:text-[8rem]">
+          <span className="font-display text-[5.5rem] font-extrabold leading-[0.8] tracking-tight text-shadow-cinema sm:text-[8rem] lg:text-[9rem]">
             {Math.round(current.temperature)}
           </span>
           <span className="mt-1.5 text-2xl font-light text-white/70 sm:mt-3 sm:text-3xl">°C</span>
@@ -201,7 +201,7 @@ export default function WeatherCard({
         </div>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2">
+      <div className="mt-3 grid grid-cols-2 gap-2 lg:mt-5 lg:gap-2.5">
         <Metric icon={icons.drop} label={t('humidity')} value={`${Math.round(current.humidity)}%`} />
         <Metric
           icon={icons.wind}
@@ -220,7 +220,7 @@ export default function WeatherCard({
       </div>
 
       {showDescription && (
-        <p className="mt-3 text-[12.5px] leading-relaxed text-cream/70">{landmark.description}</p>
+        <p className="mt-3 text-[12.5px] leading-relaxed text-cream/70 lg:mt-4 lg:text-sm">{landmark.description}</p>
       )}
 
       <div className="mt-2.5 flex items-center gap-2 text-[10px] text-cream/40">
